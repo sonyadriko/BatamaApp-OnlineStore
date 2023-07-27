@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.tokoonline.R
 import com.example.tokoonline.helper.SharedPref
-import kotlinx.android.synthetic.main.activity_masuk.*
+import kotlinx.android.synthetic.main.activity_login.btn_prosesLogin
+import kotlinx.android.synthetic.main.activity_register.btn_register
 
 class MasukActivity : AppCompatActivity() {
 
@@ -17,7 +18,7 @@ class MasukActivity : AppCompatActivity() {
 
         s = SharedPref(this)
 
-        mainButton()
+//        mainButton()
     }
 
     private fun mainButton(){

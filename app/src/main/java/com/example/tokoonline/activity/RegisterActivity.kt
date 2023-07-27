@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.tokoonline.R
 import com.example.tokoonline.helper.SharedPref
-import kotlinx.android.synthetic.main.activity_masuk.*
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {

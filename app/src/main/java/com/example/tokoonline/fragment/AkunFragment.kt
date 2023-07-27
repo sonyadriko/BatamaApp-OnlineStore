@@ -27,13 +27,13 @@ class AkunFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_akun, container, false)
-        btnLogout = view.findViewById(R.id.btn_logout)
-
-        s = SharedPref(activity!!)
-
-        btnLogout.setOnClickListener {
-            s.setStatusLogin(false)
-        }
+//        btnLogout = view.findViewById(R.id.btn_logout)
+//
+//        s = SharedPref(requireActivity())
+//
+//        btnLogout.setOnClickListener {
+//            s.setStatusLogin(false)
+//        }
 
         return view
     }
