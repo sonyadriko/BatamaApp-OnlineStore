@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "1023679009249",
-    "project_id": "batama-app",
-    "storage_bucket": "batama-app.appspot.com"
+    "project_number": "935116086644",
+    "project_id": "febriani-tokoonline",
+    "storage_bucket": "febriani-tokoonline.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1023679009249:android:c39add1aa1aada92cd02a0",
+        "mobilesdk_app_id": "1:935116086644:android:9f07e45dca8f53c89e2021",
         "android_client_info": {
           "package_name": "com.example.tokoonline"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1023679009249-0vkfc5tor7uiln6i4412qi24r9qid9g6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.tokoonline",
-            "certificate_hash": "0c49a28db0a58dab0ab0c879855559e5665124ff"
-          }
-        },
-        {
-          "client_id": "1023679009249-ip83dlvcun0jrqdabrtahbot4qjhovs6.apps.googleusercontent.com",
+          "client_id": "935116086644-7rdoq6obe14bpsiusg6q8naa8fbqfhoa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCWEMwIEr7RuDf3-6XallzfdMqIol3zxXA"
+          "current_key": "AIzaSyCeHoAolHHUlGqDR5gAuXYQ_J_BWmay4qw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1023679009249-ip83dlvcun0jrqdabrtahbot4qjhovs6.apps.googleusercontent.com",
+              "client_id": "935116086644-7rdoq6obe14bpsiusg6q8naa8fbqfhoa.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

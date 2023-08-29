@@ -11,10 +11,11 @@ android {
 
     defaultConfig {
         applicationId "com.example.tokoonline"
-        minSdk 19
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        minSdk androidConfig.minSdk
+        targetSdk androidConfig.targetSdk
+        versionCode androidConfig.versionCode
+        versionName androidConfig.versionName
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,11 +27,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility androidConfig.sourceAndTargetCompability
+        targetCompatibility androidConfig.sourceAndTargetCompability
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = androidConfig.jvmTarget
     }
     buildFeatures {
         viewBinding true
@@ -39,6 +40,7 @@ android {
 }
 
 dependencies {
+<<<<<<< HEAD
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.4.0'
@@ -53,9 +55,25 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+=======
+    implementation androidx.coreKtx
+    implementation androidx.coreKtx
+    implementation androidx.appCompat
+    implementation material.material
+    implementation androidx.constraint
+    implementation androidx.vectorDrawable
+    implementation androidx.liveData
+    implementation androidx.lifecycleVM
+    implementation androidx.navKTX
+    implementation androidx.navUI
+    implementation androidx.annotation
+>>>>>>> 82bfe2b3beede6c0f25788722f5218e7a94f0372
 
-    implementation 'com.google.android.material:material:1.1.0'
+    testImplementation unitTest.junit
+    androidTestImplementation androidx.junitExt
+    androidTestImplementation androidx.espressoCore
 
+<<<<<<< HEAD
     //firebase realtime db
     implementation platform('com.google.firebase:firebase-bom:31.3.0')
     implementation 'com.google.firebase:firebase-analytics-ktx:21.2.1'
@@ -67,4 +85,12 @@ dependencies {
 
     // gson
     implementation 'com.google.code.gson:gson:2.10.1'
+=======
+    implementation platform(firebase.firebaseBom)
+    implementation firebase.firebaseDb
+    implementation firebase.firebaseAnalytics
+    implementation firebase.firebaseAuth
+
+    implementation androidx.multidex
+>>>>>>> 82bfe2b3beede6c0f25788722f5218e7a94f0372
 }
