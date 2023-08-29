@@ -220,8 +220,8 @@
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="10dp"
                 android:text="Login"
-                android:textSize="15dp"
-                android:textColor="@color/purple_500"/>
+                android:textColor="@color/purple_500"
+                android:textSize="15dp" />
 
         </LinearLayout>
 
