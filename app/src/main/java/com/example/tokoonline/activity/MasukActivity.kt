@@ -6,6 +6,7 @@ import android.os.Bundle
 import com.example.tokoonline.R
 import com.example.tokoonline.helper.SharedPref
 import kotlinx.android.synthetic.main.activity_login.btn_prosesLogin
+import kotlinx.android.synthetic.main.activity_loginn.btn_daftarAkun
 import kotlinx.android.synthetic.main.activity_register.btn_register
 
 class MasukActivity : AppCompatActivity() {
@@ -18,15 +19,15 @@ class MasukActivity : AppCompatActivity() {
 
         s = SharedPref(this)
 
-//        mainButton()
+         mainButton()
     }
 
     private fun mainButton(){
-        btn_prosesLogin.setOnClickListener {
+        /*btn_prosesLogin.setOnClickListener {
             s.setStatusLogin(true)
-        }
+        }*/
 
-        btn_register.setOnClickListener {
+        btn_daftarAkun.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
