@@ -40,6 +40,10 @@ class RegisterActivity : BaseAuthActivity() {
                 else showToast("Register gagal")
             }
         }
+
+        btnLoggiinnn.setOnClickListener{
+            goToLoginActivity()
+        }
     }
     private fun onSuccess() {
         lifecycleScope.launch {
