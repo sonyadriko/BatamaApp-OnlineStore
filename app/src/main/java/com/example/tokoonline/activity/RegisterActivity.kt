@@ -1,16 +1,55 @@
 package com.example.tokoonline.activity
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.tokoonline.R
-import com.example.tokoonline.helper.SharedPref
-import kotlinx.android.synthetic.main.activity_register.*
+import androidx.lifecycle.lifecycleScope
+import com.example.tokoonline.base.BaseAuthActivity
+import com.example.tokoonline.databinding.ActivityRegisterBinding
+import com.example.tokoonline.domain.User
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseAuthActivity() {
+    private lateinit var binding: ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+         initListener()
+    }
+
+    private fun initListener() = with(binding){
+        btnRegister.setOnClickListener{
+            val email = edtEmail.text.toString()
+            val password = edtPassword.text.toString()
+            val nama = edtNama.text.toString()
+            val notelp = edtPhone.text.toString()
+            val role = "pembeli"
+            val userDomain = User(
+                email = email,
+                password = password,
+                nama = nama,
+                noTelepon = notelp,
+                role = role
+            )
+
+            showProgressDialog()
+            register(userDomain = userDomain) {isSuccess ->
+                dismissProgressDialog()
+                if (isSuccess) onSuccess()
+                else showToast("Register gagal")
+            }
+        }
+
+        btnLoggiinnn.setOnClickListener{
+            goToLoginActivity()
+        }
+    }
+    private fun onSuccess() {
+        lifecycleScope.launch {
+            showToast("Register Berhasil")
+            delay(500)
+            goToLoginActivity()
+        }
     }
 }
