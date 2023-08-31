@@ -8,10 +8,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tokoonline.MainActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.data.repository.UserRepository
-import com.example.tokoonline.view.activity.LoginActivity
-import com.google.android.ads.mediationtestsuite.activities.HomeActivity
+import com.example.tokoonline.view.activity.Login2Activity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -71,7 +71,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun goToHomepage() {
         if (checkCurrentUserSession()) {
             startActivity(
-                Intent(this, HomeActivity::class.java)
+                Intent(this, MainActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             )
         }
@@ -84,7 +84,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
 
         startActivity(
-            Intent(this, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            Intent(this, Login2Activity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         )
     }
 

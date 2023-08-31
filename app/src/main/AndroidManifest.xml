@@ -28,13 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.BaruActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.activity.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.MasukActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.RegisterActivity"
