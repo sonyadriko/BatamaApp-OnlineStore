@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.tokoonline.R
-import com.example.tokoonline.helper.SharedPref
+import com.example.tokoonline.core.util.SharedPref
 
 
 /**
@@ -16,7 +16,7 @@ import com.example.tokoonline.helper.SharedPref
 
 class AkunFragment : Fragment() {
 
-    lateinit var s:SharedPref
+    lateinit var s: SharedPref
     lateinit var btnLogout:Button
 
     // TODO: Rename and change types of parameters

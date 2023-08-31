@@ -1,4 +1,4 @@
-package com.example.tokoonline.model
+package com.example.tokoonline.data.model
 
 import java.io.Serializable
 

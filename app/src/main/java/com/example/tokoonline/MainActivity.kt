@@ -7,17 +7,16 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.tokoonline.activity.Login2Activity
-import com.example.tokoonline.helper.SharedPref
+import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.view.activity.Login2Activity
+import com.example.tokoonline.core.util.SharedPref
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.inyongtisto.tokoonline.fargment.AkunFragment
 import com.inyongtisto.tokoonline.fargment.HomeFragment
 import com.inyongtisto.tokoonline.fargment.RiwayatTransaksiFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
-    lateinit var auth : FirebaseAuth
     val fragmentHome: Fragment = HomeFragment ()
     val fragmentRiwayattransaksi: Fragment = RiwayatTransaksiFragment ()
     val fragmentAkun: Fragment = AkunFragment ()
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     private var statusLogin = false
 
-    private lateinit var s:SharedPref
+    private lateinit var s: SharedPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

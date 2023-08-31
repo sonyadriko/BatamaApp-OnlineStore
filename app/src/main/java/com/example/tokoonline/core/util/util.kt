@@ -1,6 +1,6 @@
-package com.example.tokoonline.util
+package com.example.tokoonline.core.util
 
-import com.example.tokoonline.constanst.Constant
+import com.example.tokoonline.core.constanst.Constant
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date

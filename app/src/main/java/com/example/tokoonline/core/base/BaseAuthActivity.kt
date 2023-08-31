@@ -1,4 +1,4 @@
-package com.example.tokoonline.base
+package com.example.tokoonline.core.base
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -9,12 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.MainActivity
 import com.example.tokoonline.R
-import com.example.tokoonline.activity.Login2Activity
-import com.example.tokoonline.activity.LoginActivity
-import com.example.tokoonline.activity.RegisterActivity
-import com.example.tokoonline.constanst.Constant.REFERENCE_USER
-import com.example.tokoonline.domain.User
-import com.example.tokoonline.repository.UserRepository
+import com.example.tokoonline.view.activity.Login2Activity
+import com.example.tokoonline.view.activity.RegisterActivity
+import com.example.tokoonline.core.constanst.Constant.REFERENCE_USER
+import com.example.tokoonline.data.domain.User
+import com.example.tokoonline.data.repository.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase

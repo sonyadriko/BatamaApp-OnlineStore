@@ -1,4 +1,4 @@
-package com.example.tokoonline.domain
+package com.example.tokoonline.data.domain
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

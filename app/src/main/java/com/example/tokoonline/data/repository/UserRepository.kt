@@ -1,10 +1,10 @@
-package com.example.tokoonline.repository
+package com.example.tokoonline.data.repository
 
 import android.content.Context
-import com.example.tokoonline.constanst.Constant
-import com.example.tokoonline.constanst.Constant.REFERENCE_USER
-import com.example.tokoonline.domain.User
-import com.example.tokoonline.util.toRole
+import com.example.tokoonline.core.constanst.Constant
+import com.example.tokoonline.core.constanst.Constant.REFERENCE_USER
+import com.example.tokoonline.data.domain.User
+import com.example.tokoonline.core.util.toRole
 import com.google.firebase.database.FirebaseDatabase
 
 class UserRepository constructor(

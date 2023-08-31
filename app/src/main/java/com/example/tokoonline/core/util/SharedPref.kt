@@ -1,4 +1,4 @@
-package com.example.tokoonline.helper
+package com.example.tokoonline.core.util
 
 import android.app.Activity
 import android.content.Context

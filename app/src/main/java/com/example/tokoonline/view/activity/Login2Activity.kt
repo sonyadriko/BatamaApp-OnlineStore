@@ -1,9 +1,7 @@
-package com.example.tokoonline.activity
+package com.example.tokoonline.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.tokoonline.R
-import com.example.tokoonline.base.BaseAuthActivity
+import com.example.tokoonline.core.base.BaseAuthActivity
 import com.example.tokoonline.databinding.ActivityLogin2Binding
 
 class Login2Activity : BaseAuthActivity() {

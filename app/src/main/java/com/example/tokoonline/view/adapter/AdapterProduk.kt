@@ -1,4 +1,4 @@
-package com.example.tokoonline.adapter
+package com.example.tokoonline.view.adapter
 
 import android.provider.ContactsContract
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.R
-import com.example.tokoonline.model.Produk
+import com.example.tokoonline.data.model.Produk
 
 class AdapterProduk(var data:ArrayList<Produk>) : RecyclerView.Adapter<AdapterProduk.Holder>() {
     class Holder(view : View):RecyclerView.ViewHolder(view){
