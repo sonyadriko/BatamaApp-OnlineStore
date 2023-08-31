@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.tokoonline.R
-import com.example.tokoonline.adapter.AdapterProduk
-import com.example.tokoonline.model.Produk
+import com.example.tokoonline.view.adapter.AdapterProduk
+import com.example.tokoonline.data.model.Produk
 import com.inyongtisto.tokoonline.adapter.AdapterSlider
 
 

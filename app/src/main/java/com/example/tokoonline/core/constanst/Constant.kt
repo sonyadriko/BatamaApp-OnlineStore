@@ -1,4 +1,4 @@
-package com.example.tokoonline.constanst
+package com.example.tokoonline.core.constanst
 
 object Constant {
     enum class Role {

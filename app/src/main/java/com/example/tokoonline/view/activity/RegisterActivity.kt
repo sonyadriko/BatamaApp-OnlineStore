@@ -1,10 +1,10 @@
-package com.example.tokoonline.activity
+package com.example.tokoonline.view.activity
 
 import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import com.example.tokoonline.base.BaseAuthActivity
+import com.example.tokoonline.core.base.BaseAuthActivity
 import com.example.tokoonline.databinding.ActivityRegisterBinding
-import com.example.tokoonline.domain.User
+import com.example.tokoonline.data.domain.User
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
