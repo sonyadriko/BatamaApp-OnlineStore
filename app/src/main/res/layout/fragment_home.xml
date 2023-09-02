@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:background="@color/design_default_color_primary"
+        android:background="@color/colorPrimary"
         android:padding="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                 <TextView
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="@color/orange"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginBottom="5dp"
                     android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                 <TextView
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="@color/orange"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginBottom="5dp"
                     android:layout_width="wrap_content"
@@ -125,7 +125,7 @@
                 <TextView
                     android:textSize="18dp"
                     android:textStyle="bold"
-                    android:textColor="@color/orange"
+                    android:textColor="@color/colorPrimaryDark"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginBottom="5dp"
                     android:layout_width="wrap_content"
