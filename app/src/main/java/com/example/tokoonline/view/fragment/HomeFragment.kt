@@ -51,10 +51,10 @@ class HomeFragment : Fragment() {
         layoutManager.orientation = LinearLayoutManager.HORIZONTAL
 
         val layoutManager2 = LinearLayoutManager(activity)
-        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        layoutManager2.orientation = LinearLayoutManager.HORIZONTAL
 
         val layoutManager3 = LinearLayoutManager(activity)
-        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        layoutManager3.orientation = LinearLayoutManager.HORIZONTAL
 
         rvProduk.adapter = AdapterProduk(arrProduk)
         rvProduk.layoutManager = layoutManager

@@ -34,18 +34,8 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:text="Nama"
-                    android:textColor="@color/dark"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_tgl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="6 jun 2020"
-                    android:textColor="@color/dark"
-                    android:textSize="11dp" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -57,22 +47,34 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_harga"
+                    android:id="@+id/tv_totalHarga"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
                     android:text="Rp.10.000"
-                    android:textColor="@color/dark"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tv_jumlah"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="3 item"
-                    android:textColor="@color/dark"
-                    android:textSize="11dp" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Item:"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_jumlah"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="3"
+                        android:textSize="15sp" />
+                </LinearLayout>
 
             </LinearLayout>
 

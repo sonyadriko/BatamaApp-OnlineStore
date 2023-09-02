@@ -26,10 +26,11 @@
             android:ellipsize="marquee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="13dp"
             android:text="Nama Produk"/>
 
         <TextView
-            android:textColor="@color/orange"
+            android:textColor="@color/colorPrimaryDark"
             android:layout_marginHorizontal="5dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="10dp"
