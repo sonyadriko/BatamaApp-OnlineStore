@@ -1,6 +1,8 @@
 package com.example.tokoonline.core.util
 
 import com.example.tokoonline.core.constanst.Constant
+import com.example.tokoonline.data.model.Produk
+import com.google.firebase.database.DataSnapshot
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -33,4 +35,8 @@ fun String.toRole(): Constant.Role? {
     return Constant.Role.values().find {
         it.name.lowercase() == this
     }
+}
+
+fun DataSnapshot.toProdukDomain(): Produk {
+    return getValue(Produk::class.java)!!
 }

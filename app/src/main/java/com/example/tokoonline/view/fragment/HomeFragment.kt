@@ -1,5 +1,6 @@
 package com.inyongtisto.tokoonline.fargment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,7 @@ class HomeFragment : Fragment() {
     lateinit var rvProdukTerlaris: RecyclerView
     lateinit var rvProdukTer: RecyclerView
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,18 +74,18 @@ class HomeFragment : Fragment() {
         val arr = ArrayList<Produk>()
         val p1 = Produk()
         p1.nama = "Hp Iphone dan Android baru"
-        p1.harga = "Rp 3.500.000"
-        p1.gambar = R.drawable.slider1
+        p1.harga = 15980000
+//        p1.gambar = R.drawable.slider1
 
         val p2 = Produk()
         p2.nama = "Perabotan memasak paling murah, banyak pilihan warna, anti lengket dan bisa menggoreng tanpa minyak"
-        p2.harga = "Rp 1.000.000"
-        p2.gambar = R.drawable.slider2
+        p2.harga = 15980000
+//        p2.gambar = R.drawable.slider2
 
         val p3 = Produk()
         p3.nama = "Perabotan memasak paling murah, anti lengket dan bisa menggoreng tanpa minyak"
-        p3.harga = "Rp 2.000.000"
-        p3.gambar = R.drawable.slider3
+        p3.harga = 15980000
+//        p3.gambar = R.drawable.slider3
 
         arr.add(p1)
         arr.add(p2)
@@ -95,23 +97,23 @@ class HomeFragment : Fragment() {
         val arr = ArrayList<Produk>()
         val p1 = Produk()
         p1.nama = "HP 14_bs749tu"
-        p1.harga = "Rp.5.500.000"
-        p1.gambar = R.drawable.slider2
+        p1.harga = 15980000
+//        p1.gambar = R.drawable.slider2
 
         val p2 = Produk()
         p2.nama = "Hp Envy_13_aq0019tx"
-        p2.harga = "Rp.15.980.000"
-        p2.gambar = R.drawable.slider3
+        p2.harga = 15980000
+//        p2.gambar = R.drawable.slider3
 
         val p3 = Produk()
         p3.nama = "HP pavilion_13_an0006na"
-        p3.harga = "Rp.14.200.000"
-        p3.gambar = R.drawable.slider1
+        p3.harga = 15980000
+//        p3.gambar = R.drawable.slider1
 
         val p4 = Produk()
         p4.nama = "Hp Envy_13_aq0019tx"
-        p4.harga = "Rp.15.980.000"
-        p4.gambar = R.drawable.slider3
+        p4.harga = 15980000
+//        p4.gambar = R.drawable.slider3
 
         arr.add(p1)
         arr.add(p2)
@@ -125,23 +127,23 @@ class HomeFragment : Fragment() {
         val arr = ArrayList<Produk>()
         val p1 = Produk()
         p1.nama = "HP 14_bs749tu"
-        p1.harga = "Rp.5.500.000"
-        p1.gambar = R.drawable.slider3
+        p1.harga = 15980000
+//        p1.gambar = R.drawable.slider3
 
         val p2 = Produk()
         p2.nama = "Hp Envy_13_aq0019tx"
-        p2.harga = "Rp.15.980.000"
-        p2.gambar = R.drawable.slider1
+        p2.harga = 15980000
+//        p2.gambar = R.drawable.slider1
 
         val p3 = Produk()
         p3.nama = "HP pavilion_13_an0006na"
-        p3.harga = "Rp.14.200.000"
-        p3.gambar = R.drawable.slider2
+        p3.harga = 15980000
+//        p3.gambar = R.drawable.slider2
 
         val p4 = Produk()
         p4.nama = "Hp Envy_13_aq0019tx"
-        p4.harga = "Rp.15.980.000"
-        p4.gambar = R.drawable.slider1
+        p4.harga = 15980000
+//        p4.gambar = R.drawable.slider1
 
         arr.add(p1)
         arr.add(p2)
