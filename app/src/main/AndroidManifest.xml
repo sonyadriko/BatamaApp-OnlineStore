@@ -18,7 +18,7 @@
             android:name=".view.activity.TambahProdukActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.Login2Activity"
+            android:name=".view.activity.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activity.LoginActivity"
+            android:name=".view.activity.InitialActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.RegisterActivity"

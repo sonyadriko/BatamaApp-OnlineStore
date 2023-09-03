@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.MainActivity
 import com.example.tokoonline.R
-import com.example.tokoonline.view.activity.Login2Activity
+import com.example.tokoonline.view.activity.LoginActivity
 import com.example.tokoonline.view.activity.RegisterActivity
 import com.example.tokoonline.core.constanst.Constant.REFERENCE_USER
 import com.example.tokoonline.data.domain.User
@@ -125,7 +125,7 @@ abstract class BaseAuthActivity: AppCompatActivity() {
     }
 
     fun goToLoginActivity() {
-        startActivity(Intent(this, Login2Activity::class.java))
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 
     private fun goToHomeActivity() {

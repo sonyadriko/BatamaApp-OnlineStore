@@ -1,14 +1,13 @@
 package com.example.tokoonline
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.tokoonline.core.base.BaseActivity
-import com.example.tokoonline.view.activity.Login2Activity
+import com.example.tokoonline.view.activity.LoginActivity
 import com.example.tokoonline.core.util.SharedPref
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.inyongtisto.tokoonline.fargment.AkunFragment
@@ -63,7 +62,7 @@ class MainActivity : BaseActivity() {
                     if (s.getStatusLogin()){
                         callFragment(2,fragmentAkun)
                     }else{
-                        startActivity(Intent(this, Login2Activity::class.java))
+                        startActivity(Intent(this, LoginActivity::class.java))
                     }
 
                 }
