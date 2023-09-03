@@ -23,8 +23,6 @@ class MainActivity : BaseActivity() {
     private lateinit var menuitem: MenuItem
     private lateinit var bottomNavigationView: BottomNavigationView
 
-    private var statusLogin = checkCurrentUserSession()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
