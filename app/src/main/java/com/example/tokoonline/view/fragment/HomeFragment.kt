@@ -1,4 +1,4 @@
-package com.inyongtisto.tokoonline.fargment
+package com.example.tokoonline.view.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,7 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.tokoonline.R
 import com.example.tokoonline.view.adapter.AdapterProduk
 import com.example.tokoonline.data.model.Produk
-import com.inyongtisto.tokoonline.adapter.AdapterSlider
+import com.example.tokoonline.view.adapter.AdapterSlider
 
 
 /**

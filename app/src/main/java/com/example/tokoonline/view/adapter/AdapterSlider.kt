@@ -1,4 +1,4 @@
-package com.inyongtisto.tokoonline.adapter
+package com.example.tokoonline.view.adapter
 
 import android.app.Activity
 import android.view.LayoutInflater
