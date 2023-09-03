@@ -16,4 +16,9 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="something_wrong">Terjadi kesalahan</string>
+    <string name="input_data_produk">Input Data Produk</string>
+    <string name="nama_produk">Nama Produk</string>
+    <string name="harga_produk">Harga Produk</string>
+    <string name="deskripsi_produk">Deskripsi Produk</string>
+    <string name="submit">Submit</string>
 </resources>

@@ -67,6 +67,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="190dp"/>
 
+            <Button
+                android:id="@+id/btn_addproduk"
+                android:layout_width="wrap_content"
+                android:text="Tambah Produk"
+                android:layout_height="wrap_content"/>
+
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:orientation="vertical"
