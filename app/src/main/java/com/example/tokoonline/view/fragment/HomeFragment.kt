@@ -1,10 +1,12 @@
 package com.example.tokoonline.view.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,6 +14,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.tokoonline.R
 import com.example.tokoonline.view.adapter.AdapterProduk
 import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.view.activity.TambahProdukActivity
 import com.example.tokoonline.view.adapter.AdapterSlider
 
 
@@ -27,6 +30,7 @@ class HomeFragment : Fragment() {
     lateinit var rvProduk: RecyclerView
     lateinit var rvProdukTerlaris: RecyclerView
     lateinit var rvProdukTer: RecyclerView
+    lateinit var btnAdd: Button
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
@@ -40,6 +44,12 @@ class HomeFragment : Fragment() {
         rvProduk = view.findViewById(R.id.rv_produk)
         rvProdukTerlaris = view.findViewById(R.id.rv_produkterlaris)
         rvProdukTer = view.findViewById(R.id.rv_produkter)
+
+        btnAdd = view.findViewById(R.id.btn_addproduk)
+        btnAdd.setOnClickListener {
+            startActivity(Intent(context, TambahProdukActivity::class.java))
+
+        }
 
         val arrSlider = ArrayList<Int>()
             arrSlider.add(R.drawable.slider2)
