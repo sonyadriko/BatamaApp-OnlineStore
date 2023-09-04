@@ -1,18 +1,34 @@
 package com.example.tokoonline.view.activity
 
 import android.os.Bundle
-import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseAuthActivity
-import com.example.tokoonline.core.util.SharedPref
+import com.example.tokoonline.databinding.ActivityLoginBinding
 
 class LoginActivity : BaseAuthActivity() {
 
-    lateinit var s: SharedPref
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        s = SharedPref(this)
+        initListener()
+    }
+
+    private fun initListener() = with(binding) {
+        btnLogin.setOnClickListener{
+            if (!edtEmail.text.isNullOrEmpty() && !edtPassword.text.isNullOrEmpty()) {
+                showProgressDialog()
+                login(edtEmail.text.toString(), edtPassword.text.toString(), doOnFailed = {
+                    dismissProgressDialog()
+                    showToast("Akun tidak ditemukan")
+                })
+            }
+        }
+
+        btnDaftarAkun.setOnClickListener{
+            goToRegister()
+        }
     }
 }

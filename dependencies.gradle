@@ -11,11 +11,7 @@ ext {
             "jvmTarget"         : "1.8"
     ]
 
-    depVersions = [
-            'firebaseDB'       : '20.2.2',
-            'firebaseAnalytics': '21.2.1',
-            'firebaseAuth'      : '21.2.0'
-    ]
+    depVersions = []
 
     androidx = [
             "coreKtx"           : "androidx.core:core-ktx:1.7.0",
@@ -43,8 +39,9 @@ ext {
 
     firebase = [
             'firebaseBom'       : 'com.google.firebase:firebase-bom:31.3.0',
-            'firebaseDb'        : "com.google.firebase:firebase-database-ktx:${depVersions.firebaseDB}",
-            'firebaseAnalytics' : "com.google.firebase:firebase-analytics-ktx:${depVersions.firebaseAnalytics}",
-            'firebaseAuth'      : "com.google.firebase:firebase-auth-ktx:${depVersions.firebaseAuth}",
+            'firebaseDb'        : "com.google.firebase:firebase-database-ktx",
+            'firebaseAnalytics' : "com.google.firebase:firebase-analytics-ktx",
+            'firebaseAuth'      : "com.google.firebase:firebase-auth-ktx",
+            'firebaseStorage'   : "com.google.firebase:firebase-storage-ktx",
     ]
 }

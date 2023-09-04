@@ -1,10 +1,10 @@
-package com.example.tokoonline
+package com.example.tokoonline.view.activity
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.example.tokoonline.view.viewmodel.TambahProdukViewModel
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.data.model.Produk
 import com.example.tokoonline.databinding.ActivityTambahProdukBinding
@@ -13,7 +13,7 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_tambah_produk.gambarImageView
 
-class TambahProduk : BaseActivity() {
+class TambahProdukActivity : BaseActivity() {
 
     private lateinit var binding: ActivityTambahProdukBinding
     private val viewModel: TambahProdukViewModel by viewModels()
@@ -31,7 +31,7 @@ class TambahProduk : BaseActivity() {
             //membuka galeri untuk memilih gambar
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
-            startActivityForResult(intent, TambahProduk.REQUEST_SELECT_IMAGE)
+            startActivityForResult(intent, REQUEST_SELECT_IMAGE)
         }
 
         initListener()
@@ -70,7 +70,7 @@ class TambahProduk : BaseActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == TambahProduk.REQUEST_SELECT_IMAGE && resultCode == RESULT_OK && data != null) {
+        if (requestCode == REQUEST_SELECT_IMAGE && resultCode == RESULT_OK && data != null) {
             // Mendapatkan URI gambar yang dipilih dari galeri
             selectedImageUri = data.data
             gambarImageView.setImageURI(selectedImageUri)

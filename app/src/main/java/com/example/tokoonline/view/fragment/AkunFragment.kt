@@ -1,4 +1,4 @@
-package com.inyongtisto.tokoonline.fargment
+package com.example.tokoonline.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

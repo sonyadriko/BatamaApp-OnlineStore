@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tokoonline.MainActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.data.repository.UserRepository
-import com.example.tokoonline.view.activity.Login2Activity
+import com.example.tokoonline.view.activity.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -84,7 +84,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
 
         startActivity(
-            Intent(this, Login2Activity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            Intent(this, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         )
     }
 

@@ -1,4 +1,4 @@
-package com.inyongtisto.tokoonline.fargment
+package com.example.tokoonline.view.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,7 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.tokoonline.R
 import com.example.tokoonline.view.adapter.AdapterProduk
 import com.example.tokoonline.data.model.Produk
-import com.inyongtisto.tokoonline.adapter.AdapterSlider
+import com.example.tokoonline.view.adapter.AdapterSlider
 
 
 /**
@@ -58,13 +58,19 @@ class HomeFragment : Fragment() {
         val layoutManager3 = LinearLayoutManager(activity)
         layoutManager3.orientation = LinearLayoutManager.HORIZONTAL
 
-        rvProduk.adapter = AdapterProduk(arrProduk)
+        rvProduk.adapter = AdapterProduk().apply {
+            submitList(arrProduk)
+        }
         rvProduk.layoutManager = layoutManager
 
-        rvProdukTerlaris.adapter = AdapterProduk(arrProdukTerlaris)
+        rvProdukTerlaris.adapter = AdapterProduk().apply {
+            submitList(arrProdukTerlaris)
+        }
         rvProdukTerlaris.layoutManager = layoutManager2
 
-        rvProdukTer.adapter = AdapterProduk(arrProdukTer)
+        rvProdukTer.adapter = AdapterProduk().apply {
+            submitList(arrProdukTer)
+        }
         rvProdukTer.layoutManager = layoutManager3
 
         return view

@@ -42,7 +42,7 @@ class RegisterActivity : BaseAuthActivity() {
         }
 
         btnLoggiinnn.setOnClickListener{
-            goToLoginActivity()
+            finish()
         }
     }
     private fun onSuccess() {
