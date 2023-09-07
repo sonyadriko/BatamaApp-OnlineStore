@@ -14,7 +14,7 @@ class AdapterProduk : RecyclerView.Adapter<AdapterProduk.Holder>() {
 
     private val produkList = ArrayList<Produk>()
 
-    fun submitList(data: ArrayList<Produk>) {
+    fun submitList(data: MutableList<Produk>) {
         produkList.clear()
         produkList.addAll(data)
         notifyItemRangeChanged(0, data.size - 1)
