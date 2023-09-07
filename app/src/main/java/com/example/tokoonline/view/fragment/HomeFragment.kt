@@ -20,11 +20,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.fragment_home.btn_addproduk
-import kotlinx.android.synthetic.main.fragment_home.rv_produk
-import kotlinx.android.synthetic.main.fragment_home.rv_produkter
-import kotlinx.android.synthetic.main.fragment_home.rv_produkterlaris
-import kotlinx.android.synthetic.main.fragment_home.vp_slider
 
 
 /**
