@@ -18,6 +18,9 @@
             android:name=".view.activity.TambahProdukActivity"
             android:exported="false" />
         <activity
+            android:name=".view.activity.DetailProdukActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.activity.LoginActivity"
             android:exported="false" />
         <activity

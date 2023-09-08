@@ -8,11 +8,6 @@ class TambahProdukViewModel: ViewModel() {
     private val repository: ProdukRepository = ProdukRepository().getInstance()
 
     fun addData(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
-//        if (status.isEmpty() && kelamin.isEmpty()) {
-//            onComplete(false)
-//            return
-//        }
-
         repository.addProduk(produk) {
             onComplete(it)
         }

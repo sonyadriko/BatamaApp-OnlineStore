@@ -19,8 +19,7 @@ import com.example.tokoonline.databinding.FragmentAkunBinding
 
 class AkunFragment : BaseFragment() {
 
-    lateinit var s: SharedPref
-    lateinit var btnLogout:Button
+
 
     private lateinit var binding: FragmentAkunBinding
 
@@ -35,16 +34,17 @@ class AkunFragment : BaseFragment() {
         binding = FragmentAkunBinding.inflate(layoutInflater)
 
         binding.tvNama.text = userRepository.nama
-//        binding.tvEmail.text = userRepository.
+        binding.tvEmail.text = userRepository.email
+            binding.tvPhone.text = userRepository.phone
         // Inflate the layout for this fragment
 //        val view: View = inflater.inflate(R.layout.fragment_akun, container, false)
 //        btnLogout = view.findViewById(R.id.btn_logout)
 //
 //        s = SharedPref(requireActivity())
 //
-//        btnLogout.setOnClickListener {
-//            s.setStatusLogin(false)
-//        }
+        binding.btnLogout.setOnClickListener {
+           logout()
+        }
 
         return binding.root
     }

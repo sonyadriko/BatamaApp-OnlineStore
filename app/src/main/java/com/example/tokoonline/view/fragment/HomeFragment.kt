@@ -6,33 +6,51 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.widget.LinearLayout
+import androidx.fragment.app.viewModels
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseFragment
 import com.example.tokoonline.core.constanst.Constant
+import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.view.adapter.AdapterProduk
 import com.example.tokoonline.data.model.Produk
 import com.example.tokoonline.databinding.FragmentHomeBinding
+import com.example.tokoonline.view.activity.DetailProdukActivity
+import com.example.tokoonline.view.activity.DetailProdukActivity.Companion.RESULT_DELETE
 import com.example.tokoonline.view.activity.TambahProdukActivity
 import com.example.tokoonline.view.adapter.AdapterSlider
+import com.example.tokoonline.view.viewmodel.ProdukViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.text.FieldPosition
 
-
-/**
- * A simple [Fragment] subclass.
- */
-
-class HomeFragment : BaseFragment() {
-
-    // TODO: Rename and change types of parameters
+class HomeFragment : BaseFragment(), OnItemClick {
 
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var produkRecyclerView: RecyclerView
+    private lateinit var adapter: AdapterProduk
+
+//    private val viewModel by viewModels<ProdukViewModel>()
+    private val viewModel: ProdukViewModel by viewModels()
+
     var databaseReference = FirebaseDatabase.getInstance().getReference(Constant.REFERENCE_PRODUK)
     val arrProduk: MutableList<Produk> = mutableListOf()
+
+
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_DELETE) {
+                loadProduk()
+            }
+        }
+
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,15 +58,42 @@ class HomeFragment : BaseFragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
-        val layoutManager = LinearLayoutManager(activity)
-        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-
-        binding.rvProduk.layoutManager = layoutManager
-
-        initListener()
-        loadData()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initListener()
+        setUpRecycler()
+//        loadData()
+        observe()
+        loadProduk()
+    }
+
+    private fun observe() {
+        viewModel.produk.observe(viewLifecycleOwner){
+            adapter.updateUserList(it)
+            dismissProgressDialog()
+        }
+    }
+
+    private fun loadProduk() {
+        viewModel.loadProduk()
+        showProgressDialog()
+    }
+
+    private fun setUpRecycler() {
+        val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.HORIZONTAL)
+        val layoutManager = LinearLayoutManager(activity)
+        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        produkRecyclerView = binding.rvProduk
+        produkRecyclerView.addItemDecoration(dividerItemDecoration)
+        produkRecyclerView.setHasFixedSize(true)
+        adapter = AdapterProduk(this)
+        produkRecyclerView.adapter = adapter
+        binding.rvProduk.layoutManager = layoutManager
     }
 
     private fun initListener() {
@@ -74,12 +119,12 @@ class HomeFragment : BaseFragment() {
 
 
 
-        binding.rvProdukterlaris.adapter = AdapterProduk().apply {
+        binding.rvProdukterlaris.adapter = AdapterProduk(this).apply {
             submitList(arrProdukTerlaris)
         }
         binding.rvProdukterlaris.layoutManager = layoutManager2
 
-        binding.rvProdukter.adapter = AdapterProduk().apply {
+        binding.rvProdukter.adapter = AdapterProduk(this).apply {
             submitList(arrProdukTer)
         }
         binding.rvProdukter.layoutManager = layoutManager3
@@ -88,29 +133,29 @@ class HomeFragment : BaseFragment() {
     }
 
 
-    private fun loadData() {
-        databaseReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                arrProduk.clear()
-                for (postSnapshot in dataSnapshot.children) {
-                    val produk = postSnapshot.getValue(Produk::class.java)
-                    produk?.let {
-                        arrProduk.add(it)
-                    }
-                }
-
-                // Setelah data diambil, update adapter RecyclerView
-                binding.rvProduk.adapter?.notifyDataSetChanged()
-                binding.rvProduk.adapter = AdapterProduk().apply {
-                    submitList(arrProduk)
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Handle database error
-            }
-        })
-    }
+//    private fun loadData() {
+//        databaseReference.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                arrProduk.clear()
+//                for (postSnapshot in dataSnapshot.children) {
+//                    val produk = postSnapshot.getValue(Produk::class.java)
+//                    produk?.let {
+//                        arrProduk.add(it)
+//                    }
+//                }
+//
+//                // Setelah data diambil, update adapter RecyclerView
+//                binding.rvProduk.adapter?.notifyDataSetChanged()
+//                binding.rvProduk.adapter = AdapterProduk(this).apply {
+//                    submitList(arrProduk)
+//                }
+//            }
+//
+//            override fun onCancelled(databaseError: DatabaseError) {
+//                // Handle database error
+//            }
+//        })
+//    }
 
 
 
@@ -197,4 +242,17 @@ class HomeFragment : BaseFragment() {
 
        return arr
     }
+
+    override fun onClick(data: Any, position: Int) {
+        val currentItem = data as Produk
+        val detailProduk = Intent(context, DetailProdukActivity::class.java).apply {
+            putExtra("namaproduk", currentItem.nama)
+        }
+        startForResult.launch(detailProduk)
+    }
+
+
 }
+
+
+
