@@ -26,7 +26,7 @@ class ProdukRepository {
         }
     }
 
-    fun loadKambing(): LiveData<List<Produk>> {
+    fun loadProduk(): LiveData<List<Produk>> {
         val data = MutableLiveData<List<Produk>>()
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -48,10 +48,16 @@ class ProdukRepository {
     }
 
     fun addProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
-        databaseReference.child(produk.nama).setValue(produk)
-            .addOnCompleteListener {
-                onComplete(it.isSuccessful)
+        val produkRef = databaseReference.push()
+        produkRef.setValue(produk)
+            .addOnCompleteListener { task ->
+                onComplete(task.isSuccessful)
             }
+
+//        databaseReference.child(produk.nama).setValue(produk)
+//            .addOnCompleteListener {
+//                onComplete(it.isSuccessful)
+//            }
     }
 
     fun updateProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {

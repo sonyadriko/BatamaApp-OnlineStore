@@ -8,7 +8,7 @@ import android.os.Parcelable
 import java.io.Serializable
 
 @Parcelize
-data class Produk (
+data class Produk(
 
     @SerializedName("image")
     val image: String = "",
@@ -18,6 +18,8 @@ data class Produk (
     var harga: Int = 0,
     @SerializedName("deskripsi")
     val deskripsi: String = "",
+    @SerializedName("id_users")
+    val id_users: String? = "",
 
 //    lateinit var tag : String
 //    lateinit var nama : String

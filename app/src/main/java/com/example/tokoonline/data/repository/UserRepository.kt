@@ -16,6 +16,8 @@ class UserRepository constructor(
         const val ROLE = "role"
         const val UID = "uid"
         const val NAMA = "nama"
+        const val EMAIL = "email"
+        const val PHONE = "noTelepon"
 
         @Volatile
         private var INSTANCE: UserRepository? = null
@@ -46,6 +48,19 @@ class UserRepository constructor(
             saveStringToSharedPref(NAMA, value)
         }
 
+    var email: String? = null
+        get() = field ?: getStringFromSharedPref(EMAIL)
+        set(value) {
+            field = value
+            saveStringToSharedPref(EMAIL, value)
+        }
+    var phone: String? = null
+        get() = field ?: getStringFromSharedPref(PHONE)
+        set(value) {
+            field = value
+            saveStringToSharedPref(PHONE, value)
+        }
+
     var role: Constant.Role? = null
         get() = field ?: getStringFromSharedPref(ROLE)?.toRole()
         set(value) {
@@ -53,16 +68,21 @@ class UserRepository constructor(
             saveStringToSharedPref(ROLE, value?.toString()?.lowercase())
         }
 
+
     fun setUserData(uid: String, user: User) {
         this.role = user.role.toRole()
         this.uid = uid
         this.nama = user.nama
+        this.email = user.email
+        this.phone = user.noTelepon
     }
 
     fun erase() {
         uid = null
         role = null
         nama = null
+        email = null
+        phone = null
     }
 
     fun getRemoteUserData(userUid: String, onComplete: (isSuccess: Boolean, user: User?) -> Unit) {

@@ -9,4 +9,7 @@ object Constant {
 
     const val REFERENCE_USER = "Users"
     const val REFERENCE_PRODUK = "Produks"
+
+
+    const val NAMA_PRODUK_QUERY_PARAM = "namaProduk"
 }

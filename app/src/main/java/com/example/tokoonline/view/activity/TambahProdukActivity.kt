@@ -50,8 +50,9 @@ class TambahProdukActivity : BaseActivity() {
                         val dataProdukNew = Produk(
                             image = uri.toString(),
                             nama = etNamaProduk.text.toString(),
-                                harga = etHargaProduk.text.toString().toInt(),
-                            deskripsi = etDeskProduk.text.toString()
+                            harga = etHargaProduk.text.toString().toInt(),
+                            deskripsi = etDeskProduk.text.toString(),
+                            id_users = userRepository.uid
 
                         )
                         viewModel.addData(dataProdukNew) {isSuccess ->
