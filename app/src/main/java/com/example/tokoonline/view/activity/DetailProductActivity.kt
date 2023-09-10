@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 class DetailProductActivity: BaseActivity() {
     companion object {
         private const val PRODUK_EXTRA = "extra_produk"
+        const val RESULT_DELETE = 10
         fun createIntent(context: Context, data: Produk): Intent {
             return Intent(context, DetailProductActivity::class.java).apply {
                 putExtra(PRODUK_EXTRA, data)
