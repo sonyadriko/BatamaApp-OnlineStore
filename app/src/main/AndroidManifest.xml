@@ -15,15 +15,6 @@
         android:theme="@style/Theme.Tokoonline"
         tools:targetApi="31">
         <activity
-            android:name=".view.activity.TambahProdukActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activity.DetailProdukActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activity.LoginActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main">
@@ -38,6 +29,15 @@
             android:exported="false" />
         <activity
             android:name=".view.activity.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.DetailProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.TambahProdukActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.LoginActivity"
             android:exported="false" />
     </application>
 

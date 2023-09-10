@@ -42,14 +42,18 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun checkCurrentUserSession(): Boolean {
+    private fun checkCurrentUserSession(): Boolean {
         val uid = userRepository.uid
         return auth.currentUser != null
                 && uid == auth.currentUser?.uid
     }
 
-    fun showToast(message: String? = null, length: Int = Toast.LENGTH_SHORT) {
-        Toast.makeText(this, message ?: getString(R.string.something_wrong), length).show()
+    fun showToast(message: String, length: Int = Toast.LENGTH_SHORT) {
+        Toast.makeText(this, message, length).show()
+    }
+
+    fun showDefaultErrorToast() {
+        showToast(getString(R.string.something_wrong))
     }
 
     fun showProgressDialog() {

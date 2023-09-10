@@ -13,7 +13,7 @@ data class Produk(
     @SerializedName("nama")
     var nama: String = "",
     @SerializedName("harga")
-    var harga: Int = 0,
+    var harga: Long = 0,
     @SerializedName("deskripsi")
     val deskripsi: String = "",
     @SerializedName("id_users")
