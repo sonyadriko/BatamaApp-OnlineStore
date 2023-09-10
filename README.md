@@ -1,8 +1,8 @@
 # tokoonline
 
 ### USER
-- [ ] login
-- [ ] register
+- [x] login
+- [x] register
 
 ### PENJUAL
 - [ ] Create Toko 
