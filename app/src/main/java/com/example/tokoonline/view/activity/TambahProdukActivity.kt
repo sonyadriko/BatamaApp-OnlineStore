@@ -11,7 +11,6 @@ import com.example.tokoonline.databinding.ActivityTambahProdukBinding
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
-import kotlinx.android.synthetic.main.activity_tambah_produk.gambarImageView
 
 class TambahProdukActivity : BaseActivity() {
 
@@ -27,7 +26,7 @@ class TambahProdukActivity : BaseActivity() {
 
         storageReference = Firebase.storage.reference.child("images/produk")
 
-        binding.buttonTambahGambarProduk.setOnClickListener{
+        binding.buttonTambahGambarProduk.setOnClickListener {
             //membuka galeri untuk memilih gambar
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
@@ -50,19 +49,19 @@ class TambahProdukActivity : BaseActivity() {
                         val dataProdukNew = Produk(
                             image = uri.toString(),
                             nama = etNamaProduk.text.toString(),
-                            harga = etHargaProduk.text.toString().toInt(),
+                            harga = etHargaProduk.text.toString().toLong(),
                             deskripsi = etDeskProduk.text.toString(),
                             id_users = userRepository.uid
 
                         )
-                        viewModel.addData(dataProdukNew) {isSuccess ->
+                        viewModel.addData(dataProdukNew) { isSuccess ->
                             dismissProgressDialog()
                             if (isSuccess) {
                                 showToast("Successfully Saved")
                             } else showToast("Failed")
                         }
                     }
-                }.addOnFailureListener{
+                }.addOnFailureListener {
                     showToast("Gambar gagal diunggah")
                 }
         }
@@ -74,9 +73,10 @@ class TambahProdukActivity : BaseActivity() {
         if (requestCode == REQUEST_SELECT_IMAGE && resultCode == RESULT_OK && data != null) {
             // Mendapatkan URI gambar yang dipilih dari galeri
             selectedImageUri = data.data
-            gambarImageView.setImageURI(selectedImageUri)
+            binding.gambarImageView.setImageURI(selectedImageUri)
         }
     }
+
     companion object {
         private const val REQUEST_SELECT_IMAGE = 100
     }

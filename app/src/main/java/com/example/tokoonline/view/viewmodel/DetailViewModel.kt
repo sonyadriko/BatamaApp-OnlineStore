@@ -35,7 +35,7 @@ class DetailViewModel : BaseViewModel() {
         }
 
         try {
-            feature = valueOf(data.lastPathSegment?.uppercase() ?: "")
+//            feature = valueOf(data.lastPathSegment?.uppercase() ?: "")
             namaProduk = data.getQueryParameter(feature.queryName)
             if (namaProduk.isNullOrEmpty()) throw IllegalArgumentException("Name not specified")
         } catch (e: Exception) {
