@@ -14,7 +14,8 @@
         android:theme="@style/Theme.Tokoonline"
         tools:targetApi="31">
         <activity
-            android:name=".view.activity.MainActivity"
+            android:name=".view.activity.DashboardActivity"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +37,7 @@
             android:exported="false" />
         <activity
             android:name=".view.activity.LoginActivity"
+            android:launchMode="singleTop"
             android:exported="false" />
     </application>
 

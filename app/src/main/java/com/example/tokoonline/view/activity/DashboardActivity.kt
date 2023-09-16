@@ -12,7 +12,7 @@ import com.example.tokoonline.view.fragment.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.tokoonline.view.fragment.RiwayatTransaksiFragment
 
-class MainActivity : BaseActivity() {
+class DashboardActivity : BaseActivity() {
 
     private val fragmentHome: Fragment = HomeFragment()
     private val fragmentRiwayattransaksi: Fragment = RiwayatTransaksiFragment()

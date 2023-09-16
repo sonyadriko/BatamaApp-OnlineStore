@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tokoonline.view.activity.MainActivity
+import com.example.tokoonline.view.activity.DashboardActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.data.repository.UserRepository
 import com.example.tokoonline.view.activity.LoginActivity
@@ -41,6 +41,7 @@ abstract class BaseActivity : AppCompatActivity() {
         if (!checkCurrentUserSession()) {
             showToast("Anda harus login terlebih dahulu")
             logout()
+            finish()
         }
     }
 
@@ -77,7 +78,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun goToHomepage() {
         if (checkCurrentUserSession()) {
             startActivity(
-                Intent(this, MainActivity::class.java)
+                Intent(this, DashboardActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             )
         }

@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.tokoonline.view.activity.MainActivity
+import com.example.tokoonline.view.activity.DashboardActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.view.activity.LoginActivity
 import com.example.tokoonline.view.activity.RegisterActivity
@@ -131,7 +131,7 @@ abstract class BaseAuthActivity: AppCompatActivity() {
 
     private fun goToHomeActivity() {
         startActivity(
-            Intent(this, MainActivity::class.java)
+            Intent(this, DashboardActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         )
     }
@@ -139,7 +139,7 @@ abstract class BaseAuthActivity: AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (isTaskRoot) {
-            if (isBackClicked) finish()
+            if (isBackClicked) finishAffinity()
             else {
                 isBackClicked = true
                 showToast("Tekan sekali lagi untuk keluar dari aplikasi")

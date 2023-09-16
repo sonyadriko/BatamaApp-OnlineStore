@@ -1,6 +1,5 @@
 package com.example.tokoonline
 
-import android.app.Application
 import android.util.Log
 import androidx.multidex.MultiDexApplication
 import com.google.firebase.crashlytics.FirebaseCrashlytics
