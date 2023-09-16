@@ -24,6 +24,7 @@ abstract class BaseActivity : AppCompatActivity() {
     private lateinit var progressDialog: ProgressDialog
     private lateinit var alertDialog: AlertDialog.Builder
     lateinit var userRepository: UserRepository
+    private var isBackClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,5 +110,15 @@ abstract class BaseActivity : AppCompatActivity() {
             Log.e("ERROR WHATSAPP", e.toString())
             showToast("Tidak ada WhatApp")
         }
+    }
+
+    override fun onBackPressed() {
+        if (isTaskRoot) {
+            if (isBackClicked) finish()
+            else {
+                isBackClicked = true
+                showToast("Tekan sekali lagi untuk keluar dari aplikasi")
+            }
+        } else super.onBackPressed()
     }
 }

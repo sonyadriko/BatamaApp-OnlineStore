@@ -13,11 +13,11 @@ import com.example.tokoonline.view.fragment.RiwayatTransaksiFragment
 
 class MainActivity : BaseActivity() {
 
-    val fragmentHome: Fragment = HomeFragment()
-    val fragmentRiwayattransaksi: Fragment = RiwayatTransaksiFragment()
-    val fragmentAkun: Fragment = AkunFragment()
-    val fm: FragmentManager = supportFragmentManager
-    var active: Fragment = fragmentHome
+    private val fragmentHome: Fragment = HomeFragment()
+    private val fragmentRiwayattransaksi: Fragment = RiwayatTransaksiFragment()
+    private val fragmentAkun: Fragment = AkunFragment()
+    private val fm: FragmentManager = supportFragmentManager
+    private var active: Fragment = fragmentHome
 
     private lateinit var menu: Menu
     private lateinit var menuitem: MenuItem
@@ -29,7 +29,7 @@ class MainActivity : BaseActivity() {
         setUpBottomNav()
     }
 
-    fun setUpBottomNav() {
+    private fun setUpBottomNav() {
         fm.beginTransaction().add(R.id.container, fragmentHome).show(fragmentHome).commit()
         fm.beginTransaction().add(R.id.container, fragmentRiwayattransaksi)
             .hide(fragmentRiwayattransaksi).commit()
@@ -60,7 +60,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun callFragment(int: Int, fragment: Fragment) {
+    private fun callFragment(int: Int, fragment: Fragment) {
         menuitem = menu.getItem(int)
         menuitem.isChecked = true
         fm.beginTransaction().hide(active).show(fragment).commit()

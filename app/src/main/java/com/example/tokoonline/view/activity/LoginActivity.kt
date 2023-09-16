@@ -7,6 +7,7 @@ import com.example.tokoonline.databinding.ActivityLoginBinding
 class LoginActivity : BaseAuthActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private var backClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,5 +31,12 @@ class LoginActivity : BaseAuthActivity() {
         btnDaftarAkun.setOnClickListener{
             goToRegister()
         }
+    }
+
+    override fun onBackPressed() {
+        if (backClicked.not()) {
+            showToast("Tekan sekali lagi untuk keluar.")
+            backClicked = true
+        } else finish()
     }
 }

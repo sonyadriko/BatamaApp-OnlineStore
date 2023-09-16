@@ -22,9 +22,9 @@ import kotlinx.coroutines.launch
 
 @Suppress("Deprecation")
 abstract class BaseAuthActivity: AppCompatActivity() {
-    lateinit var auth: FirebaseAuth
-    lateinit var database: FirebaseDatabase
-    lateinit var userRepository: UserRepository
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
+    private lateinit var userRepository: UserRepository
     private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
