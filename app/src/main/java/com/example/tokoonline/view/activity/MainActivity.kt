@@ -1,10 +1,11 @@
-package com.example.tokoonline
+package com.example.tokoonline.view.activity
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.view.fragment.AkunFragment
 import com.example.tokoonline.view.fragment.HomeFragment

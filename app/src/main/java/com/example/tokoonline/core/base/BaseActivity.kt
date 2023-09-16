@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.tokoonline.MainActivity
+import com.example.tokoonline.view.activity.MainActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.data.repository.UserRepository
 import com.example.tokoonline.view.activity.LoginActivity
@@ -18,9 +18,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import java.net.URLEncoder
 
+@Suppress("Deprecation")
 abstract class BaseActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
-    lateinit var database: FirebaseDatabase
+    private lateinit var database: FirebaseDatabase
     private lateinit var progressDialog: ProgressDialog
     private lateinit var alertDialog: AlertDialog.Builder
     lateinit var userRepository: UserRepository
@@ -112,6 +113,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (isTaskRoot) {
             if (isBackClicked) finish()
