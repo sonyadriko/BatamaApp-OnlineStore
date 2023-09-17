@@ -1,14 +1,11 @@
 package com.example.tokoonline.view.viewmodel
 
-import androidx.lifecycle.ViewModel
+import com.example.tokoonline.core.base.BaseViewModel
 import com.example.tokoonline.data.model.Produk
-import com.example.tokoonline.data.repository.ProdukRepository
 
-class TambahProdukViewModel: ViewModel() {
-    private val repository: ProdukRepository = ProdukRepository().getInstance()
-
+class TambahProdukViewModel: BaseViewModel() {
     fun addData(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
-        repository.addProduk(produk) {
+        produkRepository.addProduk(produk) {
             onComplete(it)
         }
     }

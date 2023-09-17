@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
 @Parcelize
 data class Produk(
@@ -18,7 +19,7 @@ data class Produk(
     val deskripsi: String = "",
     @SerializedName("id_users")
     val id_users: String? = "",
-): Parcelable {
+) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()
         val json = gson.toJson(this)

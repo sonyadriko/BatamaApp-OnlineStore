@@ -65,6 +65,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
+    // fragment & lifecycle ktx
+    implementation "androidx.fragment:fragment-ktx:1.5.5"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+
+
 
     // android preference
     implementation 'androidx.preference:preference:1.2.0'

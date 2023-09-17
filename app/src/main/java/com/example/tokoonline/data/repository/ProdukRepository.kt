@@ -12,22 +12,25 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class ProdukRepository {
-    private val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference(Constant.REFERENCE_PRODUK)
+    private val databaseReference: DatabaseReference =
+        FirebaseDatabase.getInstance().getReference(Constant.REFERENCE_PRODUK)
 
-    @Volatile
-    private var INSTANCE: ProdukRepository? = null
+    companion object {
+        @Volatile
+        private var INSTANCE: ProdukRepository? = null
 
-    fun getInstance(): ProdukRepository {
-        return INSTANCE ?: synchronized(this) {
+        fun getInstance(): ProdukRepository {
+            return INSTANCE ?: synchronized(this) {
 
-            val instance = ProdukRepository()
-            INSTANCE = instance
-            instance
+                val instance = ProdukRepository()
+                INSTANCE = instance
+                instance
+            }
         }
     }
 
     fun loadProduk(): LiveData<List<Produk>> {
-        val data = MutableLiveData<List<Produk>>()
+        val data: MutableLiveData<List<Produk>> = MutableLiveData(emptyList())
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 try {

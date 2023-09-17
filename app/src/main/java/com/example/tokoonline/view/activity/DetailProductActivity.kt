@@ -3,6 +3,7 @@ package com.example.tokoonline.view.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -20,7 +21,7 @@ class DetailProductActivity: BaseActivity() {
         const val RESULT_DELETE = 10
         fun createIntent(context: Context, data: Produk): Intent {
             return Intent(context, DetailProductActivity::class.java).apply {
-                putExtra(PRODUK_EXTRA, data)
+                putExtra(PRODUK_EXTRA, data as Parcelable)
             }
         }
     }

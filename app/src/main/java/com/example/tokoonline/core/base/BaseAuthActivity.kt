@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.tokoonline.view.activity.DashboardActivity
+import com.example.tokoonline.view.activity.MainActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.view.activity.LoginActivity
 import com.example.tokoonline.view.activity.RegisterActivity
@@ -131,7 +131,7 @@ abstract class BaseAuthActivity: AppCompatActivity() {
 
     private fun goToHomeActivity() {
         startActivity(
-            Intent(this, DashboardActivity::class.java)
+            Intent(this, MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         )
     }

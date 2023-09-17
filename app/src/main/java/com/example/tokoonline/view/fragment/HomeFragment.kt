@@ -1,6 +1,5 @@
 package com.example.tokoonline.view.fragment
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,11 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseFragment
-import com.example.tokoonline.core.constanst.Constant.arrProdukTer
-import com.example.tokoonline.core.constanst.Constant.arrProdukTerlaris
 import com.example.tokoonline.core.util.OnItemClickListener
 import com.example.tokoonline.data.model.Produk
 import com.example.tokoonline.view.adapter.AdapterProduk
@@ -35,62 +31,28 @@ class HomeFragment : BaseFragment(), OnItemClickListener {
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == RESULT_DELETE) {
-                loadProduk()
+                // do nothing for now
             }
         }
 
-    @SuppressLint("SuspiciousIndentation")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initSliderBanner()
-        setUpRecycler()
-        initProdukList()
+        initView()
         initListener()
         observe()
+        viewModel.processEvent(ProdukViewModel.LoadDataProduk)
     }
 
-    private fun initListener() {
-        binding.btnAddproduk.setOnClickListener {
-            startActivity(Intent(context, TambahProdukActivity::class.java))
-
-        }
-    }
-
-    private fun observe() {
-        viewModel.produk.observe(viewLifecycleOwner){
-            productAdapter.updateUserList(it)
-            dismissProgressDialog()
-        }
-    }
-
-    private fun loadProduk() {
-        viewModel.loadProduk()
-        showProgressDialog()
-    }
-
-    private fun setUpRecycler() {
-        val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.HORIZONTAL)
-        val layoutManager = LinearLayoutManager(activity)
-        productAdapter = AdapterProduk(this)
-        layoutManager.orientation = LinearLayoutManager.HORIZONTAL
-        binding.rvProduk.apply {
-            addItemDecoration(dividerItemDecoration)
-            setHasFixedSize(true)
-            adapter = adapter
-        }
-        binding.rvProduk.layoutManager = layoutManager
-    }
-
-    private fun initSliderBanner() {
+    private fun initView() {
+        // slider
         val arrSlider = ArrayList<Int>()
         arrSlider.add(R.drawable.slider2)
         arrSlider.add(R.drawable.slider1)
@@ -98,19 +60,32 @@ class HomeFragment : BaseFragment(), OnItemClickListener {
 
         val adapterSlider = AdapterSlider(arrSlider, activity)
         binding.vpSlider.adapter = adapterSlider
-    }
 
-    private fun initProdukList() = with(binding) {
-        rvProdukterlaris.apply {
-            adapter = AdapterProduk(this@HomeFragment).apply {
-                submitList(arrProdukTerlaris)
-            }
+
+        // produk terbaru
+        val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.HORIZONTAL)
+        productAdapter = AdapterProduk(this)
+        binding.rvProduk.apply {
+            addItemDecoration(dividerItemDecoration)
+            setHasFixedSize(true)
+            adapter = productAdapter
         }
 
-        rvProdukter.apply {
-            adapter = AdapterProduk(this@HomeFragment).apply {
-                submitList(arrProdukTer)
-            }
+
+    }
+
+    private fun initListener() {
+        binding.btnAddproduk.setOnClickListener {
+            startActivity(Intent(context, TambahProdukActivity::class.java))
+        }
+    }
+
+    private fun observe() {
+        viewModel.state.observe(viewLifecycleOwner) {
+            if (it.isLoading) showProgressDialog()
+            else dismissProgressDialog()
+
+            productAdapter.submitList(it.dataProduk)
         }
     }
 
