@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.tokoonline.MainActivity
+import com.example.tokoonline.view.activity.MainActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.view.activity.LoginActivity
 import com.example.tokoonline.view.activity.RegisterActivity
@@ -22,10 +22,11 @@ import kotlinx.coroutines.launch
 
 @Suppress("Deprecation")
 abstract class BaseAuthActivity: AppCompatActivity() {
-    lateinit var auth: FirebaseAuth
-    lateinit var database: FirebaseDatabase
-    lateinit var userRepository: UserRepository
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
+    private lateinit var userRepository: UserRepository
     private lateinit var progressDialog: ProgressDialog
+    private var isBackClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,5 +134,16 @@ abstract class BaseAuthActivity: AppCompatActivity() {
             Intent(this, MainActivity::class.java)
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         )
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        if (isTaskRoot) {
+            if (isBackClicked) finishAffinity()
+            else {
+                isBackClicked = true
+                showToast("Tekan sekali lagi untuk keluar dari aplikasi")
+            }
+        } else super.onBackPressed()
     }
 }

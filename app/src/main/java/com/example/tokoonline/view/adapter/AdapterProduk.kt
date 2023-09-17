@@ -16,7 +16,7 @@ class AdapterProduk(private val onItemClickListener: OnItemClickListener) :
 
     private val produkList = ArrayList<Produk>()
 
-    fun submitList(data: MutableList<Produk>) {
+    fun submitList(data: List<Produk>) {
         produkList.clear()
         produkList.addAll(data)
         notifyItemRangeChanged(0, data.size - 1)
@@ -46,11 +46,5 @@ class AdapterProduk(private val onItemClickListener: OnItemClickListener) :
 
     override fun getItemCount(): Int {
         return produkList.size
-    }
-
-    fun updateUserList(userList: List<Produk>){
-        this.produkList.clear()
-        this.produkList.addAll(userList)
-        notifyDataSetChanged()
     }
 }

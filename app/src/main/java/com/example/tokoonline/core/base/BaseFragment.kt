@@ -29,9 +29,6 @@ abstract class BaseFragment : Fragment() {
         progressDialog = ProgressDialog(context)
         alertDialog = AlertDialog.Builder(requireActivity())
         userRepository = UserRepository.getInstance(requireActivity())
-
-
-
     }
 
     override fun onStart() {
