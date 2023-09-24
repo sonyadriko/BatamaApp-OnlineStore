@@ -52,6 +52,7 @@ abstract class BaseAuthActivity: AppCompatActivity() {
     private fun setDataToLocal(currentUserUid: String) {
         userRepository.getRemoteUserData(currentUserUid) { isSuccess, user ->
             if (!isSuccess || user == null) {
+                dismissProgressDialog()
                 forceOut()
                 return@getRemoteUserData
             }

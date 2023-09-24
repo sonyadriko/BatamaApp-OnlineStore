@@ -1,8 +1,11 @@
 package com.example.tokoonline.view.activity
 
 import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.core.base.BaseAuthActivity
 import com.example.tokoonline.databinding.ActivityLoginBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class LoginActivity : BaseAuthActivity() {
 
@@ -21,8 +24,11 @@ class LoginActivity : BaseAuthActivity() {
             if (!edtEmail.text.isNullOrEmpty() && !edtPassword.text.isNullOrEmpty()) {
                 showProgressDialog()
                 login(edtEmail.text.toString(), edtPassword.text.toString(), doOnFailed = {
-                    dismissProgressDialog()
-                    showToast("Akun tidak ditemukan")
+                    lifecycleScope.launch {
+                        delay(500)
+                        dismissProgressDialog()
+                        showToast("Akun tidak ditemukan")
+                    }
                 })
             }
         }

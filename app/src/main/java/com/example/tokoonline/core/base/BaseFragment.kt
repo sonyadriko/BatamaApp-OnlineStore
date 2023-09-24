@@ -17,7 +17,7 @@ import com.google.firebase.ktx.Firebase
 
 abstract class BaseFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
-    lateinit var database: FirebaseDatabase
+    private lateinit var database: FirebaseDatabase
     lateinit var userRepository: UserRepository
     private lateinit var progressDialog: ProgressDialog
     lateinit var alertDialog: AlertDialog.Builder
@@ -53,8 +53,12 @@ abstract class BaseFragment : Fragment() {
 
     private fun checkCurrentUserSession(): Boolean {
         val uid = userRepository.uid
-        return auth.currentUser != null
-                && requireNotNull(uid) == requireNotNull(auth.currentUser).uid
+        return try {
+            auth.currentUser != null
+                    && requireNotNull(uid) == requireNotNull(auth.currentUser).uid
+        } catch (e: Exception) {
+            false
+        }
     }
 
     fun logout() {
