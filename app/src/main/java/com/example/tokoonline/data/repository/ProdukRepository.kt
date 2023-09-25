@@ -3,6 +3,7 @@ package com.example.tokoonline.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.tokoonline.core.constanst.Constant
+import com.example.tokoonline.core.util.multiValueListenerFlow
 import com.example.tokoonline.core.util.toProdukDomain
 import com.example.tokoonline.data.model.Produk
 import com.google.firebase.database.DataSnapshot
@@ -10,6 +11,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 class ProdukRepository {
     private val databaseReference: DatabaseReference =
@@ -29,25 +34,9 @@ class ProdukRepository {
         }
     }
 
-    fun loadProduk(): LiveData<List<Produk>> {
-        val data: MutableLiveData<List<Produk>> = MutableLiveData(emptyList())
-        databaseReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                try {
-                    data.value = snapshot.children.map { dataSnapshot ->
-                        dataSnapshot.getValue(Produk::class.java)!!
-                    }
-                } catch (e: Exception) {
-                    data.value = emptyList()
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                data.value = emptyList()
-            }
-        })
-
-        return data
+    fun loadProduk(): Flow<List<Produk?>> {
+        println("FETCH_PRODUK")
+        return databaseReference.multiValueListenerFlow(Produk::class.java)
     }
 
     fun addProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {

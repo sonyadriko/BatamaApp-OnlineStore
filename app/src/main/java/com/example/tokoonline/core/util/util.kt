@@ -8,6 +8,15 @@ import android.view.View
 import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.data.model.Produk
 import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -74,3 +83,38 @@ inline fun <reified T : Parcelable> Bundle.parcelable(key: String): T? = when {
     SDK_INT >= 33 -> getParcelable(key, T::class.java)
     else -> @Suppress("DEPRECATION") getParcelable(key) as? T
 }
+
+fun <T> DatabaseReference.singleValueListenerFlow(dataType: Class<T>): Flow<T?> = callbackFlow {
+    val listener = object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val value = dataSnapshot.getValue(dataType)
+            trySend(value)
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            cancel()
+        }
+    }
+    addValueEventListener(listener)
+    awaitClose { removeEventListener(listener) }
+}.flowOn(Dispatchers.IO)
+
+fun <T> DatabaseReference.multiValueListenerFlow(dataType: Class<T>): Flow<List<T?>> =
+    callbackFlow {
+        val listener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val value = dataSnapshot.children.map { snapshot ->
+                    snapshot.getValue(dataType)
+                }
+                println("FETCH_PRODUK = DATA CHANGE $value")
+                trySend(value)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                println("FETCH_PRODUK = CANCELLED")
+                cancel()
+            }
+        }
+        addValueEventListener(listener)
+        awaitClose { removeEventListener(listener) }
+    }
