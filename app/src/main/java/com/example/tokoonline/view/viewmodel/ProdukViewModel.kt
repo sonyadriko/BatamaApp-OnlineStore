@@ -2,12 +2,19 @@ package com.example.tokoonline.view.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.viewModelScope
 import com.example.tokoonline.core.base.BaseViewModel
 import com.example.tokoonline.data.model.Produk
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 
 class ProdukViewModel : BaseViewModel() {
+
+    private val supervisor = SupervisorJob()
+    private val scope = CoroutineScope(Dispatchers.Main + supervisor)
+
     data class State(
         val isLoading: Boolean = true,
         val dataProduk: List<Produk> = emptyList()
@@ -25,7 +32,7 @@ class ProdukViewModel : BaseViewModel() {
         }
     }
 
-    object LoadDataProduk: Effect()
+    object LoadDataProduk : Effect()
 
     private val _state = MediatorLiveData<State>()
     val state: LiveData<State> get() = _state
@@ -35,13 +42,15 @@ class ProdukViewModel : BaseViewModel() {
     }
 
     private fun onLoadDataProduk() {
-        val a = produkRepository.loadProduk()
-        _state.addSource(a) {
-            setState {
-                copy(
-                    isLoading = it.isEmpty(),
-                    dataProduk = it
-                )
+        viewModelScope.launch {
+            produkRepository.loadProduk().collect { dataList ->
+                println("FETCH_PRODUK $dataList")
+                setState {
+                    copy(
+                        isLoading = dataList.isEmpty(),
+                        dataProduk = dataList.filterNotNull()
+                    )
+                }
             }
         }
     }
