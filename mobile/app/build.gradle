@@ -22,11 +22,21 @@ android {
     }
 
     buildTypes {
+        debug {
+            versionNameSuffix "-dev"
+            resValue "string", "app_name", "Toko Online Dev"
+            debuggable true
+        }
+
         release {
-            minifyEnabled false
+            minifyEnabled true
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility androidConfig.sourceAndTargetCompability
         targetCompatibility androidConfig.sourceAndTargetCompability
@@ -38,6 +48,19 @@ android {
         viewBinding true
     }
     namespace 'com.example.tokoonline'
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    applicationVariants.configureEach { variant ->
+        if (variant.getName() == "release") {
+            variant.buildConfigField "String", "CLIENT_KEY", properties.getProperty("clientKeyRelease")
+            variant.buildConfigField "String", "SERVER_URL", properties.getProperty("serverUrl")
+        } else {
+            variant.buildConfigField "String", "CLIENT_KEY", properties.getProperty("clientKeySandBox")
+            variant.buildConfigField "String", "SERVER_URL", properties.getProperty("serverUrl")
+        }
+    }
 }
 
 dependencies {
@@ -84,4 +107,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     implementation androidx.multidex
+
+    debugImplementation 'com.midtrans:uikit:2.0.0-SANDBOX'
+    releaseImplementation 'com.midtrans:uikit:2.0.0'
 }
