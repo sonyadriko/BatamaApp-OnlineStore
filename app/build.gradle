@@ -22,11 +22,22 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-dev"
+            resValue "string", "app_name", "Toko Online Dev"
+            debuggable true
+        }
+
         release {
-            minifyEnabled false
+            minifyEnabled true
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility androidConfig.sourceAndTargetCompability
         targetCompatibility androidConfig.sourceAndTargetCompability
@@ -84,4 +95,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
 
     implementation androidx.multidex
+
+    debugImplementation 'com.midtrans:uikit:2.0.0-SANDBOX'
+    releaseImplementation 'com.midtrans:uikit:2.0.0'
 }
