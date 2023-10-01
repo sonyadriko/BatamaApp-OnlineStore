@@ -140,7 +140,7 @@ class CheckoutActivity : BaseActivity() {
             .setTransactionFinishedCallback { transactionResult ->
                 doOnTransactionFinished(transactionResult)
             }
-            .enableLog(false) // this is to disable logging
+            .enableLog(true) // this is to disable logging
             .buildSDK()
 
         MidtransSDK.getInstance().startPaymentUiFlow(this)
