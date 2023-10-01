@@ -19,7 +19,7 @@ class AdapterProduk(private val onItemClickListener: OnItemClickListener) :
     fun submitList(data: List<Produk>) {
         produkList.clear()
         produkList.addAll(data)
-        notifyItemRangeChanged(0, data.size - 1)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {

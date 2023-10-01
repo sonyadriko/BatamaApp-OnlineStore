@@ -17,6 +17,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.flowOn
+import java.text.DateFormat
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -29,6 +30,13 @@ fun convertLongToTime(time: Long): String {
     val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     format.timeZone = TimeZone.getTimeZone("UTC")
     return format.format(date)
+}
+
+fun getFormattedTimeMidtrans(time: Long): String {
+    // Quoted "Z" to indicate UTC, no timezone offset
+    val df: DateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z", Locale.getDefault())
+    df.timeZone = TimeZone.getTimeZone("Asia/Jakarta")
+    return df.format(Date(time))
 }
 
 fun convertDateToLong(date: String): Long {
