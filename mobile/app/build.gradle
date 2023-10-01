@@ -23,7 +23,6 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix ".debug"
             versionNameSuffix "-dev"
             resValue "string", "app_name", "Toko Online Dev"
             debuggable true
