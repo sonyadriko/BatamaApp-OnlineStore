@@ -15,7 +15,7 @@ import com.example.tokoonline.databinding.ActivityDetailProdukBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class DetailProductActivity: BaseActivity() {
+class DetailProductActivity : BaseActivity() {
     companion object {
         private const val PRODUK_EXTRA = "extra_produk"
         const val RESULT_DELETE = 10
@@ -49,6 +49,10 @@ class DetailProductActivity: BaseActivity() {
         btnKeranjang.setOnClickListener {
             // TODO: TAMBAH KE KERANJANG
             showToast("berhasil ditambahkan ke keranjang")
+        }
+
+        btnBeli.setOnClickListener {
+            startActivity(Intent(this@DetailProductActivity, CheckoutActivity::class.java))
         }
     }
 
