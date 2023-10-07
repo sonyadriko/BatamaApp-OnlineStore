@@ -46,6 +46,14 @@ class AkunFragment : BaseFragment() {
            logout()
         }
 
+        binding.btnEditProfile.setOnClickListener{
+         goToEditProfil()
+        }
+
+        binding.btnSettingAlamat.setOnClickListener{
+            goToSettingAlamat()
+        }
+
         return binding.root
     }
 }

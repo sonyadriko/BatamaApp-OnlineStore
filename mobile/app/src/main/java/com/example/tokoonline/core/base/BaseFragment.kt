@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.tokoonline.R
 import com.example.tokoonline.data.repository.UserRepository
+import com.example.tokoonline.view.activity.EditProfilActivity
 import com.example.tokoonline.view.activity.LoginActivity
+import com.example.tokoonline.view.activity.SettingAlamatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -72,5 +74,15 @@ abstract class BaseFragment : Fragment() {
                 .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         )
     }
+    fun goToEditProfil() {
+        val intent = Intent(requireContext(), EditProfilActivity::class.java)
+        startActivity(intent)
+    }
+    fun goToSettingAlamat() {
+        val intent = Intent(requireContext(), SettingAlamatActivity::class.java)
+        startActivity(intent)
+    }
+
+
 
 }
