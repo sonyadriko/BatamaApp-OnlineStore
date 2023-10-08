@@ -11,11 +11,14 @@ import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.core.util.parcelable
 import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.repository.KeranjangRepository
 import com.example.tokoonline.databinding.ActivityDetailProdukBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class DetailProductActivity : BaseActivity() {
+    private lateinit var keranjangRepository: KeranjangRepository
+
     companion object {
         private const val PRODUK_EXTRA = "extra_produk"
         const val RESULT_DELETE = 10
@@ -34,6 +37,7 @@ class DetailProductActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailProdukBinding.inflate(layoutInflater)
+        keranjangRepository = KeranjangRepository(this)
 
         verifyProductData()
         initView()
@@ -47,8 +51,24 @@ class DetailProductActivity : BaseActivity() {
         }
 
         btnKeranjang.setOnClickListener {
-            // TODO: TAMBAH KE KERANJANG
-            showToast("berhasil ditambahkan ke keranjang")
+            if (produkData == null) {
+                return@setOnClickListener
+            }
+
+            showProgressDialog()
+            userRepository.uid?.let { uuid ->
+                keranjangRepository.addKeranjang(
+                    userUid = uuid,
+                    produk = produkData!!.toProdukKeranjang(),
+                    onComplete = { success ->
+                        dismissProgressDialog()
+                        if (success) {
+                            showToast("berhasil ditambahkan ke keranjang")
+                        } else {
+                            showToast("gagal ditambahkan ke keranjang")
+                        }
+                    })
+            }
         }
 
         btnBeli.setOnClickListener {

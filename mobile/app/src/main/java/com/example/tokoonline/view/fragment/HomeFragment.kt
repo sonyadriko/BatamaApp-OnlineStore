@@ -18,6 +18,7 @@ import com.example.tokoonline.view.adapter.AdapterProduk
 import com.example.tokoonline.view.activity.DetailProductActivity
 import com.example.tokoonline.databinding.FragmentHomeBinding
 import com.example.tokoonline.view.activity.DetailProductActivity.Companion.RESULT_DELETE
+import com.example.tokoonline.view.activity.KeranjangActivity
 import com.example.tokoonline.view.activity.TambahProdukActivity
 import com.example.tokoonline.view.adapter.AdapterSlider
 import com.example.tokoonline.view.viewmodel.ProdukViewModel
@@ -78,6 +79,10 @@ class HomeFragment : BaseFragment(), OnItemClickListener {
         binding.btnAddproduk.setOnClickListener {
             startActivity(Intent(context, TambahProdukActivity::class.java))
         }
+
+        binding.icKeranjang.setOnClickListener {
+            startActivity(Intent(activity, KeranjangActivity::class.java))
+        }
     }
 
     private fun observe() {
@@ -89,7 +94,7 @@ class HomeFragment : BaseFragment(), OnItemClickListener {
         }
     }
 
-    override fun onItemClick(data: Produk, position: Int) {
-        startActivity(DetailProductActivity.createIntent(requireContext(), data))
+    override fun onItemClick(data: Any, position: Int) {
+        startActivity(DetailProductActivity.createIntent(requireContext(), data as Produk))
     }
 }
