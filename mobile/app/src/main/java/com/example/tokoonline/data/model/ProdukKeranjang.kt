@@ -8,7 +8,9 @@ import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
 @Parcelize
-data class Produk(
+data class ProdukKeranjang (
+    @SerializedName("id")
+    var id: String = "",
     @SerializedName("image")
     val image: String = "",
     @SerializedName("nama")
@@ -19,20 +21,12 @@ data class Produk(
     val deskripsi: String = "",
     @SerializedName("id_users")
     val id_users: String? = "",
+    @SerializedName("jumlah")
+    val jumlah: Int = 1,
 ) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()
         val json = gson.toJson(this)
         return gson.fromJson(json, object : TypeToken<Map<String, Any>>() {}.type)
-    }
-
-    fun toProdukKeranjang(): ProdukKeranjang {
-        return ProdukKeranjang(
-            image = this.image,
-            nama = this.nama,
-            harga = this.harga,
-            deskripsi = this.deskripsi,
-            id_users = this.id_users,
-        )
     }
 }
