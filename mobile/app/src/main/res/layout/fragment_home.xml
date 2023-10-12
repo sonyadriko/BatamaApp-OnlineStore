@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginRight="6dp"
-            android:layout_toLeftOf="@id/icn_chat"
+            android:layout_toLeftOf="@id/ic_keranjang"
             app:cardCornerRadius="17dp">
 
             <LinearLayout
@@ -42,7 +42,7 @@
         </androidx.cardview.widget.CardView>
 
         <ImageView
-            android:id="@+id/icn_chat"
+            android:id="@+id/ic_keranjang"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
