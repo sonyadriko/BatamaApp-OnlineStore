@@ -1,0 +1,37 @@
+package com.example.tokoonline.view.adapter
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.tokoonline.data.model.Alamat
+import com.example.tokoonline.databinding.ItemAlamatBinding
+
+class AlamatAdapter(private val alamatList: List<Alamat>) :
+    RecyclerView.Adapter<AlamatAdapter.ViewHolder>() {
+
+    inner class ViewHolder(private val binding: ItemAlamatBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(alamat: Alamat) {
+            binding.tvLabelAlamat.text = alamat.label
+            binding.tvNamaPenerima.text = alamat.nama
+            binding.tvAlamatPenerima.text = alamat.alamat
+            binding.tvCatatanAlamat.text = alamat.catatan
+            binding.tvPhonePenerima.text = alamat.phone
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemAlamatBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val alamat = alamatList[position]
+        holder.bind(alamat)
+    }
+
+    override fun getItemCount(): Int {
+        return alamatList.size
+    }
+}
