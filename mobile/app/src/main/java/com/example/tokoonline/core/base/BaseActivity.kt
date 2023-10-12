@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tokoonline.view.activity.MainActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.data.repository.UserRepository
+import com.example.tokoonline.view.activity.AlamatFormActivity
 import com.example.tokoonline.view.activity.EditProfilFormActivity
 import com.example.tokoonline.view.activity.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -89,6 +90,12 @@ abstract class BaseActivity : AppCompatActivity() {
         val intent = Intent(this, EditProfilFormActivity::class.java)
         intent.putExtra("cardToShow", cardToShow)
         startActivity(intent)
+    }
+
+    fun goToAlamatForm(){
+        startActivity(
+            Intent(this, AlamatFormActivity::class.java)
+        )
     }
 
     fun logout() {
