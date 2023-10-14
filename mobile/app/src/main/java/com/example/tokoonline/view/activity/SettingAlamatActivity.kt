@@ -30,9 +30,7 @@ class SettingAlamatActivity : BaseActivity() {
         recyclerView = binding.recyclerView
 
         fetchAlamatData()
-//        binding.btnUbahAlamat.setOnClickListener{
-//            goToAlamatForm()
-//        }
+
         binding.btnTambahAlamat.setOnClickListener {
             goToAlamatForm()
         }
@@ -47,6 +45,9 @@ class SettingAlamatActivity : BaseActivity() {
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.adapter = adapter
 
+            adapter.onUbahAlamatClickListener = { alamat ->
+                goToAlamatForm(selectedAlamatId = alamat.id)
+            }
         }
     }
 

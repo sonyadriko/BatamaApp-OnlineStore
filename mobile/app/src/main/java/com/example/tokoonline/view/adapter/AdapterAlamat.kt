@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.data.model.Alamat
 import com.example.tokoonline.databinding.ItemAlamatBinding
 
-class AlamatAdapter(private val alamatList: List<Alamat>) :
-    RecyclerView.Adapter<AlamatAdapter.ViewHolder>() {
+class AlamatAdapter(
+    private val alamatList: List<Alamat>
+) : RecyclerView.Adapter<AlamatAdapter.ViewHolder>() {
+    var onUbahAlamatClickListener: ((Alamat) -> Unit)? = null
 
     inner class ViewHolder(private val binding: ItemAlamatBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -18,6 +20,9 @@ class AlamatAdapter(private val alamatList: List<Alamat>) :
             binding.tvAlamatPenerima.text = alamat.alamat
             binding.tvCatatanAlamat.text = alamat.catatan
             binding.tvPhonePenerima.text = alamat.phone
+            binding.btnUbahAlamat.setOnClickListener {
+                onUbahAlamatClickListener?.invoke(alamat)
+            }
         }
     }
 

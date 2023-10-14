@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tokoonline.view.activity.MainActivity
 import com.example.tokoonline.R
+import com.example.tokoonline.data.model.Alamat
 import com.example.tokoonline.data.repository.UserRepository
 import com.example.tokoonline.view.activity.AlamatFormActivity
 import com.example.tokoonline.view.activity.EditProfilFormActivity
@@ -92,10 +93,12 @@ abstract class BaseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun goToAlamatForm(){
-        startActivity(
-            Intent(this, AlamatFormActivity::class.java)
-        )
+    fun goToAlamatForm(selectedAlamatId: String? = null) {
+        val intent = Intent(this, AlamatFormActivity::class.java)
+        if (selectedAlamatId != null) {
+            intent.putExtra("selectedAlamatId", selectedAlamatId)
+        }
+        startActivity(intent)
     }
 
     fun logout() {

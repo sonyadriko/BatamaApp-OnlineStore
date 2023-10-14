@@ -19,5 +19,22 @@ class AlamatViewModel : BaseViewModel() {
             onComplete(alamatList)
         }
     }
+    fun updateAlamat(alamat: Alamat, onComplete: (Boolean) -> Unit) {
+        alamatRepository.updateAlamat(alamat) { isSuccess ->
+            onComplete(isSuccess)
+        }
+    }
+
+    fun getAlamatById(id: String, onComplete: (Alamat?) -> Unit) {
+        alamatRepository.getAlamatById(id) { alamat ->
+            onComplete(alamat)
+        }
+    }
+
+    fun deleteAlamatById(id: String, onComplete: (Boolean) -> Unit) {
+        alamatRepository.deleteAlamatById(id) { isSuccess ->
+            onComplete(isSuccess)
+        }
+    }
 
 }

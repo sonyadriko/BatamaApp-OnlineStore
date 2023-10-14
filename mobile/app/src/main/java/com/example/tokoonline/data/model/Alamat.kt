@@ -10,16 +10,18 @@ import java.io.Serializable
 
 @Parcelize
 data class Alamat (
+    @SerializedName("id")
+    val id: String? = "",
     @SerializedName("label")
     val label: String = "",
     @SerializedName("alamat")
     val alamat: String = "",
     @SerializedName("catatan")
-    val catatan: String? = "",
+    val catatan: String = "",
     @SerializedName("nama")
-    val nama: String? = "",
+    val nama: String = "",
     @SerializedName("phone")
-    val phone: String? = "",
+    val phone: String = "",
     @SerializedName("id_users")
     val id_users: String? = "",
 ) : Parcelable, Serializable {

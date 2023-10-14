@@ -28,12 +28,14 @@ class AlamatRepository {
 
     fun pushAlamat(alamat: Alamat, onComplete: (isSuccess: Boolean) -> Unit){
         val alamatRef = databaseReference.push()
-        alamatRef.setValue(alamat)
+
+        val idKey = alamatRef.key
+
+        alamatRef.setValue(alamat.copy(id = idKey))
             .addOnCompleteListener{task ->
                 onComplete(task.isSuccessful)
             }
     }
-    // Function to retrieve Alamat data that matches the userRepository.uid
     fun getAlamatList(userRepository: UserRepository, onComplete: (List<Alamat>) -> Unit) {
         val query = databaseReference.orderByChild("id_users").equalTo(userRepository.uid)
 
@@ -56,4 +58,48 @@ class AlamatRepository {
         })
     }
 
+    fun getAlamatById(id: String, onComplete: (Alamat?) -> Unit) {
+        databaseReference.child(id).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val alamat = snapshot.getValue(Alamat::class.java)
+                onComplete(alamat)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                onComplete(null)
+            }
+        })
+    }
+
+    fun updateAlamat(alamat: Alamat, onComplete: (Boolean) -> Unit) {
+
+        val addressKey = alamat.id
+
+        if (addressKey != null) {
+            val addressUpdateData = mapOf(
+                "/$addressKey" to alamat.toMap()
+            )
+
+            databaseReference.updateChildren(addressUpdateData)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        onComplete(true)
+                    } else {
+                        onComplete(false)
+                    }
+                }
+        } else {
+            onComplete(false)
+        }
+    }
+    fun deleteAlamatById(id: String, onComplete: (Boolean) -> Unit) {
+        databaseReference.child(id).removeValue()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    onComplete(true) // Deletion was successful
+                } else {
+                    onComplete(false) // Deletion failed
+                }
+            }
+    }
 }
