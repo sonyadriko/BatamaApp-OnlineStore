@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.AlamatFormActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tv_labelAlamat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Label Alamat" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tv_alamatPenerima"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Alamat Lengkap" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tv_catatanAlamat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Catatan (Optional)" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tv_namaPenerima"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama Penerima" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/tv_phonePenerima"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Nomor HP" />
+
+        <Button
+            android:id="@+id/btn_simpanAlamat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simpan" />
+
+        <Button
+            android:id="@+id/btn_hapusAlamat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hapus Alamat" />
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
