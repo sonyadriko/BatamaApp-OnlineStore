@@ -54,6 +54,10 @@
         <activity
             android:name=".view.activity.SettingAlamatActivity"
             android:exported="false" />
+        <activity
+            android:name=".view.activity.KeranjangActivity"
+            android:exported="false"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

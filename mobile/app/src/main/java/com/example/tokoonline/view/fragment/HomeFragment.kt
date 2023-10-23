@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -88,7 +89,16 @@ class HomeFragment : BaseFragment(), OnItemClickListener {
     private fun observe() {
         viewModel.state.observe(viewLifecycleOwner) {
             if (it.isLoading) showProgressDialog()
-            else dismissProgressDialog()
+            else {
+                dismissProgressDialog()
+                if (it.dataProduk.isEmpty()) {
+                    showToast(
+                        "Tidak ada produk yang bisa ditampilkan untuk saat init",
+                        Toast.LENGTH_LONG
+                    )
+                }
+            }
+
 
             productAdapter.submitList(it.dataProduk)
         }

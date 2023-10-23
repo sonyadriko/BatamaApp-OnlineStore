@@ -23,6 +23,8 @@ data class ProdukKeranjang (
     val id_users: String? = "",
     @SerializedName("jumlah")
     val jumlah: Int = 1,
+    @SerializedName("is_checked")
+    val isChecked: Boolean = false,
 ) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()

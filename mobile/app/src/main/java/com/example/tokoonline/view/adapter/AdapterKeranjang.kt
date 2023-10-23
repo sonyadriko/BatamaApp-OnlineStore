@@ -10,8 +10,11 @@ import com.example.tokoonline.core.util.OnItemClickListener
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.ProdukKeranjang
 import com.example.tokoonline.databinding.ItemKeranjangBinding
+import timber.log.Timber
 
-class AdapterKeranjang(private val onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<AdapterKeranjang.Holder>() {
+class AdapterKeranjang(
+    private val onItemClickListener: OnItemClickListener,
+) : RecyclerView.Adapter<AdapterKeranjang.Holder>() {
     class Holder(val binding: ItemKeranjangBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val data = mutableListOf<ProdukKeranjang?>()
@@ -23,13 +26,35 @@ class AdapterKeranjang(private val onItemClickListener: OnItemClickListener) : R
         notifyDataSetChanged()
     }
 
-    private fun updateData(count: Int ,position: Int) {
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateData(
+        count: Int,
+        position: Int,
+        isIncrement: Boolean?,
+        isChecked: Boolean? = null
+    ) {
         val item = data[position] ?: return
-        val copied = item.copy(jumlah = count)
+        var copied = item.copy(jumlah = count)
+        if (isChecked != null) {
+            copied = copied.copy(isChecked = isChecked)
+        }
+
         data.apply {
-            set(position, copied)
-            notifyItemChanged(position)
-            onItemClickListener.onItemClick(copied, 1)
+            if (count <= 0) {
+                data.removeAt(position)
+                notifyDataSetChanged()
+            } else {
+                set(position, copied)
+                notifyItemChanged(position)
+            }
+
+            onItemClickListener.onItemClick(
+                ItemData(
+                    copied,
+                    isIncrement = isIncrement,
+                ), position
+            )
         }
     }
 
@@ -41,40 +66,52 @@ class AdapterKeranjang(private val onItemClickListener: OnItemClickListener) : R
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val item = data[position] ?: return
-
         val binding = holder.binding
         var count = item.jumlah
 
-        binding.btnTambah.setOnClickListener {
-            binding.tvJumlah.text = "${count++}"
-            updateData(count, position)
+        binding.apply {
+            tvJumlah.text = count.toString()
+            tvHarga.text = moneyFormatter((item.harga * count))
+            tvNama.text = item.nama
+            Glide.with(imgProduk)
+                .load(item.image.toUri())
+                .into(imgProduk)
+
+            btnTambah.setOnClickListener {
+                tvJumlah.text = "${count++}"
+                updateData(count, position, true)
+            }
+
+            btnKurang.setOnClickListener {
+                tvJumlah.text = "${count--}"
+                updateData(count, position, false)
+            }
+
+            checkBox.setOnCheckedChangeListener(null)
+            checkBox.isChecked = item.isChecked
+            Timber.d("__item__ atas = isChecked: ${item.isChecked}")
+            checkBox.setOnCheckedChangeListener { _, b ->
+                Timber.d("__item__ = isChecked: ${item.isChecked} && $b")
+                if (item.isChecked != b) {
+                    updateData(count, position, null, b)
+                }
+            }
+
+            btnDelete.setOnClickListener {
+                count = 0;
+                updateData(count, position, null)
+            }
         }
-
-        binding.btnKurang.setOnClickListener {
-            binding.tvJumlah.text = "${count--}"
-
-            if (count <= 0) {
-                data.removeAt(position)
-                notifyItemRemoved(position)
-                onItemClickListener.onItemClick(item, 0)
-            } else updateData(count, position)
-        }
-
-        binding.btnDelete.setOnClickListener {
-            notifyItemRemoved(position)
-            onItemClickListener.onItemClick(item, 0)
-        }
-
-        binding.tvJumlah.text = count.toString()
-        binding.tvHarga.text = "Rp. ${moneyFormatter((item.harga * count))}"
-
-        binding.tvNama.text = item.nama
-        Glide.with(binding.imgProduk)
-            .load(item.image.toUri())
-            .into(binding.imgProduk)
     }
 
     override fun getItemCount(): Int {
         return data.size
+    }
+
+    companion object {
+        data class ItemData(
+            val item: ProdukKeranjang,
+            val isIncrement: Boolean?,
+        )
     }
 }

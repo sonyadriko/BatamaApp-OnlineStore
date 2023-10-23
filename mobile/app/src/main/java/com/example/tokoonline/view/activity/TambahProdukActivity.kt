@@ -44,26 +44,34 @@ class TambahProdukActivity : BaseActivity() {
             //mengupload gambar ke firebase storage
             imageReference.putFile(selectedImageUri!!)
                 .addOnSuccessListener {
-                    //mendapatkan url gambar
-                    imageReference.downloadUrl.addOnSuccessListener { uri ->
-                        val dataProdukNew = Produk(
-                            image = uri.toString(),
-                            nama = etNamaProduk.text.toString(),
-                            harga = etHargaProduk.text.toString().toLong(),
-                            deskripsi = etDeskProduk.text.toString(),
-                            id_users = userRepository.uid
-
-                        )
-                        viewModel.addData(dataProdukNew) { isSuccess ->
-                            dismissProgressDialog()
-                            if (isSuccess) {
-                                showToast("Successfully Saved")
-                            } else showToast("Failed")
-                        }
-                    }
+                    uploadProduct(imageReference)
                 }.addOnFailureListener {
+                    dismissProgressDialog()
                     showToast("Gambar gagal diunggah")
                 }
+        }
+    }
+
+    private fun uploadProduct(imageReference: StorageReference) {
+        with(binding) {
+            //mendapatkan url gambar
+            imageReference.downloadUrl.addOnSuccessListener { uri ->
+                val dataProdukNew = Produk(
+                    image = uri.toString(),
+                    nama = etNamaProduk.text.toString(),
+                    harga = etHargaProduk.text.toString().toLong(),
+                    deskripsi = etDeskProduk.text.toString(),
+                    id_users = userRepository.uid
+
+                )
+                viewModel.addData(dataProdukNew) { isSuccess ->
+                    dismissProgressDialog()
+                    if (isSuccess) {
+                        showToast("Successfully Saved")
+                        finish()
+                    } else showToast("Failed")
+                }
+            }
         }
     }
 

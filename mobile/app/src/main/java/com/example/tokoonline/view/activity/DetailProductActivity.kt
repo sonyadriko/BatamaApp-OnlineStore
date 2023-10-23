@@ -45,6 +45,14 @@ class DetailProductActivity : BaseActivity() {
     }
 
     private fun initView() = with(binding) {
+        lifecycleScope.launch {
+            userRepository.getRemoteUserData(produkData?.id_users.toString()) { isSuccess, user ->
+                if (isSuccess) {
+                    sellerMail.text = user?.email
+                }
+            }
+        }
+
         btnFavorit.setOnClickListener {
             // todo: tambah ke favorit / bookmark
             showToast("Favorited!")

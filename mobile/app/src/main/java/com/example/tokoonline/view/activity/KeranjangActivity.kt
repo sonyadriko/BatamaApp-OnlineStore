@@ -1,36 +1,41 @@
 package com.example.tokoonline.view.activity
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.OnItemClickListener
-import com.example.tokoonline.data.model.ProdukKeranjang
+import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.repository.KeranjangRepository
 import com.example.tokoonline.databinding.ActivityKeranjangBinding
 import com.example.tokoonline.view.adapter.AdapterKeranjang
+import com.example.tokoonline.view.viewmodel.KeranjangViewModel
 import kotlinx.coroutines.launch
 
 class KeranjangActivity : BaseActivity() {
 
     private var uuid = ""
 
+    private val viewModel: KeranjangViewModel by viewModels()
+
     private lateinit var binding: ActivityKeranjangBinding
     private lateinit var keranjangRepository: KeranjangRepository
     private val adapter: AdapterKeranjang by lazy {
         AdapterKeranjang(object : OnItemClickListener {
             override fun onItemClick(data: Any, position: Int) {
-                val item = data as ProdukKeranjang
-                if (position == 1) { // update
-                    keranjangRepository.updateKeranjang(uuid, item) {
+                showProgressDialog()
+                val item = data as AdapterKeranjang.Companion.ItemData
+                if (item.item.jumlah <= 0) { // delete
+                    keranjangRepository.removeKeranjang(uuid, item.item) {
+                        dismissProgressDialog()
                         if (!it) {
                             showToast("gagal update produk dalam keranjang")
                             finish()
                         }
                     }
-                }
-
-                if (position == 0) { // delete
-                    keranjangRepository.removeKeranjang(uuid, item) {
+                } else {
+                    keranjangRepository.updateKeranjang(uuid, item.item) {
+                        dismissProgressDialog()
                         if (!it) {
                             showToast("gagal update produk dalam keranjang")
                             finish()
@@ -58,6 +63,10 @@ class KeranjangActivity : BaseActivity() {
 
     private fun initView() {
         binding.rvProduk.adapter = adapter
+
+        viewModel.totalBelanja.observe(this) {
+            binding.tvTotal.text = moneyFormatter(it)
+        }
     }
 
     private suspend fun getKeranjang(it: String) {
