@@ -10,9 +10,11 @@ import com.example.tokoonline.core.util.OnItemClickListener
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.ProdukKeranjang
 import com.example.tokoonline.databinding.ItemKeranjangBinding
+import com.example.tokoonline.view.viewmodel.KeranjangViewModel
 import timber.log.Timber
 
 class AdapterKeranjang(
+    private val viewModel : KeranjangViewModel,
     private val onItemClickListener: OnItemClickListener,
 ) : RecyclerView.Adapter<AdapterKeranjang.Holder>() {
     class Holder(val binding: ItemKeranjangBinding) : RecyclerView.ViewHolder(binding.root)
@@ -40,22 +42,15 @@ class AdapterKeranjang(
             copied = copied.copy(isChecked = isChecked)
         }
 
-        data.apply {
-            if (count <= 0) {
-                data.removeAt(position)
-                notifyDataSetChanged()
-            } else {
-                set(position, copied)
-                notifyItemChanged(position)
-            }
+        data[position] = copied
 
-            onItemClickListener.onItemClick(
-                ItemData(
-                    copied,
-                    isIncrement = isIncrement,
-                ), position
-            )
-        }
+        onItemClickListener.onItemClick(
+            ItemData(
+                copied,
+                isIncrement = isIncrement,
+            ), position
+        )
+        notifyItemChanged(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -93,7 +88,14 @@ class AdapterKeranjang(
             checkBox.setOnCheckedChangeListener { _, b ->
                 Timber.d("__item__ = isChecked: ${item.isChecked} && $b")
                 if (item.isChecked != b) {
+                    item.isChecked = b
                     updateData(count, position, null, b)
+                    val price = item.harga * count
+                    if (b) {
+                        viewModel.addTotalBelanja(price)
+                    } else {
+                        viewModel.removeTotalBelanja(price)
+                    }
                 }
             }
 

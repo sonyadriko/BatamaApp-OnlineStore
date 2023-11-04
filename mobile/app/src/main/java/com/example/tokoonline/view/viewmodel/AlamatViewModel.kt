@@ -1,33 +1,53 @@
 package com.example.tokoonline.view.viewmodel
 
-import com.bumptech.glide.load.data.DataFetcher
+import androidx.lifecycle.viewModelScope
 import com.example.tokoonline.core.base.BaseViewModel
 import com.example.tokoonline.data.model.Alamat
-import com.example.tokoonline.data.repository.UserRepository
-
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class AlamatViewModel : BaseViewModel() {
 
-    fun addAlamat(alamat: Alamat, onComplete: (isSuccess: Boolean) -> Unit) {
-        alamatRepository.pushAlamat(alamat) { isSuccess ->
+    fun addAlamat(alamat: Alamat, userUid: String, onComplete: (Boolean) -> Unit) {
+        alamatRepository.pushAlamat(alamat, userUid) { isSuccess ->
             onComplete(isSuccess)
         }
     }
 
-    fun fetchAlamatList(userRepository: UserRepository, onComplete: (List<Alamat>) -> Unit) {
-        alamatRepository.getAlamatList(userRepository) { alamatList ->
-            onComplete(alamatList)
-        }
-    }
-    fun updateAlamat(alamat: Alamat, onComplete: (Boolean) -> Unit) {
-        alamatRepository.updateAlamat(alamat) { isSuccess ->
-            onComplete(isSuccess)
+    fun getAlamat(userUid: String, onComplete: (List<Alamat>) -> Unit) {
+        viewModelScope.launch {
+            alamatRepository.getAlamat(userUid).collect { alamatList ->
+                val nonNullAlamatList = alamatList.filterNotNull()
+                onComplete(nonNullAlamatList)
+            }
         }
     }
 
-    fun getAlamatById(id: String, onComplete: (Alamat?) -> Unit) {
-        alamatRepository.getAlamatById(id) { alamat ->
-            onComplete(alamat)
+    fun updateAlamat(userUid: String, alamat: Alamat,  onComplete: (Boolean) -> Unit) {
+        alamatRepository.updateAlamat(userUid, alamat, onComplete)
+    }
+
+    fun getAlamatById(id: String,userUid: String,  onComplete: (Alamat?) -> Unit) {
+        viewModelScope.launch {
+            alamatRepository.getAlamatById(id, userUid) { alamat ->
+                onComplete(alamat)
+            }
+        }
+    }
+
+    fun getAlamatDefault(
+        userUid: String,
+        onComplete: (Alamat?) -> Unit){
+        viewModelScope.launch {
+            alamatRepository.getAlamatByDefault(userUid) { alamat ->
+                onComplete(alamat)
+            }
+        }
+    }
+
+    fun setDefaultAlamat(id: String, userUid: String, onComplete: (Boolean) -> Unit) {
+        alamatRepository.setDefaultAlamat(id, userUid) { isSuccess ->
+            onComplete(isSuccess)
         }
     }
 
@@ -36,5 +56,4 @@ class AlamatViewModel : BaseViewModel() {
             onComplete(isSuccess)
         }
     }
-
 }

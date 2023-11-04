@@ -45,6 +45,7 @@ android {
         jvmTarget = androidConfig.jvmTarget
     }
     buildFeatures {
+        dataBinding true
         viewBinding true
     }
     namespace 'com.example.tokoonline'

@@ -24,12 +24,13 @@ class AlamatFormActivity : BaseActivity() {
         setContentView(binding.root)
 
         val selectedAlamatId = intent.getStringExtra("selectedAlamatId")
+        val userId = userRepository.uid.toString()
 
         if (selectedAlamatId != null) {
             // Fetch the corresponding address using the repository
-            viewModel.getAlamatById(selectedAlamatId) { selectedAlamat ->
+            viewModel.getAlamatById(selectedAlamatId, userId) { selectedAlamat ->
                 if (selectedAlamat != null) {
-                    // Populate the form with the data from selectedAlamat
+                    selectedAlamat.id
                     binding.tvLabelAlamat.text = selectedAlamat.label.toEditable()
                     binding.tvAlamatPenerima.text = selectedAlamat.alamat.toEditable()
                     binding.tvCatatanAlamat.text = selectedAlamat.catatan.toEditable()
@@ -55,11 +56,11 @@ class AlamatFormActivity : BaseActivity() {
             binding.btnHapusAlamat.visibility = View.GONE
         }
         binding.btnSimpanAlamat.setOnClickListener{
-            initListener()
+            initListener(selectedAlamatId)
         }
 
     }
-    private fun initListener() = with(binding) {
+    private fun initListener(selectedAlamatId:String?) = with(binding) {
         showProgressDialog()
 
         val newDataAlamat = Alamat(
@@ -68,29 +69,31 @@ class AlamatFormActivity : BaseActivity() {
             catatan = tvCatatanAlamat.text.toString(),
             nama = tvNamaPenerima.text.toString(),
             phone = tvPhonePenerima.text.toString(),
-            id_users = userRepository.uid
+            default = false,
+            id_users = userRepository.uid.toString(),
+
         )
 
-        // Check if the address already exists based on some criteria (e.g., ID)
-        val existingAlamatId = binding.root.tag as String? // Retrieve the ID from the tag
-
-        if (existingAlamatId != null) {
+        if (selectedAlamatId != null) {
             // Update the existing address
-            val updatedAlamat = newDataAlamat.copy(id = existingAlamatId)
-            viewModel.updateAlamat(updatedAlamat) { isSuccess ->
+            val userId = userRepository.uid.toString()
+            newDataAlamat.id = selectedAlamatId // Update the id field of the existing object
+            viewModel.updateAlamat(userId, newDataAlamat) { isSuccess ->
                 dismissProgressDialog()
                 if (isSuccess) {
                     showToast("Alamat berhasil diupdate")
+                    goToAlamatSetting()
                 } else {
                     showToast("Alamat tidak berhasil diupdate")
                 }
             }
-        } else {
+    } else {
             // Add a new address
-            viewModel.addAlamat(newDataAlamat) { isSuccess ->
+            viewModel.addAlamat(newDataAlamat,userUid = userRepository.uid.toString() ) { isSuccess ->
                 dismissProgressDialog()
                 if (isSuccess) {
                     showToast("Alamat berhasil ditambahkan")
+                    goToAlamatSetting()
                 } else {
                     showToast("Alamat gagal untuk ditambahkan")
                 }

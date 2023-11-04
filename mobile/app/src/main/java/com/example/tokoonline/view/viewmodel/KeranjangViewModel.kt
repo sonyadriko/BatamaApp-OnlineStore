@@ -8,6 +8,7 @@ class KeranjangViewModel : BaseViewModel() {
     private val _totalBelanja = MutableLiveData<Long>(0)
     val totalBelanja: LiveData<Long> get() = _totalBelanja
 
+
     fun addTotalBelanja(price: Long) {
         _totalBelanja.value = _totalBelanja.value?.plus(price)
     }
@@ -17,4 +18,5 @@ class KeranjangViewModel : BaseViewModel() {
             _totalBelanja.value = _totalBelanja.value?.minus(price)
         }
     }
+
 }

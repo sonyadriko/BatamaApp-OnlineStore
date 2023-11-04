@@ -15,13 +15,12 @@ import kotlinx.coroutines.launch
 class KeranjangActivity : BaseActivity() {
 
     private var uuid = ""
-
     private val viewModel: KeranjangViewModel by viewModels()
 
     private lateinit var binding: ActivityKeranjangBinding
     private lateinit var keranjangRepository: KeranjangRepository
     private val adapter: AdapterKeranjang by lazy {
-        AdapterKeranjang(object : OnItemClickListener {
+        AdapterKeranjang(viewModel, object : OnItemClickListener {
             override fun onItemClick(data: Any, position: Int) {
                 showProgressDialog()
                 val item = data as AdapterKeranjang.Companion.ItemData
@@ -52,6 +51,11 @@ class KeranjangActivity : BaseActivity() {
         keranjangRepository = KeranjangRepository(this)
         setContentView(binding.root)
 
+        binding.btnBayar.setOnClickListener{
+            val totalBelanja = viewModel.totalBelanja.value ?: 0
+            goToBayar(totalBelanja)
+        }
+
         initView()
         lifecycleScope.launch {
             userRepository.uid?.let {
@@ -64,13 +68,15 @@ class KeranjangActivity : BaseActivity() {
     private fun initView() {
         binding.rvProduk.adapter = adapter
 
-        viewModel.totalBelanja.observe(this) {
-            binding.tvTotal.text = moneyFormatter(it)
+        viewModel.totalBelanja.observe(this) { total ->
+            binding.tvTotal.text = moneyFormatter(total)
         }
+
     }
 
     private suspend fun getKeranjang(it: String) {
         showProgressDialog()
+
         keranjangRepository.getKeranjang(userUid = it).collect {
             dismissProgressDialog()
             if (it.isEmpty() || it[0] == null) {
