@@ -47,7 +47,7 @@ class ProdukViewModel : BaseViewModel() {
                 println("FETCH_PRODUK $dataList")
                 setState {
                     copy(
-                        isLoading = dataList.isEmpty(),
+                        isLoading = false,
                         dataProduk = dataList.filterNotNull()
                     )
                 }

@@ -11,7 +11,7 @@ import java.io.Serializable
 @Parcelize
 data class Alamat (
     @SerializedName("id")
-    val id: String? = "",
+    var id: String? = null,
     @SerializedName("label")
     val label: String = "",
     @SerializedName("alamat")
@@ -24,6 +24,8 @@ data class Alamat (
     val phone: String = "",
     @SerializedName("id_users")
     val id_users: String? = "",
+    @SerializedName("default")
+    var default : Boolean = false
 ) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()

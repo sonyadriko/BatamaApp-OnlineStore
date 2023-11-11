@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tokoonline.R
-import com.example.tokoonline.core.util.OnItemClickListener
+import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.data.model.Produk
 import com.example.tokoonline.databinding.ItemProdukBinding
 
 
 class Holder(val binding: ItemProdukBinding) : RecyclerView.ViewHolder(binding.root)
-class AdapterProduk(private val onItemClickListener: OnItemClickListener) :
+class AdapterProduk(private val onItemClickListener: OnItemClick) :
     RecyclerView.Adapter<Holder>() {
 
     private val produkList = ArrayList<Produk>()
@@ -39,7 +39,7 @@ class AdapterProduk(private val onItemClickListener: OnItemClickListener) :
                 .into(imgProduk)
 
             root.setOnClickListener {
-                onItemClickListener.onItemClick(currentItem, position)
+                onItemClickListener.onClick(currentItem, position)
             }
         }
     }

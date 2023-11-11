@@ -22,7 +22,7 @@ data class ProdukKeranjang (
     @SerializedName("id_users")
     val id_users: String? = "",
     @SerializedName("jumlah")
-    val jumlah: Int = 1,
+    val jumlah: Int = 1
 ) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()

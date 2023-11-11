@@ -15,6 +15,8 @@ import com.example.tokoonline.data.repository.UserRepository
 import com.example.tokoonline.view.activity.AlamatFormActivity
 import com.example.tokoonline.view.activity.EditProfilFormActivity
 import com.example.tokoonline.view.activity.LoginActivity
+import com.example.tokoonline.view.activity.PengirimanActivity
+import com.example.tokoonline.view.activity.SettingAlamatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -97,6 +99,18 @@ abstract class BaseActivity : AppCompatActivity() {
         val intent = Intent(this, AlamatFormActivity::class.java)
         if (selectedAlamatId != null) {
             intent.putExtra("selectedAlamatId", selectedAlamatId)
+        }
+        startActivity(intent)
+    }
+    fun goToAlamatSetting(){
+        val intent = Intent(this, SettingAlamatActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun goToBayar(totalBelanja: Long){
+        val intent = Intent(this, PengirimanActivity::class.java )
+        if (totalBelanja != null) {
+            intent.putExtra("totalBelanja", totalBelanja)
         }
         startActivity(intent)
     }

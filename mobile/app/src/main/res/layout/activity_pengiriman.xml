@@ -99,16 +99,6 @@
                 android:textSize="14dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/div_kosong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="* Pilih alamat pengiriman"
-                android:visibility="visible" />
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/div_alamat"
                 android:layout_width="match_parent"
@@ -116,7 +106,7 @@
                 android:layout_marginHorizontal="2dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="15dp"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -132,14 +122,23 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_Label"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:ellipsize="marquee"
+                            android:text="Label"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark" />
+
+                        <TextView
                             android:id="@+id/tv_nama"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:ellipsize="marquee"
                             android:text="Nama"
-                            android:textColor="@color/dark"
-                            android:textStyle="bold" />
+                            android:textColor="@color/dark" />
 
                         <TextView
                             android:id="@+id/tv_phone"
@@ -164,14 +163,14 @@
             </androidx.cardview.widget.CardView>
 
             <Button
-                android:id="@+id/btn_tambahAlamat"
+                android:id="@+id/btn_ubahAlamat"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_btn_tambah"
                 android:paddingHorizontal="20dp"
-                android:text="Tambah Alamat"
+                android:text="Ubah Alamat"
                 android:textAllCaps="false"
                 android:textSize="11dp" />
 
