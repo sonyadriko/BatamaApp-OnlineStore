@@ -62,8 +62,10 @@ class KeranjangActivity : BaseActivity() {
             override fun onCheckBoxClick(isChecked: Boolean, data: Any, position: Int) {
                 val produk = data as ProdukKeranjang
                 if (isChecked) {
+                    viewModel.addProdukToBePaid(data)
                     viewModel.addTotalBelanja(produk.harga * produk.jumlah)
                 } else {
+                    viewModel.removeProdukToBePaid(data)
                     viewModel.removeTotalBelanja(produk.harga * produk.jumlah)
                 }
 
@@ -79,6 +81,7 @@ class KeranjangActivity : BaseActivity() {
         setContentView(binding.root)
 
         binding.btnBayar.setOnClickListener{
+            val data = viewModel.produkToBePaid
             val totalBelanja = viewModel.totalBelanja.value ?: 0
             goToBayar(totalBelanja)
         }
