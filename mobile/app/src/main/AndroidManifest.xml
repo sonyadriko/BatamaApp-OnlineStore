@@ -17,9 +17,6 @@
             android:name=".view.activity.PengirimanActivity"
             android:exported="false" />
         <activity
-            android:name=".view.adapter.AdapterItemTransaksi"
-            android:exported="false" />
-        <activity
             android:name=".view.activity.AlamatFormActivity"
             android:exported="false" />
         <activity

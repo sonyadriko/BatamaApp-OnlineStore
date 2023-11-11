@@ -6,50 +6,57 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.tokoonline.core.util.OnItemClickListener
+import com.example.tokoonline.core.util.OnItemCheckBoxListener
+import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.ProdukKeranjang
 import com.example.tokoonline.databinding.ItemKeranjangBinding
 import com.example.tokoonline.view.viewmodel.KeranjangViewModel
-import timber.log.Timber
 
 class AdapterKeranjang(
-    private val viewModel : KeranjangViewModel,
-    private val onItemClickListener: OnItemClickListener,
+    private val onItemClickListener: OnItemClick,
+    private val onItemCheckBoxListener: OnItemCheckBoxListener,
 ) : RecyclerView.Adapter<AdapterKeranjang.Holder>() {
     class Holder(val binding: ItemKeranjangBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private val data = mutableListOf<ProdukKeranjang?>()
+    private val data = mutableListOf<ItemData>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun submitList(newData: List<ProdukKeranjang?>) {
-        data.clear()
-        data.addAll(newData)
-        notifyDataSetChanged()
+        if (data.isEmpty()) {
+            data.clear()
+            data.addAll(newData.filterNotNull().map {
+                ItemData(
+                    produk = it,
+                    isIncrement = false,
+                    isChecked = false
+                )
+            })
+            notifyDataSetChanged()
+        }
     }
 
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun updateData(
+    fun updateData(
         count: Int,
         position: Int,
-        isIncrement: Boolean?,
+        isIncrement: Boolean,
         isChecked: Boolean? = null
     ) {
-        val item = data[position] ?: return
-        var copied = item.copy(jumlah = count)
-        if (isChecked != null) {
-            copied = copied.copy(isChecked = isChecked)
+        val unmodifiedItem = data[position]
+        val newData = ItemData(
+            isIncrement = isIncrement,
+            isChecked = isChecked ?: unmodifiedItem.isChecked,
+            produk = unmodifiedItem.produk.copy(jumlah = count)
+        )
+
+        if (count <= 0) {
+            data.removeAt(position)
+        } else {
+            data[position] = newData
         }
 
-        data[position] = copied
-
-        onItemClickListener.onItemClick(
-            ItemData(
-                copied,
-                isIncrement = isIncrement,
-            ), position
-        )
         notifyItemChanged(position)
     }
 
@@ -60,48 +67,51 @@ class AdapterKeranjang(
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val item = data[position] ?: return
+        val item = data[position]
+        val produk = item.produk
         val binding = holder.binding
-        var count = item.jumlah
+        var count = produk.jumlah
 
         binding.apply {
             tvJumlah.text = count.toString()
-            tvHarga.text = moneyFormatter((item.harga * count))
-            tvNama.text = item.nama
+            tvHarga.text = moneyFormatter((produk.harga * count))
+            tvNama.text = produk.nama
             Glide.with(imgProduk)
-                .load(item.image.toUri())
+                .load(produk.image.toUri())
                 .into(imgProduk)
 
             btnTambah.setOnClickListener {
                 tvJumlah.text = "${count++}"
-                updateData(count, position, true)
+                onItemClickListener.onClick(
+                    item.copy(produk = produk.copy(jumlah = count), isIncrement = true),
+                    position
+                )
+                btnTambah.setOnClickListener(null)
             }
 
             btnKurang.setOnClickListener {
                 tvJumlah.text = "${count--}"
-                updateData(count, position, false)
+                onItemClickListener.onClick(
+                    item.copy(produk = produk.copy(jumlah = count), isIncrement = false),
+                    position
+                )
+                btnKurang.setOnClickListener(null)
             }
 
             checkBox.setOnCheckedChangeListener(null)
             checkBox.isChecked = item.isChecked
-            Timber.d("__item__ atas = isChecked: ${item.isChecked}")
-            checkBox.setOnCheckedChangeListener { _, b ->
-                Timber.d("__item__ = isChecked: ${item.isChecked} && $b")
-                if (item.isChecked != b) {
-                    item.isChecked = b
-                    updateData(count, position, null, b)
-                    val price = item.harga * count
-                    if (b) {
-                        viewModel.addTotalBelanja(price)
-                    } else {
-                        viewModel.removeTotalBelanja(price)
-                    }
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                if (item.isChecked != isChecked) {
+                    onItemCheckBoxListener.onCheckBoxClick(isChecked, produk, position)
                 }
             }
 
             btnDelete.setOnClickListener {
-                count = 0;
-                updateData(count, position, null)
+                count = 0
+                onItemClickListener.onClick(
+                    item.copy(produk = produk.copy(jumlah = count), isIncrement = false),
+                    position
+                )
             }
         }
     }
@@ -112,8 +122,9 @@ class AdapterKeranjang(
 
     companion object {
         data class ItemData(
-            val item: ProdukKeranjang,
-            val isIncrement: Boolean?,
+            val produk: ProdukKeranjang,
+            val isIncrement: Boolean,
+            var isChecked: Boolean = false // should be sealed
         )
     }
 }

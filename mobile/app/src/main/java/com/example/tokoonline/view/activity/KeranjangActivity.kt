@@ -4,8 +4,11 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.core.base.BaseActivity
-import com.example.tokoonline.core.util.OnItemClickListener
+import com.example.tokoonline.core.util.OnItemCheckBoxListener
+import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.core.util.moneyFormatter
+import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.ProdukKeranjang
 import com.example.tokoonline.data.repository.KeranjangRepository
 import com.example.tokoonline.databinding.ActivityKeranjangBinding
 import com.example.tokoonline.view.adapter.AdapterKeranjang
@@ -20,27 +23,51 @@ class KeranjangActivity : BaseActivity() {
     private lateinit var binding: ActivityKeranjangBinding
     private lateinit var keranjangRepository: KeranjangRepository
     private val adapter: AdapterKeranjang by lazy {
-        AdapterKeranjang(viewModel, object : OnItemClickListener {
-            override fun onItemClick(data: Any, position: Int) {
+        AdapterKeranjang(object : OnItemClick {
+            override fun onClick(data: Any, position: Int) {
                 showProgressDialog()
+
                 val item = data as AdapterKeranjang.Companion.ItemData
-                if (item.item.jumlah <= 0) { // delete
-                    keranjangRepository.removeKeranjang(uuid, item.item) {
-                        dismissProgressDialog()
+                val produk = item.produk
+
+                adapter.updateData(produk.jumlah, position, item.isIncrement, item.isChecked)
+
+                // update keranjang in background
+                if (produk.jumlah <= 0) { // delete
+                    keranjangRepository.removeKeranjang(uuid, item.produk) {
                         if (!it) {
                             showToast("gagal update produk dalam keranjang")
                             finish()
+                        } else {
+                            viewModel.removeTotalBelanja(produk.harga)
+                            dismissProgressDialog()
                         }
                     }
                 } else {
-                    keranjangRepository.updateKeranjang(uuid, item.item) {
-                        dismissProgressDialog()
+                    keranjangRepository.updateKeranjang(uuid, item.produk) {
                         if (!it) {
                             showToast("gagal update produk dalam keranjang")
                             finish()
+                        } else {
+                            if (item.isChecked) {
+                                if (item.isIncrement) viewModel.addTotalBelanja(produk.harga)
+                                else viewModel.removeTotalBelanja(produk.harga)
+                                dismissProgressDialog()
+                            }
                         }
                     }
                 }
+            }
+        }, object : OnItemCheckBoxListener {
+            override fun onCheckBoxClick(isChecked: Boolean, data: Any, position: Int) {
+                val produk = data as ProdukKeranjang
+                if (isChecked) {
+                    viewModel.addTotalBelanja(produk.harga * produk.jumlah)
+                } else {
+                    viewModel.removeTotalBelanja(produk.harga * produk.jumlah)
+                }
+
+                adapter.updateData(produk.jumlah, position, false, isChecked)
             }
         })
     }
