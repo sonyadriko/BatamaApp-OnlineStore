@@ -10,13 +10,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tokoonline.view.activity.MainActivity
 import com.example.tokoonline.R
+import com.example.tokoonline.core.util.parcelable
 import com.example.tokoonline.data.model.Alamat
+import com.example.tokoonline.data.model.ProdukKeranjang
 import com.example.tokoonline.data.repository.UserRepository
 import com.example.tokoonline.view.activity.AlamatFormActivity
 import com.example.tokoonline.view.activity.EditProfilFormActivity
 import com.example.tokoonline.view.activity.LoginActivity
 import com.example.tokoonline.view.activity.PengirimanActivity
 import com.example.tokoonline.view.activity.SettingAlamatActivity
+import com.example.tokoonline.view.activity.TokoSettingActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -107,11 +110,19 @@ abstract class BaseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun goToBayar(totalBelanja: Long){
+    fun goToBayar(totalBelanja: Long, produkList: List<ProdukKeranjang>){
         val intent = Intent(this, PengirimanActivity::class.java )
-        if (totalBelanja != null) {
+        val bundle = Bundle()
+        if (produkList != null) {
+            bundle.putParcelableArrayList("produkList", ArrayList(produkList))
             intent.putExtra("totalBelanja", totalBelanja)
+            intent.putExtras(bundle)
         }
+        startActivity(intent)
+    }
+
+    fun goToTokoSetting(){
+        val intent = Intent(this, TokoSettingActivity::class.java)
         startActivity(intent)
     }
 

@@ -81,9 +81,9 @@ class KeranjangActivity : BaseActivity() {
         setContentView(binding.root)
 
         binding.btnBayar.setOnClickListener{
-            val data = viewModel.produkToBePaid
+            val produkList = viewModel.produkToBePaid
             val totalBelanja = viewModel.totalBelanja.value ?: 0
-            goToBayar(totalBelanja)
+            goToBayar(totalBelanja, produkList)
         }
 
         initView()
