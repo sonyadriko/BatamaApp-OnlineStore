@@ -44,7 +44,6 @@ class ProdukViewModel : BaseViewModel() {
     private fun onLoadDataProduk() {
         viewModelScope.launch {
             produkRepository.loadProduk().collect { dataList ->
-                println("FETCH_PRODUK $dataList")
                 setState {
                     copy(
                         isLoading = false,

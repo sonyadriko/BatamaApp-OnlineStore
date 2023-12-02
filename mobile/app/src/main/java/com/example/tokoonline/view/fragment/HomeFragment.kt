@@ -20,6 +20,7 @@ import com.example.tokoonline.view.activity.DetailProductActivity
 import com.example.tokoonline.databinding.FragmentHomeBinding
 import com.example.tokoonline.view.activity.DetailProductActivity.Companion.RESULT_DELETE
 import com.example.tokoonline.view.activity.KeranjangActivity
+import com.example.tokoonline.view.activity.SearchActivity
 import com.example.tokoonline.view.activity.TambahProdukActivity
 import com.example.tokoonline.view.adapter.AdapterSlider
 import com.example.tokoonline.view.viewmodel.ProdukViewModel
@@ -76,12 +77,16 @@ class HomeFragment : BaseFragment(), OnItemClick {
 
     }
 
-    private fun initListener() {
-        binding.btnAddproduk.setOnClickListener {
+    private fun initListener() = with(binding) {
+        searchClickable.setOnClickListener {
+            startActivity(Intent(context, SearchActivity::class.java))
+        }
+
+        btnAddproduk.setOnClickListener {
             startActivity(Intent(context, TambahProdukActivity::class.java))
         }
 
-        binding.icKeranjang.setOnClickListener {
+        icKeranjang.setOnClickListener {
             startActivity(Intent(activity, KeranjangActivity::class.java))
         }
     }

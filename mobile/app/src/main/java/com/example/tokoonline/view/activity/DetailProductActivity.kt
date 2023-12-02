@@ -46,7 +46,7 @@ class DetailProductActivity : BaseActivity() {
 
     private fun initView() = with(binding) {
         lifecycleScope.launch {
-            userRepository.getRemoteUserData(produkData?.id_users.toString()) { isSuccess, user ->
+            userRepository.getRemoteUserData(produkData?.idUser.toString()) { isSuccess, user ->
                 if (isSuccess) {
                     sellerMail.text = user?.email
                 }
