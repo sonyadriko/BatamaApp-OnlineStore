@@ -10,13 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tokoonline.view.activity.MainActivity
 import com.example.tokoonline.R
-import com.example.tokoonline.core.util.parcelable
-import com.example.tokoonline.data.model.Alamat
 import com.example.tokoonline.data.model.ProdukKeranjang
 import com.example.tokoonline.data.repository.UserRepository
 import com.example.tokoonline.view.activity.AlamatFormActivity
 import com.example.tokoonline.view.activity.EditProfilFormActivity
-import com.example.tokoonline.view.activity.LoginActivity
+import com.example.tokoonline.view.activity.InitialActivity
 import com.example.tokoonline.view.activity.PengirimanActivity
 import com.example.tokoonline.view.activity.SettingAlamatActivity
 import com.example.tokoonline.view.activity.TokoSettingActivity
@@ -133,7 +131,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
 
         startActivity(
-            Intent(this, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            Intent(this, InitialActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         )
     }
 
