@@ -1,7 +1,7 @@
 # tokoonline
 
-- [ ] halaman utama
-- [ ] halaman menu utama
+- [x] halaman utama
+- [x] halaman menu utama
 - [x] halaman login
 - [x] halaman daftar
 - [x] halaman home
