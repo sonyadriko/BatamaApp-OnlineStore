@@ -36,12 +36,7 @@ class AkunFragment : BaseFragment() {
         binding.tvNama.text = userRepository.nama
         binding.tvEmail.text = userRepository.email
             binding.tvPhone.text = userRepository.phone
-        // Inflate the layout for this fragment
-//        val view: View = inflater.inflate(R.layout.fragment_akun, container, false)
-//        btnLogout = view.findViewById(R.id.btn_logout)
-//
-//        s = SharedPref(requireActivity())
-//
+
         binding.btnLogout.setOnClickListener {
            logout()
         }
@@ -52,6 +47,10 @@ class AkunFragment : BaseFragment() {
 
         binding.btnSettingAlamat.setOnClickListener{
             goToSettingAlamat()
+        }
+
+        binding.btnProfileToko.setOnClickListener{
+            goToTokoProfile()
         }
 
         return binding.root

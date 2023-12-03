@@ -1,7 +1,5 @@
 package com.example.tokoonline.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.core.util.multiValueListenerFlow
 import com.example.tokoonline.core.util.toProdukDomain
@@ -12,9 +10,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
 
 class ProdukRepository {
     private val databaseReference: DatabaseReference =
@@ -35,7 +30,6 @@ class ProdukRepository {
     }
 
     fun loadProduk(): Flow<List<Produk?>> {
-        println("FETCH_PRODUK")
         return databaseReference.multiValueListenerFlow(Produk::class.java)
     }
 
@@ -53,11 +47,29 @@ class ProdukRepository {
     }
 
     fun updateProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
-        databaseReference.child(produk.nama)
+        databaseReference.child(produk.keyword)
             .updateChildren(produk.toMap())
             .addOnCompleteListener {
                 onComplete(it.isSuccessful)
             }
+    }
+
+    fun searchProduct(query: String, onComplete: (isSuccess: Boolean, data: List<Produk?>?) -> Unit) {
+        databaseReference.orderByChild("keyword")
+            .startAt(query)
+            .endAt(query + "\uf8ff")
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val value = dataSnapshot.children.map { snapshot ->
+                        snapshot.getValue(Produk::class.java)
+                    }
+                    onComplete(true, value)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    onComplete(false, null)
+                }
+            })
     }
 
     fun getProdukDetail(

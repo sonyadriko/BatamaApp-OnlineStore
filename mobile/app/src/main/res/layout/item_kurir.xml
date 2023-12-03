@@ -29,14 +29,14 @@
                 android:id="@+id/tv_nama"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="JNE Reguler"
+                android:text="Kirim oleh Penjual"
                 android:textColor="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/tv_lamaPengiriman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3 Hari kerja"
+                android:text="2 Hari kerja"
                 android:textColor="@color/colorPrimary"
                 android:textSize="10dp" />
 
@@ -53,14 +53,14 @@
                 android:id="@+id/tv_harga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rp 9.000"
+                android:text="Rp 5.000"
                 android:textColor="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/tv_berat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1 kilogram x Rp 9.000"
+                android:text="1 kilogram : Rp 5.000"
                 android:textColor="@color/colorPrimary"
                 android:textSize="10dp" />
 

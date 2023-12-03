@@ -27,7 +27,6 @@ class AlamatFormActivity : BaseActivity() {
         val userId = userRepository.uid.toString()
 
         if (selectedAlamatId != null) {
-            // Fetch the corresponding address using the repository
             viewModel.getAlamatById(selectedAlamatId, userId) { selectedAlamat ->
                 if (selectedAlamat != null) {
                     selectedAlamat.id
@@ -48,7 +47,6 @@ class AlamatFormActivity : BaseActivity() {
                         }
                     }
                 } else {
-                    // Handle the case where the selected address could not be retrieved
                     showToast("Failed to retrieve selected address")
                 }
             }

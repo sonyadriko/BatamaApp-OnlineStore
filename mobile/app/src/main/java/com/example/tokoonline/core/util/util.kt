@@ -114,12 +114,10 @@ fun <T> DatabaseReference.multiValueListenerFlow(dataType: Class<T>): Flow<List<
                 val value = dataSnapshot.children.map { snapshot ->
                     snapshot.getValue(dataType)
                 }
-                println("FETCH_PRODUK = DATA CHANGE $value")
                 trySend(value)
             }
 
             override fun onCancelled(error: DatabaseError) {
-                println("FETCH_PRODUK = CANCELLED")
                 cancel()
             }
         }

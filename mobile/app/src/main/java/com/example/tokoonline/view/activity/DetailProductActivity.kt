@@ -39,6 +39,11 @@ class DetailProductActivity : BaseActivity() {
         binding = ActivityDetailProdukBinding.inflate(layoutInflater)
         keranjangRepository = KeranjangRepository(this)
 
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
         verifyProductData()
         initView()
         setContentView(binding.root)
@@ -46,7 +51,7 @@ class DetailProductActivity : BaseActivity() {
 
     private fun initView() = with(binding) {
         lifecycleScope.launch {
-            userRepository.getRemoteUserData(produkData?.id_users.toString()) { isSuccess, user ->
+            userRepository.getRemoteUserData(produkData?.idUser.toString()) { isSuccess, user ->
                 if (isSuccess) {
                     sellerMail.text = user?.email
                 }

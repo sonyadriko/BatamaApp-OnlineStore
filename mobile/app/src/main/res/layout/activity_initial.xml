@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activity.InitialActivity">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:textSize="17dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selamat Datang"/>
-
-        <TextView
-            android:textSize="28dp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Aplikasi Batama"/>
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <ImageView
-            android:layout_marginTop="15dp"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/logo"/>
-
-        <Button
-            android:id="@+id/btn_prosesLogin"
-            android:background="@drawable/bg_btn_login1"
             android:layout_marginTop="15dp"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:text="Masuk"/>
+            android:src="@drawable/logo" />
 
-        <Button
-            android:background="@drawable/bg_btn_login2"
-            android:layout_marginTop="5dp"
-            android:layout_width="140dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Daftar"/>
+            android:text="Aplikasi Batama"
+            android:textColor="@color/black"
+            android:textSize="28dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_prosesLogin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/bg_btn_login1"
+            android:text="Login"
+            android:textSize="16dp"
+            android:textAllCaps="false"
+            android:textColor="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_prosesDaftar"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
+            android:background="@drawable/bg_btn_login2"
+            android:text="Daftar"
+            android:textAllCaps="false"
+            android:textSize="16dp"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 

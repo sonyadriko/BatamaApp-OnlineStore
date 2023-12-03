@@ -1,20 +1,30 @@
 # tokoonline
 
-### USER
-- [x] login
-- [x] register
-
-### PENJUAL
-- [ ] Create Toko 
-- [ ] penjual (create toko, CRUD produk)
-- [ ] dashboard informasi
-- [ ] laporan pendapatan
-
-### PEMBELI
-- [ ] katalog produk
-- [ ] kerangjang
-- [ ] Checkout
-- [ ] pembayaran
-- [ ] status pengiriman
-- [ ] riwayat transaksi
-- [ ] menambah alamat
+- [ ] halaman utama
+- [ ] halaman menu utama
+- [x] halaman login
+- [x] halaman daftar
+- [x] halaman home
+- [x] halaman detail produk
+- [ ] halaman menu tambah produk
+- [x] halaman keranjang
+- [ ] halaman pengiriman 
+- [x] halaman pengaturan alamat
+- [x] halaman tambah alamat
+- [ ] halaman pembayaran
+- [x] halaman halaman list atm
+- [x] halaman riwayat transaksi
+- [ ] halaman detail riwayat transaksi (menunggu, batal transaksi, pesan diterima)
+- [x] halaman akun
+- [x] halaman ubah profil
+- [x] halaman edit akun
+- [ ] halaman tentang aplikasi
+- [ ] halaman toko
+- [ ] halaman daftar toko
+- [ ] halaman produk
+- [x] halaman tambah produk
+- [ ] halaman keuangan
+- [ ] halaman status pesanan (perlu dikirim, pembatalan, selesai)
+- [ ] halaman pengaturan toko
+- [x] search
+- [x] halaman halaman hasil search
