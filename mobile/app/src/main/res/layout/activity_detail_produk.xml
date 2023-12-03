@@ -5,8 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".view.activity.DetailProductActivity"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".view.activity.DetailProductActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/round_arrow_back"
+            app:title="Detail Produk"
+            app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,7 +30,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/div_footer">
+            android:layout_above="@+id/div_footer"
+            android:layout_alignParentTop="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -27,6 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:background="@color/white"
+                    android:scaleType="centerInside"
                     android:src="@drawable/hp_pavilion_13_an0006na" />
 
                 <LinearLayout
@@ -48,7 +65,7 @@
                             android:ellipsize="marquee"
                             android:maxLines="3"
                             android:text="Nama Produk "
-                            android:textColor="@color/colorPrimary"
+                            android:textColor="@color/black"
                             android:textSize="20dp" />
 
                         <ImageView
@@ -68,116 +85,63 @@
                         android:layout_marginTop="10dp"
                         android:text="Rp.0"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#ECECEC" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_height="47dp"
                         android:orientation="horizontal">
 
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/stok"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:gravity="center"
+                            android:text="Stok\n12pcs"
+                            android:textColor="@color/black" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="SKU"
-                                android:textColor="@color/colorPrimaryDark" />
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="#ECECEC" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="L99ASD844"
-                                android:textColor="#657191"
-                                android:textSize="13sp" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/berat"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="55dp"
-                                android:background="#ECECEC" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Berat"
-                                    android:textColor="@color/colorPrimaryDark" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="0.2kg"
-                                    android:textColor="#657191"
-                                    android:textSize="13sp" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <View
-                                android:layout_width="1dp"
-                                android:layout_height="55dp"
-                                android:background="#ECECEC" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="5dp"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="Stok"
-                                    android:textColor="@color/colorPrimaryDark" />
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:text="0"
-                                    android:textColor="#657191"
-                                    android:textSize="13sp" />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
+                            android:gravity="center"
+                            android:text="berat\n2,1kg"
+                            android:textColor="@color/black" />
 
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#ECECEC" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="12dp"
                         android:text="Pembelian dalam jumlah besar hubungi"
-                        android:textColor="@color/dark"
+                        android:textColor="@color/black"
                         android:textSize="13sp" />
 
                     <TextView
@@ -187,7 +151,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="10dp"
                         android:text="-"
-                        android:textColor="@color/biru"
+                        android:textColor="@color/black"
                         android:textSize="13dp" />
 
                 </LinearLayout>
@@ -202,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:text="Overview"
-                    android:textColor="@color/dark"
+                    android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -212,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:text="Pembelian dalam jumlah besar hubungi"
-                    android:textColor="@color/dark"
+                    android:textColor="@color/black"
                     android:textSize="13sp" />
 
                 <View
@@ -232,7 +196,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
                         android:text="Produk Terkait"
-                        android:textColor="@color/dark"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 

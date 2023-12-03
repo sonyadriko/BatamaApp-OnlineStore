@@ -39,6 +39,11 @@ class DetailProductActivity : BaseActivity() {
         binding = ActivityDetailProdukBinding.inflate(layoutInflater)
         keranjangRepository = KeranjangRepository(this)
 
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
+
         verifyProductData()
         initView()
         setContentView(binding.root)
