@@ -14,6 +14,8 @@ object Constant {
     const val NAMA_PRODUK_QUERY_PARAM = "namaProduk"
     const val REFERENCE_ALAMAT = "Alamat"
     const val REFERENCE_KERANJANG = "Keranjang"
+    const val REFERENCE_TOKO = "Toko"
+
 
 
     // DUMMY DATA

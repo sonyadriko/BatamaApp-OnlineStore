@@ -14,12 +14,14 @@ class TokoProfileActivity : BaseActivity() {
         setContentView(binding.root)
 
         val userRole = userRepository.role
-
-
         if (userRole == Constant.Role.PEMBELI) {
-            goToTokoSetting()
+            goToHomepage()
             finish()
+            showToast("Silahkan ajukan permintaan untuk membuka toko pada admin")
         }
+
+
+
     }
 
 }
