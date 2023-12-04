@@ -1,18 +1,23 @@
 package com.example.tokoonline.view.activity
 
 import android.os.Bundle
-import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseAuthActivity
-import com.example.tokoonline.core.util.SharedPref
+import com.example.tokoonline.databinding.ActivityInitialBinding
 
 class InitialActivity : BaseAuthActivity() {
 
-    lateinit var s: SharedPref
-
+    private lateinit var binding: ActivityInitialBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_initial)
+        binding = ActivityInitialBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        s = SharedPref(this)
+        binding.btnProsesLogin.setOnClickListener {
+            goToLoginActivity()
+        }
+
+        binding.btnProsesDaftar.setOnClickListener {
+            goToRegister()
+        }
     }
 }

@@ -16,18 +16,18 @@
         android:paddingHorizontal="15dp">
 
         <TextView
-            android:textColor="@color/biru"
-            android:textStyle="bold"
-            android:textSize="25dp"
-            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selamat Datang"/>
+            android:layout_marginTop="20dp"
+            android:text="Selamat Datang"
+            android:textColor="@color/biru"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -51,7 +51,7 @@
                     <EditText
                         android:id="@+id/edt_email"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="Email"
                         android:inputType="textEmailAddress"
@@ -96,7 +96,7 @@
                     <EditText
                         android:id="@+id/edt_password"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="Password"
                         android:inputType="textPassword"
@@ -106,6 +106,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -116,7 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Lupa password?"/>
+                android:text="Lupa password?" />
 
         </LinearLayout>
 
@@ -131,10 +132,10 @@
 
         <TextView
             android:id="@+id/btn_daftarAkun"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:text="Daftar Akun" />
 
     </LinearLayout>
