@@ -28,13 +28,14 @@ class PengirimanActivity : BaseActivity() {
 
         val userId = userRepository.uid.toString()
 
+        onResume()
         showAlamatDefault(userId)
         showProdukKeranjang()
 
 
         binding.btnUbahAlamat.setOnClickListener{
             goToAlamatSetting()
-            finish()
+            onPause()
         }
 
 

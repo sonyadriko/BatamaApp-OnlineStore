@@ -1,10 +1,16 @@
 package com.example.tokoonline.data.repository
 
 import com.example.tokoonline.core.constanst.Constant
+import com.example.tokoonline.core.util.multiValueListenerFlow
+import com.example.tokoonline.core.util.singleValueListenerFlow
 import com.example.tokoonline.data.model.Alamat
 import com.example.tokoonline.data.model.Toko
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.flow.Flow
 
 class TokoRepository {
     private val databaseReference: DatabaseReference =
@@ -23,7 +29,8 @@ class TokoRepository {
             }
         }
     }
-    fun pushToko(toko: Toko, userUid: String, onComplete: (isSuccess: Boolean) -> Unit){
+
+    fun pushToko(toko: Toko, userUid: String, onComplete: (isSuccess: Boolean) -> Unit) {
         val tokoRef = databaseReference.child(userUid).push()
         tokoRef.key?.let {
             val addedProduk = toko.copy(id = it)
@@ -34,4 +41,40 @@ class TokoRepository {
         }
     }
 
+    fun getTokoData(userUid: String, onComplete: (Toko?) -> Unit) {
+        val userTokoReference = databaseReference.child(userUid)
+        userTokoReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val toko = snapshot.children.firstOrNull()?.getValue(Toko::class.java)
+                onComplete(toko)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                onComplete(null)
+            }
+        })
+    }
+    fun getTokoById(
+        id: String,
+        userUid: String,
+        onComplete: (Toko?) -> Unit
+    ) {
+        val userRef = databaseReference.child(userUid)
+
+        userRef.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val toko = snapshot.children.firstOrNull()?.getValue(Toko::class.java)
+                onComplete(toko)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                onComplete(null)
+            }
+        })
+    }
+
+
+//    fun getTokoData(userUid: String): Flow<Toko?> {
+//        return databaseReference.child(userUid).singleValueListenerFlow(Toko::class.java)
+//    }
 }

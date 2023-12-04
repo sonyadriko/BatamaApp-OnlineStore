@@ -47,7 +47,7 @@ class AlamatRepository {
         userUid: String,
         onComplete: (Alamat?) -> Unit
     ) {
-        val userRef = databaseReference.child(userUid) // Reference to the specific user node
+        val userRef = databaseReference.child(userUid)
 
         userRef.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
