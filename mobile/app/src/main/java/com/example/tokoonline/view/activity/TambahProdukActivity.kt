@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.tokoonline.view.viewmodel.TambahProdukViewModel
 import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.core.util.getFormattedTimeMidtrans
 import com.example.tokoonline.data.model.Produk
 import com.example.tokoonline.databinding.ActivityTambahProdukBinding
 import com.google.firebase.ktx.Firebase
@@ -61,8 +62,10 @@ class TambahProdukActivity : BaseActivity() {
                     nama = etNamaProduk.text.toString(),
                     harga = etHargaProduk.text.toString().toLong(),
                     deskripsi = etDeskProduk.text.toString(),
-                    id_users = userRepository.uid
-
+                    id_users = userRepository.uid,
+                    berat_produk = etBeratProduk.text.toString().toDouble(),
+                    stok = this.etStok.text.toString().toInt(),
+                    created_at = getFormattedTimeMidtrans(System.currentTimeMillis())
                 )
                 viewModel.addData(dataProdukNew) { isSuccess ->
                     dismissProgressDialog()

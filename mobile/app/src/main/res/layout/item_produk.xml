@@ -1,46 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="170dp"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="15dp"
+    android:layout_height="match_parent"
     android:layout_marginVertical="10dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginLeft="15dp">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/img_produk"
             android:layout_width="170dp"
             android:layout_height="170dp"
-            android:src="@drawable/slider3"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/slider3" />
 
         <TextView
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginTop="2dp"
             android:id="@+id/tv_nama"
-            android:textColor="@color/black"
-            android:ellipsize="marquee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:text="Nama Produk"/>
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Nama Produk"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
 
         <TextView
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="16dp"
             android:id="@+id/tv_harga"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rp 0"/>
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="Rp 0"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16dp" />
 
     </LinearLayout>
-
 
 
 </androidx.cardview.widget.CardView>

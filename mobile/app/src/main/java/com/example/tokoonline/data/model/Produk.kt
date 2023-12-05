@@ -19,8 +19,14 @@ data class Produk(
     var harga: Long = 0,
     @SerializedName("deskripsi")
     val deskripsi: String = "",
+    @SerializedName("berat_produk")
+    val berat_produk: Double = 0.0,
+    @SerializedName("stok")
+    val stok: Int = 1,
     @SerializedName("id_users")
     val id_users: String? = "",
+    @SerializedName("created_at")
+    val created_at: String = "",
 ) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()
@@ -34,6 +40,8 @@ data class Produk(
             nama = this.nama,
             harga = this.harga,
             deskripsi = this.deskripsi,
+            berat_produk = this.berat_produk,
+            stok = this.stok,
             id_users = this.id_users,
         )
     }

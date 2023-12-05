@@ -5,7 +5,6 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tokoonline.view.activity.MainActivity
@@ -23,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
+import timber.log.Timber
 import java.net.URLEncoder
 
 @Suppress("Deprecation")
@@ -144,8 +144,12 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun openWhatsApp(nomor: String, pesan: String? = null) {
         try {
+
+            val newNomor = if (nomor[0].equals('0', true)) {
+                 nomor.replaceFirst("0", "+62")
+            } else nomor
             val i = Intent(Intent.ACTION_VIEW)
-            var url = "https://api.whatsapp.com/send?phone=$nomor"
+            var url = "https://api.whatsapp.com/send?phone=$newNomor"
             if (pesan != null) {
                 val holder = url
                 url = holder + "&text=" + URLEncoder.encode(pesan, "UTF-8")
@@ -156,7 +160,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
             startActivity(i)
         } catch (e: Exception) {
-            Log.e("ERROR WHATSAPP", e.toString())
+            Timber.tag("ERROR WHATSAPP").e(e.toString())
             showToast("Tidak ada WhatApp")
         }
     }
