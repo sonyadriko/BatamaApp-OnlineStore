@@ -51,16 +51,23 @@ class DetailProductActivity : BaseActivity() {
 
     private fun initView() = with(binding) {
         lifecycleScope.launch {
-            userRepository.getRemoteUserData(produkData?.idUser.toString()) { isSuccess, user ->
+            userRepository.getRemoteUserData(produkData?.id_users.toString()) { isSuccess, user ->
                 if (isSuccess) {
-                    sellerMail.text = user?.email
+                    sellerPhone.text = user?.noTelepon
                 }
             }
         }
 
-        btnFavorit.setOnClickListener {
-            // todo: tambah ke favorit / bookmark
-            showToast("Favorited!")
+        callSeller.setOnClickListener {
+            if (sellerPhone.text.isNullOrBlank()) {
+                showToast("Nomor WhatsApp tidak ditemukan")
+                return@setOnClickListener
+            }
+
+            openWhatsApp(
+                sellerPhone.text.toString(),
+                "Halo, apakah produk ${produkData?.nama} masih ada"
+            )
         }
 
         btnKeranjang.setOnClickListener {

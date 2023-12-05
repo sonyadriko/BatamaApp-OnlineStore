@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:background="@color/white"
-                    android:scaleType="centerInside"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/hp_pavilion_13_an0006na" />
 
                 <LinearLayout
@@ -60,21 +60,12 @@
                             android:id="@+id/tv_nama"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="10dp"
-                            android:layout_toLeftOf="@+id/btn_share"
+                            android:layout_marginEnd="10dp"
                             android:ellipsize="marquee"
                             android:maxLines="3"
                             android:text="Nama Produk "
                             android:textColor="@color/black"
-                            android:textSize="20dp" />
-
-                        <ImageView
-                            android:id="@+id/btn_share"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            app:srcCompat="@drawable/ic_baseline_share_24" />
+                            android:textSize="20sp" />
 
                     </RelativeLayout>
 
@@ -135,24 +126,33 @@
                         android:layout_height="1dp"
                         android:background="#ECECEC" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/call_seller"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="12dp"
-                        android:text="Pembelian dalam jumlah besar hubungi"
-                        android:textColor="@color/black"
-                        android:textSize="13sp" />
+                        android:background="?selectableItemBackground"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/seller_mail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="10dp"
-                        android:text="-"
-                        android:textColor="@color/black"
-                        android:textSize="13dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="12dp"
+                            android:text="Pembelian dalam jumlah besar hubungi"
+                            android:textColor="@color/black"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/seller_phone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:text="-"
+                            android:textColor="@color/black"
+                            android:textSize="13dp" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -165,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
-                    android:text="Overview"
+                    android:text="Deskripsi Produk"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     android:textStyle="bold" />
@@ -189,7 +189,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#F8F8F8"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -222,30 +224,20 @@
             android:paddingVertical="10dp">
 
             <RelativeLayout
-                android:id="@+id/btn_favorit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_btn_keranjang">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:srcCompat="@drawable/ic_baseline_favorite_border_24" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
                 android:id="@+id/btn_keranjang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
                 android:background="@drawable/bg_btn_keranjang">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="?selectableItemBackground"
+                    android:paddingHorizontal="8dp"
                     app:srcCompat="@drawable/ic_baseline_add_shopping_cart_24" />
 
             </RelativeLayout>
@@ -261,7 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:text="Beli Sekarang"
+                    android:text="Beli Langsung"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold" />

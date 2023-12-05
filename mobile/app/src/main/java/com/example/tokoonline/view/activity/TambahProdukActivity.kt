@@ -61,7 +61,7 @@ class TambahProdukActivity : BaseActivity() {
                     nama = etNamaProduk.text.toString(),
                     harga = etHargaProduk.text.toString().toLong(),
                     deskripsi = etDeskProduk.text.toString(),
-                    idUser = userRepository.uid
+                    id_users = userRepository.uid
 
                 )
                 viewModel.addData(dataProdukNew) { isSuccess ->
