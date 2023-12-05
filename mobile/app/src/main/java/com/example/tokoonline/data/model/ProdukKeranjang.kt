@@ -7,6 +7,9 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
+/**
+ * should've been only id and qty
+ */
 @Parcelize
 data class ProdukKeranjang (
     @SerializedName("id")
@@ -19,6 +22,10 @@ data class ProdukKeranjang (
     var harga: Long = 0,
     @SerializedName("deskripsi")
     val deskripsi: String = "",
+    @SerializedName("berat_produk")
+    val berat_produk: Double = 0.0,
+    @SerializedName("stok")
+    val stok: Int = 1,
     @SerializedName("id_users")
     val id_users: String? = "",
     @SerializedName("jumlah")
