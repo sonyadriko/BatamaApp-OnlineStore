@@ -6,7 +6,7 @@
 - [x] halaman daftar
 - [x] halaman home
 - [x] halaman detail produk
-- [ ] halaman menu tambah produk
+- [x] halaman menu tambah produk
 - [x] halaman keranjang
 - [ ] halaman pengiriman 
 - [x] halaman pengaturan alamat
@@ -21,7 +21,7 @@
 - [ ] halaman tentang aplikasi
 - [ ] halaman toko
 - [ ] halaman daftar toko
-- [ ] halaman produk
+- [x] halaman produk
 - [x] halaman tambah produk
 - [ ] halaman keuangan
 - [ ] halaman status pesanan (perlu dikirim, pembatalan, selesai)
