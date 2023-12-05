@@ -10,7 +10,7 @@ import java.io.Serializable
 
 @Parcelize
 data class Toko (
-    @SerializedName("id")
+    @SerializedName("-NkibSJzU_jgUTdwV9i1")
     var id: String? = null,
     @SerializedName("nama")
     val nama: String = "",

@@ -55,7 +55,7 @@ class SettingAlamatActivity : BaseActivity() {
 
                 viewModel.setDefaultAlamat(id, userUid) { isSuccessful ->
                     if (isSuccessful) {
-                        showToast("ANU")
+                        showToast("Alamat default berhasil di update")
                     } else {
                         // Failed to set the default address
                         // Handle the error or display a message to the user

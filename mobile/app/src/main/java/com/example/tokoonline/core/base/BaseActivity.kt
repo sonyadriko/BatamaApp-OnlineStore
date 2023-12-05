@@ -17,6 +17,7 @@ import com.example.tokoonline.view.activity.EditProfilFormActivity
 import com.example.tokoonline.view.activity.InitialActivity
 import com.example.tokoonline.view.activity.PengirimanActivity
 import com.example.tokoonline.view.activity.SettingAlamatActivity
+import com.example.tokoonline.view.activity.TokoProfileActivity
 import com.example.tokoonline.view.activity.TokoSettingActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -123,6 +124,12 @@ abstract class BaseActivity : AppCompatActivity() {
         val intent = Intent(this, TokoSettingActivity::class.java)
         startActivity(intent)
     }
+
+    fun goToTokoProfile(){
+        val intent = Intent(this, TokoProfileActivity::class.java)
+        startActivity(intent)
+    }
+
 
     fun logout() {
         if (checkCurrentUserSession()) {
