@@ -1,6 +1,8 @@
 package com.example.tokoonline.view.activity
 
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView.OnEditorActionListener
 import androidx.core.widget.addTextChangedListener
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.OnItemClick
@@ -9,18 +11,22 @@ import com.example.tokoonline.data.repository.ProdukRepository
 import com.example.tokoonline.databinding.ActivitySearchBinding
 import com.example.tokoonline.view.adapter.SearchResultAdapter
 
-
 class SearchActivity : BaseActivity() {
 
-    private val produkRepository : ProdukRepository by lazy {
+    private val produkRepository: ProdukRepository by lazy {
         ProdukRepository.getInstance()
     }
 
     private lateinit var binding: ActivitySearchBinding
-    private val adapter : SearchResultAdapter by lazy {
+    private val adapter: SearchResultAdapter by lazy {
         SearchResultAdapter(object : OnItemClick {
             override fun onClick(data: Any, position: Int) {
-                showToast((data as Produk).nama)
+                startActivity(
+                    DetailProductActivity.createIntent(
+                        this@SearchActivity,
+                        data as Produk
+                    )
+                )
             }
         })
     }
@@ -48,20 +54,32 @@ class SearchActivity : BaseActivity() {
             searchableKeyword = it.toString()
         }
 
-        btnSearch.setOnClickListener {
-            if (searchableKeyword.isEmpty()) return@setOnClickListener
-
-            showProgressDialog()
-            produkRepository.searchProduct(searchableKeyword) { isSuccess, data ->
-                try {
-                    if (isSuccess || data?.isNotEmpty() == true) {
-                        adapter.submitData(data?.filterNotNull()!!)
-                    } else throw Exception("data is null")
-                } catch (e: Exception) {
-                    showToast("Data produk tidak ditemukan")
-                }
-                dismissProgressDialog()
+        searchbar.setOnEditorActionListener(OnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                searchProduct(searchableKeyword)
+                return@OnEditorActionListener true
             }
+            false
+        })
+
+        btnSearch.setOnClickListener {
+            searchProduct(searchableKeyword)
+        }
+    }
+
+    fun searchProduct(searchableKeyword: String) {
+        if (searchableKeyword.isEmpty()) return
+
+        showProgressDialog()
+        produkRepository.searchProduct(searchableKeyword.lowercase()) { isSuccess, data ->
+            try {
+                if (isSuccess || data?.isNotEmpty() == true) {
+                    adapter.submitData(data?.filterNotNull()!!)
+                } else throw Exception("data is null")
+            } catch (e: Exception) {
+                showToast("Data produk tidak ditemukan")
+            }
+            dismissProgressDialog()
         }
     }
 }
