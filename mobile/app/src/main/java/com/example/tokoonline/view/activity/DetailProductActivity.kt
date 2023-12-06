@@ -61,7 +61,7 @@ class DetailProductActivity : BaseActivity() {
 
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener {
-            onBackPressed()
+            finish()
         }
 
         binding.lifecycleOwner = this
@@ -75,7 +75,7 @@ class DetailProductActivity : BaseActivity() {
 
     private fun initView() = with(binding) {
         lifecycleScope.launch {
-            userRepository.getRemoteUserData(produkData?.id_users.toString()) { isSuccess, user ->
+            userRepository.getRemoteUserData(produkData?.idSeller.toString()) { isSuccess, user ->
                 if (isSuccess) {
                     sellerPhone.text = user?.noTelepon
                 }
@@ -93,8 +93,8 @@ class DetailProductActivity : BaseActivity() {
             )
         }
 
-        stok.text = "${produkData?.stok ?: 0}"
-        berat.text = "${produkData?.berat_produk ?: 0}kg"
+        stok.text = "Stok\n${produkData?.stok ?: 0} Pcs"
+        berat.text = "Berat\n${produkData?.beratProduk ?: 0} Kg"
 
         btnKeranjang.setOnClickListener {
             if (produkData == null) {
@@ -104,7 +104,7 @@ class DetailProductActivity : BaseActivity() {
             showProgressDialog()
             userRepository.uid?.let { uuid ->
                 keranjangRepository.addKeranjang(userUid = uuid,
-                    produk = produkData!!.toProdukKeranjang(),
+                    produk = produkData!!.toProdukKeranjang(vm.quantity.value ?: 1),
                     onComplete = { success ->
                         dismissProgressDialog()
                         if (success) {
@@ -158,7 +158,12 @@ class DetailProductActivity : BaseActivity() {
             }
 
             btnBeli.setOnClickListener {
-                startActivity(Intent(this@DetailProductActivity, CheckoutActivity::class.java))
+                startActivity(
+                    CheckoutActivity.createIntent(
+                        this@DetailProductActivity,
+                        produkData!!.toProdukKeranjang(vm.quantity.value ?: 1)
+                    )
+                )
             }
         }
     }

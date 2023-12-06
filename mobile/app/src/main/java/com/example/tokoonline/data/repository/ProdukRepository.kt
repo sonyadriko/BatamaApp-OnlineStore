@@ -35,15 +35,10 @@ class ProdukRepository {
 
     fun addProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
         val produkRef = databaseReference.push()
-        produkRef.setValue(produk)
+        produkRef.setValue(produk.copy(id = produkRef.key!!))
             .addOnCompleteListener { task ->
                 onComplete(task.isSuccessful)
             }
-
-//        databaseReference.child(produk.nama).setValue(produk)
-//            .addOnCompleteListener {
-//                onComplete(it.isSuccessful)
-//            }
     }
 
     fun updateProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
@@ -98,5 +93,4 @@ class ProdukRepository {
             onComplete(error == null)
         }
     }
-
 }
