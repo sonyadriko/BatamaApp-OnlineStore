@@ -11,7 +11,6 @@ import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.ProdukKeranjang
 import com.example.tokoonline.databinding.ItemKeranjangBinding
-import com.example.tokoonline.view.viewmodel.KeranjangViewModel
 
 class AdapterKeranjang(
     private val onItemClickListener: OnItemClick,
@@ -48,7 +47,7 @@ class AdapterKeranjang(
         val newData = ItemData(
             isIncrement = isIncrement,
             isChecked = isChecked ?: unmodifiedItem.isChecked,
-            produk = unmodifiedItem.produk.copy(jumlah = count)
+            produk = unmodifiedItem.produk.copy(qty = count)
         )
 
         if (count <= 0) {
@@ -70,7 +69,7 @@ class AdapterKeranjang(
         val item = data[position]
         val produk = item.produk
         val binding = holder.binding
-        var count = produk.jumlah
+        var count = produk.qty
 
         binding.apply {
             tvJumlah.text = count.toString()
@@ -83,7 +82,7 @@ class AdapterKeranjang(
             btnTambah.setOnClickListener {
                 tvJumlah.text = "${count++}"
                 onItemClickListener.onClick(
-                    item.copy(produk = produk.copy(jumlah = count), isIncrement = true),
+                    item.copy(produk = produk.copy(qty = count), isIncrement = true),
                     position
                 )
                 btnTambah.setOnClickListener(null)
@@ -92,7 +91,7 @@ class AdapterKeranjang(
             btnKurang.setOnClickListener {
                 tvJumlah.text = "${count--}"
                 onItemClickListener.onClick(
-                    item.copy(produk = produk.copy(jumlah = count), isIncrement = false),
+                    item.copy(produk = produk.copy(qty = count), isIncrement = false),
                     position
                 )
                 btnKurang.setOnClickListener(null)
@@ -109,7 +108,7 @@ class AdapterKeranjang(
             btnDelete.setOnClickListener {
                 count = 0
                 onItemClickListener.onClick(
-                    item.copy(produk = produk.copy(jumlah = count), isIncrement = false),
+                    item.copy(produk = produk.copy(qty = count), isIncrement = false),
                     position
                 )
             }

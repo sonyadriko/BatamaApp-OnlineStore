@@ -11,6 +11,7 @@ import com.example.tokoonline.BuildConfig
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.getFormattedTimeMidtrans
+import com.example.tokoonline.data.model.ProdukKeranjang
 import com.midtrans.sdk.corekit.core.MidtransSDK
 import com.midtrans.sdk.corekit.core.PaymentMethod
 import com.midtrans.sdk.corekit.core.TransactionRequest
@@ -37,15 +38,15 @@ import com.midtrans.sdk.uikit.api.model.TransactionResult
 import com.midtrans.sdk.uikit.external.UiKitApi
 import com.midtrans.sdk.uikit.internal.util.UiKitConstants
 import timber.log.Timber
+import java.io.Serializable
 import java.util.UUID
 
 
 class CheckoutActivity : BaseActivity() {
 
-    @Suppress("UNCHECKED_CAST")
-    private val produkExtra: Pair<String, Long> by lazy {
-        intent.getSerializableExtra(DATA_EXTRA) as Pair<String, Long>
-    }
+//    private val produkExtra: ProdukKeranjang by lazy {
+//        intent.getSerializableExtra(DATA_EXTRA, ProdukKeranjang::class.java)
+//    }
 
     companion object {
         private const val CLIENT_KEY = BuildConfig.CLIENT_KEY
@@ -56,11 +57,10 @@ class CheckoutActivity : BaseActivity() {
 
         fun createIntent(
             context: Context,
-            idProduk: String,
-            price: Long,
+            produkKeranjang: ProdukKeranjang
         ): Intent {
             return Intent(context, CheckoutActivity::class.java).apply {
-                putExtra(DATA_EXTRA, idProduk to price)
+                putExtra(DATA_EXTRA, produkKeranjang as Serializable)
             }
         }
     }

@@ -7,7 +7,6 @@ import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.OnItemCheckBoxListener
 import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.core.util.moneyFormatter
-import com.example.tokoonline.data.model.Produk
 import com.example.tokoonline.data.model.ProdukKeranjang
 import com.example.tokoonline.data.repository.KeranjangRepository
 import com.example.tokoonline.databinding.ActivityKeranjangBinding
@@ -30,10 +29,10 @@ class KeranjangActivity : BaseActivity() {
                 val item = data as AdapterKeranjang.Companion.ItemData
                 val produk = item.produk
 
-                adapter.updateData(produk.jumlah, position, item.isIncrement, item.isChecked)
+                adapter.updateData(produk.qty, position, item.isIncrement, item.isChecked)
 
                 // update keranjang in background
-                if (produk.jumlah <= 0) { // delete
+                if (produk.qty <= 0) { // delete
                     keranjangRepository.removeKeranjang(uuid, item.produk) {
                         if (!it) {
                             showToast("gagal update produk dalam keranjang")
@@ -63,13 +62,13 @@ class KeranjangActivity : BaseActivity() {
                 val produk = data as ProdukKeranjang
                 if (isChecked) {
                     viewModel.addProdukToBePaid(data)
-                    viewModel.addTotalBelanja(produk.harga * produk.jumlah)
+                    viewModel.addTotalBelanja(produk.harga * produk.qty)
                 } else {
                     viewModel.removeProdukToBePaid(data)
-                    viewModel.removeTotalBelanja(produk.harga * produk.jumlah)
+                    viewModel.removeTotalBelanja(produk.harga * produk.qty)
                 }
 
-                adapter.updateData(produk.jumlah, position, false, isChecked)
+                adapter.updateData(produk.qty, position, false, isChecked)
             }
         })
     }

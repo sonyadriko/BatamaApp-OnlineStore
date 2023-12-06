@@ -62,10 +62,10 @@ class TambahProdukActivity : BaseActivity() {
                     nama = etNamaProduk.text.toString(),
                     harga = etHargaProduk.text.toString().toLong(),
                     deskripsi = etDeskProduk.text.toString(),
-                    id_users = userRepository.uid,
-                    berat_produk = etBeratProduk.text.toString().toDouble(),
+                    idSeller = userRepository.uid,
+                    beratProduk = etBeratProduk.text.toString().toDouble(),
                     stok = this.etStok.text.toString().toInt(),
-                    created_at = getFormattedTimeMidtrans(System.currentTimeMillis())
+                    createdAt = getFormattedTimeMidtrans(System.currentTimeMillis())
                 )
                 viewModel.addData(dataProdukNew) { isSuccess ->
                     dismissProgressDialog()
