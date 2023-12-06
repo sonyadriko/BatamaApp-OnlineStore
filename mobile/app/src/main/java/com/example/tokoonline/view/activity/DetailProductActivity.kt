@@ -1,23 +1,43 @@
 package com.example.tokoonline.view.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.activity.viewModels
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.core.util.parcelable
 import com.example.tokoonline.data.model.Produk
 import com.example.tokoonline.data.repository.KeranjangRepository
 import com.example.tokoonline.databinding.ActivityDetailProdukBinding
+import com.example.tokoonline.databinding.ProductOrderNowBottomSheetBinding
+import com.example.tokoonline.view.viewmodel.DetailProdukViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@SuppressLint("SetTextI18n")
 class DetailProductActivity : BaseActivity() {
     private lateinit var keranjangRepository: KeranjangRepository
+
+    private val bottomSheetBinding: ProductOrderNowBottomSheetBinding by lazy {
+        ProductOrderNowBottomSheetBinding.inflate(layoutInflater)
+    }
+
+    private val vm: DetailProdukViewModel by viewModels()
+
+    private val dialog: BottomSheetDialog by lazy {
+        BottomSheetDialog(
+            this, R.style.AppTheme_BottomSheetDialog
+        )
+    }
 
     companion object {
         private const val PRODUK_EXTRA = "extra_produk"
@@ -44,9 +64,13 @@ class DetailProductActivity : BaseActivity() {
             onBackPressed()
         }
 
+        binding.lifecycleOwner = this
+        bottomSheetBinding.lifecycleOwner = this
+
+        setContentView(binding.root)
+
         verifyProductData()
         initView()
-        setContentView(binding.root)
     }
 
     private fun initView() = with(binding) {
@@ -65,10 +89,12 @@ class DetailProductActivity : BaseActivity() {
             }
 
             openWhatsApp(
-                sellerPhone.text.toString(),
-                "Halo, apakah produk ${produkData?.nama} masih ada"
+                sellerPhone.text.toString(), "Halo, apakah produk ${produkData?.nama} masih ada"
             )
         }
+
+        stok.text = "${produkData?.stok ?: 0}"
+        berat.text = "${produkData?.berat_produk ?: 0}kg"
 
         btnKeranjang.setOnClickListener {
             if (produkData == null) {
@@ -77,8 +103,7 @@ class DetailProductActivity : BaseActivity() {
 
             showProgressDialog()
             userRepository.uid?.let { uuid ->
-                keranjangRepository.addKeranjang(
-                    userUid = uuid,
+                keranjangRepository.addKeranjang(userUid = uuid,
                     produk = produkData!!.toProdukKeranjang(),
                     onComplete = { success ->
                         dismissProgressDialog()
@@ -92,7 +117,49 @@ class DetailProductActivity : BaseActivity() {
         }
 
         btnBeli.setOnClickListener {
-            startActivity(Intent(this@DetailProductActivity, CheckoutActivity::class.java))
+            showUpdateStatusDialog()
+        }
+    }
+
+    private fun showUpdateStatusDialog() {
+        // set view to dialog & create dialog from the inflated layout
+        dialog.setContentView(bottomSheetBinding.root)
+
+        bottomSheetBinding.apply {
+            bottomSheetBinding.viewModel = vm
+
+            tvPrice.text = "Rp. ${produkData!!.harga}"
+            tvStok.text = "Stok: ${produkData!!.stok}"
+            Glide.with(imgCover)
+                .load(produkData!!.image.toUri())
+                .placeholder(R.drawable.product)
+                .into(imgCover)
+
+            // show dialog
+            dialog.window?.run {
+                setBackgroundDrawable(ColorDrawable(0))
+                dialog.show()
+            }
+
+            btnClose.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            btnPlus.setOnClickListener {
+                if (produkData!!.stok >= vm.quantity.value!!.plus(1)) {
+                    vm.updateQuantity(vm.quantity.value!!.plus(1))
+                }
+            }
+
+            btnMinus.setOnClickListener {
+                if ((vm.quantity.value ?: 0) > 1) {
+                    vm.updateQuantity(vm.quantity.value!!.minus(1))
+                }
+            }
+
+            btnBeli.setOnClickListener {
+                startActivity(Intent(this@DetailProductActivity, CheckoutActivity::class.java))
+            }
         }
     }
 
@@ -115,9 +182,7 @@ class DetailProductActivity : BaseActivity() {
         tvNama.text = produkData.nama
         tvHarga.text = moneyFormatter(produkData.harga)
         tvDeskripsi.text = produkData.deskripsi
-        Glide.with(image)
-            .load(produkData.image.toUri())
-            .into(image)
+        Glide.with(image).load(produkData.image.toUri()).into(image)
 
         // dismiss
         dismissProgressDialog()
