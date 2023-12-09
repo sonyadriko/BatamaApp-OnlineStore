@@ -72,9 +72,4 @@ class TokoRepository {
             }
         })
     }
-
-
-//    fun getTokoData(userUid: String): Flow<Toko?> {
-//        return databaseReference.child(userUid).singleValueListenerFlow(Toko::class.java)
-//    }
 }

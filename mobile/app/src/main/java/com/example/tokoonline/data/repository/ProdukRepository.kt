@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class ProdukRepository {
     private val databaseReference: DatabaseReference =
@@ -32,6 +33,8 @@ class ProdukRepository {
     fun loadProduk(): Flow<List<Produk?>> {
         return databaseReference.multiValueListenerFlow(Produk::class.java)
     }
+
+
 
     fun addProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
         val produkRef = databaseReference.push()
@@ -66,6 +69,26 @@ class ProdukRepository {
                 }
             })
     }
+
+
+    fun getProdukByTokoId(tokoID: String, onComplete: (data: List<Produk?>) -> Unit) {
+        databaseReference.orderByChild("idSeller")
+            .equalTo(tokoID)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val value = dataSnapshot.children.map { snapshot ->
+                        snapshot.getValue(Produk::class.java)
+                    }
+                    onComplete(value)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle the error here if needed
+                    onComplete(emptyList()) // Return an empty list in case of an error
+                }
+            })
+    }
+
 
     fun getProdukDetail(
         namaProduk: String,

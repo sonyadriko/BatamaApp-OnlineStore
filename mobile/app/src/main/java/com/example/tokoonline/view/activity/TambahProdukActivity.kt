@@ -34,6 +34,7 @@ class TambahProdukActivity : BaseActivity() {
             startActivityForResult(intent, REQUEST_SELECT_IMAGE)
         }
 
+
         initListener()
     }
 
@@ -41,6 +42,7 @@ class TambahProdukActivity : BaseActivity() {
         btnSbmitProduk.setOnClickListener {
             showProgressDialog()
             val imageReference = storageReference.child(selectedImageUri!!.lastPathSegment!!)
+
 
             //mengupload gambar ke firebase storage
             imageReference.putFile(selectedImageUri!!)
@@ -55,24 +57,32 @@ class TambahProdukActivity : BaseActivity() {
 
     private fun uploadProduct(imageReference: StorageReference) {
         with(binding) {
-            //mendapatkan url gambar
+
             imageReference.downloadUrl.addOnSuccessListener { uri ->
-                val dataProdukNew = Produk(
-                    image = uri.toString(),
-                    nama = etNamaProduk.text.toString(),
-                    harga = etHargaProduk.text.toString().toLong(),
-                    deskripsi = etDeskProduk.text.toString(),
-                    idSeller = userRepository.uid,
-                    beratProduk = etBeratProduk.text.toString().toDouble(),
-                    stok = this.etStok.text.toString().toInt(),
-                    createdAt = getFormattedTimeMidtrans(System.currentTimeMillis())
-                )
-                viewModel.addData(dataProdukNew) { isSuccess ->
-                    dismissProgressDialog()
+                userRepository.getTokoID(userRepository.uid ?: "") { isSuccess, idToko ->
                     if (isSuccess) {
-                        showToast("Successfully Saved")
-                        finish()
-                    } else showToast("Failed")
+
+                        val dataProdukNew = Produk(
+                            image = uri.toString(),
+                            nama = etNamaProduk.text.toString(),
+                            harga = etHargaProduk.text.toString().toLong(),
+                            deskripsi = etDeskProduk.text.toString(),
+                            idSeller = idToko ?: "", // Use the idToko here
+                            beratProduk = etBeratProduk.text.toString().toDouble(),
+                            stok = this.etStok.text.toString().toInt(),
+                            createdAt = getFormattedTimeMidtrans(System.currentTimeMillis())
+                        )
+                        viewModel.addData(dataProdukNew) { isSuccess ->
+                            dismissProgressDialog()
+                            if (isSuccess) {
+                                showToast("Successfully Saved")
+                                finish()
+                            } else showToast("Failed")
+                        }
+                    } else {
+                        dismissProgressDialog()
+                        showToast("Failed to retrieve idToko")
+                    }
                 }
             }
         }
