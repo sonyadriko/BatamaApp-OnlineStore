@@ -5,11 +5,15 @@ import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.core.constanst.Constant.REFERENCE_USER
 import com.example.tokoonline.data.domain.User
 import com.example.tokoonline.core.util.toRole
+import com.example.tokoonline.data.model.Toko
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class UserRepository constructor(
     context: Context
-){
+) {
     private val database = FirebaseDatabase.getInstance().getReference(REFERENCE_USER)
 
     companion object {
@@ -23,7 +27,7 @@ class UserRepository constructor(
         private var INSTANCE: UserRepository? = null
 
         fun getInstance(context: Context): UserRepository {
-            return INSTANCE ?: synchronized(this){
+            return INSTANCE ?: synchronized(this) {
                 val instance = UserRepository(context)
                 INSTANCE = instance
                 instance
@@ -106,5 +110,20 @@ class UserRepository constructor(
         else
             editor.putString(key, value)
         editor.apply()
+    }
+
+    fun getTokoID(idUser: String, onComplete: (isSuccess: Boolean, idToko: String?) -> Unit) {
+        val tokoReference = FirebaseDatabase.getInstance().getReference(Constant.REFERENCE_TOKO)
+
+        tokoReference.child(idUser).get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val snapshot = task.result
+                    val idToko = snapshot.children.firstOrNull()?.getValue(Toko::class.java)?.id
+                    onComplete(true, idToko)
+                } else {
+                    onComplete(false, null)
+                }
+            }
     }
 }

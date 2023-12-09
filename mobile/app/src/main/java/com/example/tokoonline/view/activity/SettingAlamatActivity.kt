@@ -51,8 +51,6 @@ class SettingAlamatActivity : BaseActivity() {
 
             adapter.onCardViewClickListener = {alamat ->
                 val id = alamat.id.toString()
-
-
                 viewModel.setDefaultAlamat(id, userUid) { isSuccessful ->
                     if (isSuccessful) {
                         showToast("Alamat default berhasil di update")

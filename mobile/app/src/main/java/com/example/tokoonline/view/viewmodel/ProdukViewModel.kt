@@ -63,4 +63,14 @@ class ProdukViewModel : BaseViewModel() {
             is LoadDataProduk -> onLoadDataProduk()
         }
     }
+
+    fun loadProdukbyIDToko(tokoID: String, onComplete: (List<Produk>) -> Unit) {
+        viewModelScope.launch {
+            produkRepository.getProdukByTokoId(tokoID) { produkList ->
+                val nonNullProdukList = produkList.filterNotNull() // Filter out null elements
+                onComplete(nonNullProdukList)
+            }
+        }
+    }
+
 }

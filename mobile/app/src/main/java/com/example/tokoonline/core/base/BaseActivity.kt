@@ -15,6 +15,7 @@ import com.example.tokoonline.view.activity.AlamatFormActivity
 import com.example.tokoonline.view.activity.EditProfilFormActivity
 import com.example.tokoonline.view.activity.InitialActivity
 import com.example.tokoonline.view.activity.PengirimanActivity
+import com.example.tokoonline.view.activity.ProdukSayaActivity
 import com.example.tokoonline.view.activity.SettingAlamatActivity
 import com.example.tokoonline.view.activity.TokoProfileActivity
 import com.example.tokoonline.view.activity.TokoSettingActivity
@@ -174,5 +175,13 @@ abstract class BaseActivity : AppCompatActivity() {
                 showToast("Tekan sekali lagi untuk keluar dari aplikasi")
             }
         } else super.onBackPressed()
+    }
+
+    fun goToProdukSaya(tokoID: String? = null) {
+        val intent = Intent(this, ProdukSayaActivity::class.java)
+        if (tokoID != null) {
+            intent.putExtra("tokoID", tokoID)
+        }
+        startActivity(intent)
     }
 }

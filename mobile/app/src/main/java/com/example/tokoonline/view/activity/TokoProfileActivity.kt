@@ -39,6 +39,7 @@ class TokoProfileActivity : BaseActivity() {
 
         viewModelToko.getTokoData(userUid) { toko ->
             if (toko != null) {
+                val tokoID = toko.id
                 binding.tvNamaToko.text = toko.nama
                 binding.tvNamaToko1.text = toko.nama
                 binding.tvEmail.text = userRepository.email
@@ -51,6 +52,7 @@ class TokoProfileActivity : BaseActivity() {
                         Log.e("TokoProfileActivity", "Failed to fetch Alamat Toko")
                     }
                 }
+                binding.optionProduk.setOnClickListener{goToProdukSaya(tokoID)}
             } else {
                 showToast("Gagal mengambil Nama Toko")
                 Log.e("TokoProfileActivity", "Failed to fetch Toko data")
