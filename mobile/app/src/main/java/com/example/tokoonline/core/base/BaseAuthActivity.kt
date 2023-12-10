@@ -12,7 +12,7 @@ import com.example.tokoonline.R
 import com.example.tokoonline.view.activity.LoginActivity
 import com.example.tokoonline.view.activity.RegisterActivity
 import com.example.tokoonline.core.constanst.Constant.REFERENCE_USER
-import com.example.tokoonline.data.domain.User
+import com.example.tokoonline.data.model.firebase.User
 import com.example.tokoonline.data.repository.firebase.UserRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

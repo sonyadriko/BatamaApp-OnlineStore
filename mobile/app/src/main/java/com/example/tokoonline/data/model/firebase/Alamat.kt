@@ -1,6 +1,7 @@
-package com.example.tokoonline.data.model
+package com.example.tokoonline.data.model.firebase
 
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -8,11 +9,15 @@ import java.io.Serializable
 
 
 @Parcelize
-data class Toko (
+data class Alamat (
     var id: String? = null,
-    val nama: String = "",
+    val label: String = "",
     val alamat: String = "",
-    val isSeller: String? = "",
+    val catatan: String = "",
+    val nama: String = "",
+    val phone: String = "",
+    val id_users: String? = "",
+    var default : Boolean = false
 ) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()

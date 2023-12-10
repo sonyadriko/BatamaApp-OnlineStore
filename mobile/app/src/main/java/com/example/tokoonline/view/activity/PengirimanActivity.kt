@@ -7,12 +7,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.moneyFormatter
-import com.example.tokoonline.data.model.ProdukKeranjang
+import com.example.tokoonline.data.model.firebase.ProdukKeranjang
 import com.example.tokoonline.databinding.ActivityPengirimanBinding
 import com.example.tokoonline.view.adapter.AdapterItemTransaksi
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
-import com.example.tokoonline.view.viewmodel.KeranjangViewModel
-
 
 
 class PengirimanActivity : BaseActivity() {

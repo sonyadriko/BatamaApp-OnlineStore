@@ -1,6 +1,6 @@
 package com.example.tokoonline.core.constanst
 
-import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.firebase.Produk
 
 object Constant {
     enum class Role {

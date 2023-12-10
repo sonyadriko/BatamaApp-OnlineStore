@@ -2,8 +2,7 @@ package com.example.tokoonline.view.viewmodel
 
 import androidx.lifecycle.viewModelScope
 import com.example.tokoonline.core.base.BaseViewModel
-import com.example.tokoonline.data.model.Alamat
-import kotlinx.coroutines.flow.collect
+import com.example.tokoonline.data.model.firebase.Alamat
 import kotlinx.coroutines.launch
 
 class AlamatViewModel : BaseViewModel() {
@@ -23,7 +22,7 @@ class AlamatViewModel : BaseViewModel() {
         }
     }
 
-    fun updateAlamat(userUid: String, alamat: Alamat,  onComplete: (Boolean) -> Unit) {
+    fun updateAlamat(userUid: String, alamat: Alamat, onComplete: (Boolean) -> Unit) {
         alamatRepository.updateAlamat(userUid, alamat, onComplete)
     }
 

@@ -3,7 +3,7 @@ package com.example.tokoonline.view.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.tokoonline.core.base.BaseViewModel
-import com.example.tokoonline.data.model.ProdukKeranjang
+import com.example.tokoonline.data.model.firebase.ProdukKeranjang
 
 class KeranjangViewModel : BaseViewModel() {
     private val _totalBelanja = MutableLiveData<Long>(0)

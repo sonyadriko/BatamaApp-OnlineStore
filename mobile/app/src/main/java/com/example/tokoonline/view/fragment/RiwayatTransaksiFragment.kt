@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.R
-import com.example.tokoonline.data.model.Riwayat
+import com.example.tokoonline.data.model.firebase.Riwayat
 import com.example.tokoonline.view.adapter.AdapterRiwayat
 
 //import kotlinx.android.synthetic.main.fragment_riwayattransaksi.rv_riwayat

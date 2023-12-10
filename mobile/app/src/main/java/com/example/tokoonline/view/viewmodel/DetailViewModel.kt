@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.tokoonline.core.base.BaseViewModel
 import com.example.tokoonline.core.constanst.Constant.NAMA_PRODUK_QUERY_PARAM
-import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.firebase.Produk
 
 class DetailViewModel : BaseViewModel() {
     companion object {

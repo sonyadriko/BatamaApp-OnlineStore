@@ -6,7 +6,7 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.core.widget.addTextChangedListener
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.OnItemClick
-import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.data.repository.firebase.ProdukRepository
 import com.example.tokoonline.databinding.ActivitySearchBinding
 import com.example.tokoonline.view.adapter.SearchResultAdapter

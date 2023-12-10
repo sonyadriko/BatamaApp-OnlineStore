@@ -3,7 +3,7 @@ package com.example.tokoonline.data.repository.firebase
 import android.content.Context
 import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.core.constanst.Constant.REFERENCE_USER
-import com.example.tokoonline.data.domain.User
+import com.example.tokoonline.data.model.firebase.User
 import com.example.tokoonline.core.util.toRole
 import com.example.tokoonline.data.model.Toko
 import com.google.firebase.database.DataSnapshot

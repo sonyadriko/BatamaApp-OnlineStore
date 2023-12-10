@@ -3,25 +3,18 @@ package com.example.tokoonline.view.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
 import com.example.tokoonline.BuildConfig
-import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.getFormattedTimeMidtrans
-import com.example.tokoonline.data.model.ProdukKeranjang
-import com.midtrans.sdk.corekit.core.MidtransSDK
+import com.example.tokoonline.data.model.firebase.ProdukKeranjang
 import com.midtrans.sdk.corekit.core.PaymentMethod
 import com.midtrans.sdk.corekit.core.TransactionRequest
-import com.midtrans.sdk.corekit.models.snap.Gopay
-import com.midtrans.sdk.corekit.models.snap.Shopeepay
 import com.midtrans.sdk.corekit.models.snap.TransactionResult.STATUS_FAILED
 import com.midtrans.sdk.corekit.models.snap.TransactionResult.STATUS_INVALID
 import com.midtrans.sdk.corekit.models.snap.TransactionResult.STATUS_PENDING
 import com.midtrans.sdk.corekit.models.snap.TransactionResult.STATUS_SUCCESS
-import com.midtrans.sdk.uikit.SdkUIFlowBuilder
 import com.midtrans.sdk.corekit.models.CustomerDetails
 import com.midtrans.sdk.uikit.api.model.CustomerDetails as CD
 import com.midtrans.sdk.corekit.models.ExpiryModel
@@ -39,7 +32,6 @@ import com.midtrans.sdk.uikit.external.UiKitApi
 import com.midtrans.sdk.uikit.internal.util.UiKitConstants
 import timber.log.Timber
 import java.io.Serializable
-import java.util.UUID
 
 
 class CheckoutActivity : BaseActivity() {
