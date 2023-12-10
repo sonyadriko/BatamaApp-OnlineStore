@@ -19,11 +19,11 @@ data class Transaksi (
     @SerializedName("totalitem")
     val totalitem : Int = 0,
     @SerializedName("id_user")
-    val id_user: String? = "",
+    val idUser: String? = "",
     @SerializedName("id_alamat")
-    val id_alamat : String? = "",
+    val idAlamat : String? = "",
     @SerializedName("id_produk")
-    val id_produk : String? = "",
+    val idProduk : String? = "",
     @SerializedName("status")
     var status: String = "Diproses",
 ) : Parcelable, Serializable {

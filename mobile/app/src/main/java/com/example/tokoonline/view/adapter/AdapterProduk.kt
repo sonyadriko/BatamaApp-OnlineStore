@@ -35,7 +35,7 @@ class AdapterProduk(private val onItemClickListener: OnItemClick) :
             tvHarga.text = currentItem.deskripsi
             Glide.with(imgProduk)
                 .load(currentItem.image)
-                .placeholder(R.drawable.ic_account_circle_black_24dp)
+                .placeholder(R.drawable.loading_animation)
                 .into(imgProduk)
 
             root.setOnClickListener {
