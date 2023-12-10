@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.tokoonline.view.activity.MainActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.data.model.ProdukKeranjang
-import com.example.tokoonline.data.repository.UserRepository
+import com.example.tokoonline.data.repository.firebase.UserRepository
 import com.example.tokoonline.view.activity.AlamatFormActivity
 import com.example.tokoonline.view.activity.EditProfilFormActivity
 import com.example.tokoonline.view.activity.InitialActivity

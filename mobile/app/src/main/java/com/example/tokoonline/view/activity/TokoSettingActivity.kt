@@ -61,8 +61,8 @@ class TokoSettingActivity : BaseActivity() {
         viewModelAlamat.getAlamatDefault(userRepository.uid.toString()) { alamatDefault ->
             if (alamatDefault != null) {
                 val newToko = Toko(
-                    id_users = userRepository.uid.toString(),
-                    id_alamat = alamatDefault.id.toString(),
+                    isSeller = userRepository.uid.toString(),
+                    alamat = alamatDefault.id.toString(),
                     nama = binding.tvNamaToko.text.toString(),
                 )
                 viewModelToko.addToko(newToko,userUid = userRepository.uid.toString() ) { isSuccess ->

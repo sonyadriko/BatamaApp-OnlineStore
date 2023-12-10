@@ -15,7 +15,7 @@
             android:layout_width="170dp"
             android:layout_height="170dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/slider3" />
+            android:src="@drawable/loading_animation" />
 
         <TextView
             android:id="@+id/tv_nama"

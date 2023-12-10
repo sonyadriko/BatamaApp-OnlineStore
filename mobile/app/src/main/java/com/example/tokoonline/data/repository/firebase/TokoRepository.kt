@@ -1,16 +1,12 @@
-package com.example.tokoonline.data.repository
+package com.example.tokoonline.data.repository.firebase
 
 import com.example.tokoonline.core.constanst.Constant
-import com.example.tokoonline.core.util.multiValueListenerFlow
-import com.example.tokoonline.core.util.singleValueListenerFlow
-import com.example.tokoonline.data.model.Alamat
 import com.example.tokoonline.data.model.Toko
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.coroutines.flow.Flow
 
 class TokoRepository {
     private val databaseReference: DatabaseReference =

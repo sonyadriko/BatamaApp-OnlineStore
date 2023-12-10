@@ -36,7 +36,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <ImageView
@@ -45,7 +45,7 @@
                         android:layout_height="300dp"
                         android:background="@color/white"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/hp_pavilion_13_an0006na" />
+                        android:src="@drawable/loading_animation" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

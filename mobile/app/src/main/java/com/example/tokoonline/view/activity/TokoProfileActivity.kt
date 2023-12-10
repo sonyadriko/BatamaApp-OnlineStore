@@ -44,7 +44,7 @@ class TokoProfileActivity : BaseActivity() {
                 binding.tvNamaToko1.text = toko.nama
                 binding.tvEmail.text = userRepository.email
                 binding.tvPhone.text = userRepository.phone
-                viewModelAlamat.getAlamatById(toko.id_alamat, userUid) { alamatToko ->
+                viewModelAlamat.getAlamatById(toko.alamat, userUid) { alamatToko ->
                     if (alamatToko != null) {
                         binding.tvAlamatToko.text = alamatToko.alamat
                     } else {

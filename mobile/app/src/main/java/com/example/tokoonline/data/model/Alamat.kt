@@ -10,21 +10,13 @@ import java.io.Serializable
 
 @Parcelize
 data class Alamat (
-    @SerializedName("id")
     var id: String? = null,
-    @SerializedName("label")
     val label: String = "",
-    @SerializedName("alamat")
     val alamat: String = "",
-    @SerializedName("catatan")
     val catatan: String = "",
-    @SerializedName("nama")
     val nama: String = "",
-    @SerializedName("phone")
     val phone: String = "",
-    @SerializedName("id_users")
     val id_users: String? = "",
-    @SerializedName("default")
     var default : Boolean = false
 ) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {

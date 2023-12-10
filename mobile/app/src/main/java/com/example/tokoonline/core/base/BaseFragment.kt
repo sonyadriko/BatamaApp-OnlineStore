@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.tokoonline.R
-import com.example.tokoonline.data.repository.UserRepository
+import com.example.tokoonline.data.repository.firebase.UserRepository
 import com.example.tokoonline.view.activity.EditProfilActivity
 import com.example.tokoonline.view.activity.InitialActivity
 import com.example.tokoonline.view.activity.SettingAlamatActivity

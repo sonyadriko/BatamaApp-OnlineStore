@@ -8,7 +8,7 @@ import com.example.tokoonline.core.util.OnItemCheckBoxListener
 import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.ProdukKeranjang
-import com.example.tokoonline.data.repository.KeranjangRepository
+import com.example.tokoonline.data.repository.firebase.KeranjangRepository
 import com.example.tokoonline.databinding.ActivityKeranjangBinding
 import com.example.tokoonline.view.adapter.AdapterKeranjang
 import com.example.tokoonline.view.viewmodel.KeranjangViewModel
