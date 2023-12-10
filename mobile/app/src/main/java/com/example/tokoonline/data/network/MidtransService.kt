@@ -1,6 +1,7 @@
 package com.example.tokoonline.data.network
 
 import com.example.tokoonline.data.model.midtrans.TransactionStatusResponse
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -11,5 +12,5 @@ interface MidtransService {
     }
 
     @GET(STATUS_TRANSACTION)
-    fun getTransactionStatus(@Query("orderId") orderId: String): TransactionStatusResponse
+    fun getTransactionStatus(@Query("orderId") orderId: String): Call<TransactionStatusResponse>
 }
