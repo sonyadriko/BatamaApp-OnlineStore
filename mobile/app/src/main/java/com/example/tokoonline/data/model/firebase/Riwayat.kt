@@ -1,4 +1,4 @@
-package com.example.tokoonline.data.model
+package com.example.tokoonline.data.model.firebase
 
 import java.io.Serializable
 class Riwayat : Serializable{

@@ -1,4 +1,4 @@
-package com.example.tokoonline.data.model
+package com.example.tokoonline.data.model.firebase
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken

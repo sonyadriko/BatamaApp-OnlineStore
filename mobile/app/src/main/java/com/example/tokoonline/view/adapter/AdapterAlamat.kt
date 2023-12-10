@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tokoonline.data.model.Alamat
+import com.example.tokoonline.data.model.firebase.Alamat
 import com.example.tokoonline.databinding.ItemAlamatBinding
 
 class AlamatAdapter(

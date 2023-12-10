@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.tokoonline.core.util.OnItemCheckBoxListener
 import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.core.util.moneyFormatter
-import com.example.tokoonline.data.model.ProdukKeranjang
+import com.example.tokoonline.data.model.firebase.ProdukKeranjang
 import com.example.tokoonline.databinding.ItemKeranjangBinding
 
 class AdapterKeranjang(

@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import com.example.tokoonline.core.constanst.Constant
-import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.firebase.Produk
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

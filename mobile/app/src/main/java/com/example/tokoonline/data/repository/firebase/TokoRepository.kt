@@ -1,7 +1,7 @@
 package com.example.tokoonline.data.repository.firebase
 
 import com.example.tokoonline.core.constanst.Constant
-import com.example.tokoonline.data.model.Toko
+import com.example.tokoonline.data.model.firebase.Toko
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

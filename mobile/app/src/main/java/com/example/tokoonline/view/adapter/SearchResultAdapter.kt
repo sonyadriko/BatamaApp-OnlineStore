@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.tokoonline.R
 import com.example.tokoonline.core.util.OnItemClick
-import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.databinding.SearchResultItemBinding
 
 class SearchResultAdapter(private val onItemClickListener: OnItemClick) :

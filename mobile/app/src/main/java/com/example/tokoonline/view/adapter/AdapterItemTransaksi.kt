@@ -3,7 +3,7 @@ package com.example.tokoonline.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tokoonline.data.model.ProdukKeranjang
+import com.example.tokoonline.data.model.firebase.ProdukKeranjang
 import com.example.tokoonline.databinding.ItemProdukTransaksiBinding
 
 class AdapterItemTransaksi(private val produkList: List<ProdukKeranjang>?) :

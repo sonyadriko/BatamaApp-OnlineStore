@@ -3,7 +3,7 @@ package com.example.tokoonline.data.repository.firebase
 import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.core.util.multiValueListenerFlow
 import com.example.tokoonline.core.util.toProdukDomain
-import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.firebase.Produk
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference

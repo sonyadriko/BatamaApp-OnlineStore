@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.core.base.BaseAuthActivity
 import com.example.tokoonline.databinding.ActivityRegisterBinding
-import com.example.tokoonline.data.domain.User
+import com.example.tokoonline.data.model.firebase.User
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

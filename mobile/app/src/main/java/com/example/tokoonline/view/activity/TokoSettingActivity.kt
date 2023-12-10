@@ -5,7 +5,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.tokoonline.core.base.BaseActivity
-import com.example.tokoonline.data.model.Toko
+import com.example.tokoonline.data.model.firebase.Toko
 import com.example.tokoonline.databinding.ActivityTokoSettingBinding
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import com.example.tokoonline.view.viewmodel.TokoViewModel

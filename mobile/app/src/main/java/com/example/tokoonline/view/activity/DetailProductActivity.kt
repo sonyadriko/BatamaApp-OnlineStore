@@ -14,7 +14,7 @@ import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.core.util.parcelable
-import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.data.repository.firebase.KeranjangRepository
 import com.example.tokoonline.databinding.ActivityDetailProdukBinding
 import com.example.tokoonline.databinding.ProductOrderNowBottomSheetBinding

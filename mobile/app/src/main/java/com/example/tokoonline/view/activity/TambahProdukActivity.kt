@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import com.example.tokoonline.view.viewmodel.TambahProdukViewModel
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.getFormattedTimeMidtrans
-import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.databinding.ActivityTambahProdukBinding
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference

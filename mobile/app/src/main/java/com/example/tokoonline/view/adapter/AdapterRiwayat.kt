@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.R
-import com.example.tokoonline.data.model.Riwayat
+import com.example.tokoonline.data.model.firebase.Riwayat
 
 class AdapterRiwayat(var data:ArrayList<Riwayat>) : RecyclerView.Adapter<AdapterRiwayat.Holder>() {
     class Holder(view: View):RecyclerView.ViewHolder(view){

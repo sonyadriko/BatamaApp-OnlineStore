@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseFragment
 import com.example.tokoonline.core.util.OnItemClick
-import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.view.adapter.AdapterProduk
 import com.example.tokoonline.view.activity.DetailProductActivity
 import com.example.tokoonline.databinding.FragmentHomeBinding
