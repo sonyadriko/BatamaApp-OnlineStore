@@ -3,8 +3,10 @@ package com.example.tokoonline
 import android.util.Log
 import androidx.multidex.MultiDexApplication
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
+@HiltAndroidApp
 class TokoApp: MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
