@@ -1,24 +1,18 @@
 package com.example.tokoonline.data.model.firebase
 
+import android.os.Parcelable
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-/**
- * should've been only id and qty
- */
 @Parcelize
-data class ProdukKeranjang (
-    var id: String = "",
-    val image: String = "",
-    var nama: String = "",
-    var harga: Long = 0,
-    val deskripsi: String = "",
-    val beratProduk: Double = 0.0,
+data class Transaction(
+    val id: String,
+    val nama: String,
+    val harga: Double,
+    var jumlah: Int = 1,
+    val status: String,
     val produkId: String,
-    val idSeller: String? = "",
-    val qty: Int = 1
 ) : Parcelable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()

@@ -30,7 +30,10 @@
             android:exported="false" />
         <activity
             android:name=".view.activity.PengirimanActivity"
-            android:exported="false" />
+            android:exported="false"/>
+        <activity
+            android:name=".view.activity.PembayaranActivity"
+            android:exported="false"/>
         <activity
             android:name=".view.activity.AlamatFormActivity"
             android:exported="false" />

@@ -22,11 +22,27 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        debug {
+            storeFile file("$rootDir/debug.keystore")
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+            storePassword "android"
+        }
+        release {
+            storeFile file("$rootDir/batama.jks")
+            storePassword "batama123"
+            keyAlias "key0"
+            keyPassword "batama123"
+        }
+    }
+
     buildTypes {
         debug {
             versionNameSuffix "-dev"
             resValue "string", "app_name", "Toko Online Dev"
             debuggable true
+            signingConfig signingConfigs.release
         }
 
         release {
@@ -35,6 +51,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -54,13 +71,21 @@ android {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-    applicationVariants.configureEach { variant ->
-        if (variant.getName() == "release") {
-            variant.buildConfigField "String", "CLIENT_KEY", properties.getProperty("clientKeyRelease")
-            variant.buildConfigField "String", "SERVER_URL", properties.getProperty("serverUrl")
-        } else {
-            variant.buildConfigField "String", "CLIENT_KEY", properties.getProperty("clientKeySandBox")
-            variant.buildConfigField "String", "SERVER_URL", properties.getProperty("serverUrl")
+    flavorDimensions "version"
+    productFlavors {
+        sandbox {
+            // Assigns this product flavor to the "version" flavor dimension.
+            // If you are using only one dimension, this property is optional,
+            // and the plugin automatically assigns all the module's flavors to
+            // that dimension.
+            dimension "version"
+            buildConfigField "String", "CLIENT_KEY", properties.getProperty("clientKeySandBox")
+            buildConfigField "String", "SERVER_URL", properties.getProperty("serverUrl")
+        }
+        prod {
+            dimension "version"
+            buildConfigField "String", "CLIENT_KEY", properties.getProperty("clientKeyRelease")
+            buildConfigField "String", "SERVER_URL", properties.getProperty("serverUrl")
         }
     }
 }

@@ -21,7 +21,7 @@
             android:id="@+id/btn_toKeranjang"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp">
 
@@ -36,7 +36,7 @@
                 android:id="@+id/div_angka"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:background="@drawable/bg_bulet"
                 android:visibility="gone">
 

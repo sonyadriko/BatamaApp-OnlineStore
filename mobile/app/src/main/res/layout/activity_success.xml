@@ -59,7 +59,7 @@
                             android:id="@+id/tv_nomorRekening"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
+                            android:layout_marginEnd="20dp"
                             android:text="0931283129"
                             android:textColor="@color/dark"
                             android:textStyle="bold" />
@@ -78,7 +78,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginEnd="20dp"
                         android:text="Tisto wahyudi"
                         android:textColor="@color/dark" />
 
@@ -104,14 +104,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="20dp"
+                        android:layout_marginEnd="20dp"
                         android:text="Jumlah Transfer"
                         android:textColor="@color/dark" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -120,7 +120,7 @@
                             android:id="@+id/tv_nominal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="5dp"
+                            android:layout_marginEnd="5dp"
                             android:text="Rp.10.000"
                             android:textColor="@color/dark"
                             android:textStyle="bold" />
