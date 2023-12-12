@@ -159,9 +159,9 @@ class DetailProductActivity : BaseActivity() {
 
             btnBeli.setOnClickListener {
                 startActivity(
-                    CheckoutActivity.createIntent(
+                    PengirimanActivity.createIntent(
                         this@DetailProductActivity,
-                        produkData!!.toProdukKeranjang(vm.quantity.value ?: 1)
+                        arrayOf(produkData!!.toProdukKeranjang(vm.quantity.value ?: 1))
                     )
                 )
             }

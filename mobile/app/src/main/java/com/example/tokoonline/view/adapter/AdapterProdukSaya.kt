@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tokoonline.core.util.moneyFormatter
-import com.example.tokoonline.data.model.Produk
+import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.databinding.ItemProdukSayaBinding
 
 class AdapterItemProdukSaya(

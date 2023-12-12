@@ -28,15 +28,15 @@
                 android:id="@+id/img_produk"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
                 android:src="@drawable/product" />
 
             <TextView
                 android:id="@+id/tv_nama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
                 android:ellipsize="marquee"
                 android:lines="2"
                 android:maxLines="3"
@@ -60,7 +60,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
                 android:orientation="horizontal">
@@ -69,12 +69,12 @@
                     android:id="@+id/tv_harga"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="15dp"
                     android:ellipsize="marquee"
                     android:text="Rp.10.000"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <RelativeLayout
@@ -88,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         app:srcCompat="@drawable/ic_baseline_remove_24" />
 
                     <TextView
@@ -96,8 +96,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
                         android:ellipsize="marquee"
                         android:text="1"
                         android:textColor="@color/colorPrimary"
@@ -108,9 +108,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         app:srcCompat="@drawable/ic_baseline_add_24" />
 
                 </RelativeLayout>

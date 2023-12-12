@@ -7,10 +7,12 @@ import android.os.Parcelable
 import android.view.View
 import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.data.model.firebase.Produk
+import com.example.tokoonline.data.model.firebase.ProdukKeranjang
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import com.midtrans.sdk.uikit.api.model.ItemDetails
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.awaitClose
@@ -106,6 +108,29 @@ fun <T> DatabaseReference.singleValueListenerFlow(dataType: Class<T>): Flow<T?> 
     addValueEventListener(listener)
     awaitClose { removeEventListener(listener) }
 }.flowOn(Dispatchers.IO)
+
+fun List<ProdukKeranjang>?.getTotalBelanja(): Long {
+    return this?.map {
+        it.harga * it.qty
+    }?.reduce { sum, element -> sum + element } ?: 0
+}
+
+fun Array<ProdukKeranjang>?.getTotalBelanja(): Long {
+    return this?.map {
+        it.harga * it.qty
+    }?.reduce { sum, element -> sum + element } ?: 0
+}
+
+fun Array<ProdukKeranjang>?.toItemDetails(): List<ItemDetails> {
+    return this?.map {
+        ItemDetails(
+            id = it.id,
+            price = it.harga.toDouble(),
+            quantity = it.qty,
+            name = it.nama,
+        )
+    }?.toList() ?: emptyList()
+}
 
 fun <T> DatabaseReference.multiValueListenerFlow(dataType: Class<T>): Flow<List<T?>> =
     callbackFlow {

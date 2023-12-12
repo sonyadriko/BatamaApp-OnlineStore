@@ -33,7 +33,8 @@ data class Produk(
             deskripsi = this.deskripsi,
             beratProduk = this.beratProduk,
             idSeller = this.idSeller,
-            qty = jumlah
+            qty = jumlah,
+            produkId = this.id
         )
     }
 }

@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.R
-import com.example.tokoonline.data.model.firebase.Riwayat
+import com.example.tokoonline.data.model.firebase.Transaction
 
-class AdapterRiwayat(var data:ArrayList<Riwayat>) : RecyclerView.Adapter<AdapterRiwayat.Holder>() {
+class AdapterRiwayat(var data:List<Transaction>) : RecyclerView.Adapter<AdapterRiwayat.Holder>() {
     class Holder(view: View):RecyclerView.ViewHolder(view){
         val tvNama = view.findViewById<TextView>(R.id.tv_nama)
         val tvTotalHarga = view.findViewById<TextView>(R.id.tv_totalHarga)
@@ -24,7 +24,7 @@ class AdapterRiwayat(var data:ArrayList<Riwayat>) : RecyclerView.Adapter<Adapter
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.tvNama.text = data[position].nama
         holder.tvJumlah.text = data[position].jumlah.toString()
-        holder.tvTotalHarga.text = data[position].totalHarga
+        holder.tvTotalHarga.text = (data[position].harga * data[position].jumlah).toString()
         holder.tvStatus.text = data[position].status
     }
 
