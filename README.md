@@ -8,10 +8,10 @@
 - [x] halaman detail produk
 - [x] halaman menu tambah produk
 - [x] halaman keranjang
-- [ ] halaman pengiriman 
+- [x] halaman pengiriman 
 - [x] halaman pengaturan alamat
 - [x] halaman tambah alamat
-- [ ] halaman pembayaran
+- [x] halaman pembayaran
 - [x] halaman halaman list atm
 - [x] halaman riwayat transaksi
 - [ ] halaman detail riwayat transaksi (menunggu, batal transaksi, pesan diterima)
