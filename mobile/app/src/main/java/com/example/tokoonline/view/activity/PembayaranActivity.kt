@@ -136,7 +136,7 @@ class PembayaranActivity : BaseActivity() {
             val product = produkKeranjang[0]
             transaction = Transaction(
                 nama = product.nama,
-                id = initTransactionDetails().orderId,
+                orderId = initTransactionDetails().orderId,
                 jumlah = product.qty,
                 harga = product.harga.toDouble(),
                 produkId = product.produkId,
