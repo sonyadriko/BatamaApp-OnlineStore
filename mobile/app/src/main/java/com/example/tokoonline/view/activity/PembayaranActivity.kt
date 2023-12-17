@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
+import com.example.tokoonline.BuildConfig
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.Result
@@ -25,6 +26,7 @@ import com.example.tokoonline.data.repository.firebase.AlamatRepository
 import com.example.tokoonline.data.repository.firebase.TransactionRepository
 import com.example.tokoonline.data.repository.midtrans.MidtransRepository
 import com.example.tokoonline.databinding.ActivityPembayaranBinding
+import com.midtrans.sdk.uikit.api.model.CustomColorTheme
 import com.midtrans.sdk.uikit.api.model.SnapTransactionDetail
 import com.midtrans.sdk.uikit.api.model.TransactionResult
 import com.midtrans.sdk.uikit.external.UiKitApi
@@ -73,6 +75,7 @@ class PembayaranActivity : BaseActivity() {
             finish()
         }
 
+        buildUiKit()
         showProgressDialog()
         initExtrasData()
         initAlamatData()
@@ -87,7 +90,7 @@ class PembayaranActivity : BaseActivity() {
     private fun pay() {
         val itemDetails = produkKeranjang.map {
             ItemDetailsItem(
-                id = it.id,
+                id = it.produkId,
                 price = it.harga.toDouble(),
                 quantity = it.qty,
                 name = it.nama,
@@ -136,11 +139,15 @@ class PembayaranActivity : BaseActivity() {
         transactionRepository.addTransaction(transaction) { isComplete ->
             dismissProgressDialog()
             if (isComplete) {
-                UiKitApi.getDefaultInstance().startPaymentUiFlow(
-                    activity = this@PembayaranActivity,
-                    launcher = launcher,
-                    snapToken = result.data.token,
-                )
+                try {
+                    UiKitApi.getDefaultInstance().startPaymentUiFlow(
+                        activity = this@PembayaranActivity,
+                        launcher = launcher,
+                        snapToken = result.data.token,
+                    )
+                } catch (e: Exception) {
+                    throw Exception(e)
+                }
             } else {
                 finish()
                 showToast(getString(R.string.something_wrong))
@@ -159,22 +166,22 @@ class PembayaranActivity : BaseActivity() {
                     val shippingAddress = ShippingAddress(
                         address = it.alamat,
                         city = "Surabaya",
-                        countryCode = "62",
-                        phone = "",
+                        countryCode = "IDN",
+                        phone = userRepository.phone!!,
                         lastName = "",
                         firstName = "",
-                        email = "",
+                        email = userRepository.email!!,
                         postalCode = ""
                     )
 
                     val billingAddress = BillingAddress(
                         address = it.alamat,
                         city = "Surabaya",
-                        countryCode = "62",
-                        phone = "",
+                        countryCode = "IDN",
+                        phone = userRepository.phone!!,
                         lastName = "",
                         firstName = "",
-                        email = "",
+                        email = userRepository.email!!,
                         postalCode = ""
                     )
 
@@ -239,6 +246,21 @@ class PembayaranActivity : BaseActivity() {
             }
             fold++
         }
+    }
+
+    private fun buildUiKit() {
+        UiKitApi.Builder()
+            .withContext(this.applicationContext)
+            .withMerchantUrl(BuildConfig.SERVER_URL)
+            .withMerchantClientKey(BuildConfig.CLIENT_KEY)
+            .enableLog(true)
+            .build()
+        uiKitCustomSetting()
+    }
+
+    private fun uiKitCustomSetting() {
+        val uIKitCustomSetting = UiKitApi.getDefaultInstance().uiKitSetting
+        uIKitCustomSetting.saveCardChecked = true
     }
 
     private val launcher =
