@@ -54,16 +54,16 @@ object NetworkModule {
     fun providesOkHttp(
         @ApplicationContext context: Context
     ): OkHttpClient {
-//        val chuckerCollector = ChuckerCollector(
-//            context = context,
-//            showNotification = true,
-//            retentionPeriod = RetentionManager.Period.FOREVER
-//        )
+        val chuckerCollector = ChuckerCollector(
+            context = context,
+            showNotification = true,
+            retentionPeriod = RetentionManager.Period.FOREVER
+        )
 
         return OkHttpClient.Builder()
             .addInterceptor(
                 ChuckerInterceptor.Builder(context)
-//                    .collector(chuckerCollector)
+                    .collector(chuckerCollector)
                     .maxContentLength(250_000L)
                     .redactHeaders(emptySet())
                     .alwaysReadResponseBody(true)
