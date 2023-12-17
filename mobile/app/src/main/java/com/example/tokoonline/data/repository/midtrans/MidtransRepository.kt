@@ -49,7 +49,7 @@ class MidtransRepositoryImpl @Inject constructor(
     override fun postSnapToken(request: SnapTransactionDetailRequest): Flow<Result<SnapTokenResponse>> =
         flow {
             emit(Result.Loading)
-            val result = midtransService.postSnapToken(request).awaitResponse()
+            val result = midtransProcessorService.postSnapToken(request).awaitResponse()
             if (result.isSuccessful) {
                 val data = requireNotNull(result.body())
                 emit(Result.Success(data))

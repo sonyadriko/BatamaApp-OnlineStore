@@ -2,9 +2,9 @@ ext {
     env = []
 
     androidConfig = [
-            "compileSdk"        : 33,
-            "minSdk"            : 21,
-            "targetSdk"         : 33,
+            "compileSdk"        : 34,
+            "minSdk"            : 25,
+            "targetSdk"         : 34,
             "versionCode"       : 1,
             "versionName"       : "1.0",
             "sourceAndTargetCompability" : JavaVersion.VERSION_1_8,
