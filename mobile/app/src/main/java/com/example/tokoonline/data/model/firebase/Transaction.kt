@@ -13,6 +13,7 @@ data class Transaction(
     var jumlah: Int = 1,
     val status: String,
     val produkId: String,
+    val userId: String,
 ) : Parcelable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()

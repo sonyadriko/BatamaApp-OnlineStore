@@ -26,7 +26,6 @@ import com.example.tokoonline.data.repository.firebase.AlamatRepository
 import com.example.tokoonline.data.repository.firebase.TransactionRepository
 import com.example.tokoonline.data.repository.midtrans.MidtransRepository
 import com.example.tokoonline.databinding.ActivityPembayaranBinding
-import com.midtrans.sdk.uikit.api.model.CustomColorTheme
 import com.midtrans.sdk.uikit.api.model.SnapTransactionDetail
 import com.midtrans.sdk.uikit.api.model.TransactionResult
 import com.midtrans.sdk.uikit.external.UiKitApi
@@ -66,6 +65,8 @@ class PembayaranActivity : BaseActivity() {
     private lateinit var produkKeranjang: Array<ProdukKeranjang>
 
     private lateinit var binding: ActivityPembayaranBinding
+
+    private var isTransactionProcessing = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPembayaranBinding.inflate(layoutInflater)
@@ -81,7 +82,8 @@ class PembayaranActivity : BaseActivity() {
         initAlamatData()
 
         binding.btnBayar.setOnClickListener {
-            pay()
+            if (isTransactionProcessing) return@setOnClickListener
+            else pay()
         }
 
         setContentView(binding.root)
@@ -114,8 +116,12 @@ class PembayaranActivity : BaseActivity() {
             ).collect { result ->
                 when (result) {
                     Result.Loading -> showProgressDialog()
-                    is Result.Success -> startTransaction(result)
+                    is Result.Success -> {
+                        startTransaction(result)
+                    }
+
                     is Result.Error -> {
+                        isTransactionProcessing = false
                         dismissProgressDialog()
                         Timber.e(result.throwable)
                         showToast("${result.httpCode} : ${result.throwable.message}")
@@ -126,32 +132,37 @@ class PembayaranActivity : BaseActivity() {
     }
 
     private fun startTransaction(result: Result.Success<SnapTokenResponse>) {
-        val product = produkKeranjang[0]
-        transaction = Transaction(
-            nama = product.nama,
-            id = initTransactionDetails().orderId,
-            jumlah = product.qty,
-            harga = product.harga.toDouble(),
-            produkId = product.produkId,
-            status = "MENUNGGU"
-        )
+        try {
+            val product = produkKeranjang[0]
+            transaction = Transaction(
+                nama = product.nama,
+                id = initTransactionDetails().orderId,
+                jumlah = product.qty,
+                harga = product.harga.toDouble(),
+                produkId = product.produkId,
+                status = "MENUNGGU",
+                userId = userRepository.uid!!,
+            )
 
-        transactionRepository.addTransaction(transaction) { isComplete ->
-            dismissProgressDialog()
-            if (isComplete) {
-                try {
+            transactionRepository.addTransaction(transaction) { isComplete ->
+                dismissProgressDialog()
+                if (isComplete) {
                     UiKitApi.getDefaultInstance().startPaymentUiFlow(
                         activity = this@PembayaranActivity,
                         launcher = launcher,
                         snapToken = result.data.token,
                     )
-                } catch (e: Exception) {
-                    throw Exception(e)
+                } else {
+                    isTransactionProcessing = false
+                    throw Exception("error during creating transaction")
                 }
-            } else {
-                finish()
-                showToast(getString(R.string.something_wrong))
             }
+        } catch (e: Exception) {
+            Timber.e(e)
+            showToast(getString(R.string.something_wrong))
+            startActivity(Intent(this@PembayaranActivity, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            })
         }
     }
 
@@ -233,11 +244,13 @@ class PembayaranActivity : BaseActivity() {
         val attempt = 3
         var fold = 1
         while (attempt >= fold) {
-            transactionRepository.addTransaction(transaction.copy(status = status)) { result ->
+            transactionRepository.updateTransaction(transaction.copy(status = status)) { result ->
                 if (result) {
-                    dismissProgressDialog()
-                    finish()
                     fold = 99
+                    dismissProgressDialog()
+                    startActivity(Intent(this@PembayaranActivity, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    })
                 } else if (fold == attempt) { // last attempt
                     dismissProgressDialog()
                     showToast("gagal mengubah status transaksi, mohon hubungi support batama")
