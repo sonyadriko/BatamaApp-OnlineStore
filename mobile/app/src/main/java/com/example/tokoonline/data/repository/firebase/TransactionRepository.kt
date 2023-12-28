@@ -32,10 +32,14 @@ class TransactionRepository {
 
     fun addTransaction(transaction: Transaction, onComplete: (isSuccess: Boolean) -> Unit) {
         val transactionRef = databaseReference.push()
-        transactionRef.setValue(transaction)
-            .addOnCompleteListener { task ->
-                onComplete(task.isSuccessful)
-            }
+        try {
+            transactionRef.setValue(transaction.copy(id = transactionRef.key!!))
+                .addOnCompleteListener { task ->
+                    onComplete(task.isSuccessful)
+                }
+        } catch (e: Exception) {
+            onComplete(false)
+        }
     }
 
     fun updateTransaction(transaction: Transaction, onComplete: (isSuccess: Boolean) -> Unit) {
