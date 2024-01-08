@@ -14,6 +14,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scaleType="centerCrop"
         android:src="@drawable/gradient_blue_initial" />
 
     <LinearLayout
@@ -46,27 +47,13 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_prosesLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_btn_login1"
             android:text="Masuk"
-            android:elevation="0dp"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16dp" />
+            style="@style/button_primary" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_prosesDaftar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="0dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/bg_btn_login2"
             android:text="Buat akun baru"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16dp" />
+            style="@style/button_secondary" />
 
     </LinearLayout>
 
