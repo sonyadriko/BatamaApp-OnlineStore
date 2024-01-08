@@ -19,6 +19,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:padding="16dp"
+        android:background="?selectableItemBackground"
         android:src="@drawable/ic_arrow_left"
         app:tint="@color/white" />
 

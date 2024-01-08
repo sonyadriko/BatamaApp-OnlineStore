@@ -17,6 +17,7 @@
 
     <ImageView
         android:id="@+id/button_back"
+        android:background="?selectableItemBackground"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:padding="16dp"
