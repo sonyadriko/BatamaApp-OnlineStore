@@ -35,7 +35,7 @@ class AkunFragment : BaseFragment() {
 
         binding.tvNama.text = userRepository.nama
         binding.tvEmail.text = userRepository.email
-            binding.tvPhone.text = userRepository.phone
+//            binding.tvPhone.text = userRepository.phone
 
         binding.btnLogout.setOnClickListener {
            logout()
