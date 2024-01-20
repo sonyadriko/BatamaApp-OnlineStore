@@ -1,5 +1,8 @@
 # tokoonline
+## Notes & Resources
+https://www.figma.com/file/98na6prcdnz2Yy5v2MTR01/Low-Fidelity%2C-Medium-Fidelity-dan-high-fidelty?type=design&node-id=0-1&mode=design
 
+## Fitur : 
 - [x] halaman utama
 - [x] halaman menu utama
 - [x] halaman login
