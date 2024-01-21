@@ -63,7 +63,7 @@ class DetailProductActivity : BaseActivity() {
             finish()
         }
 
-        binding.toolbar.binding.rightIcon.setOnClickListencofer {
+        binding.toolbar.binding.rightIcon.setOnClickListener {
             startActivity(Intent(this, KeranjangActivity::class.java))
         }
 
