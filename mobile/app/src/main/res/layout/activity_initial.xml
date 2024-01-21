@@ -48,12 +48,14 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_prosesLogin"
             android:text="Masuk"
-            style="@style/button_primary" />
+            android:layout_marginTop="@dimen/large_space"
+            style="@style/button_secondary" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_prosesDaftar"
+            android:layout_marginTop="@dimen/medium_space"
             android:text="Buat akun baru"
-            style="@style/button_secondary" />
+            style="@style/button_primary" />
 
     </LinearLayout>
 

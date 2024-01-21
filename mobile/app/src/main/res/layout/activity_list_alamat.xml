@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:text="Alamat Pengiriman"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorPrimary500"
         android:textSize="14dp"
         android:textStyle="bold" />
 
@@ -34,7 +34,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="15dp"
             android:text="Belum ada alamat"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimary500"
             android:textStyle="bold"
             android:visibility="visible" />
 
@@ -45,7 +45,7 @@
             android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="Tambahkan alamat anda sekarang untuk belanja di\nTokoku"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/colorPrimary500"
             android:visibility="visible" />
 
     </LinearLayout>

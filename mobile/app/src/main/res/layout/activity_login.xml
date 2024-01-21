@@ -85,11 +85,11 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_above="@id/btn_login"
-        android:background="#E0E3DE" />
+        android:background="@color/colorNeutral100" />
 
     <Button
         android:id="@+id/btn_login"
-        style="@style/button_secondary"
+        style="@style/button_primary"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"

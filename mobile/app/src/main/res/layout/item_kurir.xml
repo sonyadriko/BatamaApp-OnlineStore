@@ -30,14 +30,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kirim oleh Penjual"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary500" />
 
             <TextView
                 android:id="@+id/tv_lamaPengiriman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2 Hari kerja"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimary500"
                 android:textSize="10dp" />
 
         </LinearLayout>
@@ -54,14 +54,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rp 5.000"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary500" />
 
             <TextView
                 android:id="@+id/tv_berat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1 kilogram : Rp 5.000"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimary500"
                 android:textSize="10dp" />
 
         </LinearLayout>

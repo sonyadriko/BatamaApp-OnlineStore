@@ -41,7 +41,7 @@
                 android:lines="2"
                 android:maxLines="3"
                 android:text="Nama Produk"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary500" />
 
         </LinearLayout>
 
@@ -73,7 +73,7 @@
                     android:layout_marginEnd="15dp"
                     android:ellipsize="marquee"
                     android:text="Rp.10.000"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimary500"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -100,7 +100,7 @@
                         android:layout_marginEnd="5dp"
                         android:ellipsize="marquee"
                         android:text="1"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/colorPrimary500"
                         android:textStyle="bold" />
 
                     <ImageView

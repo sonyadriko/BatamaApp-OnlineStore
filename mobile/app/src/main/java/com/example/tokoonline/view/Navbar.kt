@@ -10,7 +10,7 @@ import com.example.tokoonline.databinding.NavbarBinding
 class Navbar constructor(context: Context, attrs: AttributeSet) :
     LinearLayout(context, attrs) {
 
-    private val binding: NavbarBinding
+    val binding: NavbarBinding
 
     init {
         val inflater = LayoutInflater.from(context)
@@ -43,17 +43,5 @@ class Navbar constructor(context: Context, attrs: AttributeSet) :
         } finally {
             typedArray.recycle()
         }
-    }
-
-    fun setLeftIcon(resId: Int) {
-        binding.leftIcon.setImageResource(resId)
-    }
-
-    fun setTitle(text: String) {
-        binding.title.text = text
-    }
-
-    fun setRightIcon(resId: Int) {
-        binding.rightIcon.setImageResource(resId)
     }
 }

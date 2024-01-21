@@ -5,37 +5,44 @@
     android:layout_height="56dp"
     android:background="@color/white"
     android:gravity="center"
+    android:orientation="vertical"
     tools:ignore="contentDescription">
 
-    <ImageView
-        android:id="@+id/leftIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingVertical="14dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/round_arrow_back" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textColor="#181B19"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        tools:text="NAVBAR" />
+        <ImageView
+            android:id="@+id/leftIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/medium_space"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/round_arrow_back" />
 
-    <ImageView
-        android:id="@+id/rightIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:paddingVertical="14dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:scaleType="centerCrop"
-        tools:src="@drawable/ic_chevron_right" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/colorNeutral900"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="NAVBAR" />
 
+        <ImageView
+            android:id="@+id/rightIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="@dimen/medium_space"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_chevron_right" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorNeutral100" />
 </LinearLayout>

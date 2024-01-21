@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="button_primary">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">24dp</item>
-        <item name="android:background">@drawable/bg_btn_login1</item>
-        <item name="android:elevation">0dp</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">16dp</item>
-    </style>
-
     <style name="button_secondary">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_btn_login1</item>
         <item name="android:elevation">0dp</item>
-        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorPrimary500</item>
+        <item name="android:textSize">@dimen/subtitle_2</item>
+    </style>
+
+    <style name="button_primary" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:elevation">0dp</item>
         <item name="android:background">@drawable/bg_btn_login2</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">@dimen/subtitle_2</item>
     </style>
 
     <style name="AppFullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -39,7 +37,7 @@
         <item name="boxCornerRadiusBottomStart">8dp</item>
         <item name="boxCornerRadiusTopEnd">8dp</item>
         <item name="boxCornerRadiusTopStart">8dp</item>
-        <item name="boxStrokeColor">#E0E3DE</item>
+        <item name="boxStrokeColor">@color/colorNeutral100</item>
         <item name="boxStrokeWidth">1dp</item>
     </style>
 
@@ -58,16 +56,29 @@
         <item name="android:background">@drawable/background_white_radius_border_grey</item>
     </style>
 
-    <style name="heading_4">
+    <style name="heading_18">
         <item name="android:fontFamily">@font/interm</item>
-        <item name="android:textColor">#2C302D</item>
+        <item name="android:textColor">@color/colorNeutral800</item>
+        <item name="android:textSize">@dimen/subtitle_1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="heading_14">
+        <item name="android:fontFamily">@font/interm</item>
+        <item name="android:textColor">@color/colorNeutral800</item>
         <item name="android:textSize">@dimen/body_1</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="body_2">
         <item name="android:fontFamily">@font/interm</item>
-        <item name="android:textColor">#5C605C</item>
+        <item name="android:textColor">@color/colorNeutral600</item>
         <item name="android:textSize">@dimen/body_2</item>
+    </style>
+
+    <style name="body_1">
+        <item name="android:fontFamily">@font/interm</item>
+        <item name="android:textColor">@color/colorNeutral600</item>
+        <item name="android:textSize">@dimen/body_1</item>
     </style>
 </resources>

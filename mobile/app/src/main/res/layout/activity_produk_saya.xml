@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Produk Saya"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimary500"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
                 <TextView
                     android:id="@+id/tvNamaToko"
                     android:layout_width="wrap_content"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimary500"
                     android:layout_height="wrap_content"
                     android:text="Produk"
                     android:textSize="15sp"

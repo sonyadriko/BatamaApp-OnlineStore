@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Toko Saya"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimary500"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     app:cardCornerRadius="4dp"
     app:cardElevation="0dp"
-    app:strokeColor="#E0E3DE"
+    app:strokeColor="@color/colorNeutral100"
     app:strokeWidth="1dp"
     tools:layout_height="wrap_content">
 
@@ -47,7 +47,7 @@
             android:fontFamily="@font/interm"
             android:maxLines="2"
             android:text="Rp 0"
-            android:textColor="#2C302D"
+            android:textColor="@color/colorNeutral800"
             android:textSize="@dimen/subtitle_2" />
     </LinearLayout>
 
