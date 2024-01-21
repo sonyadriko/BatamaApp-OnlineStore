@@ -59,9 +59,12 @@ class DetailProductActivity : BaseActivity() {
         binding = ActivityDetailProdukBinding.inflate(layoutInflater)
         keranjangRepository = KeranjangRepository(this)
 
-        setSupportActionBar(binding.toolbar)
-        binding.toolbar.setNavigationOnClickListener {
+        binding.toolbar.binding.leftIcon.setOnClickListener {
             finish()
+        }
+
+        binding.toolbar.binding.rightIcon.setOnClickListencofer {
+            startActivity(Intent(this, KeranjangActivity::class.java))
         }
 
         binding.lifecycleOwner = this
@@ -93,8 +96,8 @@ class DetailProductActivity : BaseActivity() {
             )
         }
 
-        stok.text = "Stok\n${produkData?.stok ?: 0} Pcs"
-        berat.text = "Berat\n${produkData?.beratProduk ?: 0} Kg"
+        stok.text = "${produkData?.stok ?: 0} Pcs"
+        berat.text = "${produkData?.beratProduk ?: 0} Kg"
 
         btnKeranjang.setOnClickListener {
             if (produkData == null) {
@@ -103,7 +106,8 @@ class DetailProductActivity : BaseActivity() {
 
             showProgressDialog()
             userRepository.uid?.let { uuid ->
-                keranjangRepository.addKeranjang(userUid = uuid,
+                keranjangRepository.addKeranjang(
+                    userUid = uuid,
                     produk = produkData!!.toProdukKeranjang(vm.quantity.value ?: 1),
                     onComplete = { success ->
                         dismissProgressDialog()

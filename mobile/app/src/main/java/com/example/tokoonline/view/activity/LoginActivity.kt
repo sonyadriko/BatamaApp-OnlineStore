@@ -20,6 +20,10 @@ class LoginActivity : BaseAuthActivity() {
     }
 
     private fun initListener() = with(binding) {
+        buttonBack.setOnClickListener {
+            finish()
+        }
+
         btnLogin.setOnClickListener{
             if (!edtEmail.text.isNullOrEmpty() && !edtPassword.text.isNullOrEmpty()) {
                 showProgressDialog()

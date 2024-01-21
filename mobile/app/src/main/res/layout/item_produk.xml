@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="170dp"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    android:layout_marginVertical="10dp"
-    android:layout_marginStart="15dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_marginStart="@dimen/medium_space"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/colorNeutral100"
+    app:strokeWidth="1dp"
+    tools:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,8 +19,8 @@
 
         <ImageView
             android:id="@+id/img_produk"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="140dp"
+            android:layout_height="120dp"
             android:scaleType="centerCrop"
             android:src="@drawable/loading_animation" />
 
@@ -21,28 +28,27 @@
             android:id="@+id/tv_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginHorizontal="@dimen/small_space"
+            android:layout_marginTop="@dimen/small_space"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Nama Produk"
-            android:textColor="@color/black"
-            android:textSize="15dp" />
+            android:textColor="#434744"
+            android:textSize="@dimen/body_2" />
 
         <TextView
             android:id="@+id/tv_harga"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="5dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginHorizontal="@dimen/small_space"
+            android:layout_marginTop="@dimen/small_space_8"
+            android:layout_marginBottom="@dimen/small_space"
             android:ellipsize="end"
+            android:fontFamily="@font/interm"
             android:maxLines="2"
             android:text="Rp 0"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16dp" />
-
+            android:textColor="@color/colorNeutral800"
+            android:textSize="@dimen/subtitle_2" />
     </LinearLayout>
 
-
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

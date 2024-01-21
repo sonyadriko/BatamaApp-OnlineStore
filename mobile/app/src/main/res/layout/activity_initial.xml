@@ -5,47 +5,57 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.InitialActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_initial" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gradient_blue_initial" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
+        android:background="@drawable/gradient_blue_initial2"
         android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="15dp"
-            android:src="@drawable/logo" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aplikasi Batama"
-            android:textColor="@color/black"
-            android:textSize="28dp" />
+            android:text="Belanja Secara Online"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:lineHeight="20dp"
+            android:text="Dapat belanja dengan mudah dan lebih praktis\n tanpa ribet"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_prosesLogin"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/bg_btn_login1"
-            android:text="Login"
-            android:textSize="16dp"
-            android:textAllCaps="false"
-            android:textColor="@color/black" />
+            android:text="Masuk"
+            android:layout_marginTop="@dimen/large_space"
+            style="@style/button_secondary" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_prosesDaftar"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
-            android:background="@drawable/bg_btn_login2"
-            android:text="Daftar"
-            android:textAllCaps="false"
-            android:textSize="16dp"
-            android:textColor="@color/black" />
+            android:layout_marginTop="@dimen/medium_space"
+            android:text="Buat akun baru"
+            style="@style/button_primary" />
 
     </LinearLayout>
 

@@ -1,11 +1,13 @@
 package com.example.tokoonline.view.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tokoonline.R
 import com.example.tokoonline.core.util.OnItemClick
+import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.databinding.ItemProdukBinding
 
@@ -16,6 +18,7 @@ class AdapterProduk(private val onItemClickListener: OnItemClick) :
 
     private val produkList = ArrayList<Produk>()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun submitList(data: List<Produk>) {
         produkList.clear()
         produkList.addAll(data)
@@ -32,7 +35,7 @@ class AdapterProduk(private val onItemClickListener: OnItemClick) :
 
         with(holder.binding) {
             tvNama.text = currentItem.nama
-            tvHarga.text = currentItem.deskripsi
+            tvHarga.text = moneyFormatter(currentItem.harga)
             Glide.with(imgProduk)
                 .load(currentItem.image)
                 .placeholder(R.drawable.loading_animation)

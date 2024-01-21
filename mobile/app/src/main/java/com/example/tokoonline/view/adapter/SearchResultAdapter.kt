@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.tokoonline.R
 import com.example.tokoonline.core.util.OnItemClick
+import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.databinding.SearchResultItemBinding
 
@@ -36,12 +37,12 @@ class SearchResultAdapter(private val onItemClickListener: OnItemClick) :
     override fun onBindViewHolder(holder: SearchResultVH, position: Int) = with(holder.binding) {
         val currentItem = data[position]
 
-        itemTitle.text = currentItem.nama
-        itemPrice.text = currentItem.deskripsi
-        Glide.with(cover)
+        tvNama.text = currentItem.nama
+        tvHarga.text = moneyFormatter(currentItem.harga)
+        Glide.with(imgProduk)
             .load(currentItem.image)
-            .placeholder(R.drawable.ic_account_circle_black_24dp)
-            .into(cover)
+            .placeholder(R.drawable.loading_animation)
+            .into(imgProduk)
 
         root.setOnClickListener {
             onItemClickListener.onClick(currentItem, position)

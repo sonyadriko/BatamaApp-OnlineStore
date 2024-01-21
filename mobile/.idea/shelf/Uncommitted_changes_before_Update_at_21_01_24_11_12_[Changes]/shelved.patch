@@ -1,0 +1,616 @@
+Index: app/src/main/res/layout/fragment_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:orientation=\"vertical\">\n\n    <RelativeLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:background=\"@color/colorPrimary\"\n        android:orientation=\"horizontal\"\n        android:padding=\"10dp\">\n\n        <androidx.cardview.widget.CardView\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"35dp\"\n            android:layout_marginEnd=\"6dp\"\n            android:layout_toStartOf=\"@id/ic_keranjang\"\n            app:cardCornerRadius=\"17dp\">\n\n            <LinearLayout\n                android:id=\"@+id/search_clickable\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"match_parent\"\n                android:gravity=\"center_vertical\"\n                android:orientation=\"horizontal\">\n\n                <ImageView\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:layout_marginStart=\"8dp\"\n                    app:srcCompat=\"@drawable/ic_search_orange_24dp\" />\n\n                <TextView\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"wrap_content\"\n                    android:layout_marginStart=\"7dp\"\n                    android:hint=\"Cari Produk diSini\" />\n\n            </LinearLayout>\n        </androidx.cardview.widget.CardView>\n\n        <ImageView\n            android:id=\"@+id/ic_keranjang\"\n            android:layout_width=\"30dp\"\n            android:layout_height=\"30dp\"\n            android:layout_alignParentEnd=\"true\"\n            android:layout_centerVertical=\"true\"\n            android:layout_marginStart=\"5dp\"\n            app:srcCompat=\"@drawable/ic_baseline_shopping_basket_putih_24\" />\n\n    </RelativeLayout>\n\n    <androidx.core.widget.NestedScrollView\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"match_parent\">\n\n        <LinearLayout\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"match_parent\"\n            android:layout_marginBottom=\"15dp\"\n            android:orientation=\"vertical\">\n\n            <androidx.viewpager.widget.ViewPager\n                android:id=\"@+id/vp_slider\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"190dp\" />\n\n            <Button\n                android:id=\"@+id/btn_addproduk\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:text=\"Tambah Produk\" />\n\n            <LinearLayout\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:layout_marginTop=\"10dp\"\n                android:layout_marginBottom=\"20dp\"\n                android:orientation=\"vertical\">\n\n                <TextView\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:layout_marginHorizontal=\"10dp\"\n                    android:layout_marginBottom=\"5dp\"\n                    android:text=\"Produk Terbaru\"\n                    android:textColor=\"@color/colorPrimaryDark\"\n                    android:textSize=\"18dp\"\n                    android:textStyle=\"bold\" />\n\n                <androidx.recyclerview.widget.RecyclerView\n                    android:id=\"@+id/rv_produk\"\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"wrap_content\"\n                    android:orientation=\"horizontal\"\n                    app:layoutManager=\"androidx.recyclerview.widget.LinearLayoutManager\" />\n\n            </LinearLayout>\n\n            <LinearLayout\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:layout_marginTop=\"10dp\"\n                android:layout_marginBottom=\"20dp\"\n                android:orientation=\"vertical\">\n\n                <TextView\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:layout_marginHorizontal=\"10dp\"\n                    android:layout_marginBottom=\"5dp\"\n                    android:text=\"Produk Terjual\"\n                    android:textColor=\"@color/colorPrimaryDark\"\n                    android:textSize=\"18dp\"\n                    android:textStyle=\"bold\" />\n\n                <androidx.recyclerview.widget.RecyclerView\n                    android:id=\"@+id/rv_produkterlaris\"\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"wrap_content\"\n                    android:orientation=\"horizontal\"\n                    app:layoutManager=\"androidx.recyclerview.widget.LinearLayoutManager\" />\n\n            </LinearLayout>\n\n            <LinearLayout\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:layout_marginTop=\"10dp\"\n                android:layout_marginBottom=\"20dp\"\n                android:orientation=\"vertical\">\n\n                <TextView\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:layout_marginHorizontal=\"10dp\"\n                    android:layout_marginBottom=\"5dp\"\n                    android:text=\"Produk Ter\"\n                    android:textColor=\"@color/colorPrimaryDark\"\n                    android:textSize=\"18dp\"\n                    android:textStyle=\"bold\" />\n\n                <androidx.recyclerview.widget.RecyclerView\n                    android:id=\"@+id/rv_produkter\"\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"wrap_content\"\n                    android:orientation=\"horizontal\"\n                    app:layoutManager=\"androidx.recyclerview.widget.LinearLayoutManager\" />\n\n            </LinearLayout>\n        </LinearLayout>\n\n    </androidx.core.widget.NestedScrollView>\n\n\n</LinearLayout>\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_home.xml b/app/src/main/res/layout/fragment_home.xml
+--- a/app/src/main/res/layout/fragment_home.xml	(revision 55a366b3536601739bd1d4fbe26eee314160a345)
++++ b/app/src/main/res/layout/fragment_home.xml	(date 1705788228187)
+@@ -4,54 +4,58 @@
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+-    android:orientation="vertical">
++    android:orientation="vertical"
++    tools:ignore="contentDescription, hardcodedText">
+ 
+-    <RelativeLayout
++    <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+-        android:background="@color/colorPrimary"
+-        android:orientation="horizontal"
+-        android:padding="10dp">
+-
+-        <androidx.cardview.widget.CardView
+-            android:layout_width="match_parent"
+-            android:layout_height="35dp"
+-            android:layout_marginEnd="6dp"
+-            android:layout_toStartOf="@id/ic_keranjang"
+-            app:cardCornerRadius="17dp">
++        android:background="@color/white"
++        android:gravity="center"
++        android:orientation="horizontal">
+ 
+-            <LinearLayout
+-                android:id="@+id/search_clickable"
+-                android:layout_width="match_parent"
+-                android:layout_height="match_parent"
+-                android:gravity="center_vertical"
+-                android:orientation="horizontal">
++        <LinearLayout
++            android:id="@+id/search_clickable"
++            android:layout_width="0dp"
++            android:layout_height="44dp"
++            android:layout_marginVertical="@dimen/medium_space"
++            android:layout_marginStart="@dimen/medium_space"
++            android:layout_weight="1"
++            android:background="@drawable/background_white_radius_border_grey"
++            android:gravity="center_vertical"
++            android:orientation="horizontal"
++            android:paddingHorizontal="@dimen/medium_space">
+ 
+-                <ImageView
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginStart="8dp"
+-                    app:srcCompat="@drawable/ic_search_orange_24dp" />
++            <ImageView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginEnd="@dimen/small_space_8"
++                app:srcCompat="@drawable/ic_search_orange_24dp" />
+ 
+-                <TextView
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginStart="7dp"
+-                    android:hint="Cari Produk diSini" />
++            <TextView
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:fontFamily="@font/interm"
++                android:hint="Cari produk impian Anda"
++                android:textSize="14sp" />
+ 
+-            </LinearLayout>
+-        </androidx.cardview.widget.CardView>
++        </LinearLayout>
+ 
+         <ImageView
+             android:id="@+id/ic_keranjang"
+-            android:layout_width="30dp"
+-            android:layout_height="30dp"
+-            android:layout_alignParentEnd="true"
+-            android:layout_centerVertical="true"
+-            android:layout_marginStart="5dp"
+-            app:srcCompat="@drawable/ic_baseline_shopping_basket_putih_24" />
++            android:layout_width="wrap_content"
++            android:layout_height="match_parent"
++            android:background="?selectableItemBackground"
++            android:paddingStart="@dimen/small_space"
++            android:paddingEnd="@dimen/medium_space"
++            app:srcCompat="@drawable/ic_keranjang" />
+ 
+-    </RelativeLayout>
++    </LinearLayout>
++
++    <View
++        android:layout_width="match_parent"
++        android:layout_height="1dp"
++        android:background="#E0E3DE" />
+ 
+     <androidx.core.widget.NestedScrollView
+         android:layout_width="match_parent"
+@@ -63,94 +67,95 @@
+             android:layout_marginBottom="15dp"
+             android:orientation="vertical">
+ 
+-            <androidx.viewpager.widget.ViewPager
+-                android:id="@+id/vp_slider"
++            <androidx.constraintlayout.widget.ConstraintLayout
+                 android:layout_width="match_parent"
+-                android:layout_height="190dp" />
+-
+-            <Button
+-                android:id="@+id/btn_addproduk"
+-                android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:text="Tambah Produk" />
++                android:background="#AAE8C9">
+ 
+-            <LinearLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_marginTop="10dp"
+-                android:layout_marginBottom="20dp"
+-                android:orientation="vertical">
++                <ImageView
++                    android:layout_width="match_parent"
++                    android:layout_height="wrap_content"
++                    android:scaleType="centerCrop"
++                    android:src="@drawable/cover_depan"
++                    app:layout_constraintTop_toTopOf="parent" />
+ 
+                 <TextView
++                    android:id="@+id/headline"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+-                    android:layout_marginHorizontal="10dp"
+-                    android:layout_marginBottom="5dp"
+-                    android:text="Produk Terbaru"
+-                    android:textColor="@color/colorPrimaryDark"
+-                    android:textSize="18dp"
+-                    android:textStyle="bold" />
+-
+-                <androidx.recyclerview.widget.RecyclerView
+-                    android:id="@+id/rv_produk"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:orientation="horizontal"
+-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+-
+-            </LinearLayout>
+-
+-            <LinearLayout
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_marginTop="10dp"
+-                android:layout_marginBottom="20dp"
+-                android:orientation="vertical">
++                    android:layout_marginStart="@dimen/medium_space"
++                    android:layout_marginTop="@dimen/large_space"
++                    android:fontFamily="@font/interm"
++                    android:text="Black Friday Night"
++                    android:textColor="@color/black"
++                    android:textSize="@dimen/subtitle_1"
++                    android:textStyle="bold"
++                    app:layout_constraintStart_toStartOf="parent"
++                    app:layout_constraintTop_toTopOf="parent" />
+ 
+                 <TextView
++                    android:id="@+id/description"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+-                    android:layout_marginHorizontal="10dp"
+-                    android:layout_marginBottom="5dp"
+-                    android:text="Produk Terjual"
+-                    android:textColor="@color/colorPrimaryDark"
+-                    android:textSize="18dp"
+-                    android:textStyle="bold" />
++                    android:layout_marginStart="@dimen/medium_space"
++                    android:layout_marginTop="@dimen/small_space_6"
++                    android:fontFamily="@font/interm"
++                    android:text="Dapatkan diskon 50% dari\nmerchant pilihan kami."
++                    android:textColor="@color/black"
++                    android:textSize="@dimen/body_2"
++                    android:textStyle="normal"
++                    app:layout_constraintStart_toStartOf="parent"
++                    app:layout_constraintTop_toBottomOf="@id/headline" />
+ 
+-                <androidx.recyclerview.widget.RecyclerView
+-                    android:id="@+id/rv_produkterlaris"
+-                    android:layout_width="match_parent"
++                <Button
++                    android:id="@+id/btn_explore"
++                    android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+-                    android:orientation="horizontal"
+-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
++                    android:layout_marginStart="@dimen/medium_space"
++                    android:layout_marginTop="@dimen/small_space"
++                    android:backgroundTint="#027FB4"
++                    android:fontFamily="@font/interm"
++                    android:minWidth="0dp"
++                    android:minHeight="0dp"
++                    android:paddingHorizontal="6dp"
++                    android:paddingVertical="4dp"
++                    android:text="Explore now"
++                    android:textAllCaps="false"
++                    android:textColor="@color/white"
++                    android:textSize="@dimen/body_2"
++                    android:textStyle="normal"
++                    app:layout_constraintStart_toStartOf="parent"
++                    app:layout_constraintTop_toBottomOf="@id/description" />
+ 
+-            </LinearLayout>
++            </androidx.constraintlayout.widget.ConstraintLayout>
+ 
+-            <LinearLayout
+-                android:layout_width="match_parent"
++            <Button
++                android:id="@+id/btn_addproduk"
++                android:layout_width="wrap_content"
++                android:text="Tambah Produk"
+                 android:layout_height="wrap_content"
+-                android:layout_marginTop="10dp"
+-                android:layout_marginBottom="20dp"
+-                android:orientation="vertical">
++                android:visibility="gone" />
+ 
+-                <TextView
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginHorizontal="10dp"
+-                    android:layout_marginBottom="5dp"
+-                    android:text="Produk Ter"
+-                    android:textColor="@color/colorPrimaryDark"
+-                    android:textSize="18dp"
+-                    android:textStyle="bold" />
++            <TextView
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginHorizontal="@dimen/medium_space"
++                android:layout_marginTop="@dimen/small_space"
++                android:fontFamily="@font/interm"
++                android:text="Produk Terbaru"
++                android:textColor="@color/black"
++                android:textSize="16sp"
++                android:textStyle="normal" />
+ 
+-                <androidx.recyclerview.widget.RecyclerView
+-                    android:id="@+id/rv_produkter"
+-                    android:layout_width="match_parent"
+-                    android:layout_height="wrap_content"
+-                    android:orientation="horizontal"
+-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+-
+-            </LinearLayout>
++            <androidx.recyclerview.widget.RecyclerView
++                android:id="@+id/rv_produk"
++                android:layout_width="match_parent"
++                android:layout_height="wrap_content"
++                android:clipToPadding="false"
++                android:orientation="horizontal"
++                android:paddingStart="@dimen/no_space"
++                android:paddingEnd="@dimen/medium_space"
++                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+         </LinearLayout>
+ 
+     </androidx.core.widget.NestedScrollView>
+Index: app/src/main/java/com/example/tokoonline/view/activity/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tokoonline.view.activity\n\nimport android.os.Bundle\nimport android.view.Menu\nimport android.view.MenuItem\nimport androidx.fragment.app.Fragment\nimport com.example.tokoonline.R\nimport com.example.tokoonline.core.base.BaseActivity\nimport com.example.tokoonline.databinding.ActivityMainBinding\nimport com.example.tokoonline.view.fragment.AkunFragment\nimport com.example.tokoonline.view.fragment.HomeFragment\nimport com.google.android.material.bottomnavigation.BottomNavigationView\nimport com.example.tokoonline.view.fragment.RiwayatTransaksiFragment\n\nclass MainActivity : BaseActivity() {\n\n    private lateinit var active: Fragment\n\n    private lateinit var menu: Menu\n    private lateinit var menuitem: MenuItem\n    private lateinit var bottomNavigationView: BottomNavigationView\n    private lateinit var binding: ActivityMainBinding\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        binding = ActivityMainBinding.inflate(layoutInflater)\n        setContentView(binding.root)\n        setUpBottomNav()\n    }\n\n    private fun setUpBottomNav() {\n        val fragmentHome: Fragment = HomeFragment()\n        val fragmentRiwayattransaksi: Fragment = RiwayatTransaksiFragment()\n        val fragmentAkun: Fragment = AkunFragment()\n\n        active = fragmentHome\n        supportFragmentManager.apply {\n            beginTransaction().add(R.id.container, fragmentHome).show(fragmentHome).commit()\n            beginTransaction().add(R.id.container, fragmentRiwayattransaksi)\n                .hide(fragmentRiwayattransaksi).commit()\n            beginTransaction().add(R.id.container, fragmentAkun).hide(fragmentAkun).commit()\n        }\n\n        bottomNavigationView = binding.navView\n        menu = bottomNavigationView.menu\n        menuitem = menu.getItem(0)\n        menuitem.isChecked = true\n\n        bottomNavigationView.setOnNavigationItemSelectedListener { item ->\n            when (item.itemId) {\n                R.id.navigation_home -> {\n                    callFragment(0, fragmentHome)\n                }\n\n                R.id.navigation_riwayattransaksi -> {\n                    callFragment(1, fragmentRiwayattransaksi)\n                }\n\n                R.id.navigation_akun -> {\n                    callFragment(2, fragmentAkun)\n                }\n            }\n\n            false\n        }\n    }\n\n    private fun callFragment(int: Int, fragment: Fragment) {\n        menuitem = menu.getItem(int)\n        menuitem.isChecked = true\n        supportFragmentManager.beginTransaction().hide(active).show(fragment).commit()\n        active = fragment\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/tokoonline/view/activity/MainActivity.kt b/app/src/main/java/com/example/tokoonline/view/activity/MainActivity.kt
+--- a/app/src/main/java/com/example/tokoonline/view/activity/MainActivity.kt	(revision 55a366b3536601739bd1d4fbe26eee314160a345)
++++ b/app/src/main/java/com/example/tokoonline/view/activity/MainActivity.kt	(date 1705786729741)
+@@ -1,8 +1,12 @@
+ package com.example.tokoonline.view.activity
+ 
++import android.graphics.Color
+ import android.os.Bundle
+ import android.view.Menu
+ import android.view.MenuItem
++import android.view.View
++import android.view.WindowManager
++import androidx.core.content.ContextCompat
+ import androidx.fragment.app.Fragment
+ import com.example.tokoonline.R
+ import com.example.tokoonline.core.base.BaseActivity
+@@ -23,6 +27,9 @@
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
++        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
++        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
++
+         binding = ActivityMainBinding.inflate(layoutInflater)
+         setContentView(binding.root)
+         setUpBottomNav()
+Index: app/src/main/java/com/example/tokoonline/data/model/firebase/ProdukKeranjang.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tokoonline.data.model.firebase\n\nimport com.google.gson.Gson\nimport com.google.gson.reflect.TypeToken\nimport android.os.Parcelable\nimport kotlinx.parcelize.Parcelize\n\n/**\n * should've been only id and qty\n */\n@Parcelize\ndata class ProdukKeranjang (\n    var id: String = \"\",\n    val image: String = \"\",\n    var nama: String = \"\",\n    var harga: Long = 0,\n    val deskripsi: String = \"\",\n    val beratProduk: Double = 0.0,\n    val produkId: String,\n    val idSeller: String? = \"\",\n    val qty: Int = 1\n) : Parcelable {\n    fun toMap(): Map<String, Any?> {\n        val gson = Gson()\n        val json = gson.toJson(this)\n        return gson.fromJson(json, object : TypeToken<Map<String, Any>>() {}.type)\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/tokoonline/data/model/firebase/ProdukKeranjang.kt b/app/src/main/java/com/example/tokoonline/data/model/firebase/ProdukKeranjang.kt
+--- a/app/src/main/java/com/example/tokoonline/data/model/firebase/ProdukKeranjang.kt	(revision 55a366b3536601739bd1d4fbe26eee314160a345)
++++ b/app/src/main/java/com/example/tokoonline/data/model/firebase/ProdukKeranjang.kt	(date 1705788309887)
+@@ -16,7 +16,7 @@
+     var harga: Long = 0,
+     val deskripsi: String = "",
+     val beratProduk: Double = 0.0,
+-    val produkId: String,
++    val produkId: String = "",
+     val idSeller: String? = "",
+     val qty: Int = 1
+ ) : Parcelable {
+Index: app/src/main/java/com/example/tokoonline/view/adapter/AdapterProduk.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tokoonline.view.adapter\n\nimport android.view.LayoutInflater\nimport android.view.ViewGroup\nimport androidx.recyclerview.widget.RecyclerView\nimport com.bumptech.glide.Glide\nimport com.example.tokoonline.R\nimport com.example.tokoonline.core.util.OnItemClick\nimport com.example.tokoonline.data.model.firebase.Produk\nimport com.example.tokoonline.databinding.ItemProdukBinding\n\n\nclass Holder(val binding: ItemProdukBinding) : RecyclerView.ViewHolder(binding.root)\nclass AdapterProduk(private val onItemClickListener: OnItemClick) :\n    RecyclerView.Adapter<Holder>() {\n\n    private val produkList = ArrayList<Produk>()\n\n    fun submitList(data: List<Produk>) {\n        produkList.clear()\n        produkList.addAll(data)\n        notifyDataSetChanged()\n    }\n\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {\n        val inflater = LayoutInflater.from(parent.context)\n        return Holder(ItemProdukBinding.inflate(inflater, parent, false))\n    }\n\n    override fun onBindViewHolder(holder: Holder, position: Int) {\n        val currentItem = produkList[position]\n\n        with(holder.binding) {\n            tvNama.text = currentItem.nama\n            tvHarga.text = currentItem.deskripsi\n            Glide.with(imgProduk)\n                .load(currentItem.image)\n                .placeholder(R.drawable.loading_animation)\n                .into(imgProduk)\n\n            root.setOnClickListener {\n                onItemClickListener.onClick(currentItem, position)\n            }\n        }\n    }\n\n    override fun getItemCount(): Int {\n        return produkList.size\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/tokoonline/view/adapter/AdapterProduk.kt b/app/src/main/java/com/example/tokoonline/view/adapter/AdapterProduk.kt
+--- a/app/src/main/java/com/example/tokoonline/view/adapter/AdapterProduk.kt	(revision 55a366b3536601739bd1d4fbe26eee314160a345)
++++ b/app/src/main/java/com/example/tokoonline/view/adapter/AdapterProduk.kt	(date 1705787463711)
+@@ -6,6 +6,7 @@
+ import com.bumptech.glide.Glide
+ import com.example.tokoonline.R
+ import com.example.tokoonline.core.util.OnItemClick
++import com.example.tokoonline.core.util.moneyFormatter
+ import com.example.tokoonline.data.model.firebase.Produk
+ import com.example.tokoonline.databinding.ItemProdukBinding
+ 
+@@ -32,7 +33,7 @@
+ 
+         with(holder.binding) {
+             tvNama.text = currentItem.nama
+-            tvHarga.text = currentItem.deskripsi
++            tvHarga.text = moneyFormatter(currentItem.harga)
+             Glide.with(imgProduk)
+                 .load(currentItem.image)
+                 .placeholder(R.drawable.loading_animation)
+Index: app/src/main/res/values/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\n    <!-- Default screen margins, per the Android Design guidelines. -->\n    <dimen name=\"activity_horizontal_margin\">16dp</dimen>\n    <dimen name=\"activity_vertical_margin\">16dp</dimen>\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/dimens.xml b/app/src/main/res/values/dimens.xml
+--- a/app/src/main/res/values/dimens.xml	(revision 55a366b3536601739bd1d4fbe26eee314160a345)
++++ b/app/src/main/res/values/dimens.xml	(date 1705785778631)
+@@ -2,4 +2,86 @@
+     <!-- Default screen margins, per the Android Design guidelines. -->
+     <dimen name="activity_horizontal_margin">16dp</dimen>
+     <dimen name="activity_vertical_margin">16dp</dimen>
++
++    <dimen name="no_space">0dp</dimen>
++    <dimen name="smaller_space_2">2dp</dimen>
++    <dimen name="smaller_space">4dp</dimen>
++    <dimen name="small_space_6">6dp</dimen>
++    <dimen name="small_space_8">8dp</dimen>
++    <dimen name="small_space_10">10dp</dimen>
++    <dimen name="small_space">12dp</dimen>
++    <dimen name="medium_space_14">14dp</dimen>
++    <dimen name="medium_space">16dp</dimen>
++    <dimen name="extra_medium_space">20dp</dimen>
++    <dimen name="large_space">24dp</dimen>
++    <dimen name="extra_large_space">28dp</dimen>
++    <dimen name="larger_space">32dp</dimen>
++    <dimen name="extra_larger_space">36dp</dimen>
++    <dimen name="largest_space">40dp</dimen>
++    <dimen name="largest_space_48">48dp</dimen>
++    <dimen name="largest_space_60">60dp</dimen>
++    <dimen name="largest_space_70">70dp</dimen>
++    <dimen name="largest_space_80">80dp</dimen>
++
++    <!-- Baseline spacing -->
++    <dimen name="baseline_container_small">16dp</dimen>
++    <dimen name="baseline_container_medium">20dp</dimen>
++    <dimen name="baseline_container_large">32dp</dimen>
++    <dimen name="baseline_container_superlarge">100dp</dimen>
++    <dimen name="baseline_container_extralarge">120dp</dimen>
++
++    <!-- Typography spacing -->
++    <dimen name="text_space_small">4dp</dimen>
++    <dimen name="text_space_medium">8dp</dimen>
++    <dimen name="text_space_large">12dp</dimen>
++    <dimen name="text_space_largest">16dp</dimen>
++    <dimen name="text_space_largest_18">18dp</dimen>
++
++    <!-- Font size -->
++    <dimen name="font_initial_name">85sp</dimen>
++
++    <!-- Icon size -->
++    <dimen name="icon_size_small">12dp</dimen>
++    <dimen name="icon_size_medium_20">20dp</dimen>
++    <dimen name="icon_size_medium">24dp</dimen>
++    <dimen name="icon_size_medium_30">30dp</dimen>
++    <dimen name="icon_size_extra_medium">32dp</dimen>
++    <dimen name="icon_size_medium_large">35dp</dimen>
++    <dimen name="icon_size_large">48dp</dimen>
++    <dimen name="icon_super_large">70dp</dimen>
++
++    <!-- User Photo -->
++    <dimen name="user_photo_smaller">30dp</dimen>
++    <dimen name="user_photo_small">48dp</dimen>
++    <dimen name="user_photo_medium">72dp</dimen>
++
++    <dimen name="popup_width">280dp</dimen>
++    <dimen name="popup_height">450dp</dimen>
++
++    <!-- Define for redesign -->
++    <dimen name="baseline_container_placeholder">50dp</dimen>
++
++    <!-- Additional -->
++    <dimen name="inner_content">28dp</dimen>
++    <dimen name="inner_content_top">30dp</dimen>
++
++    <dimen name="product_image">80dp</dimen>
++    <dimen name="input_field_height">45dp</dimen>
++
++    <!-- Font Size -->
++    <dimen name="text_extra_large_44">44sp</dimen>
++    <dimen name="text_extra_large_36">36sp</dimen>
++    <dimen name="heading_1">28sp</dimen>
++    <dimen name="heading_2">24sp</dimen>
++    <dimen name="heading_3">21sp</dimen>
++    <dimen name="subtitle_1">18sp</dimen>
++    <dimen name="subtitle_2">16sp</dimen>
++    <dimen name="body_1">14sp</dimen>
++    <dimen name="body_2">12sp</dimen>
++    <dimen name="body_3">10sp</dimen>
++    <dimen name="body_4">9sp</dimen>
++
++    <!--Custom height-->
++    <dimen name="max_height_scroll">100dp</dimen>
++    <dimen name="fab_margin">16dp</dimen>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/tokoonline/view/fragment/HomeFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.tokoonline.view.fragment\n\nimport android.content.Intent\nimport android.os.Bundle\nimport android.view.LayoutInflater\nimport android.view.View\nimport android.view.ViewGroup\nimport android.widget.LinearLayout\nimport android.widget.Toast\nimport androidx.fragment.app.viewModels\nimport androidx.activity.result.ActivityResult\nimport androidx.activity.result.contract.ActivityResultContracts\nimport androidx.recyclerview.widget.DividerItemDecoration\nimport com.example.tokoonline.R\nimport com.example.tokoonline.core.base.BaseFragment\nimport com.example.tokoonline.core.util.OnItemClick\nimport com.example.tokoonline.data.model.firebase.Produk\nimport com.example.tokoonline.view.adapter.AdapterProduk\nimport com.example.tokoonline.view.activity.DetailProductActivity\nimport com.example.tokoonline.databinding.FragmentHomeBinding\nimport com.example.tokoonline.view.activity.DetailProductActivity.Companion.RESULT_DELETE\nimport com.example.tokoonline.view.activity.KeranjangActivity\nimport com.example.tokoonline.view.activity.SearchActivity\nimport com.example.tokoonline.view.activity.TambahProdukActivity\nimport com.example.tokoonline.view.adapter.AdapterSlider\nimport com.example.tokoonline.view.viewmodel.ProdukViewModel\n\nclass HomeFragment : BaseFragment(), OnItemClick {\n    private lateinit var binding: FragmentHomeBinding\n    private lateinit var productAdapter: AdapterProduk\n\n    private val viewModel: ProdukViewModel by viewModels()\n\n    private val startForResult =\n        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->\n            if (result.resultCode == RESULT_DELETE) {\n                // do nothing for now\n            }\n        }\n\n    override fun onCreateView(\n        inflater: LayoutInflater, container: ViewGroup?,\n        savedInstanceState: Bundle?\n    ): View {\n        binding = FragmentHomeBinding.inflate(inflater, container, false)\n        return binding.root\n    }\n\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\n        super.onViewCreated(view, savedInstanceState)\n        initView()\n        initListener()\n        observe()\n        viewModel.processEvent(ProdukViewModel.LoadDataProduk)\n    }\n\n    private fun initView() {\n        // slider\n        val arrSlider = ArrayList<Int>()\n        arrSlider.add(R.drawable.slider2)\n        arrSlider.add(R.drawable.slider1)\n        arrSlider.add(R.drawable.slider3)\n\n        val adapterSlider = AdapterSlider(arrSlider, activity)\n        binding.vpSlider.adapter = adapterSlider\n\n\n        // produk terbaru\n        val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.HORIZONTAL)\n        productAdapter = AdapterProduk(this)\n        binding.rvProduk.apply {\n            addItemDecoration(dividerItemDecoration)\n            setHasFixedSize(true)\n            adapter = productAdapter\n        }\n\n\n    }\n\n    private fun initListener() = with(binding) {\n        searchClickable.setOnClickListener {\n            startActivity(Intent(context, SearchActivity::class.java))\n        }\n\n        btnAddproduk.setOnClickListener {\n            startActivity(Intent(context, TambahProdukActivity::class.java))\n        }\n\n        icKeranjang.setOnClickListener {\n            startActivity(Intent(activity, KeranjangActivity::class.java))\n        }\n    }\n\n    private fun observe() {\n        viewModel.state.observe(viewLifecycleOwner) {\n            if (it.isLoading) showProgressDialog()\n            else {\n                dismissProgressDialog()\n                if (it.dataProduk.isEmpty()) {\n                    showToast(\n                        \"Tidak ada produk yang bisa ditampilkan untuk saat init\",\n                        Toast.LENGTH_LONG\n                    )\n                }\n            }\n\n\n            productAdapter.submitList(it.dataProduk)\n        }\n    }\n\n    override fun onClick(data: Any, position: Int) {\n        startActivity(DetailProductActivity.createIntent(requireContext(), data as Produk))\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/tokoonline/view/fragment/HomeFragment.kt b/app/src/main/java/com/example/tokoonline/view/fragment/HomeFragment.kt
+--- a/app/src/main/java/com/example/tokoonline/view/fragment/HomeFragment.kt	(revision 55a366b3536601739bd1d4fbe26eee314160a345)
++++ b/app/src/main/java/com/example/tokoonline/view/fragment/HomeFragment.kt	(date 1705787397166)
+@@ -55,26 +55,10 @@
+     }
+ 
+     private fun initView() {
+-        // slider
+-        val arrSlider = ArrayList<Int>()
+-        arrSlider.add(R.drawable.slider2)
+-        arrSlider.add(R.drawable.slider1)
+-        arrSlider.add(R.drawable.slider3)
+-
+-        val adapterSlider = AdapterSlider(arrSlider, activity)
+-        binding.vpSlider.adapter = adapterSlider
+-
+-
+-        // produk terbaru
+-        val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.HORIZONTAL)
+         productAdapter = AdapterProduk(this)
+         binding.rvProduk.apply {
+-            addItemDecoration(dividerItemDecoration)
+-            setHasFixedSize(true)
+             adapter = productAdapter
+         }
+-
+-
+     }
+ 
+     private fun initListener() = with(binding) {
+Index: app/src/main/res/layout/item_produk.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.cardview.widget.CardView xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    android:layout_width=\"170dp\"\n    android:layout_height=\"match_parent\"\n    android:layout_marginVertical=\"10dp\"\n    android:layout_marginStart=\"15dp\">\n\n    <LinearLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\"\n        android:orientation=\"vertical\">\n\n        <ImageView\n            android:id=\"@+id/img_produk\"\n            android:layout_width=\"170dp\"\n            android:layout_height=\"170dp\"\n            android:scaleType=\"centerCrop\"\n            android:src=\"@drawable/loading_animation\" />\n\n        <TextView\n            android:id=\"@+id/tv_nama\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"wrap_content\"\n            android:layout_marginHorizontal=\"5dp\"\n            android:layout_marginTop=\"2dp\"\n            android:ellipsize=\"end\"\n            android:maxLines=\"1\"\n            android:text=\"Nama Produk\"\n            android:textColor=\"@color/black\"\n            android:textSize=\"15dp\" />\n\n        <TextView\n            android:id=\"@+id/tv_harga\"\n            android:layout_width=\"wrap_content\"\n            android:layout_height=\"wrap_content\"\n            android:layout_marginHorizontal=\"5dp\"\n            android:layout_marginTop=\"8dp\"\n            android:layout_marginBottom=\"10dp\"\n            android:ellipsize=\"end\"\n            android:maxLines=\"2\"\n            android:text=\"Rp 0\"\n            android:textColor=\"@color/colorPrimaryDark\"\n            android:textSize=\"16dp\" />\n\n    </LinearLayout>\n\n\n</androidx.cardview.widget.CardView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/item_produk.xml b/app/src/main/res/layout/item_produk.xml
+--- a/app/src/main/res/layout/item_produk.xml	(revision 55a366b3536601739bd1d4fbe26eee314160a345)
++++ b/app/src/main/res/layout/item_produk.xml	(date 1705788125020)
+@@ -1,9 +1,17 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:layout_width="170dp"
++<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_height="match_parent"
+-    android:layout_marginVertical="10dp"
+-    android:layout_marginStart="15dp">
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="wrap_content"
++    android:layout_marginVertical="@dimen/small_space"
++    android:layout_marginStart="@dimen/medium_space"
++    android:orientation="vertical"
++    app:cardCornerRadius="4dp"
++    app:cardElevation="0dp"
++    app:strokeColor="#E0E3DE"
++    app:strokeWidth="1dp"
++    tools:layout_height="wrap_content">
+ 
+     <LinearLayout
+         android:layout_width="match_parent"
+@@ -12,37 +20,36 @@
+ 
+         <ImageView
+             android:id="@+id/img_produk"
+-            android:layout_width="170dp"
+-            android:layout_height="170dp"
+-            android:scaleType="centerCrop"
+-            android:src="@drawable/loading_animation" />
++            android:layout_width="140dp"
++            android:layout_height="120dp"
++            android:scaleType="fitXY"
++            android:src="@drawable/ic_profile" />
+ 
+         <TextView
+             android:id="@+id/tv_nama"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginHorizontal="5dp"
+-            android:layout_marginTop="2dp"
++            android:layout_marginHorizontal="@dimen/small_space"
++            android:layout_marginTop="@dimen/small_space"
+             android:ellipsize="end"
+             android:maxLines="1"
+             android:text="Nama Produk"
+-            android:textColor="@color/black"
+-            android:textSize="15dp" />
++            android:textColor="#434744"
++            android:textSize="@dimen/body_2" />
+ 
+         <TextView
+             android:id="@+id/tv_harga"
+-            android:layout_width="wrap_content"
++            android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:layout_marginHorizontal="5dp"
+-            android:layout_marginTop="8dp"
+-            android:layout_marginBottom="10dp"
++            android:layout_marginHorizontal="@dimen/small_space"
++            android:layout_marginTop="@dimen/small_space_8"
++            android:layout_marginBottom="@dimen/small_space"
+             android:ellipsize="end"
++            android:fontFamily="@font/interm"
+             android:maxLines="2"
+             android:text="Rp 0"
+-            android:textColor="@color/colorPrimaryDark"
+-            android:textSize="16dp" />
+-
++            android:textColor="#2C302D"
++            android:textSize="@dimen/subtitle_2" />
+     </LinearLayout>
+ 
+-
+-</androidx.cardview.widget.CardView>
+\ No newline at end of file
++</com.google.android.material.card.MaterialCardView>
+\ No newline at end of file
+Index: app/src/main/res/drawable/ic_keranjang.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/ic_keranjang.xml b/app/src/main/res/drawable/ic_keranjang.xml
+new file mode 100644
+--- /dev/null	(date 1705785143900)
++++ b/app/src/main/res/drawable/ic_keranjang.xml	(date 1705785143900)
+@@ -0,0 +1,9 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="24dp"
++    android:height="24dp"
++    android:viewportWidth="24"
++    android:viewportHeight="24">
++  <path
++      android:pathData="M23.589,7.986C23.435,7.79 23.246,7.632 23.033,7.524C22.821,7.415 22.59,7.359 22.357,7.358H18.622L13.116,0.312C13.039,0.214 12.944,0.135 12.838,0.081C12.731,0.028 12.616,0 12.5,0C12.383,0 12.268,0.028 12.162,0.081C12.056,0.135 11.961,0.214 11.884,0.312L6.377,7.358H2.643C2.409,7.358 2.177,7.414 1.964,7.523C1.751,7.631 1.561,7.789 1.407,7.986C1.253,8.183 1.138,8.415 1.07,8.666C1.003,8.917 0.983,9.181 1.014,9.441L2.437,21.404C2.49,21.846 2.685,22.251 2.984,22.545C3.284,22.839 3.669,23 4.067,23H20.933C21.331,23 21.715,22.839 22.015,22.545C22.315,22.251 22.509,21.846 22.562,21.404L23.986,9.442C24.017,9.182 23.997,8.917 23.928,8.666C23.86,8.415 23.744,8.183 23.589,7.986ZM7.736,19.32C7.708,19.321 7.68,19.321 7.652,19.32C7.448,19.321 7.251,19.236 7.099,19.083C6.947,18.93 6.851,18.719 6.831,18.492L6.256,12.051C6.234,11.808 6.299,11.566 6.437,11.377C6.575,11.188 6.774,11.068 6.991,11.043C7.208,11.019 7.424,11.092 7.593,11.246C7.762,11.401 7.869,11.624 7.891,11.867L8.466,18.308C8.489,18.55 8.425,18.793 8.288,18.983C8.151,19.173 7.952,19.294 7.736,19.32ZM13.321,18.399C13.321,18.643 13.235,18.878 13.081,19.05C12.927,19.223 12.718,19.32 12.5,19.32C12.282,19.32 12.073,19.223 11.919,19.05C11.765,18.878 11.678,18.643 11.678,18.399V11.959C11.678,11.715 11.765,11.481 11.919,11.308C12.073,11.136 12.282,11.039 12.5,11.039C12.718,11.039 12.927,11.136 13.081,11.308C13.235,11.481 13.321,11.715 13.321,11.959V18.399ZM8.56,7.358L12.5,2.315L16.439,7.358H8.56ZM18.738,12.051L18.163,18.492C18.143,18.718 18.048,18.928 17.897,19.081C17.747,19.235 17.551,19.319 17.347,19.32C17.319,19.321 17.292,19.321 17.264,19.32C17.157,19.308 17.052,19.272 16.957,19.215C16.862,19.157 16.778,19.08 16.71,18.986C16.642,18.893 16.591,18.785 16.56,18.669C16.528,18.554 16.518,18.432 16.529,18.312L17.104,11.871C17.125,11.629 17.233,11.405 17.401,11.251C17.57,11.097 17.786,11.024 18.003,11.048C18.22,11.072 18.419,11.192 18.557,11.381C18.695,11.57 18.76,11.813 18.738,12.055V12.051Z"
++      android:fillColor="#2C302D"/>
++</vector>
+Index: app/src/main/res/drawable/background_white_radius4_border_grey.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/background_white_radius4_border_grey.xml b/app/src/main/res/drawable/background_white_radius4_border_grey.xml
+new file mode 100644
+--- /dev/null	(date 1705786908830)
++++ b/app/src/main/res/drawable/background_white_radius4_border_grey.xml	(date 1705786908830)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape xmlns:android="http://schemas.android.com/apk/res/android"
++    android:shape="rectangle">
++    <solid android:color="@color/white" />
++
++    <corners android:radius="4dp" />
++
++    <stroke
++        android:width="1dp"
++        android:color="#E0E3DE" />
++
++</shape>
+\ No newline at end of file

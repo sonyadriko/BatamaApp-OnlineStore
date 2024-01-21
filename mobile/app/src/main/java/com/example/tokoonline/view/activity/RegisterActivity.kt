@@ -19,6 +19,10 @@ class RegisterActivity : BaseAuthActivity() {
     }
 
     private fun initListener() = with(binding){
+        buttonBack.setOnClickListener {
+            finish()
+        }
+
         btnRegister.setOnClickListener{
             val email = edtEmail.text.toString()
             val password = edtPassword.text.toString()

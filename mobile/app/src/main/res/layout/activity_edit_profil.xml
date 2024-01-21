@@ -5,17 +5,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.example.tokoonline.view.Navbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Ini Title"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/white" />
     </LinearLayout>
+
+
 
     <ScrollView
         android:layout_width="match_parent"

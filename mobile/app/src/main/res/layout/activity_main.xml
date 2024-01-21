@@ -21,6 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="?android:attr/windowBackground"
+        android:paddingBottom="@dimen/small_space_6"
+        android:paddingTop="@dimen/small_space_6"
         app:menu="@menu/bottom_nav_menu" />
 
 </RelativeLayout>

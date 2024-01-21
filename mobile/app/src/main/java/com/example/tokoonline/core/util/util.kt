@@ -1,10 +1,14 @@
 package com.example.tokoonline.core.util
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import com.example.tokoonline.R
 import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.data.model.firebase.ProdukKeranjang
@@ -54,6 +58,11 @@ fun convertStringToCalendar(date: String): Calendar {
     val cal = Calendar.getInstance(Locale.getDefault())
     cal.time = date
     return cal
+}
+
+fun Activity.changeStatusBar(@ColorRes colorRes: Int) {
+    window.statusBarColor = ContextCompat.getColor(this, colorRes)
+    window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 }
 
 fun View.gone() {

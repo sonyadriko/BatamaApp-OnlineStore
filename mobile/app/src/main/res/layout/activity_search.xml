@@ -4,69 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:ignore="contentDescription, hardcodedText, autofill"
     tools:context=".view.activity.SearchActivity">
-
-    <ImageView
-        android:id="@+id/btn_back"
-        android:layout_width="40dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="9dp"
-        android:padding="10dp"
-        android:src="@drawable/ic_arrow_left"
-        app:layout_constraintBottom_toBottomOf="@id/searchbar_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/purple_500" />
 
     <LinearLayout
         android:id="@+id/searchbar_container"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/border_purple500"
-        android:gravity="center_vertical"
+        android:background="@color/white"
+        android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_back"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/searchbar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/white"
-            android:hint="Cari Produk di Sini"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:singleLine="true"
-            android:maxLines="1"
-            android:paddingStart="8dp"
-            android:autofillHints="Buku Tulis" />
-
         <ImageView
-            android:id="@+id/btn_search"
-            android:layout_width="40dp"
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginEnd="2dp"
-            android:background="@color/purple_500"
-            android:padding="4dp"
-            android:src="@drawable/ic_search_orange_24dp"
-            app:tint="@color/white" />
+            android:background="?selectableItemBackgroundBorderless"
+            android:paddingStart="@dimen/medium_space"
+            android:paddingEnd="@dimen/small_space"
+            android:src="@drawable/ic_arrow_left" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginVertical="@dimen/medium_space"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:layout_weight="1"
+            android:background="@drawable/background_white_radius_border_grey"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?selectableItemBackground"
+                android:paddingStart="@dimen/small_space"
+                android:paddingEnd="@dimen/small_space_8"
+                app:srcCompat="@drawable/ic_search_orange_24dp" />
+
+            <EditText
+                android:id="@+id/searchbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:fontFamily="@font/interm"
+                android:hint="Cari produk impian Anda"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="14sp" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorNeutral100"
+        app:layout_constraintTop_toBottomOf="@id/searchbar_container" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_result"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:padding="8dp"
+        android:paddingHorizontal="@dimen/small_space_8"
+        android:paddingVertical="@dimen/small_space_6"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchbar_container"
+        app:layout_constraintTop_toBottomOf="@id/divider"
         app:spanCount="2"
         tools:itemCount="6"
         tools:listitem="@layout/search_result_item" />
+
+    <LinearLayout
+        android:id="@+id/container_search_not_found"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/medium_space"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_not_found" />
+
+        <TextView
+            style="@style/heading_14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_space"
+            android:gravity="center"
+            android:text="Pencarian Tidak Ditemukan" />
+
+        <TextView
+            style="@style/body_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_space_8"
+            android:gravity="center"
+            android:text="Produk untuk yang anda cari tidak ditemukan. \nCoba gunakan kata kunci lain." />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

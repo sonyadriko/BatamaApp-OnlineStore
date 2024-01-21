@@ -4,54 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="contentDescription, hardcodedText">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        android:padding="10dp">
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginEnd="6dp"
-            android:layout_toStartOf="@id/ic_keranjang"
-            app:cardCornerRadius="17dp">
+        <LinearLayout
+            android:id="@+id/search_clickable"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginVertical="@dimen/medium_space"
+            android:layout_marginStart="@dimen/medium_space"
+            android:layout_weight="1"
+            android:foreground="?selectableItemBackground"
+            android:background="@drawable/background_white_radius_border_grey"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/medium_space">
 
-            <LinearLayout
-                android:id="@+id/search_clickable"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/small_space_8"
+                app:srcCompat="@drawable/ic_search_orange_24dp" />
+
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/interm"
+                android:textColor="#8E908E"
+                android:hint="Cari produk impian Anda"
+                android:textSize="14sp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    app:srcCompat="@drawable/ic_search_orange_24dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:hint="Cari Produk diSini" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/ic_keranjang"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="5dp"
-            app:srcCompat="@drawable/ic_baseline_shopping_basket_putih_24" />
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="?selectableItemBackgroundBorderless"
+            android:paddingStart="@dimen/small_space"
+            android:paddingEnd="@dimen/medium_space"
+            app:srcCompat="@drawable/ic_keranjang" />
 
-    </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorNeutral100" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -63,94 +69,118 @@
             android:layout_marginBottom="15dp"
             android:orientation="vertical">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/vp_slider"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="190dp" />
+                android:layout_height="wrap_content"
+                android:background="#AAE8C9">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cover_depan"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_space"
+                    android:layout_marginTop="@dimen/large_space"
+                    android:fontFamily="@font/interm"
+                    android:text="Black Friday Night"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/subtitle_1"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_space"
+                    android:layout_marginTop="@dimen/small_space_6"
+                    android:fontFamily="@font/interm"
+                    android:text="Dapatkan diskon 50% dari\nmerchant pilihan kami."
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/body_2"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/headline" />
+
+                <Button
+                    android:id="@+id/btn_explore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/medium_space"
+                    android:layout_marginTop="@dimen/small_space"
+                    android:backgroundTint="#027FB4"
+                    android:fontFamily="@font/interm"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="4dp"
+                    android:text="Explore now"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/body_2"
+                    android:textStyle="normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/description" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/btn_addproduk"
                 android:layout_width="wrap_content"
+                android:text="Tambah Produk"
                 android:layout_height="wrap_content"
-                android:text="Tambah Produk" />
+                android:visibility="gone" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/interm"
+                    android:paddingVertical="@dimen/small_space"
+                    android:paddingStart="@dimen/medium_space"
+                    android:paddingEnd="@dimen/no_space"
                     android:text="Produk Terbaru"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_produk"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:orientation="vertical">
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
 
                 <TextView
+                    android:id="@+id/tv_see_all"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Produk Terjual"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_produkterlaris"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
+                    android:layout_height="match_parent"
+                    android:background="?selectableItemBackground"
+                    android:fontFamily="@font/interm"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/medium_space"
+                    android:paddingEnd="@dimen/medium_space"
+                    android:text="Lihat semua"
+                    android:textColor="#049BDC"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_produk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Produk Ter"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_produkter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-
-            </LinearLayout>
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/no_space"
+                android:paddingEnd="@dimen/medium_space"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

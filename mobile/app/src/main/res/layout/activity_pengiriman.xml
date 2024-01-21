@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Alamat Pengiriman"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimary500"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -163,7 +163,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="3dp"
                                 android:text="NAMA PENERIMA"
-                                android:textColor="@color/colorPrimary"
+                                android:textColor="@color/colorPrimary500"
                                 android:textSize="13sp"
                                 android:textStyle="bold" />
 
@@ -221,7 +221,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:text="Metode Pengiriman"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimary500"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -251,7 +251,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Rekap Belanja"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorPrimary500"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -276,7 +276,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Total Belanja"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary500" />
 
                         <TextView
                             android:id="@+id/tv_totalBelanja"
@@ -284,7 +284,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:text="Rp0"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary500" />
 
                     </LinearLayout>
 
@@ -303,7 +303,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Biaya Pengiriman"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary500" />
 
                         <TextView
                             android:id="@+id/tv_ongkir"
@@ -311,7 +311,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="end"
                             android:text="Rp0"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary500" />
 
                     </LinearLayout>
 
@@ -330,7 +330,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Total"
-                            android:textColor="@color/colorPrimary" />
+                            android:textColor="@color/colorPrimary500" />
 
                         <TextView
                             android:id="@+id/tv_total"

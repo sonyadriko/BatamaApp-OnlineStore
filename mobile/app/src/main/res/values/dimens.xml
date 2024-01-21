@@ -2,4 +2,86 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="no_space">0dp</dimen>
+    <dimen name="smaller_space_2">2dp</dimen>
+    <dimen name="smaller_space">4dp</dimen>
+    <dimen name="small_space_6">6dp</dimen>
+    <dimen name="small_space_8">8dp</dimen>
+    <dimen name="small_space_10">10dp</dimen>
+    <dimen name="small_space">12dp</dimen>
+    <dimen name="medium_space_14">14dp</dimen>
+    <dimen name="medium_space">16dp</dimen>
+    <dimen name="extra_medium_space">20dp</dimen>
+    <dimen name="large_space">24dp</dimen>
+    <dimen name="extra_large_space">28dp</dimen>
+    <dimen name="larger_space">32dp</dimen>
+    <dimen name="extra_larger_space">36dp</dimen>
+    <dimen name="largest_space">40dp</dimen>
+    <dimen name="largest_space_48">48dp</dimen>
+    <dimen name="largest_space_60">60dp</dimen>
+    <dimen name="largest_space_70">70dp</dimen>
+    <dimen name="largest_space_80">80dp</dimen>
+
+    <!-- Baseline spacing -->
+    <dimen name="baseline_container_small">16dp</dimen>
+    <dimen name="baseline_container_medium">20dp</dimen>
+    <dimen name="baseline_container_large">32dp</dimen>
+    <dimen name="baseline_container_superlarge">100dp</dimen>
+    <dimen name="baseline_container_extralarge">120dp</dimen>
+
+    <!-- Typography spacing -->
+    <dimen name="text_space_small">4dp</dimen>
+    <dimen name="text_space_medium">8dp</dimen>
+    <dimen name="text_space_large">12dp</dimen>
+    <dimen name="text_space_largest">16dp</dimen>
+    <dimen name="text_space_largest_18">18dp</dimen>
+
+    <!-- Font size -->
+    <dimen name="font_initial_name">85sp</dimen>
+
+    <!-- Icon size -->
+    <dimen name="icon_size_small">12dp</dimen>
+    <dimen name="icon_size_medium_20">20dp</dimen>
+    <dimen name="icon_size_medium">24dp</dimen>
+    <dimen name="icon_size_medium_30">30dp</dimen>
+    <dimen name="icon_size_extra_medium">32dp</dimen>
+    <dimen name="icon_size_medium_large">35dp</dimen>
+    <dimen name="icon_size_large">48dp</dimen>
+    <dimen name="icon_super_large">70dp</dimen>
+
+    <!-- User Photo -->
+    <dimen name="user_photo_smaller">30dp</dimen>
+    <dimen name="user_photo_small">48dp</dimen>
+    <dimen name="user_photo_medium">72dp</dimen>
+
+    <dimen name="popup_width">280dp</dimen>
+    <dimen name="popup_height">450dp</dimen>
+
+    <!-- Define for redesign -->
+    <dimen name="baseline_container_placeholder">50dp</dimen>
+
+    <!-- Additional -->
+    <dimen name="inner_content">28dp</dimen>
+    <dimen name="inner_content_top">30dp</dimen>
+
+    <dimen name="product_image">80dp</dimen>
+    <dimen name="input_field_height">45dp</dimen>
+
+    <!-- Font Size -->
+    <dimen name="text_extra_large_44">44sp</dimen>
+    <dimen name="text_extra_large_36">36sp</dimen>
+    <dimen name="heading_1">28sp</dimen>
+    <dimen name="heading_2">24sp</dimen>
+    <dimen name="heading_3">21sp</dimen>
+    <dimen name="subtitle_1">18sp</dimen>
+    <dimen name="subtitle_2">16sp</dimen>
+    <dimen name="body_1">14sp</dimen>
+    <dimen name="body_2">12sp</dimen>
+    <dimen name="body_3">10sp</dimen>
+    <dimen name="body_4">9sp</dimen>
+
+    <!--Custom height-->
+    <dimen name="max_height_scroll">100dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

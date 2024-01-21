@@ -16,7 +16,7 @@ data class ProdukKeranjang (
     var harga: Long = 0,
     val deskripsi: String = "",
     val beratProduk: Double = 0.0,
-    val produkId: String,
+    val produkId: String = "",
     val idSeller: String? = "",
     val qty: Int = 1
 ) : Parcelable {

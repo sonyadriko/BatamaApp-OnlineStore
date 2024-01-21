@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseFragment
 import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.data.model.firebase.Produk
@@ -22,7 +19,6 @@ import com.example.tokoonline.view.activity.DetailProductActivity.Companion.RESU
 import com.example.tokoonline.view.activity.KeranjangActivity
 import com.example.tokoonline.view.activity.SearchActivity
 import com.example.tokoonline.view.activity.TambahProdukActivity
-import com.example.tokoonline.view.adapter.AdapterSlider
 import com.example.tokoonline.view.viewmodel.ProdukViewModel
 
 class HomeFragment : BaseFragment(), OnItemClick {
@@ -55,26 +51,10 @@ class HomeFragment : BaseFragment(), OnItemClick {
     }
 
     private fun initView() {
-        // slider
-        val arrSlider = ArrayList<Int>()
-        arrSlider.add(R.drawable.slider2)
-        arrSlider.add(R.drawable.slider1)
-        arrSlider.add(R.drawable.slider3)
-
-        val adapterSlider = AdapterSlider(arrSlider, activity)
-        binding.vpSlider.adapter = adapterSlider
-
-
-        // produk terbaru
-        val dividerItemDecoration = DividerItemDecoration(context, LinearLayout.HORIZONTAL)
         productAdapter = AdapterProduk(this)
         binding.rvProduk.apply {
-            addItemDecoration(dividerItemDecoration)
-            setHasFixedSize(true)
             adapter = productAdapter
         }
-
-
     }
 
     private fun initListener() = with(binding) {

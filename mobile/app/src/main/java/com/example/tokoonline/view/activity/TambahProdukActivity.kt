@@ -67,6 +67,7 @@ class TambahProdukActivity : BaseActivity() {
                             nama = etNamaProduk.text.toString(),
                             harga = etHargaProduk.text.toString().toLong(),
                             deskripsi = etDeskProduk.text.toString(),
+                            keyword = etNamaProduk.text.toString().lowercase(),
                             idSeller = idToko ?: "", // Use the idToko here
                             beratProduk = etBeratProduk.text.toString().toDouble(),
                             stok = this.etStok.text.toString().toInt(),
