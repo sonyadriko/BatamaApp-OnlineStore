@@ -21,6 +21,7 @@
             android:layout_marginVertical="@dimen/medium_space"
             android:layout_marginStart="@dimen/medium_space"
             android:layout_weight="1"
+            android:foreground="?selectableItemBackground"
             android:background="@drawable/background_white_radius_border_grey"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -36,6 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/interm"
+                android:textColor="#8E908E"
                 android:hint="Cari produk impian Anda"
                 android:textSize="14sp" />
 
