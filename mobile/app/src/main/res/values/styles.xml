@@ -57,4 +57,17 @@
         <item name="android:padding">1dp</item>
         <item name="android:background">@drawable/background_white_radius_border_grey</item>
     </style>
+
+    <style name="heading_4">
+        <item name="android:fontFamily">@font/interm</item>
+        <item name="android:textColor">#2C302D</item>
+        <item name="android:textSize">@dimen/body_1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="body_2">
+        <item name="android:fontFamily">@font/interm</item>
+        <item name="android:textColor">#5C605C</item>
+        <item name="android:textSize">@dimen/body_2</item>
+    </style>
 </resources>

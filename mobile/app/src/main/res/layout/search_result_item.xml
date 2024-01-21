@@ -1,36 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="@drawable/background_white_border_gray"
+    android:layout_marginHorizontal="@dimen/small_space_8"
+    android:layout_marginVertical="@dimen/small_space_6"
     android:orientation="vertical"
-    android:paddingBottom="11dp">
+    app:cardCornerRadius="4dp"
+    app:cardElevation="0dp"
+    app:strokeColor="#E0E3DE"
+    app:strokeWidth="1dp"
+    tools:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/cover"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/product" />
-
-    <TextView
-        android:id="@+id/item_title"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="5dp"
-        android:textSize="20sp"
-        tools:text="Buku Tulis KIKY" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/item_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginTop="4dp"
-        android:textSize="19sp"
-        tools:text="Rp 38.000" />
+        <ImageView
+            android:id="@+id/img_produk"
+            android:layout_width="match_parent"
+            android:layout_margin="1dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/loading_animation"
+            tools:ignore="ContentDescription" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/small_space"
+            android:layout_marginTop="@dimen/small_space"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Nama Produk"
+            android:textColor="#434744"
+            android:textSize="@dimen/body_2" />
+
+        <TextView
+            android:id="@+id/tv_harga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/small_space"
+            android:layout_marginTop="@dimen/small_space_8"
+            android:layout_marginBottom="@dimen/small_space"
+            android:ellipsize="end"
+            android:fontFamily="@font/interm"
+            android:maxLines="2"
+            android:text="Rp 0"
+            android:textColor="#2C302D"
+            android:textSize="@dimen/subtitle_2" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

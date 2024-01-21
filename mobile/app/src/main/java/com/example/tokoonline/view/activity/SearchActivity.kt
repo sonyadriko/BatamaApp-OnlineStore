@@ -3,9 +3,14 @@ package com.example.tokoonline.view.activity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView.OnEditorActionListener
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.OnItemClick
+import com.example.tokoonline.core.util.changeStatusBar
+import com.example.tokoonline.core.util.gone
+import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.data.repository.firebase.ProdukRepository
 import com.example.tokoonline.databinding.ActivitySearchBinding
@@ -33,6 +38,7 @@ class SearchActivity : BaseActivity() {
     private var searchableKeyword = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        changeStatusBar(R.color.white)
 
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -67,17 +73,20 @@ class SearchActivity : BaseActivity() {
         }
     }
 
-    fun searchProduct(searchableKeyword: String) {
+    private fun searchProduct(searchableKeyword: String) {
         if (searchableKeyword.isEmpty()) return
 
         showProgressDialog()
         produkRepository.searchProduct(searchableKeyword.lowercase()) { isSuccess, data ->
             try {
-                if (isSuccess || data?.isNotEmpty() == true) {
-                    adapter.submitData(data?.filterNotNull()!!)
+                if (isSuccess && data?.isNotEmpty() == true) {
+                    adapter.submitData(data.filterNotNull())
+                    if (binding.containerSearchNotFound.isVisible) {
+                        binding.containerSearchNotFound.gone()
+                    }
                 } else throw Exception("data is null")
             } catch (e: Exception) {
-                showToast("Data produk tidak ditemukan")
+                binding.containerSearchNotFound.visible()
             }
             dismissProgressDialog()
         }

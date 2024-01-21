@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.core.util.changeStatusBar
 import com.example.tokoonline.databinding.ActivityMainBinding
 import com.example.tokoonline.view.fragment.AkunFragment
 import com.example.tokoonline.view.fragment.HomeFragment
@@ -25,8 +26,7 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        changeStatusBar(R.color.white)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
