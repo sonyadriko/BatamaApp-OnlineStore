@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_marginVertical="@dimen/small_space"
     android:layout_marginStart="@dimen/medium_space"
     android:orientation="vertical"
     app:cardCornerRadius="4dp"
@@ -22,8 +21,8 @@
             android:id="@+id/img_produk"
             android:layout_width="140dp"
             android:layout_height="120dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_profile" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/loading_animation" />
 
         <TextView
             android:id="@+id/tv_nama"
