@@ -1,87 +1,80 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="20dp"
-    android:clickable="true"
-    app:cardElevation="3dp">
-
-    <LinearLayout
+<layout>
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:clickable="true"
+        app:cardElevation="3dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvLabelAlamat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="LABEL ALAMAT"
-                android:textSize="14sp"
-                android:layout_weight="1"
-                android:textStyle="bold" />
-
-            <RadioButton
-                android:id="@+id/radioButton"
+            <LinearLayout
+                android:id="@+id/linearasu"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="-10dp"
-                android:clickable="false"
-                />
-        </LinearLayout>
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
 
-        <!-- Nama Penerima -->
-        <TextView
-            android:id="@+id/tvNamaPenerima"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="NAMA PENERIMA"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="8dp" />
+                <!-- RadioButton -->
+                <RadioButton
+                    android:id="@+id/radioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    />
 
-        <!-- No Telp -->
-        <TextView
-            android:id="@+id/tvPhonePenerima"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="NO TELP"
-            android:layout_marginTop="4dp" />
+                <LinearLayout
+                    android:id="@+id/linearlayout"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/radioButton">
 
-        <!-- Alamat Penerima -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+                    <TextView
+                        android:id="@+id/tvNamaPenerima"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="NAMA PENERIMA"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="8dp" />
 
-            <TextView
-                android:id="@+id/tvAlamatPenerima"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ALAMAT PENERIMA"
-                android:layout_weight="1" />
+                    <!-- No Telp -->
+                    <TextView
+                        android:id="@+id/tvPhonePenerima"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvNamaPenerima"
+                        android:layout_toEndOf="@id/radioButton"
+                        android:layout_marginTop="8dp"
+                        android:text="NO TELP" />
 
-            <TextView
-                android:id="@+id/tvCatatanAlamat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(CATATAN)" />
-        </LinearLayout>
+                    <!-- Alamat Penerima -->
+                    <TextView
+                        android:id="@+id/tvAlamatPenerima"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvPhonePenerima"
+                        android:layout_toEndOf="@id/radioButton"
+                        android:layout_marginTop="8dp"
+                        android:text="ALAMAT PENERIMA" />
 
-        <!-- Button to Ubah Alamat -->
-        <Button
-            android:id="@+id/btnUbahAlamat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ubah Alamat"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvUbahAlamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="16dp"
+                    android:layout_toEndOf="@id/linearasu"
+                    android:text="Ubah"
+                    android:textColor="#F4900C" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

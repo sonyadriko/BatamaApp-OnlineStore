@@ -31,9 +31,13 @@ class SettingAlamatActivity : BaseActivity() {
             }
         }
 
-        binding.btnTambahAlamat.setOnClickListener {
-            goToAlamatForm()
+        binding.toolbar.binding.leftIcon.setOnClickListener {
+            finish()
         }
+
+//        binding.btnTambahAlamat.setOnClickListener {
+//            goToAlamatForm()
+//        }
 
 
 

@@ -1,341 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-
-
-    <LinearLayout
+<layout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        tools:ignore="contentDescription, hardcodedText">
 
-        <com.example.tokoonline.view.Navbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="Ini Title"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/white" />
-    </LinearLayout>
-
+    <com.example.tokoonline.view.Navbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/round_arrow_back"
+        app:title="Edit Profile" />
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/div_footer"
+        android:layout_below="@id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:orientation="vertical">
 
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="UBAH PROFIL"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="20sp" />-->
-
-            <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/ic_profile" />
-            <TextView
-                android:id="@+id/editFotoProfil"
-                android:layout_marginVertical="10dp"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:textColor="@color/white"
-                android:text="UBAH FOTO PROFIL ANDA"/>
+                android:gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:orientation="vertical">
 
-<!--            <TextView-->
-<!--                android:id="@+id/tv_nama"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="Nama User"-->
-<!--                android:textColor="@color/white" />-->
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/ic_profile" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/tv_phone"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="2dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="Nomor Telp"-->
-<!--                android:textColor="@color/white" />-->
+                <TextView
+                    android:id="@+id/ubahFotoProfil"
+                    android:layout_marginVertical="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:fontFamily="@font/interm"
+                    android:textSize="16sp"
+                    android:textColor="#027FB4"
+                    android:text="Ubah Foto Profil"/>
 
-<!--            <TextView-->
-<!--                android:id="@+id/tv_email"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="2dp"-->
-<!--                android:gravity="center"-->
-<!--                android:text="Email"-->
-<!--                android:textColor="@color/white" />-->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="2dp"
-                app:cardElevation="3dp">
+            </LinearLayout>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="20dp">
+                    android:paddingHorizontal="20dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="INFO PROFIL"
-                        android:paddingBottom="20dp"
-                        android:textStyle="bold"
-                        android:textSize="15sp"/>
+                    <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Custom">
 
-                    <RelativeLayout
-                        android:id="@+id/btn_editNama"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/edt_nama"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:hint="Nama"
+                            android:inputType="text"
+                            android:maxLines="1"
+                            android:singleLine="true" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Nama"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                            <TextView
-                                android:id="@+id/tv_nama"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="NAMA USER"
-                                android:textColor="@color/colorPrimaryDark" />
 
-                        </LinearLayout>
+                    <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Custom">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            app:srcCompat="@drawable/ic_baseline_chevron_right_24" />
-
-                    </RelativeLayout>
-                    
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"/>
-
-                    <RelativeLayout
-                        android:id="@+id/btn_editEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/edt_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:hint="No. HP"
+                            android:inputType="phone"
+                            android:maxLines="1"
+                            android:singleLine="true" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Email"/>
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                            <TextView
-                                android:id="@+id/tv_email"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="EMAIL USER"
-                                android:textColor="@color/colorPrimaryDark" />
+                    <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Custom">
 
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            app:srcCompat="@drawable/ic_baseline_chevron_right_24" />
-
-                    </RelativeLayout>
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"/>
-
-                    <RelativeLayout
-                        android:id="@+id/btn_editPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
+                        <EditText
+                            android:id="@+id/edt_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:hint="Email"
+                            android:inputType="none"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:maxLines="1"
+                            android:singleLine="true" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Password"/>
-
-                            <TextView
-                                android:id="@+id/tv_pass"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="******"
-                                android:textColor="@color/colorPrimaryDark" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            app:srcCompat="@drawable/ic_baseline_chevron_right_24" />
-
-                    </RelativeLayout>
-
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
-<androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="1dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="2dp"
-                app:cardElevation="3dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="20dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="INFO PRIBADI"
-                        android:paddingBottom="20dp"
-                        android:textStyle="bold"
-                        android:textSize="15sp"/>
-
-                    <RelativeLayout
-                        android:id="@+id/btn_editAlamat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="ALAMAT"/>
-
-                            <TextView
-                                android:id="@+id/tv_alamat"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="ALAMAT USER"
-                                android:textColor="@color/colorPrimaryDark" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            app:srcCompat="@drawable/ic_baseline_chevron_right_24" />
-
-                    </RelativeLayout>
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"/>
-
-                    <RelativeLayout
-                        android:id="@+id/btn_editPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="NO TELP"/>
-
-                            <TextView
-                                android:id="@+id/tv_phone"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="NO TELP USER"
-                                android:textColor="@color/colorPrimaryDark" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            app:srcCompat="@drawable/ic_baseline_chevron_right_24" />
-
-                    </RelativeLayout>
-
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
     </ScrollView>
 
+        <LinearLayout
+            android:id="@+id/div_footer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/medium_space"
+            android:background="#ECECEC" />
+
+            <Button
+                android:id="@+id/btn_register"
+                style="@style/button_primary"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Simpan" />
+
+        </LinearLayout>
+
+
 </RelativeLayout>
+</layout>

@@ -17,18 +17,18 @@ class AlamatAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(alamat: Alamat) {
-            binding.tvLabelAlamat.text = alamat.label
+//            binding.tvLabelAlamat.text = alamat.label
             binding.tvNamaPenerima.text = alamat.nama
             binding.tvAlamatPenerima.text = alamat.alamat
-            binding.tvCatatanAlamat.text = alamat.catatan
+//            binding.tvCatatanAlamat.text = alamat.catatan
             binding.tvPhonePenerima.text = alamat.phone
             binding.radioButton.isChecked = alamat.default
             binding.root.setOnClickListener{
                 showConfirmationDialog(alamat)
             }
-            binding.btnUbahAlamat.setOnClickListener {
-                onUbahAlamatClickListener?.invoke(alamat)
-            }
+//            binding.btnUbahAlamat.setOnClickListener {
+//                onUbahAlamatClickListener?.invoke(alamat)
+//            }
         }
         private fun showConfirmationDialog(alamat: Alamat) {
             val builder = AlertDialog.Builder(binding.root.context)

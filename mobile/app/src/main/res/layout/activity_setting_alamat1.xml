@@ -1,43 +1,61 @@
-<?xml version="1.0" encoding="utf-8"?>
-
 <!-- activity_setting_alamat.xml -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+    <com.example.tokoonline.view.Navbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Daftar Alamat"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
-
-
-    <Button
-        android:id="@+id/btnTambahAlamat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tambah Alamat"
-        android:textSize="16sp"
-        android:layout_below="@id/tvTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp" />
-
+        app:leftIcon="@drawable/round_arrow_back"
+        app:title="Pengaturan Alamat" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@color/colorPrimaryDark"
         android:id="@+id/rvAlamat"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/btnTambahAlamat"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:background="#F5F5F5"
         tools:listitem="@layout/item_alamat"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    <Button
+        android:id="@+id/btn_tambah_alamat"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/rvAlamat"
+        android:background="#FFFFFF"
+        android:drawableLeft="@drawable/ic_baseline_add_24"
+        android:text="Tambah Alamat"
+        android:textColor="#0EB4FA"
+        android:gravity="center_vertical"
+        android:drawablePadding="8dp" />
+
+    <LinearLayout
+        android:id="@+id/div_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ECECEC" />
+
+        <Button
+            android:id="@+id/btn_pilih_alamat"
+            style="@style/button_primary"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Pilih Alamat" />
+
+    </LinearLayout>
 
 </RelativeLayout>
