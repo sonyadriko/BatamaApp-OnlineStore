@@ -22,7 +22,7 @@ class SettingAlamatActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingAlamat1Binding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this).get(AlamatViewModel::class.java)
+        viewModel = ViewModelProvider(this)[AlamatViewModel::class.java]
 
         lifecycleScope.launch {
             userRepository.uid?.let {
@@ -63,8 +63,6 @@ class SettingAlamatActivity : BaseActivity() {
                         // Handle the error or display a message to the user
                     }
                 }
-
-
             }
 
             adapter.onUbahAlamatClickListener = { alamat ->

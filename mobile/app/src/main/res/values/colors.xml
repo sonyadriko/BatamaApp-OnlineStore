@@ -16,6 +16,7 @@
     <color name="colorPrimary500">#0EB4FA</color>
     <color name="colorPrimary600">#049BDC</color>
 
+    <color name="colorNeutral50">#F0F2EE</color>
     <color name="colorNeutral100">#E0E3DE</color>
     <color name="colorNeutral600">#5C605C</color>
     <color name="colorNeutral800">#2C302D</color>

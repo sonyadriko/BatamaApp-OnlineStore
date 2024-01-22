@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tokoonline.core.util.gone
+import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Alamat
 import com.example.tokoonline.databinding.ItemAlamatBinding
 
@@ -16,31 +18,35 @@ class AlamatAdapter(
     inner class ViewHolder(private val binding: ItemAlamatBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(alamat: Alamat) {
-//            binding.tvLabelAlamat.text = alamat.label
-            binding.tvNamaPenerima.text = alamat.nama
-            binding.tvAlamatPenerima.text = alamat.alamat
-//            binding.tvCatatanAlamat.text = alamat.catatan
-            binding.tvPhonePenerima.text = alamat.phone
-            binding.radioButton.isChecked = alamat.default
-            binding.root.setOnClickListener{
+        fun bind(alamat: Alamat, position: Int) = with(binding) {
+            if (position == alamatList.lastIndex) {
+                btnTambahAlamat.visible()
+            } else {
+                btnTambahAlamat.gone()
+            }
+
+            tvNamaPenerima.text = alamat.nama
+            tvAlamatPenerima.text = alamat.alamat
+            tvPhonePenerima.text = alamat.phone
+            radioButton.isChecked = alamat.default
+            rootCard.setOnClickListener {
                 showConfirmationDialog(alamat)
             }
-//            binding.btnUbahAlamat.setOnClickListener {
-//                onUbahAlamatClickListener?.invoke(alamat)
-//            }
+            tvUbahAlamat.setOnClickListener {
+                onUbahAlamatClickListener?.invoke(alamat)
+            }
         }
+
         private fun showConfirmationDialog(alamat: Alamat) {
             val builder = AlertDialog.Builder(binding.root.context)
             builder.setTitle("Confirmation")
             builder.setMessage("Atur alamat ini menjadi Alamat Default?")
 
-            builder.setPositiveButton("Yes") { dialog, which ->
-
+            builder.setPositiveButton("Yes") { _, _ ->
                 onCardViewClickListener?.invoke(alamat)
             }
 
-            builder.setNegativeButton("No") { dialog, which ->
+            builder.setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
             }
 
@@ -58,7 +64,7 @@ class AlamatAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val alamat = alamatList[position]
-        holder.bind(alamat)
+        holder.bind(alamat, position)
     }
 
     override fun getItemCount(): Int {

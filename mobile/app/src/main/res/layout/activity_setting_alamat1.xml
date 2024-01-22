@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorNeutral50"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
@@ -17,26 +18,17 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAlamat"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
+        android:layout_above="@id/div_footer"
         android:background="#F5F5F5"
         tools:listitem="@layout/item_alamat"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    <Button
-        android:id="@+id/btn_tambah_alamat"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@id/rvAlamat"
-        android:background="#FFFFFF"
-        android:drawableLeft="@drawable/ic_baseline_add_24"
-        android:text="Tambah Alamat"
-        android:textColor="#0EB4FA"
-        android:gravity="center_vertical"
-        android:drawablePadding="8dp" />
 
     <LinearLayout
         android:id="@+id/div_footer"
         android:layout_width="match_parent"
+        android:background="@color/white"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
@@ -49,7 +41,6 @@
         <Button
             android:id="@+id/btn_pilih_alamat"
             style="@style/button_primary"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
