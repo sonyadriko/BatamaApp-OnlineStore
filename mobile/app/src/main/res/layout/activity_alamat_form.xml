@@ -1,62 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".view.activity.AlamatFormActivity">
+
+    <com.example.tokoonline.view.Navbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/round_arrow_back"
+        app:title="Edit Alamat"
+        tools:ignore="MissingConstraints" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_above="@+id/div_footer"
+        android:layout_below="@id/toolbar"
         android:padding="16dp">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/tv_labelAlamat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Label Alamat" />
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Custom">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/tv_alamatPenerima"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Alamat Lengkap" />
+            <EditText
+                android:id="@+id/tv_labelAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Label Alamat"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/tv_catatanAlamat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Catatan (Optional)" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/tv_namaPenerima"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nama Penerima" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/tv_phonePenerima"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:hint="Nomor HP" />
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Custom">
 
-        <Button
-            android:id="@+id/btn_simpanAlamat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Simpan" />
+            <EditText
+                android:id="@+id/tv_alamatPenerima"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Alamat Lengkap"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
 
-        <Button
-            android:id="@+id/btn_hapusAlamat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hapus Alamat" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Custom">
+
+            <EditText
+                android:id="@+id/tv_catatanAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Catatan ALamat (Opsional)"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Custom">
+
+            <EditText
+                android:id="@+id/tv_namaPenerima"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama Penerima"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Custom">
+
+            <EditText
+                android:id="@+id/tv_phonePenerima"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="No. Telepon"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_hapusAlamat"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Hapus Alamat" />-->
+
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/div_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/medium_space"
+            android:background="#ECECEC" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btn_simpanAlamat"
+            style="@style/button_primary"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Simpan" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+</layout>

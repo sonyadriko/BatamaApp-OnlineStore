@@ -34,23 +34,23 @@ class AlamatFormActivity : BaseActivity() {
                     binding.tvCatatanAlamat.text = selectedAlamat.catatan.toEditable()
                     binding.tvNamaPenerima.text = selectedAlamat.nama.toEditable()
                     binding.tvPhonePenerima.text = selectedAlamat.phone.toEditable()
-                    binding.btnHapusAlamat.visibility = View.VISIBLE
-                    binding.btnHapusAlamat.setOnClickListener {
-                        viewModel.deleteAlamatById(selectedAlamatId) { isSuccess ->
-                            if (isSuccess) {
-                                showToast("Alamat berhasil dihapus")
-                                goToHomepage()
-                            } else {
-                                showToast("Deletion failed")
-                            }
-                        }
-                    }
+//                    binding.btnHapusAlamat.visibility = View.VISIBLE
+//                    binding.btnHapusAlamat.setOnClickListener {
+//                        viewModel.deleteAlamatById(selectedAlamatId) { isSuccess ->
+//                            if (isSuccess) {
+//                                showToast("Alamat berhasil dihapus")
+//                                goToHomepage()
+//                            } else {
+//                                showToast("Deletion failed")
+//                            }
+//                        }
+//                    }
                 } else {
                     showToast("Failed to retrieve selected address")
                 }
             }
         }else{
-            binding.btnHapusAlamat.visibility = View.GONE
+//            binding.btnHapusAlamat.visibility = View.GONE
         }
         binding.btnSimpanAlamat.setOnClickListener{
             initListener(selectedAlamatId)
