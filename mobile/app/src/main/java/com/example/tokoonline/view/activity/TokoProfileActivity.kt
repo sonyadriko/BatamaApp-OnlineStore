@@ -25,9 +25,9 @@ class TokoProfileActivity : BaseActivity() {
 
         val userRole = userRepository.role
         if (userRole == Constant.Role.PEMBELI) {
-            goToHomepage()
-            showToast("Silahkan ajukan permintaan untuk membuka toko pada admin")
-            finish()
+            goToTokoPage()
+//            showToast("Silahkan ajukan permintaan untuk membuka toko pada admin")
+//            finish()
         }else {
             getTokoData()
         }

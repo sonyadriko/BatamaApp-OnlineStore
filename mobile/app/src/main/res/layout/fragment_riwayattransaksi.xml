@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Belum Ada Riwayat"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="#2C302D"
             android:fontFamily="@font/interm"
@@ -50,7 +50,7 @@
             android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             android:text="Transaksi yang Anda lakukan akan masuk pada halaman ini"
-            android:textSize="12dp"
+            android:textSize="12sp"
             android:textColor="#5C605C"
             android:fontFamily="@font/interm"
             android:gravity="center" />

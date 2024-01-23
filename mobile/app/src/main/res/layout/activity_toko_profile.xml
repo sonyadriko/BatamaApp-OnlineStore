@@ -1,51 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.activity.TokoProfileActivity"
     tools:ignore="HardcodedText,RtlSymmetry,UseCompoundDrawables,contentDescription">
+
+
+    <com.example.tokoonline.view.Navbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/round_arrow_back"
+        app:title="Toko" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/white"
         android:orientation="vertical">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Toko Saya"
-                android:textColor="@color/colorPrimary500"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardElevation="2dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="16dp">
 
                 <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:src="@drawable/ic_profile" />
 
                 <TextView
@@ -53,161 +46,193 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingStart="20dp"
+                    android:layout_marginStart="12dp"
+                    android:textColor="#2C302D"
+                    android:fontFamily="@font/intersemibold"
                     android:text="Nama Toko"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp"/>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
+        <Space
+            android:layout_width="match_parent"
+            android:background="#F5F5F5"
+            android:layout_height="4dp"/>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardElevation="2dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="20dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="15dp"
                     android:text="Keterangan Toko"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textColor="#5C605C"
+                    android:layout_marginBottom="8dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/intermedium"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="5dp">
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Nama Toko"
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/tvNamaToko1"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Nama Toko"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="5dp">
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="#5C605C"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/interregular"
+                            android:text="Nama Toko"
+                            android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Alamat Toko"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/tvNamaToko1"
+                            android:layout_width="wrap_content"
+                            android:textColor="#5C605C"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/interregular"
+                            android:layout_gravity="center_vertical"
+                            android:text="Jolly Official"
+                            android:textSize="12sp" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvAlamatToko"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Alamat Toko"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="5dp">
+                        <TextView
+                            android:layout_width="120dp"
+                            android:textColor="#5C605C"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/interregular"
+                            android:text="Alamat Toko"
+                            android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Email"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/tvAlamatToko"
+                            android:textColor="#5C605C"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/interregular"
+                            android:text="Jalan Kamboja Gang II No 10 Kec. Krembangan, Kota Surabaya Jawa Timur, 101235 (Rumah)"
+                            android:textSize="12sp" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvEmail"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="Email"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="5dp">
+                        <TextView
+                            android:layout_width="120dp"
+                            android:textColor="#5C605C"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/interregular"
+                            android:layout_gravity="center_vertical"
+                            android:text="Email"
+                            android:textSize="12sp" />
 
-                    <TextView
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="No Telp"
-                        android:textSize="15sp" />
+                        <TextView
+                            android:id="@+id/tvEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/interregular"
+                            android:textColor="#5C605C"
+                            android:layout_gravity="center_vertical"
+                            android:text="Febriyani.N.H@gmail.com"
+                            android:textSize="12sp" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvPhone"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="No Telp"
-                        android:textSize="15sp" />
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp">
+
+                        <TextView
+                            android:textColor="#5C605C"
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/interregular"
+                            android:text="No Telp"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tvPhone"
+                            android:layout_width="wrap_content"
+                            android:textColor="#5C605C"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/interregular"
+                            android:layout_gravity="center_vertical"
+                            android:text="08547632341"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
+        <Space
+            android:layout_width="match_parent"
+            android:background="#F5F5F5"
+            android:layout_height="4dp"/>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardElevation="2dp">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="15dp">
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Status Pesanan"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+                    android:textColor="#5C605C"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/intermedium"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="100dp"
+                        android:layout_width="110dp"
                         android:layout_height="70dp"
                         android:layout_margin="8dp"
-                        app:cardBackgroundColor="#EDEDED">
+                        app:cardBackgroundColor="#F0F2EE">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:gravity="center"
                             android:layout_gravity="center_vertical"
                             android:orientation="vertical">
 
@@ -216,28 +241,32 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
+                                android:textColor="#2C302D"
                                 android:text="0"
-                                android:textSize="35sp"
-                                android:textStyle="bold" />
+                                android:fontFamily="@font/intersemibold"
+                                android:textSize="16sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="Perlu Dikirim"
-                                android:textStyle="bold" />
+                                android:textSize="12sp"
+                                android:textColor="#747674"
+                                android:fontFamily="@font/interregular"
+                                android:text="Perlu Dikirim" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="100dp"
+                        android:layout_width="110dp"
                         android:layout_height="70dp"
                         android:layout_margin="8dp"
-                        app:cardBackgroundColor="#EDEDED">
+                        app:cardBackgroundColor="#F0F2EE">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:gravity="center"
                             android:layout_gravity="center_vertical"
                             android:orientation="vertical">
 
@@ -246,28 +275,32 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
+                                android:textColor="#2C302D"
                                 android:text="0"
-                                android:textSize="35sp"
-                                android:textStyle="bold" />
+                                android:fontFamily="@font/intersemibold"
+                                android:textSize="16sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="Pembatalan"
-                                android:textStyle="bold" />
+                                android:textSize="12sp"
+                                android:textColor="#747674"
+                                android:fontFamily="@font/interregular"
+                                android:text="Pembatalan"/>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="100dp"
+                        android:layout_width="110dp"
                         android:layout_height="70dp"
                         android:layout_margin="8dp"
-                        app:cardBackgroundColor="#EDEDED">
+                        app:cardBackgroundColor="#F0F2EE">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:gravity="center"
                             android:layout_gravity="center_vertical"
                             android:orientation="vertical">
 
@@ -276,16 +309,19 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
+                                android:textColor="#2C302D"
                                 android:text="0"
-                                android:textSize="35sp"
-                                android:textStyle="bold" />
+                                android:fontFamily="@font/intersemibold"
+                                android:textSize="16sp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="Selesai"
-                                android:textStyle="bold" />
+                                android:textSize="12sp"
+                                android:textColor="#747674"
+                                android:fontFamily="@font/interregular"
+                                android:text="Selesai" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -296,11 +332,14 @@
 
         </androidx.cardview.widget.CardView>
 
+        <Space
+            android:layout_width="match_parent"
+            android:background="#F5F5F5"
+            android:layout_height="4dp"/>
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            app:cardElevation="2dp">
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -321,12 +360,15 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_produk" />
+                        android:layout_gravity="center"
+                        android:src="@drawable/box_produk" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/intermedium"
                         android:layout_marginStart="6dp"
+                        android:textColor="#2C302D"
                         android:text="Produk" />
                 </LinearLayout>
 
@@ -342,11 +384,14 @@
 
                     <ImageView
                         android:layout_width="40dp"
+                        android:layout_gravity="center"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_status_pesanan" />
+                        android:src="@drawable/box_status_pesanan" />
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:textColor="#2C302D"
+                        android:fontFamily="@font/intermedium"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:text="Status Pesanan" />
@@ -365,14 +410,17 @@
 
                     <ImageView
                         android:layout_width="40dp"
+                        android:layout_gravity="center"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_keuangan" />
+                        android:src="@drawable/box_pendapatan" />
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:fontFamily="@font/intermedium"
                         android:layout_height="wrap_content"
+                        android:textColor="#2C302D"
                         android:layout_marginStart="6dp"
-                        android:text="Keuangan" />
+                        android:text="Pendapatan" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -386,15 +434,18 @@
                     app:layout_constraintTop_toTopOf="@id/option_keuangan">
 
                     <ImageView
+                        android:layout_gravity="center"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_pengaturan_toko" />
+                        android:src="@drawable/box_pengaturan" />
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:textColor="#2C302D"
+                        android:fontFamily="@font/intermedium"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:text="Pengaturan Toko" />
+                        android:text="Pengaturan" />
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -403,5 +454,5 @@
 
 
     </LinearLayout>
-
-</ScrollView>
+    </ScrollView>
+</LinearLayout>
