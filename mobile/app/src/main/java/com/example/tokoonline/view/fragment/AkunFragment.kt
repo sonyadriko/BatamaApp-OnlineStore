@@ -45,6 +45,10 @@ class AkunFragment : BaseFragment() {
          goToEditProfil()
         }
 
+        binding.btnKeranjang.setOnClickListener{
+            goToKeranjang()
+        }
+
         binding.btnSettingAlamat.setOnClickListener{
             goToSettingAlamat()
         }

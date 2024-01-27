@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="2dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="5dp"
     app:cardCornerRadius="3dp"
+    android:orientation="vertical"
     app:cardElevation="1dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,17 +44,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="marquee"
+                    android:textColor="#8E908E"
                     android:lines="2"
                     android:maxLines="3"
                     android:text="Nama Produk" />
 
-                <TextView
-                    android:id="@+id/tv_berat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="1kg"
-                    android:textSize="12dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_berat"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:text="1kg"-->
+<!--                    android:textSize="12dp" />-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -58,6 +64,7 @@
 
                     <TextView
                         android:id="@+id/tv_harga"
+                        android:textColor="#2C302D"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rp.10.000"
@@ -84,17 +91,43 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_produk" />
+<!--                <ImageView-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:src="@drawable/ic_produk" />-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/intermedium"
+                    android:textColor="#2C302D"
+                    android:text="Stok" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/tvStok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/intermedium"
+                    android:textColor="#2C302D"
+                    android:text="24" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
-                    android:text="Stok" />
+                    android:textSize="14sp"
+                    android:fontFamily="@font/intermedium"
+                    android:textColor="#8E908E"
+                    android:text="Item" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -107,74 +140,106 @@
                 app:layout_constraintStart_toEndOf="@id/option_produk"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_status_pesanan" />
+<!--                <ImageView-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:src="@drawable/ic_status_pesanan" />-->
 
                 <TextView
-                    android:id="@+id/tvTerjual"
+                    android:textColor="#2C302D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="6dp"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/intermedium"
                     android:text="Terjual" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="16dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvTerjual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/intermedium"
+                        android:textColor="#2C302D"
+                        android:text="24" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/intermedium"
+                        android:textColor="#8E908E"
+                        android:text="Item" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:weightSum="3">-->
 
-            <TextView
-                android:id="@+id/btn_detail_produk"
-                android:layout_width="0dp"
-                android:layout_marginHorizontal="5dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_white_border_gray"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Lihat Detail"
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:id="@+id/btn_detail_produk"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_marginHorizontal="5dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/background_white_border_gray"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="10dp"-->
+<!--                android:text="Lihat Detail"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="15dp"-->
+<!--                android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/btn_ubah_produk"
-                android:layout_marginHorizontal="5dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_white_border_gray"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Ubah"
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:id="@+id/btn_ubah_produk"-->
+<!--                android:layout_marginHorizontal="5dp"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/background_white_border_gray"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="10dp"-->
+<!--                android:text="Ubah"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="15dp"-->
+<!--                android:textStyle="bold" />-->
 
-            <TextView
-                android:layout_marginHorizontal="5dp"
-                android:id="@+id/btn_hapus_produk"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_white_border_gray"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Hapus"
-                android:textColor="@color/black"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_marginHorizontal="5dp"-->
+<!--                android:id="@+id/btn_hapus_produk"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@drawable/background_white_border_gray"-->
+<!--                android:layout_weight="1"-->
+<!--                android:gravity="center"-->
+<!--                android:padding="10dp"-->
+<!--                android:text="Hapus"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="15dp"-->
+<!--                android:textStyle="bold" />-->
 
 
 
-        </LinearLayout>
+<!--        </LinearLayout>-->
 
     </LinearLayout>
 
+    </androidx.cardview.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/colorNeutral50" />
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

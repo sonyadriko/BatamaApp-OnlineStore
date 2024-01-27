@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".view.activity.TokoProfileActivity"
     tools:ignore="HardcodedText,RtlSymmetry,UseCompoundDrawables,contentDescription">
+
+    <com.example.tokoonline.view.Navbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/round_arrow_back"
+        app:title="Produk" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,56 +25,55 @@
         android:background="@color/colorPrimaryDark"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:padding="10dp">
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/white"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:padding="10dp">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Produk Saya"
-                android:textColor="@color/colorPrimary500"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:text="Produk Saya"-->
+<!--                android:textColor="@color/colorPrimary500"-->
+<!--                android:textSize="16sp"-->
+<!--                android:textStyle="bold" />-->
 
-        </RelativeLayout>
+<!--        </RelativeLayout>-->
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            app:cardElevation="2dp">
+<!--        <androidx.cardview.widget.CardView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="5dp"-->
+<!--            app:cardElevation="2dp">-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="5dp">-->
 
-                <TextView
-                    android:id="@+id/tvNamaToko"
-                    android:layout_width="wrap_content"
-                    android:textColor="@color/colorPrimary500"
-                    android:layout_height="wrap_content"
-                    android:text="Produk"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tvNamaToko"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:textColor="@color/colorPrimary500"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Produk"-->
+<!--                    android:textSize="15sp"-->
+<!--                    android:textStyle="bold" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
-        </androidx.cardview.widget.CardView>
+<!--        </androidx.cardview.widget.CardView>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_produksaya"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/div_footer"
-            android:layout_marginHorizontal="10dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_produk_saya" />
 
@@ -94,5 +105,6 @@
 
     </LinearLayout>
 
+    </ScrollView>
 
-</ScrollView>
+</LinearLayout>

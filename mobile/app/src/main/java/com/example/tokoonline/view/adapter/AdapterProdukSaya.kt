@@ -20,20 +20,20 @@ class AdapterItemProdukSaya(
                         .into(binding.imgProduk)
                     binding.tvNama.text = produk.nama
                     binding.tvHarga.text = moneyFormatter(produk.harga)
-                    binding.tvBerat.text = produk.beratProduk.toString() + " Kg"
+//                    binding.tvBerat.text = produk.beratProduk.toString() + " Kg"
                     binding.tvStok.text = "Stok : " + produk.stok.toString()
 
-                    binding.btnDetailProduk.setOnClickListener{
-
-                    }
-
-                    binding.btnUbahProduk.setOnClickListener{
-
-                    }
-
-                    binding.btnHapusProduk.setOnClickListener{
-
-                    }
+//                    binding.btnDetailProduk.setOnClickListener{
+//
+//                    }
+//
+//                    binding.btnUbahProduk.setOnClickListener{
+//
+//                    }
+//
+//                    binding.btnHapusProduk.setOnClickListener{
+//
+//                    }
                 }
             }
 

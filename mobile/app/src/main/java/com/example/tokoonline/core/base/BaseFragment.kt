@@ -10,6 +10,7 @@ import com.example.tokoonline.R
 import com.example.tokoonline.data.repository.firebase.UserRepository
 import com.example.tokoonline.view.activity.EditProfilActivity
 import com.example.tokoonline.view.activity.InitialActivity
+import com.example.tokoonline.view.activity.KeranjangActivity
 import com.example.tokoonline.view.activity.SettingAlamatActivity
 import com.example.tokoonline.view.activity.TokoProfileActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -77,6 +78,11 @@ abstract class BaseFragment : Fragment() {
     }
     fun goToEditProfil() {
         val intent = Intent(requireContext(), EditProfilActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun goToKeranjang() {
+        val intent = Intent(requireContext(), KeranjangActivity::class.java)
         startActivity(intent)
     }
     fun goToSettingAlamat() {
