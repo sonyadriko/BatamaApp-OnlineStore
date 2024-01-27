@@ -18,6 +18,10 @@ class TambahAlamatBaruActivity : BaseActivity() {
         binding = ActivityTambahAlamatBaruBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.toolbar.binding.leftIcon.setOnClickListener {
+            finish()
+        }
+
         binding.btnSimpan.setOnClickListener{
             initListener()
         }

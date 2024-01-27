@@ -32,6 +32,7 @@ class AlamatAdapter(
             tvNamaPenerima.text = alamat.nama
             tvAlamatPenerima.text = alamat.alamat
             tvPhonePenerima.text = alamat.phone
+            tvTypeAlamat.text = alamat.label
             radioButton.isChecked = alamat.default
             rootCard.setOnClickListener {
                 showConfirmationDialog(alamat)

@@ -33,9 +33,8 @@
                 android:layout_height="wrap_content"
                 android:text="Transaksi Berhasil Dibuat"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 android:textColor="#2C302D"
-                android:fontFamily="@font/interm"
+                android:fontFamily="@font/intersemibold"
                 android:gravity="center" />
 
             <TextView
@@ -45,7 +44,7 @@
                 android:text="Pengajuan pemesanan produk berhasil dibuat, pantau proses pemesanan transaksi di Riwayat Transaksi"
                 android:textSize="12sp"
                 android:textColor="#5C605C"
-                android:fontFamily="@font/interm"
+                android:fontFamily="@font/interregular"
                 android:gravity="center" />
         </LinearLayout>
 
