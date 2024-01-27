@@ -6,10 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar"
+    <com.example.tokoonline.view.Navbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:leftIcon="@drawable/round_arrow_back"
+        app:title="Riwayat" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_riwayat"
