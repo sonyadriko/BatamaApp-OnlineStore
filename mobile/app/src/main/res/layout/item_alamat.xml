@@ -99,7 +99,7 @@
                 android:background="@color/colorNeutral50" />
 
             <LinearLayout
-                android:id="@+id/btn_tambah_alamat"
+                android:id="@+id/btn_tambah_alamat2"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@color/white"

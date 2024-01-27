@@ -1,8 +1,14 @@
 package com.example.tokoonline.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.lifecycle.ViewModelProvider
+import com.example.tokoonline.TambahTokoActivity
+import com.example.tokoonline.TambahTokoBaruActivity
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.databinding.ActivityTokoProfileBinding
@@ -22,13 +28,28 @@ class TokoProfileActivity : BaseActivity() {
         viewModelToko = ViewModelProvider(this).get(TokoViewModel::class.java)
         viewModelAlamat = ViewModelProvider(this).get(AlamatViewModel::class.java)
 
+        val emptyView: LinearLayout = binding.tokoNull
+        val viewOn: LinearLayout = binding.viewOnToko
 
         val userRole = userRepository.role
         if (userRole == Constant.Role.PEMBELI) {
-            goToTokoPage()
-//            showToast("Silahkan ajukan permintaan untuk membuka toko pada admin")
-//            finish()
+            emptyView.visibility = View.VISIBLE
+            viewOn.visibility = View.GONE
+            binding.toolbarNull.binding.leftIcon.setOnClickListener {
+                finish()
+            }
+            binding.btnTambahToko.setOnClickListener {
+                val intent = Intent(this, TambahTokoBaruActivity::class.java)
+                startActivity(intent)
+            }
+
         }else {
+            emptyView.visibility = View.GONE
+            viewOn.visibility = View.VISIBLE
+
+            binding.toolbar.binding.leftIcon.setOnClickListener {
+                finish()
+            }
             getTokoData()
         }
 

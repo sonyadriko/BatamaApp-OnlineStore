@@ -1,9 +1,13 @@
 package com.example.tokoonline.view.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tokoonline.TambahAlamatBaruActivity
 import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Alamat
@@ -20,9 +24,9 @@ class AlamatAdapter(
 
         fun bind(alamat: Alamat, position: Int) = with(binding) {
             if (position == alamatList.lastIndex) {
-                btnTambahAlamat.visible()
+                btnTambahAlamat2.visible()
             } else {
-                btnTambahAlamat.gone()
+                btnTambahAlamat2.gone()
             }
 
             tvNamaPenerima.text = alamat.nama
@@ -35,9 +39,10 @@ class AlamatAdapter(
             tvUbahAlamat.setOnClickListener {
                 onUbahAlamatClickListener?.invoke(alamat)
             }
-//            btnTambahAlamat.setOnClickListener {
-//
-//            }
+            btnTambahAlamat2.setOnClickListener {
+                val intent = Intent(btnTambahAlamat2.context, TambahAlamatBaruActivity::class.java)
+                btnTambahAlamat2.context.startActivity(intent)
+            }
         }
 
         private fun showConfirmationDialog(alamat: Alamat) {

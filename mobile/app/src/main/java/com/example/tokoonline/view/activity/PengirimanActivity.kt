@@ -63,10 +63,10 @@ class PengirimanActivity : BaseActivity() {
         showAlamatDefault(userId)
         showProdukKeranjang()
 
-        setSupportActionBar(binding.toolbar)
-        binding.toolbar.setNavigationOnClickListener {
-            finish()
-        }
+//        setSupportActionBar(binding.toolbar)
+//        binding.toolbar.setNavigationOnClickListener {
+//            finish()
+//        }
 
         binding.btnUbahAlamat.setOnClickListener {
             goToAlamatSetting()

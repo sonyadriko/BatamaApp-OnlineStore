@@ -1,10 +1,15 @@
 package com.example.tokoonline.view.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tokoonline.TambahAlamatBaruActivity
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.databinding.ActivitySettingAlamat1Binding
 import com.example.tokoonline.view.adapter.AlamatAdapter
@@ -47,26 +52,44 @@ class SettingAlamatActivity : BaseActivity() {
         viewModel.getAlamat(userUid) { alamatList ->
 
             val recyclerView: RecyclerView = binding.rvAlamat
+            val emptyView: LinearLayout = binding.emptyView
+            val viewOn: RelativeLayout = binding.viewOn
 
             val adapter = AlamatAdapter(alamatList)
 
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = adapter
+            if (alamatList.isEmpty()) {
+                emptyView.visibility = View.VISIBLE
+                viewOn.visibility = View.GONE
 
-            adapter.onCardViewClickListener = {alamat ->
-                val id = alamat.id.toString()
-                viewModel.setDefaultAlamat(id, userUid) { isSuccessful ->
-                    if (isSuccessful) {
-                        showToast("Alamat default berhasil di update")
-                    } else {
-                        // Failed to set the default address
-                        // Handle the error or display a message to the user
+                binding.btnTambahAlamat.setOnClickListener {
+//                    goToAlamatForm()
+                    val intent = Intent(this, TambahAlamatBaruActivity::class.java)
+                    startActivity(intent)
+                }
+            }else {
+
+                emptyView.visibility = View.GONE
+                viewOn.visibility = View.VISIBLE
+
+
+                recyclerView.layoutManager = LinearLayoutManager(this)
+                recyclerView.adapter = adapter
+
+                adapter.onCardViewClickListener = { alamat ->
+                    val id = alamat.id.toString()
+                    viewModel.setDefaultAlamat(id, userUid) { isSuccessful ->
+                        if (isSuccessful) {
+                            showToast("Alamat default berhasil di update")
+                        } else {
+                            // Failed to set the default address
+                            // Handle the error or display a message to the user
+                        }
                     }
                 }
-            }
 
-            adapter.onUbahAlamatClickListener = { alamat ->
-                goToAlamatForm(selectedAlamatId = alamat.id)
+                adapter.onUbahAlamatClickListener = { alamat ->
+                    goToAlamatForm(selectedAlamatId = alamat.id)
+                }
             }
         }
     }

@@ -115,6 +115,7 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         startActivity(intent)
     }
+
     fun goToAlamatSetting(){
         val intent = Intent(this, SettingAlamatActivity::class.java)
         startActivity(intent)

@@ -140,7 +140,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:id="@+id/btn_ubahAlamat"
-                        android:background="@drawable/Frame"
+                        android:background="@drawable/frame"
                         android:paddingHorizontal="@dimen/medium_space"
                         android:paddingTop="@dimen/medium_space"
                             android:layout_height="24dp"/>
