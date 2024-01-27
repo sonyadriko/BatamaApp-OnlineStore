@@ -1,6 +1,9 @@
 package com.example.tokoonline.view.activity
 
 import android.os.Bundle
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.core.base.BaseActivity
@@ -85,6 +88,10 @@ class KeranjangActivity : BaseActivity() {
             goToBayar(totalBelanja, produkList)
         }
 
+        binding.toolbar.binding.leftIcon.setOnClickListener {
+            finish()
+        }
+
         initView()
         lifecycleScope.launch {
             userRepository.uid?.let {
@@ -106,11 +113,25 @@ class KeranjangActivity : BaseActivity() {
     private suspend fun getKeranjang(it: String) {
         showProgressDialog()
 
+        val emptyView: LinearLayout = binding.keranjangNull
+        val viewOn: LinearLayout = binding.viewOnKeranjang
+
         keranjangRepository.getKeranjang(userUid = it).collect {
             dismissProgressDialog()
             if (it.isEmpty() || it[0] == null) {
-                showToast("Keranjang kosong")
-            } else adapter.submitList(it)
+                emptyView.visibility = View.VISIBLE
+                viewOn.visibility = View.GONE
+
+                binding.toolbarNull.binding.leftIcon.setOnClickListener {
+                    finish()
+                }
+
+//                showToast("Keranjang kosong")
+            } else  {
+                emptyView.visibility = View.GONE
+                viewOn.visibility = View.VISIBLE
+                adapter.submitList(it)
+            }
         }
     }
 }

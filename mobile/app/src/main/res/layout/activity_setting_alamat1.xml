@@ -11,7 +11,6 @@
     <LinearLayout
         android:id="@+id/empty_view"
         android:layout_width="match_parent"
-        android:visibility="gone"
         android:background="@color/white"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -50,9 +49,8 @@
                     android:layout_height="wrap_content"
                     android:text="Anda Belum Memiliki Alamat"
                     android:textSize="14sp"
-                    android:textStyle="bold"
                     android:textColor="#2C302D"
-                    android:fontFamily="@font/interm"
+                    android:fontFamily="@font/intersemibold"
                     android:gravity="center" />
 
                 <TextView
@@ -62,7 +60,7 @@
                     android:text="Anda belum pernah menyimpan alamat, buat alamat baru sebagai lokasi pengiriman"
                     android:textSize="12sp"
                     android:textColor="#5C605C"
-                    android:fontFamily="@font/interm"
+                    android:fontFamily="@font/interregular"
                     android:gravity="center" />
             </LinearLayout>
 
@@ -95,6 +93,8 @@
 
     <RelativeLayout
         android:id="@+id/view_on"
+        android:visibility="gone"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

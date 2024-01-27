@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="2dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="5dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,16 +22,29 @@
             android:orientation="horizontal">
 
             <CheckBox
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <ImageView
-                android:id="@+id/img_produk"
+            <androidx.cardview.widget.CardView
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="5dp"
-                android:src="@drawable/product" />
+                app:cardCornerRadius="4dp"
+                android:layout_height="100dp">
+
+                <ImageView
+                    android:id="@+id/img_produk"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/product" />
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv_nama"
@@ -38,10 +53,27 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="5dp"
                 android:ellipsize="marquee"
+                android:textSize="16sp"
                 android:lines="2"
-                android:maxLines="3"
+                android:maxLines="2"
                 android:text="Nama Produk"
-                android:textColor="@color/colorPrimary500" />
+                android:textColor="#8E908E" />
+
+            <TextView
+                android:id="@+id/tv_harga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="15dp"
+                android:ellipsize="marquee"
+                android:text="Rp.10.000"
+                android:textColor="#2C302D"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            </LinearLayout>
+
+
 
         </LinearLayout>
 
@@ -65,31 +97,21 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_harga"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:ellipsize="marquee"
-                    android:text="Rp.10.000"
-                    android:textColor="@color/colorPrimary500"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+
 
                 <RelativeLayout
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="110dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/bg_penambahan"
                     android:padding="5dp">
 
                     <ImageView
                         android:id="@+id/btn_kurang"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="5dp"
-                        app:srcCompat="@drawable/ic_baseline_remove_24" />
+                        app:srcCompat="@drawable/minus_keranjang" />
 
                     <TextView
                         android:id="@+id/tv_jumlah"
@@ -99,18 +121,19 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="5dp"
                         android:ellipsize="marquee"
+                        android:textSize="18sp"
                         android:text="1"
-                        android:textColor="@color/colorPrimary500"
+                        android:textColor="#2F3640"
                         android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/btn_tambah"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="5dp"
-                        app:srcCompat="@drawable/ic_baseline_add_24" />
+                        app:srcCompat="@drawable/plus_keranjang" />
 
                 </RelativeLayout>
 
@@ -118,7 +141,18 @@
 
         </RelativeLayout>
 
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:background="#FAFBF9" />
+
     </LinearLayout>
 
 
-</androidx.cardview.widget.CardView>
+
+
+
+
+</LinearLayout>

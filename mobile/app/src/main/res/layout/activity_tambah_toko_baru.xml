@@ -82,9 +82,7 @@
                     android:background="@drawable/border_background_btn"
                     android:layout_marginBottom="@dimen/medium_space"
                     android:foreground="?selectableItemBackground"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    tools:visibility="visible">
+                    android:gravity="center">
 
                     <ImageView
                         android:layout_width="wrap_content"

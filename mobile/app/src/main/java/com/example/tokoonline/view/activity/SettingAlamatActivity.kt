@@ -61,6 +61,10 @@ class SettingAlamatActivity : BaseActivity() {
                 emptyView.visibility = View.VISIBLE
                 viewOn.visibility = View.GONE
 
+                binding.toolbarNull.binding.leftIcon.setOnClickListener {
+                    finish()
+                }
+
                 binding.btnTambahAlamat.setOnClickListener {
 //                    goToAlamatForm()
                     val intent = Intent(this, TambahAlamatBaruActivity::class.java)
