@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.tokoonline.R
 import com.example.tokoonline.data.repository.firebase.UserRepository
+import com.example.tokoonline.view.activity.EditAkunActivity
 import com.example.tokoonline.view.activity.EditProfilActivity
 import com.example.tokoonline.view.activity.InitialActivity
 import com.example.tokoonline.view.activity.KeranjangActivity
@@ -95,6 +96,10 @@ abstract class BaseFragment : Fragment() {
         startActivity(intent)
     }
 
+    fun goToEditAkun(){
+        val intent = Intent(requireContext(), EditAkunActivity::class.java)
+        startActivity(intent)
+    }
 
 
 

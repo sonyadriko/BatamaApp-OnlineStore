@@ -11,7 +11,8 @@ import java.io.Serializable
 data class Toko (
     var id: String? = null,
     val nama: String = "",
-    val alamat: String = "",
+    val id_alamat: String = "",
+    val id_users : String = "",
     val isSeller: String? = "",
 ) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {

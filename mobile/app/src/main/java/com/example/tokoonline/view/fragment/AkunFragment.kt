@@ -57,6 +57,11 @@ class AkunFragment : BaseFragment() {
             goToTokoProfile()
         }
 
+        binding.btnEditAkun.setOnClickListener{
+            goToEditAkun()
+        }
+
+
         return binding.root
     }
 }

@@ -6,6 +6,8 @@ import com.example.tokoonline.core.constanst.Constant.REFERENCE_USER
 import com.example.tokoonline.data.model.firebase.User
 import com.example.tokoonline.core.util.toRole
 import com.example.tokoonline.data.model.firebase.Toko
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
 class UserRepository constructor(
@@ -122,5 +124,38 @@ class UserRepository constructor(
                     onComplete(false, null)
                 }
             }
+    }
+
+    fun changePassword(
+        oldPassword: String,
+        newPassword: String,
+        onComplete: (isSuccess: Boolean, errorMessage: String?) -> Unit){
+
+
+        val auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+        if (user != null) {
+
+            val credential = EmailAuthProvider.getCredential(user.email!!, oldPassword)
+
+            user.reauthenticate(credential)
+                .addOnCompleteListener { reauthTask ->
+                    if (reauthTask.isSuccessful) {
+                        user.updatePassword(newPassword)
+                            .addOnCompleteListener { updateTask ->
+                                if (updateTask.isSuccessful) {
+                                    // Password updated successfully
+                                    onComplete(true, null)
+                                } else {
+                                    // Handle the failure to update the password
+                                    onComplete(false, "Failed to update password")
+                                }
+                            }
+                    } else {
+                        // Handle the failure to reauthenticate
+                        onComplete(false, "Password Lama yang anda masukkan salah")
+                    }
+                }
+        }
     }
 }

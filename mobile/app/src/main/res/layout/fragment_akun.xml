@@ -317,7 +317,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/btn_wishlist"
+                        android:id="@+id/btn_editAkun"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
