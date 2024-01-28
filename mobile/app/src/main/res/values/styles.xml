@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="button_secondary" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+    <style name="button_secondary">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/bg_btn_login1</item>
@@ -11,7 +11,7 @@
         <item name="android:textSize">@dimen/subtitle_2</item>
     </style>
 
-    <style name="button_primary" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+    <style name="button_primary">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:elevation">0dp</item>

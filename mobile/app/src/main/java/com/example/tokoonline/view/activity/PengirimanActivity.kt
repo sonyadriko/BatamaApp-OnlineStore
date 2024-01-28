@@ -78,7 +78,7 @@ class PengirimanActivity : BaseActivity() {
         binding.btnBayar.setOnClickListener {
             if (metodePengiriman == null) {
                 showToast("tolong pilih metode pengiriman terlebih dahulu")
-            } else if (isAlamatDefaultPresent) {
+            } else if (!isAlamatDefaultPresent) {
                 showToast("tambahkan alamat pengiriman terlebih dahulu")
             } else {
                 startActivity(
@@ -88,11 +88,13 @@ class PengirimanActivity : BaseActivity() {
         }
 
         binding.kirim.setOnClickListener {
+            metodePengiriman = 0
             binding.ambil.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
             binding.kirim.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
         }
 
         binding.ambil.setOnClickListener {
+            metodePengiriman = 1
             binding.kirim.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
             binding.ambil.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
         }

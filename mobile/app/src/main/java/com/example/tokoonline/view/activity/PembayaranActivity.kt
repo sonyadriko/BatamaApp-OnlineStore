@@ -81,11 +81,6 @@ class PembayaranActivity : BaseActivity() {
         initExtrasData()
         initAlamatData()
 
-        binding.btnBayar.setOnClickListener {
-            if (isTransactionProcessing) return@setOnClickListener
-            else pay()
-        }
-
         setContentView(binding.root)
     }
 
@@ -207,6 +202,8 @@ class PembayaranActivity : BaseActivity() {
                         billingAddress = billingAddress,
                         lastName = ""
                     )
+
+                    pay()
                 }
             }
         }
