@@ -18,6 +18,7 @@
 
     <color name="colorNeutral50">#F0F2EE</color>
     <color name="colorNeutral100">#E0E3DE</color>
+    <color name="colorNeutral500">#2C302D</color>
     <color name="colorNeutral600">#5C605C</color>
     <color name="colorNeutral800">#2C302D</color>
     <color name="colorNeutral900">#181B19</color>
