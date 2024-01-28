@@ -3,6 +3,7 @@ package com.example.tokoonline.view.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,14 +28,11 @@ class ProdukSayaActivity : BaseActivity() {
         loadProdukbyTokoID(tokoID)
 
 
-        binding.btnTambahProduk.setOnClickListener{
-            startActivity(Intent(this, TambahProdukActivity::class.java))
-        }
+
         
     }
 
     fun loadProdukbyTokoID(tokoID: String) {
-
         viewModel.loadProdukbyIDToko(tokoID) { produkList ->
 
             val recyclerView: RecyclerView = binding.rvProduksaya
@@ -43,6 +41,29 @@ class ProdukSayaActivity : BaseActivity() {
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.adapter = adapter
 
+            // Check if the produkList is empty
+            if (produkList.isEmpty()) {
+                // No produk, show produk_null layout
+                binding.produkNull.visibility = View.VISIBLE
+                binding.viewOnProduk.visibility = View.GONE
+                binding.toolbarNull.binding.leftIcon.setOnClickListener {
+                    finish()
+                }
+                binding.btnTambahProdukNull.setOnClickListener{
+
+                    startActivity(Intent(this, TambahProdukActivity::class.java))
+                }
+            } else {
+                // Produk exists, show view_on_produk layout
+                binding.produkNull.visibility = View.GONE
+                binding.viewOnProduk.visibility = View.VISIBLE
+                binding.toolbar.binding.leftIcon.setOnClickListener {
+                    finish()
+                }
+                binding.btnTambahProduk.setOnClickListener{
+                    startActivity(Intent(this, TambahProdukActivity::class.java))
+                }
+            }
         }
     }
 

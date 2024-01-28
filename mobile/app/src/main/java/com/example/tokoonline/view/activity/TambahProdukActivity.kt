@@ -27,6 +27,10 @@ class TambahProdukActivity : BaseActivity() {
 
         storageReference = Firebase.storage.reference.child("images/produk")
 
+        binding.toolbar.binding.leftIcon.setOnClickListener {
+            finish()
+        }
+
         binding.buttonTambahGambarProduk.setOnClickListener {
             //membuka galeri untuk memilih gambar
             val intent = Intent(Intent.ACTION_PICK)

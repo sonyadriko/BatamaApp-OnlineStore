@@ -8,6 +8,92 @@
     tools:context=".view.activity.TokoProfileActivity"
     tools:ignore="HardcodedText,RtlSymmetry,UseCompoundDrawables,contentDescription">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/produk_null"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.example.tokoonline.view.Navbar
+            android:id="@+id/toolbar_null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftIcon="@drawable/round_arrow_back"
+            app:title="Toko" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="180dp"
+                android:layout_height="143.28dp"
+                android:layout_margin="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/produk_null" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_margin="8dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Anda Belum Memiliki Produk"
+                    android:textSize="14sp"
+                    android:textColor="#2C302D"
+                    android:fontFamily="@font/intersemibold"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content"
+                    android:text="Anda belum pernah menambahkan data produk, tambahkan data produk baru untuk mengiklankan"
+                    android:textSize="12sp"
+                    android:textColor="#5C605C"
+                    android:fontFamily="@font/interregular"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/div_footer2"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
+
+
+
+                <Button
+                    android:id="@+id/btn_tambah_produk_null"
+                    style="@style/button_primary"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Tambah Produk Baru" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/view_on_produk"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <com.example.tokoonline.view.Navbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,96 +101,51 @@
         app:leftIcon="@drawable/round_arrow_back"
         app:title="Produk" />
 
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:orientation="vertical">
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@color/white"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:padding="10dp">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_centerInParent="true"-->
-<!--                android:text="Produk Saya"-->
-<!--                android:textColor="@color/colorPrimary500"-->
-<!--                android:textSize="16sp"-->
-<!--                android:textStyle="bold" />-->
-
-<!--        </RelativeLayout>-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="5dp"-->
-<!--            app:cardElevation="2dp">-->
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:gravity="center_horizontal"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:padding="5dp">-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/tvNamaToko"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:textColor="@color/colorPrimary500"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Produk"-->
-<!--                    android:textSize="15sp"-->
-<!--                    android:textStyle="bold" />-->
-
-<!--            </LinearLayout>-->
-
-<!--        </androidx.cardview.widget.CardView>-->
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_produksaya"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/div_footer"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_produk_saya" />
-
-        <RelativeLayout
-            android:id="@+id/div_footer"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="10dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/btn_tambah_produk"
-                android:layout_width="150dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_produksaya"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_btn_beli"
-                android:layout_alignParentEnd="true"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="Tambah Produk"
-                android:textColor="@color/white"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_produk_saya" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/div_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/medium_space"
+            android:background="#ECECEC" />
+
+        <Button
+            android:id="@+id/btn_tambah_produk"
+            style="@style/button_primary"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Tambah Produk Baru" />
 
     </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>

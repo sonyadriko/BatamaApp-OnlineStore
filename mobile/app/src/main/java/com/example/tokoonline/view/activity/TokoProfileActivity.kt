@@ -32,18 +32,18 @@ class TokoProfileActivity : BaseActivity() {
         val viewOn: LinearLayout = binding.viewOnToko
 
         val userRole = userRepository.role
-        if (userRole == Constant.Role.PEMBELI) {
-            emptyView.visibility = View.VISIBLE
-            viewOn.visibility = View.GONE
-            binding.toolbarNull.binding.leftIcon.setOnClickListener {
-                finish()
-            }
-            binding.btnTambahToko.setOnClickListener {
-                val intent = Intent(this, TambahTokoBaruActivity::class.java)
-                startActivity(intent)
-            }
-
-        }else {
+//        if (userRole == Constant.Role.PEMBELI) {
+//            emptyView.visibility = View.VISIBLE
+//            viewOn.visibility = View.GONE
+//            binding.toolbarNull.binding.leftIcon.setOnClickListener {
+//                finish()
+//            }
+//            binding.btnTambahToko.setOnClickListener {
+//                val intent = Intent(this, TambahTokoBaruActivity::class.java)
+//                startActivity(intent)
+//            }
+//
+//        }else {
             emptyView.visibility = View.GONE
             viewOn.visibility = View.VISIBLE
 
@@ -51,7 +51,7 @@ class TokoProfileActivity : BaseActivity() {
                 finish()
             }
             getTokoData()
-        }
+//        }
 
     }
 
