@@ -25,24 +25,20 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/edit_alamat"
+                android:foreground="?selectableItemBackground"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical">
-
+                android:orientation="horizontal"
+                android:padding="@dimen/medium_space">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:id="@+id/linearlayout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:id="@+id/linearlayout"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginRight="16dp"
-                        android:orientation="vertical">
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/tesId"
@@ -55,140 +51,48 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/fixAlamat"
+                        android:id="@+id/alamatPlaceholder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="@font/interregular"
                         android:text="Anda belum mengatur alamat pengiriman, silahkan atur alamat terlebih dahulu"
                         android:textColor="#747674"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/alamatDefault"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:ellipsize="end"
+                        android:text="-"
+                        android:fontFamily="@font/interregular"
+                        tools:text="Febriyani \u2022 08547632341\nrandu barat 6 / 10"
+                        android:textColor="#747674"
                         android:textSize="14sp"
-                        android:fontFamily="@font/interregular"/>
-
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:id="@+id/btn_ubahAlamat"
-                        android:background="@drawable/frame"
-                        android:paddingHorizontal="@dimen/medium_space"
-                        android:paddingTop="@dimen/medium_space"
-                            android:layout_height="24dp"/>
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/tvUbahAlamat"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:background="@drawable/Frame"-->
-<!--                        android:paddingHorizontal="@dimen/medium_space"-->
-<!--                        android:paddingTop="@dimen/medium_space"-->
-<!--                        android:textColor="#F4900C" />-->
+                        android:maxLines="2" />
 
                 </LinearLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/div_alamat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:visibility="visible">
+                <ImageView
+                    android:id="@+id/btn_ubahAlamat"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/frame"
+                    android:paddingHorizontal="@dimen/medium_space"
+                    android:paddingTop="@dimen/medium_space" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/btn_edit"
-                        android:orientation="horizontal"
-                        android:padding="5dp">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:clickable="false"
-                            app:cardElevation="3dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                    <TextView
-                                        android:id="@+id/tvLabelAlamat"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="LABEL ALAMAT"
-                                        android:textSize="13sp"
-                                        android:textStyle="bold" />
-
-                                    <RadioButton
-                                        android:id="@+id/radioButton"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginEnd="-10dp"
-                                        android:clickable="false" />
-                                </LinearLayout>
-
-                                <TextView
-                                    android:id="@+id/tvNamaPenerima"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="3dp"
-                                    android:text="NAMA PENERIMA"
-                                    android:textColor="#2C302D"
-                                    android:textSize="13sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:id="@+id/tvPhonePenerima"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="2dp"
-                                    android:text="NO TELP"
-                                    android:textSize="11sp"
-                                    android:textStyle="bold" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-                                        android:id="@+id/tvAlamatPenerima"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="ALAMAT PENERIMA" />
-
-                                    <TextView
-                                        android:id="@+id/tvCatatanAlamat"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="(CATATAN)" />
-                                </LinearLayout>
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-<!--                <Button-->
-<!--                    android:id="@+id/btn_ubahAlamat"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="35dp"-->
-<!--                    android:layout_gravity="center_horizontal"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    android:background="@drawable/bg_btn_tambah"-->
-<!--                    android:paddingHorizontal="20dp"-->
-<!--                    android:text="Ubah Alamat"-->
-<!--                    android:textAllCaps="false"-->
-<!--                    android:textSize="11sp" />-->
-
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tvUbahAlamat"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:background="@drawable/Frame"-->
+                <!--                        android:paddingHorizontal="@dimen/medium_space"-->
+                <!--                        android:paddingTop="@dimen/medium_space"-->
+                <!--                        android:textColor="#F4900C" />-->
 
             </LinearLayout>
 

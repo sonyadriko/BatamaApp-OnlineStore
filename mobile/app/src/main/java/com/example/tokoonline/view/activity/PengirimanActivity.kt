@@ -4,22 +4,20 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.getTotalBelanja
+import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.moneyFormatter
-import com.example.tokoonline.core.util.parcelable
-import com.example.tokoonline.data.model.firebase.Produk
+import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.ProdukKeranjang
-import com.example.tokoonline.databinding.ActivityPembayaranBinding
 import com.example.tokoonline.databinding.ActivityPengirimanBinding
-import com.example.tokoonline.view.adapter.AdapterItemTransaksi
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class PengirimanActivity : BaseActivity() {
@@ -52,23 +50,21 @@ class PengirimanActivity : BaseActivity() {
         setContentView(binding.root)
         viewModelAlamat = ViewModelProvider(this)[AlamatViewModel::class.java]
 
-        val userId = userRepository.uid.toString()
-
         if (produkKeranjang.isNullOrEmpty()) {
             showToast(getString(R.string.something_wrong))
             finish()
         }
 
-        onResume()
-        showAlamatDefault(userId)
-        showProdukKeranjang()
+        binding.toolbar.binding.leftIcon.setOnClickListener {
+            finish()
+        }
 
 //        setSupportActionBar(binding.toolbar)
 //        binding.toolbar.setNavigationOnClickListener {
 //            finish()
 //        }
 
-        binding.btnUbahAlamat.setOnClickListener {
+        binding.editAlamat.setOnClickListener {
             goToAlamatSetting()
             onPause()
         }
@@ -93,16 +89,15 @@ class PengirimanActivity : BaseActivity() {
     }
 
     private fun showAlamatDefault(userUid: String) {
-        viewModelAlamat.getAlamatDefault(userUid) { alamatDefault ->
-            if (alamatDefault != null) {
-                binding.tvNamaPenerima.text = alamatDefault.nama
-                binding.tvAlamatPenerima.text = alamatDefault.alamat
-                binding.tvPhonePenerima.text = alamatDefault.phone
-                binding.tvLabelAlamat.text = alamatDefault.label
-                binding.tvCatatanAlamat.text = alamatDefault.catatan
-                binding.radioButton.isChecked = alamatDefault.default
-            } else {
-                binding.divAlamat.visibility = View.GONE
+        viewModelAlamat.getAlamatDefault(userUid) { alamatDef ->
+            with(binding) {
+                if (alamatDef != null) {
+                    alamatPlaceholder.gone()
+                    alamatDefault.visible()
+
+                    alamatDefault.text =
+                        "${alamatDef.nama} \u2022 ${alamatDef.phone}\n${alamatDef.alamat}"
+                }
             }
         }
     }
@@ -115,5 +110,17 @@ class PengirimanActivity : BaseActivity() {
 //
 //        recyclerView.layoutManager = LinearLayoutManager(this)
 //        recyclerView.adapter = adapter
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showProgressDialog()
+        val userId = userRepository.uid.toString()
+        showAlamatDefault(userId)
+        showProdukKeranjang()
+        lifecycleScope.launch {
+            delay(200)
+            dismissProgressDialog()
+        }
     }
 }

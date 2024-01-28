@@ -17,7 +17,10 @@ class AlamatAdapter(
     private val alamatList: List<Alamat>
 ) : RecyclerView.Adapter<AlamatAdapter.ViewHolder>() {
     var onUbahAlamatClickListener: ((Alamat) -> Unit)? = null
-    var onCardViewClickListener: ((Alamat) -> Unit)? = null
+    var onCardViewClickListener: ((Alamat, isChanged: Boolean) -> Unit)? = null
+
+    private var prevAlamat: Int = -1
+    private var selectedAlamat: Int = -1
 
     inner class ViewHolder(private val binding: ItemAlamatBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -33,9 +36,20 @@ class AlamatAdapter(
             tvAlamatPenerima.text = alamat.alamat
             tvPhonePenerima.text = alamat.phone
             tvTypeAlamat.text = alamat.label
-            radioButton.isChecked = alamat.default
+
+            if (alamat.default && prevAlamat == -1) {
+                prevAlamat = position
+                selectedAlamat = position
+            }
+
+            radioButton.isChecked = selectedAlamat == position
+
             rootCard.setOnClickListener {
-                showConfirmationDialog(alamat)
+//                showConfirmationDialog(alamat, position)
+                selectedAlamat = position
+                notifyDataSetChanged()
+                onCardViewClickListener?.invoke(alamat, position != prevAlamat)
+
             }
             tvUbahAlamat.setOnClickListener {
                 onUbahAlamatClickListener?.invoke(alamat)
@@ -46,13 +60,13 @@ class AlamatAdapter(
             }
         }
 
-        private fun showConfirmationDialog(alamat: Alamat) {
+        private fun showConfirmationDialog(alamat: Alamat, position: Int) {
             val builder = AlertDialog.Builder(binding.root.context)
             builder.setTitle("Confirmation")
             builder.setMessage("Atur alamat ini menjadi Alamat Default?")
 
             builder.setPositiveButton("Yes") { _, _ ->
-                onCardViewClickListener?.invoke(alamat)
+
             }
 
             builder.setNegativeButton("No") { dialog, _ ->

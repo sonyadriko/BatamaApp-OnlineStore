@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.TambahAlamatBaruActivity
 import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.data.model.firebase.Alamat
 import com.example.tokoonline.databinding.ActivitySettingAlamat1Binding
 import com.example.tokoonline.view.adapter.AlamatAdapter
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
@@ -23,6 +25,9 @@ class SettingAlamatActivity : BaseActivity() {
     private lateinit var viewModel : AlamatViewModel
     private var uuid = ""
 
+    private var isChanged = false
+    private lateinit var alamat: Alamat
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingAlamat1Binding.inflate(layoutInflater)
@@ -33,11 +38,46 @@ class SettingAlamatActivity : BaseActivity() {
             userRepository.uid?.let {
                 uuid = it
                 getAlamat(uuid)
+
+                binding.btnPilihAlamat.setOnClickListener {
+                    if (isChanged) {
+                        showProgressDialog()
+                        val id = alamat.id.toString()
+                        viewModel.setDefaultAlamat(id, uuid) { isSuccessful ->
+                            if (isSuccessful) {
+                                showToast("Alamat default berhasil di update")
+                                dismissProgressDialog()
+                                finish()
+                            } else {
+                                // Failed to set the default address
+                                // Handle the error or display a message to the user
+                            }
+                        }
+                    } else {
+                        showToast("Alamat tidak berubah")
+                    }
+                }
             }
         }
 
         binding.toolbar.binding.leftIcon.setOnClickListener {
-            finish()
+            if (isChanged) {
+                val builder = AlertDialog.Builder(binding.root.context)
+                builder.setTitle("Perubahan belum disimpan")
+                builder.setMessage("lanjutkan membuang perubahan?")
+
+                builder.setPositiveButton("Yes") { _, _ ->
+                    finish()
+                }
+
+                builder.setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+
+                // Create and show the dialog
+                val dialog = builder.create()
+                dialog.show()
+            } else finish()
         }
 
 //        binding.btnTambahAlamat.setOnClickListener {
@@ -49,6 +89,7 @@ class SettingAlamatActivity : BaseActivity() {
     }
 
     private fun getAlamat(userUid: String) {
+        showProgressDialog()
         viewModel.getAlamat(userUid) { alamatList ->
 
             val recyclerView: RecyclerView = binding.rvAlamat
@@ -79,21 +120,26 @@ class SettingAlamatActivity : BaseActivity() {
                 recyclerView.layoutManager = LinearLayoutManager(this)
                 recyclerView.adapter = adapter
 
-                adapter.onCardViewClickListener = { alamat ->
-                    val id = alamat.id.toString()
-                    viewModel.setDefaultAlamat(id, userUid) { isSuccessful ->
-                        if (isSuccessful) {
-                            showToast("Alamat default berhasil di update")
-                        } else {
-                            // Failed to set the default address
-                            // Handle the error or display a message to the user
-                        }
-                    }
+                adapter.onCardViewClickListener = { alamat, isChanged ->
+                    this.isChanged = isChanged
+                    this.alamat = alamat
                 }
 
                 adapter.onUbahAlamatClickListener = { alamat ->
                     goToAlamatForm(selectedAlamatId = alamat.id)
                 }
+            }
+
+            dismissProgressDialog()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            userRepository.uid?.let {
+                uuid = it
+                getAlamat(uuid)
             }
         }
     }

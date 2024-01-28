@@ -20,6 +20,10 @@ class AlamatFormActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAlamatFormBinding.inflate(layoutInflater)
+
+        binding.toolbar.binding.leftIcon.setOnClickListener {
+            finish()
+        }
         setContentView(binding.root)
 
         val selectedAlamatId = intent.getStringExtra("selectedAlamatId")
@@ -79,10 +83,11 @@ class AlamatFormActivity : BaseActivity() {
                 dismissProgressDialog()
                 if (isSuccess) {
                     showToast("Alamat berhasil diupdate")
-                    goToAlamatSetting()
                 } else {
                     showToast("Alamat tidak berhasil diupdate")
                 }
+
+                finish()
             }
     } else {
             // Add a new address
@@ -90,10 +95,11 @@ class AlamatFormActivity : BaseActivity() {
                 dismissProgressDialog()
                 if (isSuccess) {
                     showToast("Alamat berhasil ditambahkan")
-                    goToAlamatSetting()
                 } else {
                     showToast("Alamat gagal untuk ditambahkan")
                 }
+
+                finish()
             }
         }
     }

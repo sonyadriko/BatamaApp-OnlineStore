@@ -135,24 +135,13 @@
             android:background="#E2E2E2"
             app:layout_constraintTop_toBottomOf="@id/container_counter" />
 
-        <RelativeLayout
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_beli"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="16dp"
-            android:background="@drawable/bg_btn_beli"
-            app:layout_constraintTop_toBottomOf="@id/divider2">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Beli Langsung"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
+            style="@style/button_primary"
+            android:layout_margin="@dimen/medium_space"
+            android:text="Beli Langsung"
+            app:layout_constraintTop_toBottomOf="@id/divider2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
