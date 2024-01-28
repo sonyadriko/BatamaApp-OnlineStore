@@ -1,5 +1,6 @@
 package com.example.tokoonline.view.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -14,6 +15,10 @@ import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.ProdukKeranjang
+import com.example.tokoonline.data.model.midtrans.BillingAddress
+import com.example.tokoonline.data.model.midtrans.CustomerDetails
+import com.example.tokoonline.data.model.midtrans.ShippingAddress
+import com.example.tokoonline.data.repository.firebase.AlamatRepository
 import com.example.tokoonline.databinding.ActivityPengirimanBinding
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import kotlinx.coroutines.delay
@@ -24,6 +29,7 @@ class PengirimanActivity : BaseActivity() {
     private lateinit var binding: ActivityPengirimanBinding
     private lateinit var viewModelAlamat: AlamatViewModel
 
+    private var isAlamatDefaultPresent = false
     companion object {
         private const val EXTRA_DATA_PRODUK = "data_produk_extra"
         fun createIntent(context: Context, produkKeranjang: Array<ProdukKeranjang>): Intent {
@@ -59,11 +65,6 @@ class PengirimanActivity : BaseActivity() {
             finish()
         }
 
-//        setSupportActionBar(binding.toolbar)
-//        binding.toolbar.setNavigationOnClickListener {
-//            finish()
-//        }
-
         binding.editAlamat.setOnClickListener {
             goToAlamatSetting()
             onPause()
@@ -73,31 +74,53 @@ class PengirimanActivity : BaseActivity() {
         binding.tvOngkir.text = moneyFormatter(5000)
         binding.tvTotal.text = moneyFormatter(produkKeranjang.getTotalBelanja() + 5000)
 
-        binding.containerMetodePengiriman.setOnCheckedChangeListener { _, i ->
-            metodePengiriman = i + 1
-        }
 
         binding.btnBayar.setOnClickListener {
             if (metodePengiriman == null) {
                 showToast("tolong pilih metode pengiriman terlebih dahulu")
+            } else if (isAlamatDefaultPresent) {
+                showToast("tambahkan alamat pengiriman terlebih dahulu")
             } else {
                 startActivity(
                     PembayaranActivity.createIntent(this, produkKeranjang!!, metodePengiriman!!)
                 )
             }
         }
+
+        binding.kirim.setOnClickListener {
+            binding.ambil.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
+            binding.kirim.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
+        }
+
+        binding.ambil.setOnClickListener {
+            binding.kirim.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
+            binding.ambil.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
+        }
+
+
+        binding.cod.setOnClickListener {
+            binding.transfer.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
+            binding.cod.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
+        }
+
+        binding.transfer.setOnClickListener {
+            binding.cod.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
+            binding.transfer.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
+        }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showAlamatDefault(userUid: String) {
         viewModelAlamat.getAlamatDefault(userUid) { alamatDef ->
             with(binding) {
                 if (alamatDef != null) {
+                    isAlamatDefaultPresent = true
                     alamatPlaceholder.gone()
                     alamatDefault.visible()
 
                     alamatDefault.text =
                         "${alamatDef.nama} \u2022 ${alamatDef.phone}\n${alamatDef.alamat}"
-                }
+                } else isAlamatDefaultPresent = false
             }
         }
     }

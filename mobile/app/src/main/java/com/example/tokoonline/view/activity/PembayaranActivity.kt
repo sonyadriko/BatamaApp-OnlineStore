@@ -142,6 +142,9 @@ class PembayaranActivity : BaseActivity() {
                 produkId = product.produkId,
                 status = "MENUNGGU",
                 userId = userRepository.uid!!,
+                catatan = "",
+                metodePembayaran = "",
+                metodePengiriman = ""
             )
 
             transactionRepository.addTransaction(transaction) { isComplete ->
