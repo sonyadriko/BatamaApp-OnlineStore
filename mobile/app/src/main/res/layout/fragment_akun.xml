@@ -47,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="1dp"
                 android:layout_marginTop="50dp"
+                app:cardElevation="0dp"
                 android:layout_marginBottom="2dp"
                 app:cardCornerRadius="8dp">
 <!--                app:cardElevation="3dp"-->
@@ -108,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="1dp"
                 android:layout_marginTop="16dp"
+                app:cardElevation="0dp"
                 android:layout_marginBottom="2dp"
                 app:cardCornerRadius="8dp">
 <!--                app:cardElevation="3dp"-->
@@ -235,8 +237,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="1dp"
                 android:layout_marginTop="16dp"
+                app:cardCornerRadius="8dp"
                 android:layout_marginBottom="2dp"
-                app:cardElevation="3dp">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -401,25 +404,35 @@
 <!--                android:layout_gravity="center_horizontal"-->
 <!--                android:text="Keluar"/>-->
 
-            <com.google.android.material.button.MaterialButton
+            <LinearLayout
                 android:id="@+id/btn_logout"
+                android:layout_marginTop="@dimen/medium_space"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_gravity="center_horizontal"
-                android:text="Keluar"
+                android:background="@drawable/background_white_radius8_border_blue"
+                android:foreground="?selectableItemBackground"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="12dp">
 
-                android:icon="@drawable/ic_logout"
-                app:iconGravity="start"
-                app:iconSize="24dp"
-                app:strokeColor="#5ECDFC"
-                app:strokeWidth="1dp"
-                app:cornerRadius="8dp"
-                app:backgroundTint="#FFFFFF"
-                android:textColor="#5ECDFC"
-                />
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="@dimen/small_space_8"
+                    app:srcCompat="@drawable/ic_logout"
+                    app:tint="@color/colorPrimary500" />
+
+                <TextView
+                    style="@style/heading_14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Keluar"
+                    android:textColor="#0EB4FA"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
             <!--                android:drawableLeft="@drawable/ic_logout"-->
-
 
 
             <TextView
