@@ -2,10 +2,12 @@ package com.example.tokoonline.data.repository.firebase
 
 import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.core.util.multiValueListenerFlow
-import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.data.model.firebase.Transaction
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.flow.Flow
 
 class TransactionRepository {
@@ -55,4 +57,23 @@ class TransactionRepository {
             onComplete(error == null)
         }
     }
+
+    fun getTransactionsByUserId(userId: String, onComplete: (data: List<Transaction?>) -> Unit) {
+        databaseReference.orderByChild("userId")
+            .equalTo(userId)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val transactions = dataSnapshot.children.map { snapshot ->
+                        snapshot.getValue(Transaction::class.java)
+                    }
+                    onComplete(transactions)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle the error here if needed
+                    onComplete(emptyList()) // Return an empty list in case of an error
+                }
+            })
+    }
+
 }

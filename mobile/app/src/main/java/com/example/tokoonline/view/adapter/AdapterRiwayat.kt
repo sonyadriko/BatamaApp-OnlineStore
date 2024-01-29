@@ -1,34 +1,48 @@
 package com.example.tokoonline.view.adapter
 
+import android.content.ClipData.Item
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tokoonline.R
+import com.bumptech.glide.Glide
+import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.firebase.Transaction
+import com.example.tokoonline.data.repository.firebase.ProdukRepository
+import com.example.tokoonline.databinding.ItemRiwayatBinding
 
-class AdapterRiwayat(var data:List<Transaction>) : RecyclerView.Adapter<AdapterRiwayat.Holder>() {
-    class Holder(view: View):RecyclerView.ViewHolder(view){
-        val tvNama = view.findViewById<TextView>(R.id.tv_nama)
-        val tvTotalHarga = view.findViewById<TextView>(R.id.tv_totalHarga)
-        val tvJumlah = view.findViewById<TextView>(R.id.tv_jumlah)
-        val tvStatus = view.findViewById<TextView>(R.id.tv_status)
+
+class AdapterRiwayat(private val transactionList: List<Transaction>?) : RecyclerView.Adapter<AdapterRiwayat.ViewHolder>() {
+    class ViewHolder(private val binding: ItemRiwayatBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(transaction: Transaction) {
+            binding.tvTotalHarga.text = moneyFormatter(transaction.harga.toLong())
+            val produkRepository = ProdukRepository.getInstance()
+            produkRepository.getProdukById(transaction.produkId){produk ->
+                if (produk != null){
+                    binding.tvNama.text = produk.nama
+                    Glide.with(binding.imgProduk.context)
+                        .load(produk.image)
+                        .into(binding.imgProduk)
+                }
+            }
+
+
+        }
+    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterRiwayat.ViewHolder {
+        val binding = ItemRiwayatBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return AdapterRiwayat.ViewHolder(binding)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_riwayat, parent, false)
-        return Holder(view)
-    }
+    override fun onBindViewHolder(holder: AdapterRiwayat.ViewHolder, position: Int) {
+        val transaction = transactionList?.get(position)
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.tvNama.text = data[position].nama
-        holder.tvJumlah.text = data[position].jumlah.toString()
-        holder.tvTotalHarga.text = (data[position].harga * data[position].jumlah).toString()
-        holder.tvStatus.text = data[position].status
+        transaction?.let {
+            holder.bind(transaction)
+        }
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return transactionList?.size ?: 0
     }
+
 }

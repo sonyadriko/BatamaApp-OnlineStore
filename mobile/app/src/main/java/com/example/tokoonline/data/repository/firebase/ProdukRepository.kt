@@ -111,6 +111,21 @@ class ProdukRepository {
             })
     }
 
+    fun getProdukById(produkId: String, onComplete: (data: Produk?) -> Unit) {
+        databaseReference.child(produkId)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val produk = snapshot.getValue(Produk::class.java)
+                    onComplete(produk)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    onComplete(null)
+                }
+            })
+    }
+
+
     fun removeProduk(namaProduk: String, onComplete: (isSuccess: Boolean) -> Unit) {
         databaseReference.child(namaProduk).removeValue { error, _ ->
             onComplete(error == null)

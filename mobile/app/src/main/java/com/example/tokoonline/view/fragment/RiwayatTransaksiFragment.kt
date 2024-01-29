@@ -4,45 +4,63 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.databinding.DataBindingUtil.setContentView
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.R
+import com.example.tokoonline.core.base.BaseFragment
 import com.example.tokoonline.data.model.firebase.Transaction
+import com.example.tokoonline.databinding.FragmentRiwayattransaksiBinding
 import com.example.tokoonline.view.adapter.AdapterRiwayat
+import com.example.tokoonline.view.viewmodel.AlamatViewModel
+import com.example.tokoonline.view.viewmodel.TransactionViewModel
+import kotlinx.coroutines.launch
 
-//import kotlinx.android.synthetic.main.fragment_riwayattransaksi.rv_riwayat
 
+class RiwayatTransaksiFragment : BaseFragment() {
+    private var uuid = ""
+    private lateinit var binding : FragmentRiwayattransaksiBinding
+    private lateinit var viewModel : TransactionViewModel
 
-/**
- * A simple [Fragment] subclass.
- */
-
-class RiwayatTransaksiFragment : Fragment() {
-
-    // TODO: Rename and change types of parameters
-
-    lateinit var rvRiwayat: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_riwayattransaksi, container, false)
-
-        rvRiwayat = view.findViewById(R.id.rv_riwayat)
-
-        val layoutManager = LinearLayoutManager(activity)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-
-        rvRiwayat.adapter = AdapterRiwayat(arrRiwayat)
-        rvRiwayat.layoutManager = layoutManager
-
-        return view
+        super.onCreate(savedInstanceState)
+        binding = FragmentRiwayattransaksiBinding.inflate(layoutInflater)
+        viewModel = ViewModelProvider(this)[TransactionViewModel::class.java]
 
 
+        lifecycleScope.launch {
+            userRepository.uid?.let {
+                uuid = it
+                getRiwayat(uuid)
+
+            }
+        }
+
+        return binding.root
     }
 
-    val arrRiwayat = emptyList<Transaction>()
+    private fun getRiwayat(userUid : String){
+        showProgressDialog()
+        viewModel.getTransaction(userUid){transactionList ->
+
+            val recyclerView : RecyclerView = binding.rvRiwayat
+            val adapter = AdapterRiwayat(transactionList)
+
+            if (transactionList.isNotEmpty()){
+                binding.divGambar.visibility = View.GONE
+                binding.rvRiwayat.visibility = View.VISIBLE
+                recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                recyclerView.adapter = adapter
+                dismissProgressDialog()
+
+            }
+        }
+
+    }
 }
