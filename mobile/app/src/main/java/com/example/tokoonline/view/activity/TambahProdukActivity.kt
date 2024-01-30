@@ -82,6 +82,8 @@ class TambahProdukActivity : BaseActivity() {
                             if (isSuccess) {
                                 showToast("Successfully Saved")
                                 finish()
+//                                showProgressDialog()
+
                             } else showToast("Failed")
                         }
                     } else {

@@ -195,4 +195,9 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         startActivity(intent)
     }
+
+    fun goToProdukKu(){
+        val intent = Intent(this, ProdukSayaActivity::class.java)
+        startActivity(intent)
+    }
 }

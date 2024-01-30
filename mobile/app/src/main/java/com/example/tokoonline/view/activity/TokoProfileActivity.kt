@@ -31,7 +31,43 @@ class TokoProfileActivity : BaseActivity() {
         val emptyView: LinearLayout = binding.tokoNull
         val viewOn: LinearLayout = binding.viewOnToko
 
-        val userRole = userRepository.role
+
+        
+//        val userRole = userRepository.role
+        val userId = userRepository.uid
+
+        if (userId != null) {
+            viewModelToko.checkUserHasToko(userId) { userHasToko ->
+                if (userHasToko) {
+                    // User has a toko, show toko details
+                    emptyView.visibility = View.GONE
+                    viewOn.visibility = View.VISIBLE
+
+                    binding.toolbar.binding.leftIcon.setOnClickListener {
+                        finish()
+                    }
+                    getTokoData()
+
+
+                    // Use tokoData to populate your views
+                    // Example: binding.tvNamaToko.text = tokoData.nama
+                } else {
+                    // User doesn't have a toko, show button to add a new toko
+                    emptyView.visibility = View.VISIBLE
+                    viewOn.visibility = View.GONE
+
+                    binding.toolbarNull.binding.leftIcon.setOnClickListener {
+                        finish()
+                    }
+                    binding.btnTambahToko.setOnClickListener {
+                        // Handle the case for adding a new toko
+                        val intent = Intent(this, TambahTokoBaruActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+            }
+        }
+
 //        if (userRole == Constant.Role.PEMBELI) {
 //            emptyView.visibility = View.VISIBLE
 //            viewOn.visibility = View.GONE
@@ -44,13 +80,13 @@ class TokoProfileActivity : BaseActivity() {
 //            }
 //
 //        }else {
-            emptyView.visibility = View.GONE
-            viewOn.visibility = View.VISIBLE
-
-            binding.toolbar.binding.leftIcon.setOnClickListener {
-                finish()
-            }
-            getTokoData()
+//            emptyView.visibility = View.GONE
+//            viewOn.visibility = View.VISIBLE
+//
+//            binding.toolbar.binding.leftIcon.setOnClickListener {
+//                finish()
+//            }
+//            getTokoData()
 //        }
 
     }

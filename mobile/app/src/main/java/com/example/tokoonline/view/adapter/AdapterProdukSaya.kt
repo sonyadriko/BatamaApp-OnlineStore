@@ -21,7 +21,7 @@ class AdapterItemProdukSaya(
                     binding.tvNama.text = produk.nama
                     binding.tvHarga.text = moneyFormatter(produk.harga)
 //                    binding.tvBerat.text = produk.beratProduk.toString() + " Kg"
-                    binding.tvStok.text = "Stok : " + produk.stok.toString()
+                    binding.tvStok.text = produk.stok.toString()
 
 //                    binding.btnDetailProduk.setOnClickListener{
 //

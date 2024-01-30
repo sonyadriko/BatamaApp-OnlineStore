@@ -68,4 +68,21 @@ class TokoRepository {
             }
         })
     }
+
+    fun checkUserHasToko(userId: String, callback: (Boolean) -> Unit) {
+        val tokoRef = FirebaseDatabase.getInstance().getReference("Toko").child(userId)
+
+        tokoRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // Check if there are any children under the user's ID
+                val userHasToko = snapshot.childrenCount > 0
+                callback(userHasToko)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error if needed
+                callback(false)
+            }
+        })
+    }
 }

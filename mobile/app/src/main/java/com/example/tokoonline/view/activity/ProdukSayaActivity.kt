@@ -25,16 +25,14 @@ class ProdukSayaActivity : BaseActivity() {
 
 
         val tokoID = intent.getStringExtra("tokoID").toString()
+        showProgressDialog()
         loadProdukbyTokoID(tokoID)
 
-
-
-        
     }
 
     fun loadProdukbyTokoID(tokoID: String) {
         viewModel.loadProdukbyIDToko(tokoID) { produkList ->
-
+            dismissProgressDialog()
             val recyclerView: RecyclerView = binding.rvProduksaya
             val adapter = AdapterItemProdukSaya(produkList)
 

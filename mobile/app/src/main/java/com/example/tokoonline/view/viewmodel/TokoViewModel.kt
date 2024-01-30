@@ -31,6 +31,13 @@ class TokoViewModel : BaseViewModel() {
         }
     }
 
+    fun checkUserHasToko(userId: String, callback: (Boolean) -> Unit) {
+        // Assuming you have a repository method to check if the user has a toko
+        tokoRepository.checkUserHasToko(userId) { userHasToko ->
+            callback(userHasToko)
+        }
+    }
+
 
 
 
