@@ -10,7 +10,6 @@ aplikasi ini dibuat untuk mendapatkan gelar S1 pada jurusan sistem informasi ITA
 - basic transaction / buy and sell,
 - history transactions,
 
-
 ### Notes & Resources
 https://www.figma.com/file/98na6prcdnz2Yy5v2MTR01/Low-Fidelity%2C-Medium-Fidelity-dan-high-fidelty?type=design&node-id=0-1&mode=design
 
