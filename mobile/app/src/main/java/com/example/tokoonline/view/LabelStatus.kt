@@ -40,7 +40,7 @@ class LabelStatus constructor(context: Context, attributeSet: AttributeSet) :
             )
         }
 
-        if (status.equals("cancel", true)) {
+        if (status.equals("canceled", true)) {
             content.text = "DIBATALKAN"
             content.setTextColor(ContextCompat.getColor(
                 context,

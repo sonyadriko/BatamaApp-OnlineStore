@@ -9,8 +9,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.core.base.BaseFragment
-import com.example.tokoonline.core.util.*
+import com.example.tokoonline.core.util.OnItemClick
+import com.example.tokoonline.core.util.gone
+import com.example.tokoonline.core.util.visible
+import com.example.tokoonline.data.model.firebase.Transaction
 import com.example.tokoonline.databinding.FragmentRiwayattransaksiBinding
+import com.example.tokoonline.view.activity.PembayaranActivity
 import com.example.tokoonline.view.adapter.AdapterRiwayat
 import com.example.tokoonline.view.viewmodel.TransactionViewModel
 import kotlinx.coroutines.launch
@@ -25,7 +29,7 @@ class RiwayatTransaksiFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         super.onCreate(savedInstanceState)
         binding = FragmentRiwayattransaksiBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this)[TransactionViewModel::class.java]
@@ -47,10 +51,23 @@ class RiwayatTransaksiFragment : BaseFragment() {
         viewModel.getTransaction(userUid){transactionList ->
 
             dismissProgressDialog()
-            val recyclerView : RecyclerView = binding.rvRiwayat
-            val adapter = AdapterRiwayat(transactionList)
+            val recyclerView: RecyclerView = binding.rvRiwayat
+            val adapter = AdapterRiwayat(transactionList, object : OnItemClick {
+                override fun onClick(data: Any, position: Int) {
+                    if ((data as Transaction).status.equals("pending", ignoreCase = true)) {
+                        startActivity(
+                            PembayaranActivity.createIntent(
+                                requireActivity(),
+                                data
+                            )
+                        )
+                    } else {
+                        showToast("Transaksi status : " + data.status)
+                    }
+                }
+            })
 
-            if (transactionList.isNotEmpty()){
+            if (transactionList.isNotEmpty()) {
                 binding.divGambar.gone()
                 binding.rvRiwayat.visible()
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())

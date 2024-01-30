@@ -17,7 +17,7 @@ class AdapterListProduk(private val produkList: List<ProdukKeranjang>?) :
         @SuppressLint("SetTextI18n")
         fun bind(produk: ProdukKeranjang) = with(binding) {
             tvTotalHarga.text = moneyFormatter(produk.harga)
-            tvWeight.text = "${produk.beratProduk * produk.qty}Kg"
+            tvWeight.text = "${produk.beratProduk.toFloat() * produk.qty}Kg"
             tvCount.text = "${produk.qty} item${if (produk.qty > 1) "s" else ""}"
             val produkRepository = ProdukRepository.getInstance()
             produkRepository.getProdukById(produk.produkId) { produk ->
