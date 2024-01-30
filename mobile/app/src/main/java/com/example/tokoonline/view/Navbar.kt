@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.example.tokoonline.R
+import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.databinding.NavbarBinding
 
 class Navbar constructor(context: Context, attrs: AttributeSet) :
@@ -26,7 +27,10 @@ class Navbar constructor(context: Context, attrs: AttributeSet) :
             // Set left icon
             val leftIconResId = typedArray.getResourceId(R.styleable.Navbar_leftIcon, 0)
             if (leftIconResId != 0) {
-                binding.leftIcon.setImageResource(leftIconResId)
+                binding.leftIcon.apply {
+                    setImageResource(leftIconResId)
+                    visible()
+                }
             }
 
             // Set title
@@ -38,7 +42,10 @@ class Navbar constructor(context: Context, attrs: AttributeSet) :
             // Set right icon
             val rightIconResId = typedArray.getResourceId(R.styleable.Navbar_rightIcon, 0)
             if (rightIconResId != 0) {
-                binding.rightIcon.setImageResource(rightIconResId)
+                binding.rightIcon.apply {
+                    setImageResource(rightIconResId)
+                    visible()
+                }
             }
         } finally {
             typedArray.recycle()
