@@ -16,6 +16,12 @@ if( !strpos($_SERVER['REQUEST_URI'], '/charge') ) {
   echo "wrong path, make sure it's `/charge`"; exit();
 }
 
+// Check if request doesn't contains `/charge` in the url/path, display 404
+if( !strpos($_SERVER['REQUEST_URI'], '/conf') ) {
+  http_response_code(404); 
+  echo "current configuration : " . $is_production; exit();
+}
+
 // Check if method is not HTTP POST, display 404
 if( $_SERVER['REQUEST_METHOD'] !== 'POST'){
   http_response_code(404);
