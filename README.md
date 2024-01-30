@@ -29,7 +29,7 @@ https://www.figma.com/file/98na6prcdnz2Yy5v2MTR01/Low-Fidelity%2C-Medium-Fidelit
     </tr>
     <tr>
       <td><b>Auth</b></td>
-      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/6a23c285-c9c2-4827-aa6f-4bc4674e75a7"></td>
+      <td colspan="2"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/6a23c285-c9c2-4827-aa6f-4bc4674e75a7"></td>
       <td colspan="5"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/20504d9e-5a7d-4d06-873b-feee9572d89d"></td>
     </tr>
     <tr>
