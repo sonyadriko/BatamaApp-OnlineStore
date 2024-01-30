@@ -132,22 +132,11 @@ class PengirimanActivity : BaseActivity() {
         }
     }
 
-    private fun showProdukKeranjang() {
-//        val bundle = intent.extras
-//        val produkList = bundle?.getParcelableArrayList<ProdukKeranjang>("produkList")
-//        val recyclerView : RecyclerView = binding.rvProdukTransaksi
-//        val adapter = AdapterItemTransaksi(produkList)
-//
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        recyclerView.adapter = adapter
-    }
-
     override fun onResume() {
         super.onResume()
         showProgressDialog()
         val userId = userRepository.uid.toString()
         showAlamatDefault(userId)
-        showProdukKeranjang()
         lifecycleScope.launch {
             delay(200)
             dismissProgressDialog()
