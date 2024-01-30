@@ -1,6 +1,6 @@
 package com.example.tokoonline.view.adapter
 
-import android.content.ClipData.Item
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,27 +13,28 @@ import com.example.tokoonline.databinding.ItemRiwayatBinding
 
 class AdapterRiwayat(private val transactionList: List<Transaction>?) : RecyclerView.Adapter<AdapterRiwayat.ViewHolder>() {
     class ViewHolder(private val binding: ItemRiwayatBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(transaction: Transaction) {
-            binding.tvTotalHarga.text = moneyFormatter(transaction.harga.toLong())
+        @SuppressLint("SetTextI18n")
+        fun bind(transaction: Transaction) = with(binding) {
+            tvTotalHarga.text = moneyFormatter(transaction.harga.toLong())
+            labelStatus.setStatus(status = transaction.status)
+            tvItem.text = "${transaction.jumlah} item${if (transaction.jumlah > 1) "s" else ""}"
             val produkRepository = ProdukRepository.getInstance()
-            produkRepository.getProdukById(transaction.produkId){produk ->
-                if (produk != null){
-                    binding.tvNama.text = produk.nama
-                    Glide.with(binding.imgProduk.context)
+            produkRepository.getProdukById(transaction.produkId) { produk ->
+                if (produk != null) {
+                    tvNama.text = produk.nama
+                    Glide.with(imgProduk.context)
                         .load(produk.image)
-                        .into(binding.imgProduk)
+                        .into(imgProduk)
                 }
             }
-
-
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterRiwayat.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRiwayatBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return AdapterRiwayat.ViewHolder(binding)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AdapterRiwayat.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val transaction = transactionList?.get(position)
 
         transaction?.let {

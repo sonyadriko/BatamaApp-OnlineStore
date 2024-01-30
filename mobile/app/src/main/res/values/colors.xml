@@ -22,4 +22,13 @@
     <color name="colorNeutral600">#5C605C</color>
     <color name="colorNeutral800">#2C302D</color>
     <color name="colorNeutral900">#181B19</color>
+
+    <color name="colorSuccessBackground">#3D20845A</color>
+    <color name="colorSuccessText">#20845A</color>
+
+    <color name="colorPendingBackground">#3DF5C343</color>
+    <color name="colorPendingText">#F5C343</color>
+
+    <color name="colorCancelBackground">#3DC6463A</color>
+    <color name="colorCancelText">#C6463A</color>
 </resources>

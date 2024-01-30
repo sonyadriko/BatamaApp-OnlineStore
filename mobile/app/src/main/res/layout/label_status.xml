@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv_status"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#3D20845A"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="0dp"
+    app:strokeColor="#20845A"
+    app:strokeWidth="1dp">
+
+    <TextView
+        android:id="@+id/content"
+        style="@style/body_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="6dp"
+        android:text="SELESAI"
+        android:textColor="#20845A"
+        android:textSize="10sp"
+        tools:ignore="SmallSp, hardcodedText" />
+</com.google.android.material.card.MaterialCardView>
