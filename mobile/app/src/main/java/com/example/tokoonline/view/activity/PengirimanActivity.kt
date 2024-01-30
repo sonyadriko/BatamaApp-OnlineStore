@@ -20,6 +20,7 @@ import com.example.tokoonline.data.model.midtrans.CustomerDetails
 import com.example.tokoonline.data.model.midtrans.ShippingAddress
 import com.example.tokoonline.data.repository.firebase.AlamatRepository
 import com.example.tokoonline.databinding.ActivityPengirimanBinding
+import com.example.tokoonline.view.adapter.AdapterListProduk
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -49,6 +50,7 @@ class PengirimanActivity : BaseActivity() {
     }
 
     private var metodePengiriman: Int? = null
+    private lateinit var adapterListProduk: AdapterListProduk
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,8 +73,8 @@ class PengirimanActivity : BaseActivity() {
         }
 
         binding.tvTotalBelanja.text = moneyFormatter(produkKeranjang.getTotalBelanja())
-        binding.tvOngkir.text = moneyFormatter(5000)
-        binding.tvTotal.text = moneyFormatter(produkKeranjang.getTotalBelanja() + 5000)
+        binding.tvOngkir.text = moneyFormatter(0)
+        binding.tvTotal.text = moneyFormatter(produkKeranjang.getTotalBelanja() + 0)
 
 
         binding.btnBayar.setOnClickListener {
@@ -109,6 +111,9 @@ class PengirimanActivity : BaseActivity() {
             binding.cod.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
             binding.transfer.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
         }
+
+        adapterListProduk = AdapterListProduk(produkKeranjang!!.toList())
+        binding.detailItem.adapter = adapterListProduk
     }
 
     @SuppressLint("SetTextI18n")

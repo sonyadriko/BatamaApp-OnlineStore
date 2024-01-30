@@ -49,19 +49,22 @@
                     android:id="@+id/tv_nama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
+                    style="@style/body_1"
+                    android:ellipsize="end"
+                    android:textColor="#8E908E"
                     android:text="Nama"
                     android:paddingBottom="10dp"
-                    android:textSize="20dp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_totalHarga"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
+                    style="@style/body_1"
+                    android:textColor="#2C302D"
+                    android:ellipsize="end"
                     android:text="Rp.10.000"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
