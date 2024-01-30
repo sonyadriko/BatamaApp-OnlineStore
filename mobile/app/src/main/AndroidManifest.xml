@@ -47,7 +47,7 @@
             android:name=".view.activity.TokoProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.PengirimanActivity"
+            android:name=".view.activity.OrderConfirmationActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.PembayaranActivity"

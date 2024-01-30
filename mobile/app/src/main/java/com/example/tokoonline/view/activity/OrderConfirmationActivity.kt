@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.R
@@ -15,26 +14,24 @@ import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.ProdukKeranjang
-import com.example.tokoonline.data.model.midtrans.BillingAddress
-import com.example.tokoonline.data.model.midtrans.CustomerDetails
-import com.example.tokoonline.data.model.midtrans.ShippingAddress
-import com.example.tokoonline.data.repository.firebase.AlamatRepository
-import com.example.tokoonline.databinding.ActivityPengirimanBinding
+import com.example.tokoonline.data.repository.midtrans.MidtransRepository
+import com.example.tokoonline.databinding.ActivityOrderConfirmationBinding
 import com.example.tokoonline.view.adapter.AdapterListProduk
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class PengirimanActivity : BaseActivity() {
-    private lateinit var binding: ActivityPengirimanBinding
+class OrderConfirmationActivity : BaseActivity() {
+    private lateinit var binding: ActivityOrderConfirmationBinding
     private lateinit var viewModelAlamat: AlamatViewModel
 
     private var isAlamatDefaultPresent = false
     companion object {
         private const val EXTRA_DATA_PRODUK = "data_produk_extra"
         fun createIntent(context: Context, produkKeranjang: Array<ProdukKeranjang>): Intent {
-            return Intent(context, PengirimanActivity::class.java).apply {
+            return Intent(context, OrderConfirmationActivity::class.java).apply {
                 putExtra(EXTRA_DATA_PRODUK, produkKeranjang)
             }
         }
@@ -49,12 +46,15 @@ class PengirimanActivity : BaseActivity() {
         }
     }
 
+    @Inject
+    lateinit var midtransRepository: MidtransRepository
+
     private var metodePengiriman: Int? = null
     private lateinit var adapterListProduk: AdapterListProduk
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPengirimanBinding.inflate(layoutInflater)
+        binding = ActivityOrderConfirmationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModelAlamat = ViewModelProvider(this)[AlamatViewModel::class.java]
 
