@@ -1,7 +1,7 @@
 # Batama
 Aplikasi ini berfokus pada penjualan yang ada pada kecamatan wonokromo, surabaya. 
 berniat untuk menghubungkan penjual dan pembeli yang ada disebut, kedepannya akan dikembangkan dalam lingkup kota surabaya.
-aplikasi ini dibuat untuk mendapatkan gelar S1 pada jurusan sistem informasi ITATS
+aplikasi ini dibuat untuk mendapatkan gelar S1 pada jurusan sistem informasi ITATS.
 
 
 ### Notes & Resources
