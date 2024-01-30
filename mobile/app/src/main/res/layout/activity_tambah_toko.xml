@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TambahTokoActivity">
+    tools:context=".view.activity.TambahTokoActivity">
 
     <com.example.tokoonline.view.Navbar
         android:id="@+id/toolbar"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TambahTokoBaruActivity">
+    tools:context=".view.activity.TambahTokoBaruActivity">
 
     <com.example.tokoonline.view.Navbar
         android:id="@+id/toolbar"

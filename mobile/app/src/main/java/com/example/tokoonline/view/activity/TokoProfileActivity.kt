@@ -5,12 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.lifecycle.ViewModelProvider
-import com.example.tokoonline.TambahTokoActivity
-import com.example.tokoonline.TambahTokoBaruActivity
 import com.example.tokoonline.core.base.BaseActivity
-import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.databinding.ActivityTokoProfileBinding
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import com.example.tokoonline.view.viewmodel.TokoViewModel

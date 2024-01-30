@@ -4,10 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tokoonline.TambahAlamatBaruActivity
+import com.example.tokoonline.view.activity.TambahAlamatBaruActivity
 import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Alamat

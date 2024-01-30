@@ -9,25 +9,37 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.core.util.Result
+import com.example.tokoonline.core.util.getFormattedTimeMidtrans
 import com.example.tokoonline.core.util.getTotalBelanja
 import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.core.util.visible
+import com.example.tokoonline.data.model.firebase.Alamat
 import com.example.tokoonline.data.model.firebase.ProdukKeranjang
+import com.example.tokoonline.data.model.firebase.Transaction
+import com.example.tokoonline.data.model.midtrans.BillingAddress
+import com.example.tokoonline.data.model.midtrans.CustomerDetails
+import com.example.tokoonline.data.model.midtrans.ItemDetailsItem
+import com.example.tokoonline.data.model.midtrans.ShippingAddress
+import com.example.tokoonline.data.model.midtrans.SnapTokenResponse
+import com.example.tokoonline.data.model.midtrans.SnapTransactionDetailRequest
+import com.example.tokoonline.data.model.midtrans.TransactionDetails
+import com.example.tokoonline.data.repository.firebase.TransactionRepository
 import com.example.tokoonline.data.repository.midtrans.MidtransRepository
 import com.example.tokoonline.databinding.ActivityOrderConfirmationBinding
 import com.example.tokoonline.view.adapter.AdapterListProduk
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
+import com.midtrans.sdk.uikit.api.model.SnapTransactionDetail
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import java.util.UUID
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class OrderConfirmationActivity : BaseActivity() {
-    private lateinit var binding: ActivityOrderConfirmationBinding
-    private lateinit var viewModelAlamat: AlamatViewModel
-
-    private var isAlamatDefaultPresent = false
     companion object {
         private const val EXTRA_DATA_PRODUK = "data_produk_extra"
         fun createIntent(context: Context, produkKeranjang: Array<ProdukKeranjang>): Intent {
@@ -46,11 +58,20 @@ class OrderConfirmationActivity : BaseActivity() {
         }
     }
 
+    private lateinit var binding: ActivityOrderConfirmationBinding
+    private lateinit var viewModelAlamat: AlamatViewModel
+
     @Inject
     lateinit var midtransRepository: MidtransRepository
+    private val transactionRepository: TransactionRepository = TransactionRepository.getInstance()
 
-    private var metodePengiriman: Int? = null
+    private var alamat: Alamat? = null
+
+    private var metodePengiriman: String? = null
+    private var metodePembayaran: String? = null
     private lateinit var adapterListProduk: AdapterListProduk
+
+    private lateinit var customerDetail: CustomerDetails
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,36 +99,39 @@ class OrderConfirmationActivity : BaseActivity() {
 
 
         binding.btnBayar.setOnClickListener {
-            if (metodePengiriman == null) {
-                showToast("tolong pilih metode pengiriman terlebih dahulu")
-            } else if (!isAlamatDefaultPresent) {
+            if (alamat == null) {
                 showToast("tambahkan alamat pengiriman terlebih dahulu")
+            } else if (metodePengiriman == null) {
+                showToast("tolong pilih metode pengiriman terlebih dahulu")
+            } else if (metodePembayaran == null) {
+                showToast("tolong pilih metode pembayaran terlebih dahulu")
             } else {
-                startActivity(
-                    PembayaranActivity.createIntent(this, produkKeranjang!!, metodePengiriman!!)
-                )
+                it.isEnabled = false
+                createTransaction()
             }
         }
 
         binding.kirim.setOnClickListener {
-            metodePengiriman = 0
+            metodePengiriman = "kirim"
             binding.ambil.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
             binding.kirim.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
         }
 
         binding.ambil.setOnClickListener {
-            metodePengiriman = 1
+            metodePengiriman = "ambil"
             binding.kirim.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
             binding.ambil.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
         }
 
 
         binding.cod.setOnClickListener {
+            metodePembayaran = "cod"
             binding.transfer.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
             binding.cod.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
         }
 
         binding.transfer.setOnClickListener {
+            metodePembayaran = "transfer"
             binding.cod.setBackgroundResource(R.drawable.background_white_radius4_border_grey)
             binding.transfer.setBackgroundResource(R.drawable.background_blue_radius4_border_primary)
         }
@@ -121,13 +145,13 @@ class OrderConfirmationActivity : BaseActivity() {
         viewModelAlamat.getAlamatDefault(userUid) { alamatDef ->
             with(binding) {
                 if (alamatDef != null) {
-                    isAlamatDefaultPresent = true
                     alamatPlaceholder.gone()
                     alamatDefault.visible()
+                    alamat = alamatDef
 
                     alamatDefault.text =
                         "${alamatDef.nama} \u2022 ${alamatDef.phone}\n${alamatDef.alamat}"
-                } else isAlamatDefaultPresent = false
+                } else alamat = null
             }
         }
     }
@@ -141,5 +165,143 @@ class OrderConfirmationActivity : BaseActivity() {
             delay(200)
             dismissProgressDialog()
         }
+    }
+
+    private fun initTransactionDetails(): SnapTransactionDetail {
+        return SnapTransactionDetail(
+            orderId = UUID.randomUUID().toString(),
+            grossAmount = produkKeranjang.getTotalBelanja().toDouble()
+        )
+    }
+
+    private fun createTransaction() {
+        showProgressDialog()
+
+        val shippingAddress = ShippingAddress(
+            address = alamat!!.alamat,
+            city = "Surabaya",
+            countryCode = "IDN",
+            phone = userRepository.phone!!,
+            lastName = "",
+            firstName = userRepository.nama!!,
+            email = userRepository.email!!,
+            postalCode = "60245"
+        )
+
+        val billingAddress = BillingAddress(
+            address = alamat!!.alamat,
+            city = "Surabaya",
+            countryCode = "IDN",
+            phone = userRepository.phone!!,
+            lastName = "",
+            firstName = userRepository.nama!!,
+            email = userRepository.email!!,
+            postalCode = "60245"
+        )
+
+        customerDetail = CustomerDetails(
+            firstName = userRepository.nama!!,
+            email = userRepository.email!!,
+            phone = userRepository.phone!!,
+            shippingAddress = shippingAddress,
+            billingAddress = billingAddress,
+            lastName = ""
+        )
+
+        val itemDetails = produkKeranjang!!.map {
+            ItemDetailsItem(
+                id = it.produkId,
+                price = it.harga.toDouble(),
+                quantity = it.qty,
+                name = it.nama,
+                category = "",
+                brand = "",
+                url = "",
+                merchantName = "Batama"
+            )
+        }
+
+        if (metodePembayaran.equals("cod", ignoreCase = true)) {
+            startTransaction(getTransactionDetail())
+        } else {
+            lifecycleScope.launch {
+                midtransRepository.postSnapToken(
+                    SnapTransactionDetailRequest(
+                        customerDetails = customerDetail,
+                        itemDetails = itemDetails,
+                        transactionDetails = TransactionDetails(
+                            orderId = initTransactionDetails().orderId,
+                            grossAmount = initTransactionDetails().grossAmount,
+                        )
+                    )
+                ).collect { result ->
+                    when (result) {
+                        Result.Loading -> showProgressDialog()
+                        is Result.Success -> {
+                            binding.btnBayar.isEnabled = true
+                            startTransaction(getTransactionDetail(result))
+                        }
+
+                        is Result.Error -> {
+                            binding.btnBayar.isEnabled = true
+                            dismissProgressDialog()
+                            Timber.e(result.throwable)
+                            showToast("${result.httpCode} : ${result.throwable.message}")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun startTransaction(transaction: Transaction) {
+        try {
+            transactionRepository.addTransaction(transaction) { isComplete ->
+                dismissProgressDialog()
+                if (isComplete) {
+                    startActivity(Intent(this, SuccessOrderActivity::class.java))
+                } else {
+                    throw Exception("error during creating transaction")
+                }
+            }
+        } catch (e: Exception) {
+            e.message?.let { showToast(it) }
+        }
+    }
+
+    private fun getTransactionDetail(): Transaction  {
+        val product = produkKeranjang!![0]
+        return Transaction(
+            nama = product.nama,
+            orderId = initTransactionDetails().orderId,
+            jumlah = product.qty,
+            harga = product.harga.toDouble(),
+            produkId = product.produkId,
+            status = "success",
+            userId = userRepository.uid!!,
+            catatan = binding.edtCatatan.text.toString(),
+            metodePembayaran = metodePembayaran!!,
+            metodePengiriman = metodePengiriman!!,
+            snapToken = "",
+            createdAt = getFormattedTimeMidtrans(System.currentTimeMillis())
+        )
+    }
+
+    private fun getTransactionDetail(result: Result.Success<SnapTokenResponse>): Transaction  {
+        val product = produkKeranjang!![0]
+        return Transaction(
+            nama = product.nama,
+            orderId = initTransactionDetails().orderId,
+            jumlah = product.qty,
+            harga = product.harga.toDouble(),
+            produkId = product.produkId,
+            status = "pending",
+            userId = userRepository.uid!!,
+            catatan = binding.edtCatatan.text.toString(),
+            metodePembayaran = metodePembayaran!!,
+            metodePengiriman = metodePengiriman!!,
+            snapToken = result.data.token,
+            createdAt = getFormattedTimeMidtrans(System.currentTimeMillis())
+        )
     }
 }
