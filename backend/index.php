@@ -5,7 +5,7 @@ $is_production = getenv('IS_PROD');
 $server_key = $is_production ? getenv('ACCESS_KEY_PROD') : getenv('ACCESS_KEY_SANDBOX');
 // Set true for production, set false for sandbox
 
-$api_url = $is_production ? 
+$api_url = $is_production == 'true' ? 
   'https://app.midtrans.com/snap/v1/transactions' : 
   'https://app.sandbox.midtrans.com/snap/v1/transactions';
 
@@ -13,7 +13,7 @@ $api_url = $is_production ?
 if (strpos($_SERVER['REQUEST_URI'], '/conf')) {
   http_response_code(200); 
   echo "current configuration : " . $is_production;
-  echo "current url : " . $api_url;
+  echo "\ncurrent url : " . $api_url;
   exit();
 }
 
