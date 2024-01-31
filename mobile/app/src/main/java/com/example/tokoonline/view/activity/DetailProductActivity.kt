@@ -85,6 +85,8 @@ class DetailProductActivity : BaseActivity() {
             }
         }
 
+        
+
         callSeller.setOnClickListener {
             if (sellerPhone.text.isNullOrBlank()) {
                 showToast("Nomor WhatsApp tidak ditemukan")
@@ -95,15 +97,12 @@ class DetailProductActivity : BaseActivity() {
                 sellerPhone.text.toString(), "Halo, apakah produk ${produkData?.nama} masih ada"
             )
         }
-
         stok.text = "${produkData?.stok ?: 0} Pcs"
         berat.text = "${produkData?.beratProduk ?: 0} Kg"
-
         btnKeranjang.setOnClickListener {
             if (produkData == null) {
                 return@setOnClickListener
             }
-
             showProgressDialog()
             userRepository.uid?.let { uuid ->
                 keranjangRepository.addKeranjang(
@@ -119,7 +118,6 @@ class DetailProductActivity : BaseActivity() {
                     })
             }
         }
-
         btnBeli.setOnClickListener {
             showUpdateStatusDialog()
         }

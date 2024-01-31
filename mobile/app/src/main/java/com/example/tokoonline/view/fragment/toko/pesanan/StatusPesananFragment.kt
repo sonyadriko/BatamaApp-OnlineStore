@@ -1,6 +1,7 @@
 package com.example.tokoonline.view.fragment.toko.pesanan
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +10,32 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.tokoonline.DetailPesananTokoActivity
 import com.example.tokoonline.R
+import com.example.tokoonline.core.base.BaseFragment
+import com.example.tokoonline.core.util.OnItemClick
+import com.example.tokoonline.core.util.gone
+import com.example.tokoonline.core.util.visible
+import com.example.tokoonline.data.model.firebase.Transaction
 import com.example.tokoonline.databinding.FragmentStatusPesananBinding
+import com.example.tokoonline.view.activity.PembayaranActivity
 import com.example.tokoonline.view.activity.toko.pesanan.PageViewModel
+import com.example.tokoonline.view.adapter.AdapterRiwayat
+import com.example.tokoonline.view.viewmodel.TransactionViewModel
+import kotlinx.coroutines.launch
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class StatusPesananFragment : Fragment() {
-
+class StatusPesananFragment : BaseFragment() {
+    private var uuid = ""
     private lateinit var pageViewModel: PageViewModel
     private var _binding: FragmentStatusPesananBinding? = null
+    private lateinit var viewModel : TransactionViewModel
+
 
     private val binding get() = _binding!!
 
@@ -37,6 +53,14 @@ class StatusPesananFragment : Fragment() {
 
         _binding = FragmentStatusPesananBinding.inflate(inflater, container, false)
         val root = binding.root
+
+        lifecycleScope.launch {
+            userRepository.uid?.let {
+                uuid = it
+                getRiwayat(uuid)
+
+            }
+        }
 
         initView()
         return root
@@ -81,6 +105,43 @@ class StatusPesananFragment : Fragment() {
                 arguments = Bundle().apply {
                     putInt(ARG_SECTION_NUMBER, sectionNumber)
                 }
+            }
+        }
+    }
+
+    private fun getRiwayat(userUid : String){
+        showProgressDialog()
+        viewModel.getTransaction(userUid){transactionList ->
+
+            dismissProgressDialog()
+            val recyclerView: RecyclerView = binding.rvRiwayat
+            val adapter = AdapterRiwayat(transactionList, object : OnItemClick {
+                override fun onClick(data: Any, position: Int) {
+                    if ((data as Transaction).status.equals("pending", ignoreCase = true)
+                        && data.metodePembayaran.equals("cod", ignoreCase = true).not()
+                    ) {
+                        startActivity(
+                            PembayaranActivity.createIntent(
+                                requireActivity(),
+                                data
+                            )
+                        )
+                    } else {
+                        val intent = Intent(requireActivity(), DetailPesananTokoActivity::class.java)
+                        intent.putExtra("data", data)
+                        startActivity(intent)
+                    }
+                }
+            })
+
+            if (transactionList.isNotEmpty()) {
+                binding.placeholder.gone()
+                binding.rvRiwayat.visible()
+                recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                recyclerView.adapter = adapter
+            } else {
+                binding.placeholder.visible()
+                binding.rvRiwayat.gone()
             }
         }
     }

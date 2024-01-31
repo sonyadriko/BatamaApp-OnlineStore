@@ -55,7 +55,6 @@ class RiwayatTransaksiFragment : BaseFragment() {
             dismissProgressDialog()
             val recyclerView: RecyclerView = binding.rvRiwayat
             val adapter = AdapterRiwayat(transactionList, object : OnItemClick {
-
                 override fun onClick(data: Any, position: Int) {
                     if ((data as Transaction).status.equals("pending", ignoreCase = true)
                         && data.metodePembayaran.equals("cod", ignoreCase = true).not()
