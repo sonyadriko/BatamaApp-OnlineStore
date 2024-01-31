@@ -277,7 +277,7 @@ class OrderConfirmationActivity : BaseActivity() {
             jumlah = product.qty,
             harga = product.harga.toDouble(),
             produkId = product.produkId,
-            status = "success",
+            status = "pending",
             userId = userRepository.uid!!,
             catatan = binding.edtCatatan.text.toString(),
             metodePembayaran = metodePembayaran!!,
