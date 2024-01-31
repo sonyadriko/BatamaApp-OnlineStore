@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:id="@+id/toko_null"
+        android:visibility="invisible"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -474,6 +475,7 @@
                         android:src="@drawable/box_status_pesanan" />
 
                     <TextView
+                        android:id="@+id/btn_status_pesanan"
                         android:layout_width="wrap_content"
                         android:textColor="#2C302D"
                         android:fontFamily="@font/intermedium"

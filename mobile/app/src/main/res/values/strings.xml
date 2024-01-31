@@ -20,4 +20,7 @@
     <string name="harga_produk">Harga Produk</string>
     <string name="deskripsi_produk">Deskripsi Produk</string>
     <string name="submit">Submit</string>
+    <string name="title_activity_status_pesanan">StatusPesananActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>

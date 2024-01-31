@@ -2,7 +2,6 @@ package com.example.tokoonline.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProvider
@@ -16,23 +15,32 @@ class TokoProfileActivity : BaseActivity() {
     private lateinit var viewModelToko: TokoViewModel
     private lateinit var viewModelAlamat : AlamatViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTokoProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModelToko = ViewModelProvider(this).get(TokoViewModel::class.java)
-        viewModelAlamat = ViewModelProvider(this).get(AlamatViewModel::class.java)
+        showProgressDialog()
+        viewModelToko = ViewModelProvider(this)[TokoViewModel::class.java]
+        viewModelAlamat = ViewModelProvider(this)[AlamatViewModel::class.java]
 
+        initView()
+        initClickListener()
+    }
+
+    private fun initClickListener() {
+        binding.btnStatusPesanan.setOnClickListener {
+            startActivity(Intent(this, StatusPesananActivity::class.java))
+        }
+    }
+
+    private fun initView() {
         val emptyView: LinearLayout = binding.tokoNull
         val viewOn: LinearLayout = binding.viewOnToko
 
-
-        
-//        val userRole = userRepository.role
         val userId = userRepository.uid
 
         if (userId != null) {
+            dismissProgressDialog()
             viewModelToko.checkUserHasToko(userId) { userHasToko ->
                 if (userHasToko) {
                     // User has a toko, show toko details
@@ -43,7 +51,6 @@ class TokoProfileActivity : BaseActivity() {
                         finish()
                     }
                     getTokoData()
-
 
                     // Use tokoData to populate your views
                     // Example: binding.tvNamaToko.text = tokoData.nama
@@ -62,32 +69,12 @@ class TokoProfileActivity : BaseActivity() {
                     }
                 }
             }
+        } else {
+            finish()
         }
-
-//        if (userRole == Constant.Role.PEMBELI) {
-//            emptyView.visibility = View.VISIBLE
-//            viewOn.visibility = View.GONE
-//            binding.toolbarNull.binding.leftIcon.setOnClickListener {
-//                finish()
-//            }
-//            binding.btnTambahToko.setOnClickListener {
-//                val intent = Intent(this, TambahTokoBaruActivity::class.java)
-//                startActivity(intent)
-//            }
-//
-//        }else {
-//            emptyView.visibility = View.GONE
-//            viewOn.visibility = View.VISIBLE
-//
-//            binding.toolbar.binding.leftIcon.setOnClickListener {
-//                finish()
-//            }
-//            getTokoData()
-//        }
-
     }
 
-    fun getTokoData() {
+    private fun getTokoData() {
         val userUid = userRepository.uid.toString()
 
         viewModelToko.getTokoData(userUid) { toko ->
@@ -102,13 +89,11 @@ class TokoProfileActivity : BaseActivity() {
                         binding.tvAlamatToko.text = alamatToko.alamat
                     } else {
                         showToast("Gagal mengambil Alamat Toko")
-                        Log.e("TokoProfileActivity", "Failed to fetch Alamat Toko")
                     }
                 }
                 binding.optionProduk.setOnClickListener{goToProdukSaya(tokoID)}
             } else {
                 showToast("Gagal mengambil Nama Toko")
-                Log.e("TokoProfileActivity", "Failed to fetch Toko data")
             }
         }
     }
