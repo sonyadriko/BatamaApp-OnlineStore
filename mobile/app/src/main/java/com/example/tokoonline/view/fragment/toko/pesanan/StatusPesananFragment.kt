@@ -34,7 +34,7 @@ class StatusPesananFragment : BaseFragment() {
     private var uuid = ""
     private lateinit var pageViewModel: PageViewModel
     private var _binding: FragmentStatusPesananBinding? = null
-    private lateinit var viewModel : TransactionViewModel
+    private lateinit var viewModel: TransactionViewModel  // tambahkan inisialisasi ini
 
 
     private val binding get() = _binding!!
@@ -53,14 +53,17 @@ class StatusPesananFragment : BaseFragment() {
 
         _binding = FragmentStatusPesananBinding.inflate(inflater, container, false)
         val root = binding.root
-
+        viewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
         lifecycleScope.launch {
             userRepository.uid?.let {
                 uuid = it
-                getRiwayat(uuid)
+//                getRiwayat(uuid)
+                getRiwayat(uuid, pageViewModel.text.value ?: 0)
 
             }
         }
+
+
 
         initView()
         return root
@@ -69,6 +72,12 @@ class StatusPesananFragment : BaseFragment() {
     @SuppressLint("SetTextI18n")
     private fun initView() = with(_binding!!) {
         pageViewModel.text.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                0 -> getRiwayat(uuid, 0)
+                1 -> getRiwayat(uuid, 1)
+                2 -> getRiwayat(uuid, 2)
+            }
+
             when (it) {
                 0 -> {
                     cover.setImageResource(R.drawable.delivery)
@@ -87,6 +96,8 @@ class StatusPesananFragment : BaseFragment() {
             }
         })
     }
+
+
 
     companion object {
         /**
@@ -109,13 +120,20 @@ class StatusPesananFragment : BaseFragment() {
         }
     }
 
-    private fun getRiwayat(userUid : String){
+    private fun getRiwayat(userUid: String, statusPesanan: Int) {
         showProgressDialog()
-        viewModel.getTransaction(userUid){transactionList ->
-
+        viewModel.getTransaction(userUid) { transactionList ->
             dismissProgressDialog()
+
+            val filteredTransactionList = when (statusPesanan) {
+                0 -> transactionList.filter { it.status.equals("pending", ignoreCase = true) }
+                1 -> transactionList.filter { it.status.equals("canceled", ignoreCase = true) }
+                2 -> transactionList.filter { it.status.equals("success", ignoreCase = true) }
+                else -> transactionList
+            }
+
             val recyclerView: RecyclerView = binding.rvRiwayat
-            val adapter = AdapterRiwayat(transactionList, object : OnItemClick {
+            val adapter = AdapterRiwayat(filteredTransactionList, object : OnItemClick {
                 override fun onClick(data: Any, position: Int) {
                     if ((data as Transaction).status.equals("pending", ignoreCase = true)
                         && data.metodePembayaran.equals("cod", ignoreCase = true).not()
@@ -134,7 +152,7 @@ class StatusPesananFragment : BaseFragment() {
                 }
             })
 
-            if (transactionList.isNotEmpty()) {
+            if (filteredTransactionList.isNotEmpty()) {
                 binding.placeholder.gone()
                 binding.rvRiwayat.visible()
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -145,6 +163,7 @@ class StatusPesananFragment : BaseFragment() {
             }
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
