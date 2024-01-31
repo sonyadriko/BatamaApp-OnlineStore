@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.tokoonline.DetailPesananTokoActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.data.repository.firebase.UserRepository
 import com.example.tokoonline.view.activity.EditAkunActivity
@@ -17,6 +18,7 @@ import com.example.tokoonline.view.activity.TokoProfileActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Transaction
 import com.google.firebase.ktx.Firebase
 
 
@@ -90,6 +92,7 @@ abstract class BaseFragment : Fragment() {
         val intent = Intent(requireContext(), SettingAlamatActivity::class.java)
         startActivity(intent)
     }
+
 
     fun goToTokoProfile(){
         val intent = Intent(requireContext(), TokoProfileActivity::class.java)
