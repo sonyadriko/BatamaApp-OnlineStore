@@ -5,10 +5,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.databinding.ActivityTokoProfileBinding
+import com.example.tokoonline.view.activity.toko.pesanan.StatusPesananActivity
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import com.example.tokoonline.view.viewmodel.TokoViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class TokoProfileActivity : BaseActivity() {
     private lateinit var binding: ActivityTokoProfileBinding
@@ -40,7 +44,10 @@ class TokoProfileActivity : BaseActivity() {
         val userId = userRepository.uid
 
         if (userId != null) {
-            dismissProgressDialog()
+            lifecycleScope.launch {
+                delay(200)
+                dismissProgressDialog()
+            }
             viewModelToko.checkUserHasToko(userId) { userHasToko ->
                 if (userHasToko) {
                     // User has a toko, show toko details

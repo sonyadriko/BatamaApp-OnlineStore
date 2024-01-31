@@ -1,4 +1,4 @@
-package com.example.tokoonline.view.activity
+package com.example.tokoonline.view.activity.toko.pesanan
 
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -24,6 +24,9 @@ class StatusPesananActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.toolbar.binding.divider.invisible()
+        binding.toolbar.binding.leftIcon.setOnClickListener {
+            finish()
+        }
 
         val sectionsPagerAdapter = SectionsPagerAdapter(this, supportFragmentManager)
         val viewPager: ViewPager = binding.viewPager

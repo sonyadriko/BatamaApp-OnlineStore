@@ -17,7 +17,7 @@
             android:name=".view.activity.toko.pendapatan.PendapatanActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.StatusPesananActivity"
+            android:name=".view.activity.toko.pesanan.StatusPesananActivity"
             android:exported="false"
             android:label="@string/title_activity_status_pesanan"
             android:theme="@style/Theme.Tokoonline.NoActionBar" />

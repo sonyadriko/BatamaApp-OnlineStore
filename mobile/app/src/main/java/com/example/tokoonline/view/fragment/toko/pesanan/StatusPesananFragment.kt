@@ -1,29 +1,31 @@
-package com.example.tokoonline.view.activity.toko.pesanan
+package com.example.tokoonline.view.fragment.toko.pesanan
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.tokoonline.R
 import com.example.tokoonline.databinding.FragmentStatusPesananBinding
+import com.example.tokoonline.view.activity.toko.pesanan.PageViewModel
 
 /**
  * A placeholder fragment containing a simple view.
  */
-class PlaceholderFragment : Fragment() {
+class StatusPesananFragment : Fragment() {
 
     private lateinit var pageViewModel: PageViewModel
     private var _binding: FragmentStatusPesananBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pageViewModel = ViewModelProvider(this).get(PageViewModel::class.java).apply {
+        pageViewModel = ViewModelProvider(this)[PageViewModel::class.java].apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
     }
@@ -31,16 +33,35 @@ class PlaceholderFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentStatusPesananBinding.inflate(inflater, container, false)
         val root = binding.root
 
-        val textView: TextView = binding.sectionLabel
-        pageViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+        initView()
         return root
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initView() = with(_binding!!) {
+        pageViewModel.text.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                0 -> {
+                    cover.setImageResource(R.drawable.delivery)
+                    subtitle.text = "Pesanan yang perlu dikirim akan ditampilkan\npada halaman ini"
+                }
+
+                1 -> {
+                    cover.setImageResource(R.drawable.cancel)
+                    subtitle.text = "Pesanan yang telah dibatalkan akan ditampilkan\npada halaman ini"
+                }
+
+                2 -> {
+                    cover.setImageResource(R.drawable.selesai)
+                    subtitle.text = "Pesanan yang telah selesai akan ditampilkan\npada halaman ini"
+                }
+            }
+        })
     }
 
     companion object {
@@ -55,8 +76,8 @@ class PlaceholderFragment : Fragment() {
          * number.
          */
         @JvmStatic
-        fun newInstance(sectionNumber: Int): PlaceholderFragment {
-            return PlaceholderFragment().apply {
+        fun newInstance(sectionNumber: Int): StatusPesananFragment {
+            return StatusPesananFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECTION_NUMBER, sectionNumber)
                 }

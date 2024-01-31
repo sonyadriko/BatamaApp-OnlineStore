@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.StatusPesananActivity">
+    tools:context=".view.activity.toko.pesanan.StatusPesananActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -15,10 +15,16 @@
             android:id="@+id/toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:leftIcon="@drawable/round_arrow_back"
             app:title="Status Pesanan" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
+            style="@style/customTabLayout"
+            android:textAllCaps="false"
+            app:tabBackground="@color/white"
+            app:tabIndicatorColor="@color/colorPrimary500"
+            app:tabSelectedTextColor="@color/colorPrimary500"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>
