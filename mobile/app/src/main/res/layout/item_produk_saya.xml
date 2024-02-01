@@ -72,7 +72,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rp.10.000"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                 </RelativeLayout>
 
