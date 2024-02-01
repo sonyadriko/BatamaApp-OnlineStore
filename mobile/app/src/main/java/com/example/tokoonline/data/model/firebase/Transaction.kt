@@ -40,6 +40,7 @@ data class Transaction(
     val status: String = "",
     val produkId: String = "",
     val userId: String = "",
+    val alamatId : String = "",
     val catatan: String = "",
     val metodePengiriman: String = "",
     val metodePembayaran: String = "",

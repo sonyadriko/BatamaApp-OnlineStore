@@ -140,8 +140,9 @@ class OrderConfirmationActivity : BaseActivity() {
         binding.detailItem.adapter = adapterListProduk
     }
 
+    private var idAlamat = ""
     @SuppressLint("SetTextI18n")
-    private fun showAlamatDefault(userUid: String) {
+    fun showAlamatDefault(userUid: String) {
         viewModelAlamat.getAlamatDefault(userUid) { alamatDef ->
             with(binding) {
                 if (alamatDef != null) {
@@ -151,6 +152,7 @@ class OrderConfirmationActivity : BaseActivity() {
 
                     alamatDefault.text =
                         "${alamatDef.nama} \u2022 ${alamatDef.phone}\n${alamatDef.alamat}"
+                    idAlamat = alamatDef.id.toString()
                 } else alamat = null
             }
         }
@@ -269,10 +271,12 @@ class OrderConfirmationActivity : BaseActivity() {
         }
     }
 
-    private fun getTransactionDetail(): Transaction  {
+     private fun getTransactionDetail(): Transaction  {
         val product = produkKeranjang!![0]
+
         return Transaction(
             nama = product.nama,
+            alamatId = idAlamat,
             orderId = initTransactionDetails().orderId,
             jumlah = product.qty,
             harga = product.harga.toDouble(),
@@ -287,10 +291,11 @@ class OrderConfirmationActivity : BaseActivity() {
         )
     }
 
-    private fun getTransactionDetail(result: Result.Success<SnapTokenResponse>): Transaction  {
+     private fun getTransactionDetail(result: Result.Success<SnapTokenResponse>): Transaction  {
         val product = produkKeranjang!![0]
         return Transaction(
             nama = product.nama,
+            alamatId = idAlamat ,
             orderId = initTransactionDetails().orderId,
             jumlah = product.qty,
             harga = product.harga.toDouble(),
