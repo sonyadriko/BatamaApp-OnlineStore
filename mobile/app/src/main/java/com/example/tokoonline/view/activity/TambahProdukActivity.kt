@@ -9,6 +9,7 @@ import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.getFormattedTimeMidtrans
 import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.databinding.ActivityTambahProdukBinding
+import com.example.tokoonline.view.viewmodel.ProdukViewModel
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
@@ -38,15 +39,20 @@ class TambahProdukActivity : BaseActivity() {
     private fun initListener() = with(binding) {
         btnSbmitProduk.setOnClickListener {
             showProgressDialog()
-            val imageReference = storageReference.child(selectedImageUri!!.lastPathSegment!!)
-            //mengupload gambar ke firebase storage
-            imageReference.putFile(selectedImageUri!!)
-                .addOnSuccessListener {
-                    uploadProduct(imageReference)
-                }.addOnFailureListener {
-                    dismissProgressDialog()
-                    showToast("Gambar gagal diunggah")
-                }
+            if (selectedImageUri != null) {
+                val imageReference = storageReference.child(selectedImageUri!!.lastPathSegment!!)
+                // Upload the selected image to Firebase Storage
+                imageReference.putFile(selectedImageUri!!)
+                    .addOnSuccessListener {
+                        uploadProduct(imageReference)
+                    }.addOnFailureListener {
+                        dismissProgressDialog()
+                        showToast("Gambar gagal diunggah")
+                    }
+            } else {
+                dismissProgressDialog()
+                showToast("Pilih gambar terlebih dahulu")
+            }
         }
     }
 
@@ -61,7 +67,8 @@ class TambahProdukActivity : BaseActivity() {
                             harga = etHargaProduk.text.toString().toLong(),
                             deskripsi = etDeskProduk.text.toString(),
                             keyword = etNamaProduk.text.toString().lowercase(),
-                            idSeller = idToko ?: "", // Use the idToko here
+                            idToko = idToko ?: "", // Use the idToko here
+                            idSeller = userRepository.uid,
                             beratProduk = etBeratProduk.text.toString().toDouble(),
                             stok = this.etStok.text.toString().toInt(),
                             createdAt = getFormattedTimeMidtrans(System.currentTimeMillis())

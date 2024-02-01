@@ -72,7 +72,7 @@ class ProdukRepository {
 
 
     fun getProdukByTokoId(tokoID: String, onComplete: (data: List<Produk?>) -> Unit) {
-        databaseReference.orderByChild("idSeller")
+        databaseReference.orderByChild("idToko")
             .equalTo(tokoID)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
