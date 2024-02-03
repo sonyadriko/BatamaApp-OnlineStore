@@ -84,8 +84,9 @@ class HomeFragment : BaseFragment(), OnItemClick {
                 }
             }
 
+            val filteredData = it.dataProduk.filter { produk -> produk.idSeller != userRepository.uid }
 
-            productAdapter.submitList(it.dataProduk)
+            productAdapter.submitList(filteredData)
         }
     }
 
