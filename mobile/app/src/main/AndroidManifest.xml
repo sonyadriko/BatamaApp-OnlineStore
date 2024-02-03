@@ -22,7 +22,7 @@
             android:label="@string/title_activity_status_pesanan"
             android:theme="@style/Theme.Tokoonline.NoActionBar" />
         <activity
-            android:name=".DetailPesananTokoActivity"
+            android:name=".view.activity.DetailPesananTokoActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.PendapatanActivity"

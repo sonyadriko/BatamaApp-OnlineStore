@@ -1,12 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Tokoonline" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.Tokoonline" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_500</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/white</item>
+        <item name="colorSecondary">@color/colorPrimary500</item>
         <item name="colorSecondaryVariant">@color/colorPrimary500</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -18,4 +18,13 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
+
+    <style name="Theme.Tokoonline.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Tokoonline.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Tokoonline.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

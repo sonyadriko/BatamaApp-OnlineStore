@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tokoonline.DetailPesananTokoActivity
+import com.example.tokoonline.view.activity.DetailPesananTokoActivity
 import com.example.tokoonline.core.base.BaseFragment
 import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.core.util.gone
@@ -28,6 +28,27 @@ class RiwayatTransaksiFragment : BaseFragment() {
     private lateinit var viewModel : TransactionViewModel
 
 
+    private val adapter: AdapterRiwayat by lazy {
+        AdapterRiwayat(object : OnItemClick {
+            override fun onClick(data: Any, position: Int) {
+                if ((data as Transaction).status.equals("pending", ignoreCase = true)
+                    && data.metodePembayaran.equals("cod", ignoreCase = true).not()
+                ) {
+                    startActivity(
+                        PembayaranActivity.createIntent(
+                            requireActivity(),
+                            data
+                        )
+                    )
+                } else {
+                    val intent = Intent(requireActivity(), DetailPesananTokoActivity::class.java)
+                    intent.putExtra("data", data)
+                    startActivity(intent)
+                }
+            }
+        })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,52 +56,41 @@ class RiwayatTransaksiFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         binding = FragmentRiwayattransaksiBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this)[TransactionViewModel::class.java]
+        init()
 
-
-        lifecycleScope.launch {
-            userRepository.uid?.let {
-                uuid = it
-                getRiwayat(uuid)
-
-            }
+        binding.rvRiwayat.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = this@RiwayatTransaksiFragment.adapter
+        }
+        binding.swipeRefresh.setOnRefreshListener {
+            init()
         }
 
         return binding.root
     }
 
     private fun getRiwayat(userUid : String){
-        showProgressDialog()
+        binding.swipeRefresh.isRefreshing = true
         viewModel.getTransaction(userUid){transactionList ->
+            binding.swipeRefresh.isRefreshing = false
 
-            dismissProgressDialog()
-            val recyclerView: RecyclerView = binding.rvRiwayat
-            val adapter = AdapterRiwayat(transactionList, object : OnItemClick {
-                override fun onClick(data: Any, position: Int) {
-                    if ((data as Transaction).status.equals("pending", ignoreCase = true)
-                        && data.metodePembayaran.equals("cod", ignoreCase = true).not()
-                    ) {
-                        startActivity(
-                            PembayaranActivity.createIntent(
-                                requireActivity(),
-                                data
-                            )
-                        )
-                    } else {
-                        val intent = Intent(requireActivity(), DetailPesananTokoActivity::class.java)
-                        intent.putExtra("data", data)
-                        startActivity(intent)
-                    }
-                }
-            })
-
+            adapter.submitList(transactionList)
             if (transactionList.isNotEmpty()) {
                 binding.divGambar.gone()
                 binding.rvRiwayat.visible()
-                recyclerView.layoutManager = LinearLayoutManager(requireContext())
-                recyclerView.adapter = adapter
             } else {
                 binding.divGambar.visible()
                 binding.rvRiwayat.gone()
+            }
+        }
+    }
+
+    private fun init() {
+        lifecycleScope.launch {
+            adapter.submitList(emptyList())
+            userRepository.uid?.let {
+                uuid = it
+                getRiwayat(uuid)
             }
         }
     }

@@ -65,7 +65,7 @@ class TransactionRepository {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val transactions = dataSnapshot.children.map { snapshot ->
                         snapshot.getValue(Transaction::class.java)
-                    }
+                    }.reversed()
                     onComplete(transactions)
                 }
 
@@ -83,7 +83,7 @@ class TransactionRepository {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val transactions = dataSnapshot.children.map { snapshot ->
                         snapshot.getValue(Transaction::class.java)
-                    }
+                    }.reversed()
                     onComplete(transactions)
                 }
 

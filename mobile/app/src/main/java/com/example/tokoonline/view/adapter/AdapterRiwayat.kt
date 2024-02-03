@@ -13,13 +13,23 @@ import com.example.tokoonline.databinding.ItemRiwayatBinding
 
 
 class AdapterRiwayat(
-    private val transactionList: List<Transaction>?,
     private val onItemClick: OnItemClick
 ) : RecyclerView.Adapter<AdapterRiwayat.ViewHolder>() {
-    inner class ViewHolder(private val binding: ItemRiwayatBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    private val transactionList: MutableList<Transaction> = mutableListOf()
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitList(newList: List<Transaction>) {
+        transactionList.clear()
+        transactionList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
+    inner class ViewHolder(private val binding: ItemRiwayatBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(transaction: Transaction, position: Int) = with(binding) {
-            tvTotalHarga.text = moneyFormatter(transaction.harga.toLong())
+            tvTotalHarga.text = moneyFormatter(transaction.harga.toLong() * transaction.jumlah)
             labelStatus.setStatus(status = transaction.status)
             tvItem.text = "${transaction.jumlah} item${if (transaction.jumlah > 1) "s" else ""}"
             val produkRepository = ProdukRepository.getInstance()
@@ -43,15 +53,14 @@ class AdapterRiwayat(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val transaction = transactionList?.get(position)
-
-        transaction?.let {
+        val transaction = transactionList[position]
+        transaction.let {
             holder.bind(transaction, position)
         }
     }
 
     override fun getItemCount(): Int {
-        return transactionList?.size ?: 0
+        return transactionList.size
     }
 
 }

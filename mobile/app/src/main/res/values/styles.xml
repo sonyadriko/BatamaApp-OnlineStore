@@ -11,6 +11,16 @@
         <item name="android:textSize">@dimen/subtitle_2</item>
     </style>
 
+    <style name="button_danger">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/background_white_radius8_border_red</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">#C6463A</item>
+        <item name="android:textSize">@dimen/subtitle_2</item>
+    </style>
+
     <style name="button_primary">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

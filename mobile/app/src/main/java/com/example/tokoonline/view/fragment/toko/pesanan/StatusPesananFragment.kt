@@ -1,7 +1,6 @@
 package com.example.tokoonline.view.fragment.toko.pesanan
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tokoonline.DetailPesananTokoActivity
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseFragment
 import com.example.tokoonline.core.util.OnItemClick
@@ -19,6 +17,7 @@ import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Transaction
 import com.example.tokoonline.databinding.FragmentStatusPesananBinding
+import com.example.tokoonline.view.activity.DetailPesananTokoActivity
 import com.example.tokoonline.view.activity.PembayaranActivity
 import com.example.tokoonline.view.activity.toko.pesanan.PageViewModel
 import com.example.tokoonline.view.adapter.AdapterRiwayat
@@ -29,74 +28,6 @@ import kotlinx.coroutines.launch
  * A placeholder fragment containing a simple view.
  */
 class StatusPesananFragment : BaseFragment() {
-    private var uuid = ""
-    private lateinit var pageViewModel: PageViewModel
-    private var _binding: FragmentStatusPesananBinding? = null
-    private lateinit var viewModel: TransactionViewModel  // tambahkan inisialisasi ini
-
-
-    private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        pageViewModel = ViewModelProvider(this)[PageViewModel::class.java].apply {
-            setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        _binding = FragmentStatusPesananBinding.inflate(inflater, container, false)
-        val root = binding.root
-        viewModel = ViewModelProvider(this).get(TransactionViewModel::class.java)
-        lifecycleScope.launch {
-            userRepository.uid?.let {
-                uuid = it
-//                getRiwayat(uuid)
-                getRiwayat(uuid, pageViewModel.text.value ?: 0)
-
-            }
-        }
-
-
-
-        initView()
-        return root
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun initView() = with(_binding!!) {
-        pageViewModel.text.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                0 -> getRiwayat(uuid, 0)
-                1 -> getRiwayat(uuid, 1)
-                2 -> getRiwayat(uuid, 2)
-            }
-
-            when (it) {
-                0 -> {
-                    cover.setImageResource(R.drawable.delivery)
-                    subtitle.text = "Pesanan yang perlu dikirim akan ditampilkan\npada halaman ini"
-                }
-
-                1 -> {
-                    cover.setImageResource(R.drawable.cancel)
-                    subtitle.text = "Pesanan yang telah dibatalkan akan ditampilkan\npada halaman ini"
-                }
-
-                2 -> {
-                    cover.setImageResource(R.drawable.selesai)
-                    subtitle.text = "Pesanan yang telah selesai akan ditampilkan\npada halaman ini"
-                }
-            }
-        })
-    }
-
-
-
     companion object {
         /**
          * The fragment argument representing the section number for this
@@ -118,6 +49,92 @@ class StatusPesananFragment : BaseFragment() {
         }
     }
 
+    private var uuid = ""
+    private lateinit var pageViewModel: PageViewModel
+    private var _binding: FragmentStatusPesananBinding? = null
+    private lateinit var viewModel: TransactionViewModel  // tambahkan inisialisasi ini
+
+
+    private val binding get() = _binding!!
+
+    val adapter: AdapterRiwayat by lazy {
+        AdapterRiwayat(object : OnItemClick {
+            override fun onClick(data: Any, position: Int) {
+                if ((data as Transaction).status.equals("pending", ignoreCase = true)
+                    && data.metodePembayaran.equals("cod", ignoreCase = true).not()
+                ) {
+                    startActivity(
+                        PembayaranActivity.createIntent(
+                            requireActivity(),
+                            data
+                        )
+                    )
+                } else {
+                    startActivity(
+                        DetailPesananTokoActivity.createIntent(
+                            requireContext(),
+                            transaction = data,
+                            isFromSeller = true
+                        )
+                    )
+                }
+            }
+        })
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        pageViewModel = ViewModelProvider(this)[PageViewModel::class.java].apply {
+            setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
+        _binding = FragmentStatusPesananBinding.inflate(inflater, container, false)
+        val root = binding.root
+        viewModel = ViewModelProvider(this)[TransactionViewModel::class.java]
+
+        initView()
+        init()
+        return root
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initView() = with(_binding!!) {
+        rvRiwayat.layoutManager = LinearLayoutManager(requireContext())
+        rvRiwayat.adapter = adapter
+
+        pageViewModel.text.observe(viewLifecycleOwner) {
+            when (it) {
+                0 -> getRiwayat(uuid, 0)
+                1 -> getRiwayat(uuid, 1)
+                2 -> getRiwayat(uuid, 2)
+            }
+
+            when (it) {
+                0 -> {
+                    cover.setImageResource(R.drawable.delivery)
+                    subtitle.text = "Pesanan yang perlu dikirim akan ditampilkan\npada halaman ini"
+                }
+
+                1 -> {
+                    cover.setImageResource(R.drawable.cancel)
+                    subtitle.text =
+                        "Pesanan yang telah dibatalkan akan ditampilkan\npada halaman ini"
+                }
+
+                2 -> {
+                    cover.setImageResource(R.drawable.selesai)
+                    subtitle.text = "Pesanan yang telah selesai akan ditampilkan\npada halaman ini"
+                }
+            }
+        }
+    }
+
     private fun getRiwayat(sellerId: String, statusPesanan: Int) {
         showProgressDialog()
         viewModel.getTransactionBySellerId(sellerId) { transactionList ->
@@ -130,34 +147,22 @@ class StatusPesananFragment : BaseFragment() {
                 else -> transactionList
             }
 
-            val recyclerView: RecyclerView = binding.rvRiwayat
-            val adapter = AdapterRiwayat(filteredTransactionList, object : OnItemClick {
-                override fun onClick(data: Any, position: Int) {
-                    if ((data as Transaction).status.equals("pending", ignoreCase = true)
-                        && data.metodePembayaran.equals("cod", ignoreCase = true).not()
-                    ) {
-                        startActivity(
-                            PembayaranActivity.createIntent(
-                                requireActivity(),
-                                data
-                            )
-                        )
-                    } else {
-                        val intent = Intent(requireActivity(), DetailPesananTokoActivity::class.java)
-                        intent.putExtra("data", data)
-                        startActivity(intent)
-                    }
-                }
-            })
-
+            adapter.submitList(filteredTransactionList)
             if (filteredTransactionList.isNotEmpty()) {
                 binding.placeholder.gone()
                 binding.rvRiwayat.visible()
-                recyclerView.layoutManager = LinearLayoutManager(requireContext())
-                recyclerView.adapter = adapter
             } else {
                 binding.placeholder.visible()
                 binding.rvRiwayat.gone()
+            }
+        }
+    }
+
+    private fun init() {
+        lifecycleScope.launch {
+            userRepository.uid?.let {
+                uuid = it
+                getRiwayat(uuid, pageViewModel.text.value ?: 0)
             }
         }
     }
@@ -166,5 +171,10 @@ class StatusPesananFragment : BaseFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        init()
     }
 }

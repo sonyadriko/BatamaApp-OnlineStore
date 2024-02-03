@@ -11,7 +11,17 @@
         <item name="android:textSize">@dimen/subtitle_2</item>
     </style>
 
-    <style name="button_primary" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+    <style name="button_danger">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/background_white_radius8_border_red</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">#C6463A</item>
+        <item name="android:textSize">@dimen/subtitle_2</item>
+    </style>
+
+    <style name="button_primary">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:elevation">0dp</item>
@@ -31,8 +41,8 @@
     <style name="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Custom" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorNeutral900</item>
         <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textColor">@color/colorNeutral900</item>
         <item name="boxBackgroundColor">@color/white</item>
         <item name="boxCornerRadiusBottomEnd">8dp</item>
         <item name="boxCornerRadiusBottomStart">8dp</item>
@@ -45,9 +55,9 @@
     <style name="Widget.MaterialComponents.TextInputLayout.FilledBox.Custom" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/colorNeutral900</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="boxBackgroundColor">@color/white</item>
+        <item name="android:textColor">@color/colorNeutral900</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxCornerRadiusBottomEnd">8dp</item>
         <item name="boxCornerRadiusBottomStart">8dp</item>
@@ -82,5 +92,13 @@
         <item name="android:fontFamily">@font/interm</item>
         <item name="android:textColor">@color/colorNeutral600</item>
         <item name="android:textSize">@dimen/body_1</item>
+    </style>
+
+    <style name="customTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/TabTextAppearance</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textAllCaps">false</item>
     </style>
 </resources>

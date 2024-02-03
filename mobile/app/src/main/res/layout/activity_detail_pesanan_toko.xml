@@ -6,15 +6,15 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent"
-        tools:context=".DetailPesananTokoActivity">
+        tools:context=".view.activity.DetailPesananTokoActivity">
 
 
-    <com.example.tokoonline.view.Navbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:leftIcon="@drawable/round_arrow_back"
-        app:title="Detail Pesanan" />
+        <com.example.tokoonline.view.Navbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftIcon="@drawable/round_arrow_back"
+            app:title="Detail Pesanan" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -627,6 +627,38 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/seller_action"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/colorNeutral50" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_selesai"
+                        style="@style/button_primary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/medium_space"
+                        android:text="Pesanan Diterima" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_batal"
+                        style="@style/button_danger"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/medium_space"
+                        android:layout_marginBottom="@dimen/medium_space"
+                        android:text="Batalkan Transaksi" />
 
                 </LinearLayout>
 
