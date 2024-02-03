@@ -180,8 +180,8 @@ class AlamatRepository {
                 onComplete(task.isSuccessful)
             }
     }
-    fun deleteAlamatById(id: String, onComplete: (Boolean) -> Unit) {
-        databaseReference.child(id).removeValue()
+    fun deleteAlamatById( id: String, userUid: String, onComplete: (Boolean) -> Unit) {
+        databaseReference.child(userUid).child(id).removeValue()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     onComplete(true)

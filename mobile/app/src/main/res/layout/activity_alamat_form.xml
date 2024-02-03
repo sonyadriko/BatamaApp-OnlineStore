@@ -115,6 +115,16 @@
             android:background="#ECECEC" />
 
         <Button
+            android:id="@+id/btn_hapusAlamat"
+            style="@style/button_primary"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Hapus" />
+
+        <Button
             android:id="@+id/btn_simpanAlamat"
             style="@style/button_primary"
             android:layout_alignParentBottom="true"
