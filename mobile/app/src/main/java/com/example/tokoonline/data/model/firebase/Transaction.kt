@@ -46,6 +46,7 @@ data class Transaction(
     val metodePembayaran: String = "",
     val snapToken: String = "",
     val createdAt: String = "",
+    val idSeller: String = "",
 ) : Parcelable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()

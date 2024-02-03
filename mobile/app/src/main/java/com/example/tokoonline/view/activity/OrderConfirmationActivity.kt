@@ -287,7 +287,8 @@ class OrderConfirmationActivity : BaseActivity() {
             metodePembayaran = metodePembayaran!!,
             metodePengiriman = metodePengiriman!!,
             snapToken = "",
-            createdAt = getFormattedTimeMidtrans(System.currentTimeMillis())
+            createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
+            idSeller = product.idSeller!!
         )
     }
 
@@ -306,7 +307,8 @@ class OrderConfirmationActivity : BaseActivity() {
             metodePembayaran = metodePembayaran!!,
             metodePengiriman = metodePengiriman!!,
             snapToken = result.data.token,
-            createdAt = getFormattedTimeMidtrans(System.currentTimeMillis())
+            createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
+            idSeller = product.idSeller!!
         )
     }
 }

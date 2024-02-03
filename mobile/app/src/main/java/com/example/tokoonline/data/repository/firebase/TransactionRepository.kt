@@ -76,4 +76,22 @@ class TransactionRepository {
             })
     }
 
+    fun getTransactionsByIdSeller(idSeller: String, onComplete: (data: List<Transaction?>) -> Unit) {
+        databaseReference.orderByChild("idSeller")
+            .equalTo(idSeller)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val transactions = dataSnapshot.children.map { snapshot ->
+                        snapshot.getValue(Transaction::class.java)
+                    }
+                    onComplete(transactions)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Handle the error here if needed
+                    onComplete(emptyList()) // Return an empty list in case of an error
+                }
+            })
+    }
+
 }

@@ -17,5 +17,14 @@ class TransactionViewModel : BaseViewModel() {
         }
     }
 
+    fun getTransactionBySellerId(idSeller: String, onComplete: (List<Transaction>) -> Unit) {
+        viewModelScope.launch {
+            transactionRepository.getTransactionsByIdSeller(idSeller){ transactionList ->
+                val nonNullAlamatList = transactionList.filterNotNull()
+                onComplete(nonNullAlamatList)
+            }
+        }
+    }
+
 
 }
