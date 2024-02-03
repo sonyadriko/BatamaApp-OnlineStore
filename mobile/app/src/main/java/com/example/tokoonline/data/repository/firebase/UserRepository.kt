@@ -145,10 +145,12 @@ class UserRepository constructor(
         database.child(uid).updateChildren(userUpdateMap)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Update successful
                     onComplete(true)
+
+                    nama = newName
+                    email = newEmail
+                    phone = newPhone
                 } else {
-                    // Update failed
                     onComplete(false)
                 }
             }

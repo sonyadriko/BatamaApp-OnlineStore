@@ -24,6 +24,7 @@ class EditProfilActivity : BaseActivity() {
         binding.edtNama.setText(userRepository.nama)
         binding.edtPhone.setText(userRepository.phone)
         binding.edtEmail.setText(userRepository.email)
+
         val userUid = userRepository.uid.toString()
 
         binding.btnRegister.setOnClickListener {

@@ -35,7 +35,6 @@ class AkunFragment : BaseFragment() {
 
         binding.tvNama.text = userRepository.nama
         binding.tvEmail.text = userRepository.email
-//            binding.tvPhone.text = userRepository.phone
 
         binding.btnLogout.setOnClickListener {
            logout()
@@ -65,17 +64,14 @@ class AkunFragment : BaseFragment() {
         return binding.root
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//
-//        // Refresh data or perform actions when the fragment is resumed
-//        refreshData()
-//    }
-//
-//    private fun refreshData() {
-//        // You can put the code here to refresh data or perform any actions needed
-//        // For example, if you want to refresh the user information, you can do something like this:
-//        binding.tvNama.text = userRepository.nama
-//        binding.tvEmail.text = userRepository.idToko
-//    }
+    override fun onResume() {
+        super.onResume()
+
+        refreshData()
+    }
+
+    private fun refreshData() {
+        binding.tvNama.text = userRepository.nama
+        binding.tvEmail.text = userRepository.email
+    }
 }
