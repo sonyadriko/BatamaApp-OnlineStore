@@ -238,6 +238,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="Beli"
+                    android:background="@drawable/button_disabled_background"
                     app:elevation="0dp" />
             </LinearLayout>
 

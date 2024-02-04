@@ -97,7 +97,21 @@ class DetailProductActivity : BaseActivity() {
                 sellerPhone.text.toString(), "Halo, apakah produk ${produkData?.nama} masih ada"
             )
         }
-        stok.text = "${produkData?.stok ?: 0} Pcs"
+
+        val stokProduk = produkData?.stok
+
+        if (stokProduk == null || stokProduk == 0) {
+            btnBeli.isEnabled = false
+            btnBeli.setOnClickListener {
+                showToast("Stok produk tidak tersedia. Silahkan hubungi seller")
+            }
+        } else {
+            stok.text = "${stokProduk} Pcs"
+            btnBeli.isEnabled = true
+        }
+
+
+
         berat.text = "${produkData?.beratProduk ?: 0} Kg"
         btnKeranjang.setOnClickListener {
             if (produkData == null) {
