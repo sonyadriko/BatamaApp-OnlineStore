@@ -28,6 +28,7 @@ data class Produk(
 
     fun toProdukKeranjang(jumlah: Int): ProdukKeranjang {
         return ProdukKeranjang(
+            id = this.id,
             image = this.image,
             nama = this.nama,
             harga = this.harga,
@@ -35,7 +36,8 @@ data class Produk(
             beratProduk = this.beratProduk,
             idSeller = this.idSeller,
             qty = jumlah,
-            produkId = this.id
+            produkId = this.id,
+            stok = this.stok
         )
     }
 }

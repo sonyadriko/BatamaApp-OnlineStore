@@ -9,6 +9,7 @@ import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.firebase.Transaction
 import com.example.tokoonline.data.repository.firebase.ProdukRepository
+import com.example.tokoonline.data.repository.firebase.ProdukTransactionRepository
 import com.example.tokoonline.databinding.ItemRiwayatBinding
 
 
@@ -32,7 +33,7 @@ class AdapterRiwayat(
             tvTotalHarga.text = moneyFormatter(transaction.harga.toLong() * transaction.jumlah)
             labelStatus.setStatus(status = transaction.status)
             tvItem.text = "${transaction.jumlah} item${if (transaction.jumlah > 1) "s" else ""}"
-            val produkRepository = ProdukRepository.getInstance()
+            val produkRepository = ProdukTransactionRepository.getInstance()
             produkRepository.getProdukById(transaction.produkId) { produk ->
                 if (produk != null) {
                     tvNama.text = produk.nama

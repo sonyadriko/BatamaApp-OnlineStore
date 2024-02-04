@@ -44,9 +44,10 @@ class ProdukRepository {
             }
     }
 
-    fun updateProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
-        databaseReference.child(produk.keyword)
-            .updateChildren(produk.toMap())
+    fun updateProdukStok(produkId: String, newStok: Int, onComplete: (isSuccess: Boolean) -> Unit) {
+        databaseReference.child(produkId)
+            .child("stok")
+            .setValue(newStok)
             .addOnCompleteListener {
                 onComplete(it.isSuccessful)
             }

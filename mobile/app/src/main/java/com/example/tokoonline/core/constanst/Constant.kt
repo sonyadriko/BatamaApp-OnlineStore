@@ -14,4 +14,5 @@ object Constant {
     const val REFERENCE_ALAMAT = "Alamat"
     const val REFERENCE_KERANJANG = "Keranjang"
     const val REFERENCE_TOKO = "Toko"
+    const val REFERENCE_PRODUK_TRANSACTIONS = "ProdukTransactions"
 }

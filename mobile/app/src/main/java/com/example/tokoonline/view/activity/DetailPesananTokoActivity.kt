@@ -13,6 +13,7 @@ import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Transaction
 import com.example.tokoonline.data.repository.firebase.ProdukRepository
+import com.example.tokoonline.data.repository.firebase.ProdukTransactionRepository
 import com.example.tokoonline.data.repository.firebase.TransactionRepository
 import com.example.tokoonline.databinding.ActivityDetailPesananTokoBinding
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
@@ -126,7 +127,7 @@ class DetailPesananTokoActivity : BaseActivity() {
         }
 
         var idProduk = data.produkId
-        ProdukRepository.getInstance().getProdukById(idProduk){produk->
+        ProdukTransactionRepository.getInstance().getProdukById(idProduk){produk->
             if (produk !== null){
                 binding.tvNama.text = produk.nama
                 binding.tvTotalHarga.text = moneyFormatter(produk.harga)

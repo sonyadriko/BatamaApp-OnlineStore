@@ -2,6 +2,7 @@ package com.example.tokoonline.data.repository.firebase
 
 import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.core.util.multiValueListenerFlow
+import com.example.tokoonline.data.model.firebase.ProdukKeranjang
 import com.example.tokoonline.data.model.firebase.Transaction
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -11,8 +12,11 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.flow.Flow
 
 class TransactionRepository {
-    private val databaseReference: DatabaseReference =
+    private val transactionReference: DatabaseReference =
         FirebaseDatabase.getInstance().getReference(Constant.REFERENCE_TRANSACTION)
+
+    private val produkRepository = ProdukRepository.getInstance()
+    private val produkTransactionRepository = ProdukTransactionRepository.getInstance()
 
     companion object {
         @Volatile
@@ -29,23 +33,43 @@ class TransactionRepository {
     }
 
     fun loadTransaction(): Flow<List<Transaction?>> {
-        return databaseReference.multiValueListenerFlow(Transaction::class.java)
+        return transactionReference.multiValueListenerFlow(Transaction::class.java)
     }
 
-    fun addTransaction(transaction: Transaction, onComplete: (isSuccess: Boolean) -> Unit) {
-        val transactionRef = databaseReference.push()
+    fun addTransaction(
+        produkKeranjang: Array<ProdukKeranjang>?,
+        transaction: Transaction,
+        onComplete: (isSuccess: Boolean) -> Unit
+    ) {
         try {
-            transactionRef.setValue(transaction.copy(id = transactionRef.key!!))
-                .addOnCompleteListener { task ->
-                    onComplete(task.isSuccessful)
+            for (index in produkKeranjang!!.indices) {
+                val produk = produkKeranjang[index]
+                produkTransactionRepository.addProdukTransaction(produk) { isSuccess, id ->
+                    if (isSuccess) {
+                        produkRepository.updateProdukStok(
+                            produk.produkId,
+                            produk.stok - produk.qty
+                        ) {
+                            val transactionRef = transactionReference.push()
+                            transactionRef.setValue(
+                                transaction.copy(
+                                    id = transactionRef.key!!,
+                                    produkId = id
+                                )
+                            ).addOnCompleteListener { task ->
+                                onComplete(task.isSuccessful)
+                            }
+                        }
+                    } else onComplete(false)
                 }
+            }
         } catch (e: Exception) {
             onComplete(false)
         }
     }
 
     fun updateTransaction(transaction: Transaction, onComplete: (isSuccess: Boolean) -> Unit) {
-        databaseReference.child(transaction.id)
+        transactionReference.child(transaction.id)
             .updateChildren(transaction.toMap())
             .addOnCompleteListener {
                 onComplete(it.isSuccessful)
@@ -53,13 +77,13 @@ class TransactionRepository {
     }
 
     fun removeTransaction(namaTransaction: String, onComplete: (isSuccess: Boolean) -> Unit) {
-        databaseReference.child(namaTransaction).removeValue { error, _ ->
+        transactionReference.child(namaTransaction).removeValue { error, _ ->
             onComplete(error == null)
         }
     }
 
     fun getTransactionsByUserId(userId: String, onComplete: (data: List<Transaction?>) -> Unit) {
-        databaseReference.orderByChild("userId")
+        transactionReference.orderByChild("userId")
             .equalTo(userId)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -77,7 +101,7 @@ class TransactionRepository {
     }
 
     fun getTransactionsByIdSeller(idSeller: String, onComplete: (data: List<Transaction?>) -> Unit) {
-        databaseReference.orderByChild("idSeller")
+        transactionReference.orderByChild("idSeller")
             .equalTo(idSeller)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {

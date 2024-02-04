@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.view.activity.DetailPesananTokoActivity
 import com.example.tokoonline.core.base.BaseFragment
 import com.example.tokoonline.core.util.OnItemClick

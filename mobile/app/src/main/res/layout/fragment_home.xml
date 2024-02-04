@@ -183,11 +183,6 @@
                 android:paddingBottom="@dimen/medium_space"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/colorNeutral100" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

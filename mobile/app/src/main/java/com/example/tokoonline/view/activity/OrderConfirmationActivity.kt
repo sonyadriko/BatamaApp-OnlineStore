@@ -32,8 +32,12 @@ import com.example.tokoonline.view.adapter.AdapterListProduk
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import com.midtrans.sdk.uikit.api.model.SnapTransactionDetail
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.UUID
 import javax.inject.Inject
@@ -257,17 +261,26 @@ class OrderConfirmationActivity : BaseActivity() {
     }
 
     private fun startTransaction(transaction: Transaction) {
-        try {
-            transactionRepository.addTransaction(transaction) { isComplete ->
-                dismissProgressDialog()
-                if (isComplete) {
-                    startActivity(Intent(this, SuccessOrderActivity::class.java))
-                } else {
-                    throw Exception("error during creating transaction")
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                try {
+                    transactionRepository.addTransaction(produkKeranjang, transaction) { isComplete ->
+                        dismissProgressDialog()
+                        if (isComplete) {
+                            startActivity(
+                                Intent(
+                                    this@OrderConfirmationActivity,
+                                    SuccessOrderActivity::class.java
+                                )
+                            )
+                        } else {
+                            throw Exception("error during creating transaction")
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.message?.let { showToast(it) }
                 }
             }
-        } catch (e: Exception) {
-            e.message?.let { showToast(it) }
         }
     }
 

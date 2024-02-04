@@ -18,6 +18,7 @@ data class ProdukKeranjang (
     val beratProduk: Double = 0.0,
     val produkId: String = "",
     val idSeller: String? = "",
+    val stok: Int = 1,
     val qty: Int = 1
 ) : Parcelable {
     fun toMap(): Map<String, Any?> {
