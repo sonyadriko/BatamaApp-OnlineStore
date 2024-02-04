@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.databinding.ActivityTokoProfileBinding
+import com.example.tokoonline.view.activity.toko.pendapatan.PendapatanActivity
 import com.example.tokoonline.view.activity.toko.pesanan.StatusPesananActivity
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import com.example.tokoonline.view.viewmodel.TokoViewModel
@@ -32,8 +33,12 @@ class TokoProfileActivity : BaseActivity() {
     }
 
     private fun initClickListener() {
-        binding.btnStatusPesanan.setOnClickListener {
+        binding.optionStatusPesanan.setOnClickListener {
             startActivity(Intent(this, StatusPesananActivity::class.java))
+        }
+
+        binding.optionKeuangan.setOnClickListener {
+            startActivity(Intent(this, PendapatanActivity::class.java))
         }
     }
 

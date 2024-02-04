@@ -4,6 +4,156 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.activity.toko.pendapatan.PendapatanActivity">
 
+    <com.example.tokoonline.view.Navbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:leftIcon="@drawable/round_arrow_back"
+        app:title="Pendapatan" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_cover"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/cover_pendapatan"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    style="@style/body_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Penghasilan"
+                    android:textColor="@color/colorNeutral600" />
+
+                <TextView
+                    android:id="@+id/penghasilan"
+                    style="@style/body_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="32sp"
+                    tools:text="Rp80.000.000" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="#F5F5F5"
+                app:layout_constraintTop_toBottomOf="@id/img_cover" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorNeutral100"
+                app:layout_constraintTop_toBottomOf="@id/divider" />
+
+            <LinearLayout
+                android:id="@+id/thead"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:background="@color/colorNeutral50"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/divider2">
+
+                <TextView
+                    style="@style/heading_14"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="10dp"
+                    android:text="Produk"
+                    android:textColor="@color/colorNeutral800" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorNeutral100" />
+
+                <TextView
+                    style="@style/heading_14"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="10dp"
+                    android:text="Status"
+                    android:textColor="@color/colorNeutral800" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorNeutral100" />
+
+                <TextView
+                    style="@style/heading_14"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.3"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="10dp"
+                    android:text="Tanggal"
+                    android:textColor="@color/colorNeutral800" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorNeutral100" />
+
+                <!--        <TextView-->
+                <!--            style="@style/heading_14"-->
+                <!--            android:layout_width="60dp"-->
+                <!--            android:layout_height="match_parent"-->
+                <!--            android:paddingStart="8dp"-->
+                <!--            android:paddingVertical="10dp"-->
+                <!--            android:text="Aksi"-->
+                <!--            android:textColor="@color/colorNeutral800" />-->
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorNeutral100"
+                app:layout_constraintTop_toBottomOf="@id/thead" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_pendapatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/divider3"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_table" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
