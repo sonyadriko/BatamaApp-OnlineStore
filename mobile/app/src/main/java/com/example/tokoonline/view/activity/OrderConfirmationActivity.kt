@@ -32,7 +32,6 @@ import com.example.tokoonline.view.adapter.AdapterListProduk
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import com.midtrans.sdk.uikit.api.model.SnapTransactionDetail
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -260,68 +259,75 @@ class OrderConfirmationActivity : BaseActivity() {
         }
     }
 
-    private fun startTransaction(transaction: Transaction) {
+    private fun startTransaction(transactions: List<Transaction>) {
         runBlocking {
             withContext(Dispatchers.IO) {
-                try {
-                    transactionRepository.addTransaction(produkKeranjang, transaction) { isComplete ->
-                        dismissProgressDialog()
-                        if (isComplete) {
-                            startActivity(
-                                Intent(
-                                    this@OrderConfirmationActivity,
-                                    SuccessOrderActivity::class.java
-                                )
-                            )
-                        } else {
-                            throw Exception("error during creating transaction")
+                transactions.forEachIndexed { index, transaction ->
+                    try {
+                        transactionRepository.addTransaction(produkKeranjang, transaction) { isComplete ->
+                            dismissProgressDialog()
+                            if (index == transactions.size - 1) {
+                                if (isComplete) {
+                                    startActivity(
+                                        Intent(
+                                            this@OrderConfirmationActivity,
+                                            SuccessOrderActivity::class.java
+                                        )
+                                    )
+                                } else {
+                                    throw Exception("error during creating transaction")
+                                }
+                            } else return@addTransaction
                         }
+                    } catch (e: Exception) {
+                        e.message?.let { showToast(it) }
                     }
-                } catch (e: Exception) {
-                    e.message?.let { showToast(it) }
                 }
             }
         }
     }
 
-     private fun getTransactionDetail(): Transaction  {
-        val product = produkKeranjang!![0]
-
-        return Transaction(
-            nama = product.nama,
-            alamatId = idAlamat,
-            orderId = initTransactionDetails().orderId,
-            jumlah = product.qty,
-            harga = product.harga.toDouble(),
-            produkId = product.produkId,
-            status = "pending",
-            userId = userRepository.uid!!,
-            catatan = binding.edtCatatan.text.toString(),
-            metodePembayaran = metodePembayaran!!,
-            metodePengiriman = metodePengiriman!!,
-            snapToken = "",
-            createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
-            idSeller = product.idSeller!!
-        )
+     private fun getTransactionDetail(): List<Transaction>  {
+         return produkKeranjang!!.map {
+             val product = it
+             Transaction(
+                 nama = product.nama,
+                 alamatId = idAlamat,
+                 orderId = initTransactionDetails().orderId,
+                 jumlah = product.qty,
+                 harga = product.harga.toDouble(),
+                 produkId = product.produkId,
+                 status = "pending",
+                 userId = userRepository.uid!!,
+                 catatan = binding.edtCatatan.text.toString(),
+                 metodePembayaran = metodePembayaran!!,
+                 metodePengiriman = metodePengiriman!!,
+                 snapToken = "",
+                 createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
+                 idSeller = product.idSeller!!
+             )
+         }
     }
 
-     private fun getTransactionDetail(result: Result.Success<SnapTokenResponse>): Transaction  {
-        val product = produkKeranjang!![0]
-        return Transaction(
-            nama = product.nama,
-            alamatId = idAlamat ,
-            orderId = initTransactionDetails().orderId,
-            jumlah = product.qty,
-            harga = product.harga.toDouble(),
-            produkId = product.produkId,
-            status = "pending",
-            userId = userRepository.uid!!,
-            catatan = binding.edtCatatan.text.toString(),
-            metodePembayaran = metodePembayaran!!,
-            metodePengiriman = metodePengiriman!!,
-            snapToken = result.data.token,
-            createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
-            idSeller = product.idSeller!!
-        )
+     private fun getTransactionDetail(result: Result.Success<SnapTokenResponse>): List<Transaction>  {
+         return produkKeranjang!!.map {
+             val product = it
+             Transaction(
+                 nama = product.nama,
+                 alamatId = idAlamat ,
+                 orderId = initTransactionDetails().orderId,
+                 jumlah = product.qty,
+                 harga = product.harga.toDouble(),
+                 produkId = product.produkId,
+                 status = "pending",
+                 userId = userRepository.uid!!,
+                 catatan = binding.edtCatatan.text.toString(),
+                 metodePembayaran = metodePembayaran!!,
+                 metodePengiriman = metodePengiriman!!,
+                 snapToken = result.data.token,
+                 createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
+                 idSeller = product.idSeller!!
+             )
+         }
     }
 }

@@ -121,17 +121,6 @@ abstract class BaseActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun goToBayar(totalBelanja: Long, produkList: List<ProdukKeranjang>){
-        val intent = Intent(this, OrderConfirmationActivity::class.java )
-        val bundle = Bundle()
-        if (produkList != null) {
-            bundle.putParcelableArrayList("produkList", ArrayList(produkList))
-            intent.putExtra("totalBelanja", totalBelanja)
-            intent.putExtras(bundle)
-        }
-        startActivity(intent)
-    }
-
     fun goToTokoSetting(){
         val intent = Intent(this, TokoSettingActivity::class.java)
         startActivity(intent)
