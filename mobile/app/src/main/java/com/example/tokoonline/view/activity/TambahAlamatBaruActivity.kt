@@ -28,9 +28,8 @@ class TambahAlamatBaruActivity : BaseActivity() {
     private fun initListener() = with(binding) {
 
         val newDataAlamat = Alamat(
-//            label = edtNama.text.toString(),
             alamat = edtAlamat.text.toString(),
-            catatan = edtType.text.toString(),
+            label = edtType.text.toString(),
             nama = edtNama.text.toString(),
             phone = edtPhone.text.toString(),
             default = false,

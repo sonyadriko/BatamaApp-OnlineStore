@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.data.model.firebase.Alamat
 import com.example.tokoonline.data.repository.firebase.AlamatRepository
 import com.example.tokoonline.databinding.ActivityTambahTokoBaruBinding
@@ -128,6 +129,7 @@ class TambahTokoBaruActivity : BaseActivity() {
                 binding.tvAlamatPenerima.text = alamatDefault.alamat
                 binding.tvPhonePenerima.text = alamatDefault.phone
                 binding.tvTypeAlamat.text = alamatDefault.label
+                binding.btnTambahAlamat.gone()
             } else {
                 binding.linearlayout.visibility = View.GONE
             }
