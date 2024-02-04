@@ -69,11 +69,19 @@ class RiwayatTransaksiFragment : BaseFragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        userRepository.uid?.let {
+            uuid = it
+            getRiwayat(uuid)
+            init()
+        }
+    }
+
     private fun getRiwayat(userUid : String){
         binding.swipeRefresh.isRefreshing = true
-        viewModel.getTransaction(userUid){transactionList ->
+        viewModel.getTransaction(userUid) { transactionList ->
             binding.swipeRefresh.isRefreshing = false
-
             adapter.submitList(transactionList)
             if (transactionList.isNotEmpty()) {
                 binding.divGambar.gone()
@@ -84,7 +92,6 @@ class RiwayatTransaksiFragment : BaseFragment() {
             }
         }
     }
-
     private fun init() {
         lifecycleScope.launch {
             adapter.submitList(emptyList())
@@ -93,5 +100,4 @@ class RiwayatTransaksiFragment : BaseFragment() {
                 getRiwayat(uuid)
             }
         }
-    }
-}
+    }}

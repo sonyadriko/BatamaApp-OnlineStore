@@ -19,11 +19,13 @@ import com.example.tokoonline.view.activity.DetailProductActivity.Companion.RESU
 import com.example.tokoonline.view.activity.KeranjangActivity
 import com.example.tokoonline.view.activity.SearchActivity
 import com.example.tokoonline.view.activity.TambahProdukActivity
+import com.example.tokoonline.view.adapter.AdapterProdukTerlaris
 import com.example.tokoonline.view.viewmodel.ProdukViewModel
 
 class HomeFragment : BaseFragment(), OnItemClick {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var productAdapter: AdapterProduk
+    private lateinit var productTerlarisAdapter : AdapterProdukTerlaris
 
     private val viewModel: ProdukViewModel by viewModels()
 
@@ -51,6 +53,11 @@ class HomeFragment : BaseFragment(), OnItemClick {
     }
 
     private fun initView() {
+        productTerlarisAdapter = AdapterProdukTerlaris(this)
+        binding.rvProdukTerlaris.apply{
+            adapter = productTerlarisAdapter
+        }
+
         productAdapter = AdapterProduk(this)
         binding.rvProduk.apply {
             adapter = productAdapter
@@ -85,8 +92,13 @@ class HomeFragment : BaseFragment(), OnItemClick {
             }
 
             val filteredData = it.dataProduk.filter { produk -> produk.idSeller != userRepository.uid }
+            val filteredDataByStok = it.dataProduk
+                .filter { produk -> produk.stok > 0 }
+                .filter { produk -> produk.idSeller != userRepository.uid }
+                .sortedBy { it.stok }
 
             productAdapter.submitList(filteredData)
+            productTerlarisAdapter.submitList(filteredDataByStok)
         }
     }
 
