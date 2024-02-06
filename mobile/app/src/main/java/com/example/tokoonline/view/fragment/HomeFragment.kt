@@ -19,6 +19,7 @@ import com.example.tokoonline.view.activity.DetailProductActivity.Companion.RESU
 import com.example.tokoonline.view.activity.KeranjangActivity
 import com.example.tokoonline.view.activity.SearchActivity
 import com.example.tokoonline.view.activity.TambahProdukActivity
+import com.example.tokoonline.view.activity.ProdukViewAllActivity
 import com.example.tokoonline.view.adapter.AdapterProdukTerlaris
 import com.example.tokoonline.view.viewmodel.ProdukViewModel
 
@@ -98,7 +99,18 @@ class HomeFragment : BaseFragment(), OnItemClick {
                 .sortedBy { it.stok }
 
             productAdapter.submitList(filteredData)
+            binding.tvSeeAll.setOnClickListener {
+                val intent = Intent(context, ProdukViewAllActivity::class.java)
+                intent.putParcelableArrayListExtra("productDitawarkanData", ArrayList(filteredData))
+                startActivity(intent)
+            }
+
             productTerlarisAdapter.submitList(filteredDataByStok)
+            binding.tvSeeAllTerlaris.setOnClickListener {
+                val intent = Intent(context, ProdukViewAllActivity::class.java)
+                intent.putParcelableArrayListExtra("productTerlarisData", ArrayList(filteredDataByStok))
+                startActivity(intent)
+            }
         }
     }
 
