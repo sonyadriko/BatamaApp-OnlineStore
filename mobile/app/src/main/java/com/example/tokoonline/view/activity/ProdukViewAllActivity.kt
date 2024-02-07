@@ -22,12 +22,22 @@ class ProdukViewAllActivity : BaseActivity(), OnItemClick {
         setContentView(binding.root)
 
         val productData: List<Produk>
-        if (packageName == "com.example.tokoonline.view.fragment") {
-            productData = intent.getParcelableArrayListExtra<Produk>("productTerlarisData").orEmpty()
-            binding.tvTitle.text = "Produk Terlaris"
-        } else {
-            productData = intent.getParcelableArrayListExtra<Produk>("productDitawarkanData").orEmpty()
-            binding.tvTitle.text = "Produk Ditawarkan"
+        val intentName = intent.getStringExtra("intentName") // Get the intent name
+
+        when (intentName) {
+            "productDitawarkanData" -> {
+                productData = intent.getParcelableArrayListExtra<Produk>("productDitawarkanData").orEmpty()
+                binding.tvTitle.text = "Produk Ditawarkan"
+            }
+            "productTerlarisData" -> {
+                productData = intent.getParcelableArrayListExtra<Produk>("productTerlarisData").orEmpty()
+                binding.tvTitle.text = "Produk Terlaris"
+            }
+            else -> {
+                // Handle unknown intent names here or set a default behavior
+                productData = emptyList()
+                binding.tvTitle.text = "Unknown Category"
+            }
         }
 
 

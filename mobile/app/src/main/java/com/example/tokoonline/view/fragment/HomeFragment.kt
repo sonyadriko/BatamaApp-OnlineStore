@@ -101,6 +101,7 @@ class HomeFragment : BaseFragment(), OnItemClick {
             productAdapter.submitList(filteredData)
             binding.tvSeeAll.setOnClickListener {
                 val intent = Intent(context, ProdukViewAllActivity::class.java)
+                intent.putExtra("intentName", "productDitawarkanData") // Set the intentName here
                 intent.putParcelableArrayListExtra("productDitawarkanData", ArrayList(filteredData))
                 startActivity(intent)
             }
@@ -108,9 +109,11 @@ class HomeFragment : BaseFragment(), OnItemClick {
             productTerlarisAdapter.submitList(filteredDataByStok)
             binding.tvSeeAllTerlaris.setOnClickListener {
                 val intent = Intent(context, ProdukViewAllActivity::class.java)
+                intent.putExtra("intentName", "productTerlarisData") // Set the intentName here
                 intent.putParcelableArrayListExtra("productTerlarisData", ArrayList(filteredDataByStok))
                 startActivity(intent)
             }
+
         }
     }
 
