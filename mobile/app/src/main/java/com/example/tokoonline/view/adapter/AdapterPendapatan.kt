@@ -6,13 +6,14 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tokoonline.R
 import com.example.tokoonline.data.model.firebase.Transaction
+import com.example.tokoonline.data.repository.firebase.ProdukTransactionRepository
 import com.example.tokoonline.databinding.ItemTableBinding
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
 
 class AdapterPendapatan : RecyclerView.Adapter<AdapterPendapatan.ViewHolder>() {
+    private val produkTransactionRepository = ProdukTransactionRepository.getInstance()
 
     private val list: MutableList<Transaction> = mutableListOf()
 
@@ -34,7 +35,12 @@ class AdapterPendapatan : RecyclerView.Adapter<AdapterPendapatan.ViewHolder>() {
                 )
             }
 
-            binding.nama.text = transaction.nama
+            //TODO NEED LOOP
+            produkTransactionRepository.getProdukById(transaction.produkId) {
+                binding.nama.text =
+                    it.joinToString(separator = ",") { produk -> produk?.nama.toString() }
+            }
+            binding.nama.text = transaction.produkId
             binding.status.text = transaction.status
             binding.tanggal.text = formatString(transaction.createdAt)
         }
