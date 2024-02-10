@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/swipe_refresh"
-    android:background="#FAFBF9"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -70,7 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            tools:visibility="gone"
+            android:background="#FAFBF9"
+            tools:visibility="visible"
             tools:listitem="@layout/item_riwayat" />
     </LinearLayout>
 

@@ -27,21 +27,23 @@ class AdapterRiwayat(
         RecyclerView.ViewHolder(binding.root) {
 
         private val produkRepository = ProdukTransactionRepository.getInstance()
-        private val adapter: AdapterRiwayatProduk? = null
+        private var adapter: AdapterRiwayatProduk? = null
 
         @SuppressLint("SetTextI18n")
         fun bind(transaction: Transaction, position: Int) = with(binding) {
             labelStatus.setStatus(status = transaction.status)
             produkRepository.getProdukById(transaction.produkId) {
-                if (adapter == null) AdapterRiwayatProduk(
-                    context = binding.root.context,
-                    it.filterNotNull()
-                )
+                if (adapter == null) {
+                    adapter = AdapterRiwayatProduk(
+                        context = binding.root.context,
+                        it.filterNotNull()
+                    )
+                }
 
-                binding.layout.adapter = adapter
+                binding.rv.adapter = adapter
             }
 
-            root.setOnClickListener {
+            binding.root.setOnClickListener {
                 onItemClick.onClick(transaction, position)
             }
         }

@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="@dimen/smaller_space"
+    android:background="@color/white"
+    android:clickable="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.example.tokoonline.view.LabelStatus
@@ -14,17 +17,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:paddingVertical="@dimen/small_space"
-        android:id="@+id/layout"
-        android:background="@color/white"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/white"
         android:orientation="vertical"
         android:overScrollMode="never"
         android:scrollbars="none"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:itemCount="2"
         tools:listitem="@layout/item_riwayat_produk" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
