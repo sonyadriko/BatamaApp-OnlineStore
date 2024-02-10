@@ -9,4 +9,9 @@ class TambahProdukViewModel: BaseViewModel() {
             onComplete(it)
         }
     }
+
+    fun updateProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
+        produkRepository.updateProduk(produk, onComplete)
+    }
+
 }

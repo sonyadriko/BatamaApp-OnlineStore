@@ -76,10 +76,7 @@
 
                 </RelativeLayout>
 
-
             </LinearLayout>
-
-
 
         </LinearLayout>
 
@@ -194,9 +191,74 @@
     </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:background="@color/colorNeutral50" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:padding="5dp">
+
+        <!-- Button 1 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:id="@+id/btnDetailProduk"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle_background"
+            android:foreground="?selectableItemBackground"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lihat Detail"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+
+        <!-- Button 2 -->
+        <LinearLayout
+            android:id="@+id/btnUbahProduk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle_background"
+            android:foreground="?selectableItemBackground"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubah"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+
+        <!-- Button 3 -->
+        <LinearLayout
+            android:id="@+id/btn_hapusProduk"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rectangle_background"
+            android:foreground="?selectableItemBackground"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hapus"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 </LinearLayout>

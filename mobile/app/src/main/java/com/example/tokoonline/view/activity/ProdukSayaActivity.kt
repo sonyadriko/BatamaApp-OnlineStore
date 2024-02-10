@@ -34,7 +34,7 @@ class ProdukSayaActivity : BaseActivity() {
         viewModel.loadProdukbyIDToko(tokoID) { produkList ->
             dismissProgressDialog()
             val recyclerView: RecyclerView = binding.rvProduksaya
-            val adapter = AdapterItemProdukSaya(produkList)
+            val adapter = AdapterItemProdukSaya(this, produkList)
 
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.adapter = adapter

@@ -35,6 +35,16 @@ class ProdukRepository {
     }
 
 
+    fun updateProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
+        val produkRef = databaseReference.child(produk.id)
+
+        produkRef.updateChildren(produk.toMap())
+            .addOnCompleteListener { task ->
+                onComplete(task.isSuccessful)
+            }
+    }
+
+
 
     fun addProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
         val produkRef = databaseReference.push()
@@ -85,7 +95,7 @@ class ProdukRepository {
 
                 override fun onCancelled(error: DatabaseError) {
                     // Handle the error here if needed
-                    onComplete(emptyList()) // Return an empty list in case of an error
+                    onComplete(emptyList())
                 }
             })
     }

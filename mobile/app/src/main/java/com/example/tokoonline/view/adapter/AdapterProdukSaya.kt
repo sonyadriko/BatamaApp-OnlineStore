@@ -1,5 +1,8 @@
 package com.example.tokoonline.view.adapter
 
+import android.content.Context
+import android.content.Intent
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,54 +10,55 @@ import com.bumptech.glide.Glide
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.databinding.ItemProdukSayaBinding
+import com.example.tokoonline.view.activity.DetailProductActivity
+import com.example.tokoonline.view.activity.TambahProdukActivity
 
 class AdapterItemProdukSaya(
-    private val produkSayaList : List<Produk>
+    private val context: Context,
+    private val produkSayaList: List<Produk>
 ) : RecyclerView.Adapter<AdapterItemProdukSaya.ViewHolder>() {
 
-    inner class ViewHolder(private val binding : ItemProdukSayaBinding) :
-            RecyclerView.ViewHolder(binding.root){
-                fun bind (produk: Produk){
-                    Glide.with(binding.imgProduk.context)
-                        .load(produk.image)
-                        .into(binding.imgProduk)
-                    binding.tvNama.text = produk.nama
-                    binding.tvHarga.text = moneyFormatter(produk.harga)
-//                    binding.tvBerat.text = produk.beratProduk.toString() + " Kg"
-                    binding.tvStok.text = produk.stok.toString()
+    inner class ViewHolder(private val binding: ItemProdukSayaBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-//                    binding.btnDetailProduk.setOnClickListener{
-//
-//                    }
-//
-//                    binding.btnUbahProduk.setOnClickListener{
-//
-//                    }
-//
-//                    binding.btnHapusProduk.setOnClickListener{
-//
-//                    }
-                }
+        fun bind(produk: Produk) {
+            Glide.with(binding.imgProduk.context)
+                .load(produk.image)
+                .into(binding.imgProduk)
+            binding.tvNama.text = produk.nama
+            binding.tvHarga.text = moneyFormatter(produk.harga)
+            binding.tvStok.text = produk.stok.toString()
+
+            binding.btnDetailProduk.setOnClickListener {
+                val intent = Intent(binding.root.context, DetailProductActivity::class.java)
+                intent.putExtra("extra_produk", produk as Parcelable)
+                binding.root.context.startActivity(intent)
             }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterItemProdukSaya.ViewHolder {
+            binding.btnUbahProduk.setOnClickListener {
+                val intent = Intent(binding.root.context, TambahProdukActivity::class.java).apply {
+                    putExtra("produk", produk as Parcelable)
+                }
+                binding.root.context.startActivity(intent)
+            }
+
+            binding.btnHapusProduk.setOnClickListener {
+                //TODO add hapus produk by id produk
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemProdukSayaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AdapterItemProdukSaya.ViewHolder, position: Int) {
-        val produk = produkSayaList?.get(position)
-
-        produk?.let {
-            holder.bind(produk)
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val produk = produkSayaList[position]
+        holder.bind(produk)
     }
 
     override fun getItemCount(): Int {
-        return produkSayaList?.size ?: 0
+        return produkSayaList.size
     }
-
-
-
-
 }
