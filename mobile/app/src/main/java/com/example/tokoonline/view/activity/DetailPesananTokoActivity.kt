@@ -1,5 +1,6 @@
 package com.example.tokoonline.view.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -63,6 +64,7 @@ class DetailPesananTokoActivity : BaseActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPesananTokoBinding.inflate(layoutInflater)
@@ -130,7 +132,8 @@ class DetailPesananTokoActivity : BaseActivity() {
             if (produk !== null){
                 binding.tvNama.text = produk.nama
                 binding.tvTotalHarga.text = moneyFormatter(produk.harga)
-                binding.tvWeight.text = produk.beratProduk.toString()
+                binding.tvWeight.text = produk.beratProduk.toString() + " kg"
+                binding.tvCount.text = "${produk.qty} item${if (produk.qty > 1) "s" else ""}"
                 Glide.with(this)
                     .load(produk.image)
                     .placeholder(R.drawable.loading_animation) // Placeholder image while loading

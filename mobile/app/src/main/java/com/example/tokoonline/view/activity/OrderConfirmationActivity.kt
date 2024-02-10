@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.Result
+import com.example.tokoonline.core.util.filterSameSeller
 import com.example.tokoonline.core.util.getFormattedTimeMidtrans
 import com.example.tokoonline.core.util.getTotalBelanja
 import com.example.tokoonline.core.util.gone
@@ -227,7 +228,7 @@ class OrderConfirmationActivity : BaseActivity() {
         }
 
         if (metodePembayaran.equals("cod", ignoreCase = true)) {
-            startTransaction(getTransactionDetail())
+            startTransaction(getTransactionTransactionList())
         } else {
             lifecycleScope.launch {
                 midtransRepository.postSnapToken(
@@ -244,7 +245,7 @@ class OrderConfirmationActivity : BaseActivity() {
                         Result.Loading -> showProgressDialog()
                         is Result.Success -> {
                             binding.btnBayar.isEnabled = true
-                            startTransaction(getTransactionDetail(result))
+                            startTransaction(getTransactionTransactionList(result))
                         }
 
                         is Result.Error -> {
@@ -287,15 +288,13 @@ class OrderConfirmationActivity : BaseActivity() {
         }
     }
 
-     private fun getTransactionDetail(): List<Transaction>  {
-         return produkKeranjang!!.map {
+     private fun getTransactionTransactionList(): List<Transaction>  {
+         return produkKeranjang!!.groupBy { it.idSeller }.map {
              val product = it
              Transaction(
-                 nama = product.nama,
                  alamatId = idAlamat,
                  orderId = initTransactionDetails().orderId,
-                 jumlah = product.qty,
-                 harga = product.harga.toDouble(),
+                 harga = it.value.sumOf { it.harga }.toDouble(),
                  produkId = product.produkId,
                  status = "pending",
                  userId = userRepository.uid!!,
@@ -304,20 +303,18 @@ class OrderConfirmationActivity : BaseActivity() {
                  metodePengiriman = metodePengiriman!!,
                  snapToken = "",
                  createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
-                 idSeller = product.idSeller!!
+                 idSeller = product.value.get(0).idSeller!!
              )
          }
     }
 
-     private fun getTransactionDetail(result: Result.Success<SnapTokenResponse>): List<Transaction>  {
-         return produkKeranjang!!.map {
+     private fun getTransactionTransactionList(result: Result.Success<SnapTokenResponse>): List<Transaction>  {
+         return produkKeranjang!!.groupBy { it.idSeller }.map {
              val product = it
              Transaction(
-                 nama = product.nama,
-                 alamatId = idAlamat ,
+                 alamatId = idAlamat,
                  orderId = initTransactionDetails().orderId,
-                 jumlah = product.qty,
-                 harga = product.harga.toDouble(),
+                 harga = it.value.sumOf { it.harga }.toDouble(),
                  produkId = product.produkId,
                  status = "pending",
                  userId = userRepository.uid!!,
@@ -326,7 +323,7 @@ class OrderConfirmationActivity : BaseActivity() {
                  metodePengiriman = metodePengiriman!!,
                  snapToken = result.data.token,
                  createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
-                 idSeller = product.idSeller!!
+                 idSeller = product.value.get(0).idSeller!!
              )
          }
     }

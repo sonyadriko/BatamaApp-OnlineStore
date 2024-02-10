@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/swipe_refresh"
-    android:background="@color/white"
+    android:background="#FAFBF9"
     android:layout_height="wrap_content">
 
     <LinearLayout
@@ -18,15 +18,15 @@
             android:layout_height="wrap_content"
             app:title="Riwayat Transaksi" />
 
-        <!-- Spacer to push content to the center -->
-
         <LinearLayout
             android:id="@+id/div_gambar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
+            android:background="@color/white"
             android:layout_weight="1"
             android:gravity="center"
+            tools:visibility="visible"
             android:orientation="vertical">
 
             <ImageView
@@ -70,6 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            tools:visibility="gone"
             tools:listitem="@layout/item_riwayat" />
     </LinearLayout>
 

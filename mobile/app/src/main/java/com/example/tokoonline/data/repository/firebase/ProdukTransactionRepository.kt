@@ -1,12 +1,10 @@
 package com.example.tokoonline.data.repository.firebase
 
 import com.example.tokoonline.core.constanst.Constant
+import com.example.tokoonline.core.util.multiValue
 import com.example.tokoonline.data.model.firebase.ProdukKeranjang
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class ProdukTransactionRepository {
     private val databaseReference: DatabaseReference =
@@ -26,7 +24,10 @@ class ProdukTransactionRepository {
         }
     }
 
-    fun addProdukTransaction(produkKeranjang: ProdukKeranjang, onComplete: (isSuccess: Boolean, id: String) -> Unit) {
+    fun addProdukTransaction(
+        produkKeranjang: ProdukKeranjang,
+        onComplete: (isSuccess: Boolean, id: String) -> Unit
+    ) {
         val produkRef = databaseReference.push()
         produkRef.setValue(produkKeranjang.copy(id = produkRef.key!!))
             .addOnCompleteListener {
@@ -34,17 +35,12 @@ class ProdukTransactionRepository {
             }
     }
 
-    fun getProdukById(produkId: String, onComplete: (data: ProdukKeranjang?) -> Unit) {
-        databaseReference.child(produkId)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    val produk = snapshot.getValue(ProdukKeranjang::class.java)
-                    onComplete(produk)
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    onComplete(null)
-                }
-            })
+    fun getProdukById(produkId: String, onComplete: (data: List<ProdukKeranjang?>) -> Unit) {
+        databaseReference.child(produkId).multiValue(
+            dataType = ProdukKeranjang::class.java,
+            onComplete = { value, isSuccess ->
+                onComplete(value)
+            },
+        )
     }
 }

@@ -8,10 +8,10 @@ import android.os.Parcelable
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import com.example.tokoonline.R
 import com.example.tokoonline.core.constanst.Constant
 import com.example.tokoonline.data.model.firebase.Produk
 import com.example.tokoonline.data.model.firebase.ProdukKeranjang
+import com.example.tokoonline.data.model.firebase.Transaction
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -30,6 +30,10 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
+
+fun List<Transaction>.isSameSeller(): Boolean {
+    return all { it.idSeller == get(0).idSeller }
+}
 
 fun convertLongToTime(time: Long): String {
     val date = Date(time)
@@ -162,3 +166,21 @@ fun <T> DatabaseReference.multiValueListenerFlow(dataType: Class<T>): Flow<List<
         addValueEventListener(listener)
         awaitClose { removeEventListener(listener) }
     }
+
+fun <T> DatabaseReference.multiValue(
+    dataType: Class<T>,
+    onComplete: (value: List<T?>, isSuccess: Boolean) -> Unit
+) {
+    val listener = object : ValueEventListener {
+        override fun onDataChange(dataSnapshot: DataSnapshot) {
+            val value = dataSnapshot.children.map { snapshot ->
+                snapshot.getValue(dataType)
+            }
+            onComplete(value, true)
+        }
+
+        override fun onCancelled(error: DatabaseError) {
+            onComplete(emptyList(), false)
+        }
+    }
+}

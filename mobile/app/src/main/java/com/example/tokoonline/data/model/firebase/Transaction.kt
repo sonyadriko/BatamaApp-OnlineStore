@@ -34,9 +34,7 @@ import kotlinx.parcelize.Parcelize
 data class Transaction(
     var id: String = "",
     val orderId: String = "",
-    val nama: String = "",
     val harga: Double = 0.0,
-    var jumlah: Int = 1,
     val status: String = "",
     val produkId: String = "",
     val userId: String = "",
