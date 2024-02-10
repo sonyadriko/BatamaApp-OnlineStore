@@ -129,7 +129,6 @@ class TambahTokoBaruActivity : BaseActivity() {
                 binding.tvAlamatPenerima.text = alamatDefault.alamat
                 binding.tvPhonePenerima.text = alamatDefault.phone
                 binding.tvTypeAlamat.text = alamatDefault.label
-                binding.btnTambahAlamat.gone()
             } else {
                 binding.linearlayout.visibility = View.GONE
             }

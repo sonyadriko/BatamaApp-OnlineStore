@@ -37,6 +37,16 @@ class TokoRepository {
         }
     }
 
+    fun updateToko(userUid: String, toko: Toko,  onComplete: (isSuccess: Boolean) -> Unit) {
+        val tokoRef = databaseReference.child(userUid).child(toko.id ?: "")
+
+        tokoRef.updateChildren(toko.toMap())
+            .addOnCompleteListener { task ->
+                onComplete(task.isSuccessful)
+            }
+    }
+
+
     fun getTokoData(userUid: String, onComplete: (Toko?) -> Unit) {
         val userTokoReference = databaseReference.child(userUid)
         userTokoReference.addListenerForSingleValueEvent(object : ValueEventListener {

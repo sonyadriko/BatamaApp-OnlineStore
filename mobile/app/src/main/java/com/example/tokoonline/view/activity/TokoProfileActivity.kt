@@ -104,6 +104,12 @@ class TokoProfileActivity : BaseActivity() {
                     }
                 }
                 binding.optionProduk.setOnClickListener{goToProdukSaya(tokoID)}
+                binding.optionPengaturan.setOnClickListener {
+                    val intent = Intent(this, TokoSettingActivity::class.java)
+                    intent.putExtra("tokoID", tokoID)
+                    startActivity(intent)
+                }
+
             } else {
                 showToast("Gagal mengambil Nama Toko")
             }

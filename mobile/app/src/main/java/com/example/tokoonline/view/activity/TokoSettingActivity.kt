@@ -1,6 +1,8 @@
 package com.example.tokoonline.view.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +16,11 @@ class TokoSettingActivity : BaseActivity() {
 
     private lateinit var binding: ActivityTokoSettingBinding
     private lateinit var viewModelAlamat : AlamatViewModel
-    private val viewModelToko : TokoViewModel by viewModels()
+    private lateinit var  viewModelToko : TokoViewModel
+    private fun String.toEditable() : Editable {
+        return Editable.Factory.getInstance().newEditable(this)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,19 +28,46 @@ class TokoSettingActivity : BaseActivity() {
         setContentView(binding.root)
 
         val userId = userRepository.uid.toString()
+        val tokoId = intent.getStringExtra("tokoID")
         viewModelAlamat = ViewModelProvider(this).get(AlamatViewModel::class.java)
+        viewModelToko = ViewModelProvider(this).get(TokoViewModel::class.java)
 
+        if (tokoId != null){
+            viewModelToko.getTokoData(userId){toko ->
+                val namaToko = toko?.nama ?: ""
+                binding.tvNamaToko.text = namaToko.toEditable()
+                viewModelAlamat.getAlamatDefault(userId){alamatDefault->
+                    val newToko = Toko(
+                        id = tokoId,
+                        id_users = userRepository.uid.toString(),
+                        id_alamat = alamatDefault?.id.toString(),
+                        nama = binding.tvNamaToko.text.toString(),
+                    )
+
+                    binding.btnSimpanToko.setOnClickListener {
+                        showProgressDialog()
+                        viewModelToko.updateToko(userId, newToko){isSuccess->
+                            if (isSuccess){
+                                showToast("Toko Berhasil di Update")
+                                dismissProgressDialog()
+                                goToTokoProfile()
+                            }else{
+                                // handle failed to update toko
+                            }
+                        }
+                    }
+                }
+            }
+        }else{
+            val intent = Intent(this, TambahTokoBaruActivity::class.java)
+            startActivity(intent)
+        }
 
         showAlamatDefault(userId)
 
         binding.btnUbahAlamat.setOnClickListener{
             goToAlamatSetting()
             finish()
-        }
-
-        binding.btnSimpanToko.setOnClickListener{
-            initListener()
-            goToTokoProfile()
         }
 
 
@@ -57,26 +90,36 @@ class TokoSettingActivity : BaseActivity() {
         }
     }
 
-    private fun initListener(){
-        viewModelAlamat.getAlamatDefault(userRepository.uid.toString()) { alamatDefault ->
-            if (alamatDefault != null) {
-                val newToko = Toko(
-                    id_users = userRepository.uid.toString(),
-                    id_alamat = alamatDefault.id.toString(),
-                    nama = binding.tvNamaToko.text.toString(),
-                )
-                viewModelToko.addToko(newToko,userUid = userRepository.uid.toString() ) { isSuccess ->
-                    dismissProgressDialog()
-                    if (isSuccess) {
-                        showToast("Toko berhasil ditambahkan")
-                        goToAlamatSetting()
-                    } else {
-                        showToast("Toko gagal untuk ditambahkan")
-                    }
-                }
-            } else {
-                // Handle if there no alamat default set
-            }
-        }
-    }
+//    private fun initListener(tokoId : String){
+//        val userId = userRepository.uid.toString()
+//        if (tokoId != null){
+//            viewModelToko.getTokoById(tokoId, userId){toko->
+//                binding.tvNamaToko.text = toko?.nama.toString().toEditable()
+//
+//            }
+//        }else{
+//
+//        }
+//
+////        viewModelAlamat.getAlamatDefault(userRepository.uid.toString()) { alamatDefault ->
+////            if (alamatDefault != null) {
+////                val newToko = Toko(
+////                    id_users = userRepository.uid.toString(),
+////                    id_alamat = alamatDefault.id.toString(),
+////                    nama = binding.tvNamaToko.text.toString(),
+////                )
+////                viewModelToko.addToko(newToko,userUid = userRepository.uid.toString() ) { isSuccess ->
+////                    dismissProgressDialog()
+////                    if (isSuccess) {
+////                        showToast("Toko berhasil ditambahkan")
+////                        goToAlamatSetting()
+////                    } else {
+////                        showToast("Toko gagal untuk ditambahkan")
+////                    }
+////                }
+////            } else {
+////                // Handle if there no alamat default set
+////            }
+////        }
+//    }
 }
