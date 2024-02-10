@@ -133,15 +133,18 @@ class PembayaranActivity : BaseActivity() {
                     if (transactionResult != null) {
                         when (transactionResult.status) {
                             UiKitConstants.STATUS_SUCCESS -> {
-                                Toast.makeText(
-                                    this,
-                                    "Transaction Finished. ID: " + transactionResult.transactionId,
-                                    Toast.LENGTH_LONG
-                                ).show()
+//                                Toast.makeText(
+//                                    this,
+//                                    "Transaction Finished. ID: " + transactionResult.transactionId,
+//                                    Toast.LENGTH_LONG
+//                                ).show()
                                 updateStatus("success")
                             }
 
-                            UiKitConstants.STATUS_PENDING -> { /*NoOperation*/ }
+                            UiKitConstants.STATUS_PENDING -> {
+                                dismissProgressDialog()
+                                finish()
+                            }
                             else -> {
                                 updateStatus("canceled")
                             }

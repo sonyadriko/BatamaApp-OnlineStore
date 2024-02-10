@@ -70,9 +70,6 @@
             android:name=".view.activity.AlamatFormActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.CheckoutActivity"
-            android:exported="false" />
-        <activity
             android:name=".view.activity.SplashActivity"
             android:exported="true"
             android:launchMode="singleTop"
