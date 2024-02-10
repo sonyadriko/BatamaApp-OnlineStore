@@ -34,9 +34,7 @@ import kotlinx.parcelize.Parcelize
 data class Transaction(
     var id: String = "",
     val orderId: String = "",
-    val nama: String = "",
     val harga: Double = 0.0,
-    var jumlah: Int = 1,
     val status: String = "",
     val produkId: String = "",
     val userId: String = "",
@@ -48,6 +46,12 @@ data class Transaction(
     val createdAt: String = "",
     val idSeller: String = "",
 ) : Parcelable {
+
+    val listOfProdukKeranjang = mutableListOf<ProdukKeranjang>()
+    fun setProdukKeranjang(newList: List<ProdukKeranjang>) {
+        listOfProdukKeranjang.addAll(newList)
+    }
+
     fun toMap(): Map<String, Any?> {
         val gson = Gson()
         val json = gson.toJson(this)

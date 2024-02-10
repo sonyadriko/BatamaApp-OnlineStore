@@ -227,32 +227,34 @@ class OrderConfirmationActivity : BaseActivity() {
         }
 
         if (metodePembayaran.equals("cod", ignoreCase = true)) {
-            startTransaction(getTransactionDetail())
-        } else {
-            lifecycleScope.launch {
-                midtransRepository.postSnapToken(
-                    SnapTransactionDetailRequest(
-                        customerDetails = customerDetail,
-                        itemDetails = itemDetails,
-                        transactionDetails = TransactionDetails(
-                            orderId = initTransactionDetails().orderId,
-                            grossAmount = initTransactionDetails().grossAmount,
-                        )
-                    )
-                ).collect { result ->
-                    when (result) {
-                        Result.Loading -> showProgressDialog()
-                        is Result.Success -> {
-                            binding.btnBayar.isEnabled = true
-                            startTransaction(getTransactionDetail(result))
-                        }
+            startTransaction(getTransactionTransactionList())
+            return
+        }
 
-                        is Result.Error -> {
-                            binding.btnBayar.isEnabled = true
-                            dismissProgressDialog()
-                            Timber.e(result.throwable)
-                            showToast("${result.httpCode} : ${result.throwable.message}")
-                        }
+        lifecycleScope.launch {
+            midtransRepository.postSnapToken(
+                SnapTransactionDetailRequest(
+                    customerDetails = customerDetail,
+                    itemDetails = itemDetails,
+                    transactionDetails = TransactionDetails(
+                        orderId = initTransactionDetails().orderId,
+                        grossAmount = initTransactionDetails().grossAmount,
+                    )
+                )
+            ).collect { result ->
+                when (result) {
+                    Result.Loading -> showProgressDialog()
+                    is Result.Success -> {
+                        binding.btnBayar.isEnabled = true
+                        startTransaction(getTransactionTransactionList(result))
+                    }
+
+                    is Result.Error -> {
+                        binding.btnBayar.isEnabled = true
+                        dismissProgressDialog()
+                        Timber.e(result.throwable)
+                        // showToast("${result.httpCode} : ${result.throwable.message}") //only for testing
+                        showDefaultErrorToast()
                     }
                 }
             }
@@ -264,7 +266,10 @@ class OrderConfirmationActivity : BaseActivity() {
             withContext(Dispatchers.IO) {
                 transactions.forEachIndexed { index, transaction ->
                     try {
-                        transactionRepository.addTransaction(produkKeranjang, transaction) { isComplete ->
+                        transactionRepository.addTransaction(
+                            transaction.listOfProdukKeranjang.toTypedArray(),
+                            transaction
+                        ) { isComplete ->
                             dismissProgressDialog()
                             if (index == transactions.size - 1) {
                                 if (isComplete) {
@@ -287,16 +292,12 @@ class OrderConfirmationActivity : BaseActivity() {
         }
     }
 
-     private fun getTransactionDetail(): List<Transaction>  {
-         return produkKeranjang!!.map {
-             val product = it
+     private fun getTransactionTransactionList(): List<Transaction>  {
+         return produkKeranjang!!.groupBy { it.idSeller }.map { product ->
              Transaction(
-                 nama = product.nama,
                  alamatId = idAlamat,
                  orderId = initTransactionDetails().orderId,
-                 jumlah = product.qty,
-                 harga = product.harga.toDouble(),
-                 produkId = product.produkId,
+                 harga = product.value.sumOf { it.harga }.toDouble(),
                  status = "pending",
                  userId = userRepository.uid!!,
                  catatan = binding.edtCatatan.text.toString(),
@@ -304,21 +305,19 @@ class OrderConfirmationActivity : BaseActivity() {
                  metodePengiriman = metodePengiriman!!,
                  snapToken = "",
                  createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
-                 idSeller = product.idSeller!!
-             )
+                 idSeller = product.value[0].idSeller!! // id seller is the same
+             ).also {
+                 it.setProdukKeranjang(product.value)
+             }
          }
     }
 
-     private fun getTransactionDetail(result: Result.Success<SnapTokenResponse>): List<Transaction>  {
-         return produkKeranjang!!.map {
-             val product = it
+     private fun getTransactionTransactionList(result: Result.Success<SnapTokenResponse>): List<Transaction>  {
+         return produkKeranjang!!.groupBy { it.idSeller }.map { product ->
              Transaction(
-                 nama = product.nama,
-                 alamatId = idAlamat ,
+                 alamatId = idAlamat,
                  orderId = initTransactionDetails().orderId,
-                 jumlah = product.qty,
-                 harga = product.harga.toDouble(),
-                 produkId = product.produkId,
+                 harga = product.value.sumOf { it.harga }.toDouble(),
                  status = "pending",
                  userId = userRepository.uid!!,
                  catatan = binding.edtCatatan.text.toString(),
@@ -326,7 +325,7 @@ class OrderConfirmationActivity : BaseActivity() {
                  metodePengiriman = metodePengiriman!!,
                  snapToken = result.data.token,
                  createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
-                 idSeller = product.idSeller!!
+                 idSeller = product.value[0].idSeller!! // id seller is the same
              )
          }
     }

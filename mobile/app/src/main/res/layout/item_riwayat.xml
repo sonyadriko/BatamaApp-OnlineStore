@@ -1,97 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="15dp"
-    android:layout_marginTop="15dp"
-    android:layout_marginBottom="5dp"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="1dp">
+    android:layout_marginVertical="@dimen/smaller_space"
+    android:background="@color/white"
+    android:clickable="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <com.example.tokoonline.view.LabelStatus
+        android:id="@+id/label_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_space"
+        android:layout_marginEnd="@dimen/medium_space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:paddingVertical="@dimen/small_space"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:itemCount="2"
+        tools:listitem="@layout/item_riwayat_produk" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="15dp">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="80dp"
-                app:cardCornerRadius="4dp"
-                android:layout_height="80dp">
-
-                <ImageView
-                    android:id="@+id/img_produk"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/loading_animation" />
-
-            </androidx.cardview.widget.CardView>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:paddingStart="12dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_nama"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/body_1"
-                    android:ellipsize="end"
-                    android:textColor="#8E908E"
-                    android:text="Nama"
-                    android:paddingBottom="10dp"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tv_totalHarga"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/body_1"
-                    android:textColor="#2C302D"
-                    android:ellipsize="end"
-                    android:text="Rp.10.000"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:gravity="end"
-                android:orientation="vertical">
-
-                <com.example.tokoonline.view.LabelStatus
-                    android:id="@+id/label_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/tv_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:ellipsize="marquee"
-                    android:gravity="end|bottom"
-                    tools:text="1 items" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
