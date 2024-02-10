@@ -6,35 +6,19 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.BuildConfig
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
-import com.example.tokoonline.core.util.Result
-import com.example.tokoonline.core.util.getTotalBelanja
 import com.example.tokoonline.core.util.parcelable
-import com.example.tokoonline.data.model.firebase.ProdukKeranjang
 import com.example.tokoonline.data.model.firebase.Transaction
-import com.example.tokoonline.data.model.midtrans.BillingAddress
-import com.example.tokoonline.data.model.midtrans.CustomerDetails
-import com.example.tokoonline.data.model.midtrans.ItemDetailsItem
-import com.example.tokoonline.data.model.midtrans.ShippingAddress
-import com.example.tokoonline.data.model.midtrans.SnapTokenResponse
-import com.example.tokoonline.data.model.midtrans.SnapTransactionDetailRequest
-import com.example.tokoonline.data.model.midtrans.TransactionDetails
-import com.example.tokoonline.data.repository.firebase.AlamatRepository
 import com.example.tokoonline.data.repository.firebase.TransactionRepository
 import com.example.tokoonline.data.repository.midtrans.MidtransRepository
 import com.example.tokoonline.databinding.ActivityPembayaranBinding
-import com.midtrans.sdk.uikit.api.model.SnapTransactionDetail
 import com.midtrans.sdk.uikit.api.model.TransactionResult
 import com.midtrans.sdk.uikit.external.UiKitApi
 import com.midtrans.sdk.uikit.internal.util.UiKitConstants
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.util.UUID
 import javax.inject.Inject
 
 @AndroidEntryPoint

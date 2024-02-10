@@ -47,7 +47,7 @@
             <EditText
                 android:id="@+id/edt_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
@@ -62,13 +62,22 @@
             <EditText
                 android:id="@+id/edt_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="Password"
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:textColor="#8E908E"
+            android:text="Terdiri dari Huruf A-Z, Huruf a-z, Angka 0-9" />
 
         <TextView
             android:id="@+id/btn_daftarAkun"

@@ -12,7 +12,6 @@ import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Transaction
-import com.example.tokoonline.data.repository.firebase.ProdukRepository
 import com.example.tokoonline.data.repository.firebase.ProdukTransactionRepository
 import com.example.tokoonline.data.repository.firebase.TransactionRepository
 import com.example.tokoonline.databinding.ActivityDetailPesananTokoBinding

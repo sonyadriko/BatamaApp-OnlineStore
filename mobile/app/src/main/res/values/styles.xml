@@ -40,7 +40,8 @@
 
     <style name="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Custom" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:gravity">center</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:textColor">@color/colorNeutral900</item>
         <item name="boxBackgroundColor">@color/white</item>
@@ -54,7 +55,8 @@
 
     <style name="Widget.MaterialComponents.TextInputLayout.FilledBox.Custom" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:gravity">center</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="boxBackgroundColor">@color/white</item>
         <item name="android:textColor">@color/colorNeutral900</item>
