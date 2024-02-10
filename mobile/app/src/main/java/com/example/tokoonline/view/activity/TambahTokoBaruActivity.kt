@@ -1,20 +1,16 @@
-package com.example.tokoonline
+package com.example.tokoonline.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.data.model.firebase.Alamat
-import com.example.tokoonline.data.model.firebase.Toko
 import com.example.tokoonline.data.repository.firebase.AlamatRepository
 import com.example.tokoonline.databinding.ActivityTambahTokoBaruBinding
-import com.example.tokoonline.databinding.ActivityTokoProfileBinding
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
-import java.util.UUID
 
 class TambahTokoBaruActivity : BaseActivity() {
     private lateinit var binding: ActivityTambahTokoBaruBinding

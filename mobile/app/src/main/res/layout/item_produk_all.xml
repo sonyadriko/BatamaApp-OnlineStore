@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/small_space_8"
+    android:layout_marginVertical="@dimen/small_space_6"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/colorNeutral100"
+    app:strokeWidth="1dp"
+    tools:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_produk"
+            android:layout_width="match_parent"
+            android:layout_margin="1dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/loading_animation"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/small_space"
+            android:layout_marginTop="@dimen/small_space"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Nama Produk"
+            android:textColor="#434744"
+            android:textSize="@dimen/body_2" />
+
+        <TextView
+            android:id="@+id/tv_harga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/small_space"
+            android:layout_marginTop="@dimen/small_space_8"
+            android:layout_marginBottom="@dimen/small_space"
+            android:ellipsize="end"
+            android:fontFamily="@font/interm"
+            android:maxLines="2"
+            android:text="Rp 0"
+            android:textColor="@color/colorNeutral800"
+            android:textSize="@dimen/subtitle_2" />
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

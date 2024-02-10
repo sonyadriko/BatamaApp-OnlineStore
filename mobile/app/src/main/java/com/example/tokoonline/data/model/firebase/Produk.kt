@@ -17,7 +17,9 @@ data class Produk(
     val beratProduk: Double = 0.0,
     val stok: Int = 1,
     val idSeller: String? = "",
+    val idToko: String? = "",
     val createdAt: String = "",
+    val terjual: Int = 0,
 ) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()
@@ -27,6 +29,7 @@ data class Produk(
 
     fun toProdukKeranjang(jumlah: Int): ProdukKeranjang {
         return ProdukKeranjang(
+            id = this.id,
             image = this.image,
             nama = this.nama,
             harga = this.harga,
@@ -34,7 +37,8 @@ data class Produk(
             beratProduk = this.beratProduk,
             idSeller = this.idSeller,
             qty = jumlah,
-            produkId = this.id
+            produkId = this.id,
+            stok = this.stok
         )
     }
 }

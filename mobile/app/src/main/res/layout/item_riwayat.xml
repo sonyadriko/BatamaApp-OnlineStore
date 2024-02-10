@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -32,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/product" />
+                    android:src="@drawable/loading_animation" />
 
             </androidx.cardview.widget.CardView>
 
@@ -48,19 +49,22 @@
                     android:id="@+id/tv_nama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
+                    style="@style/body_1"
+                    android:ellipsize="end"
+                    android:textColor="#8E908E"
                     android:text="Nama"
                     android:paddingBottom="10dp"
-                    android:textSize="20dp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_totalHarga"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="marquee"
+                    style="@style/body_1"
+                    android:textColor="#2C302D"
+                    android:ellipsize="end"
                     android:text="Rp.10.000"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -71,21 +75,10 @@
                 android:gravity="end"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <com.example.tokoonline.view.LabelStatus
+                    android:id="@+id/label_status"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp">
-
-                    <TextView
-                        android:id="@+id/tv_status"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="marquee"
-                        android:text="Completed"
-                        android:textColor="#4CAF50" />
-
-                </LinearLayout>
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:id="@+id/tv_item"
@@ -93,7 +86,7 @@
                     android:layout_height="match_parent"
                     android:ellipsize="marquee"
                     android:gravity="end|bottom"
-                    android:text="1 items" />
+                    tools:text="1 items" />
 
             </LinearLayout>
 

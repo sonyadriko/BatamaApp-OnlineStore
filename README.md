@@ -24,28 +24,30 @@ https://www.figma.com/file/98na6prcdnz2Yy5v2MTR01/Low-Fidelity%2C-Medium-Fidelit
   <tbody>
     <tr>
       <td><b>Initial</b></td>
-      <td colspan="5"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/6cd02ac2-667b-4a2d-9aee-ec9b799f3916"></td>
+      <td colspan="5"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/323f720c-9ec2-49cd-b8fe-31849c1a64e6"></td>
     </tr>
     <tr>
       <td><b>Auth</b></td>
-      <td colspan="2"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/6a23c285-c9c2-4827-aa6f-4bc4674e75a7"></td>
-      <td colspan="5"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/20504d9e-5a7d-4d06-873b-feee9572d89d"></td>
+      <td colspan="2"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/fdf354a5-8b73-46e3-bb5d-0b25a7661012">
+</td>
+      <td colspan="5"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/00c0f34c-6a33-4d1c-8c40-a771e2491372">
+</td>
     </tr>
     <tr>
       <td><b>Main</b></td>
-      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/d0a8ffa3-db40-4160-b3ce-b3454df91334"></td>
-      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/0d36b5ad-6f1f-437b-b86a-3f68518b9509"></td>
-      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/1084c48e-d612-47b4-9ab8-d11257be82eb"></td>
-      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/44e97508-7c3b-43cf-8a60-5c4e0593febd"></td>
-      <td colspan="5"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/3c8f69ad-423d-485d-9ed8-647b455790ba"></td>
+      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/80f06a2c-97db-410a-985b-061c2e6cd399"></td>
+      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/9258454f-bed5-43e8-b336-8536a15c13b1"></td>
+      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/0e7f3b1b-e65d-49a2-ad8c-1ab70ae5e717"></td>
+      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/18f61bc3-d359-4f3a-8fda-7edc96cb8a48"></td>
+      <td colspan="5"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/f04dff33-b26e-48ef-b441-54f5b2945c09"></td>
     </tr>
     <tr>
       <td><b>Product & checkout</b></td>
-      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/ad13ed9e-11cb-41a6-b6c5-55b795d3ea2b"></td>
-      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/6a784960-9a4f-40a9-b180-3f394059ad87"></td>
-      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/73b18b69-76a6-4ac9-a7d1-587a3f17ab5a"></td>
-      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/b0770f5b-0613-407c-b6c8-c6261ac4f93a"></td>
-      <td colspan="5"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/b2b50762-da11-45ad-a911-b671874b5669"></td>
+      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/fc1a6f9c-6fc8-461b-a112-3f9ac38b30fc"></td>
+      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/84945011-5328-4cd6-a7f9-af7ea7d57605"></td>
+      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/ca6c88bb-f14e-45fa-8621-10ae51c95ad7"></td>
+      <td><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/0e578f52-e544-44d5-ab33-249ad6732466"></td>
+      <td colspan="5"><img width="150" alt="image" src="https://github.com/ai-null/tokoonline/assets/24985130/c37be803-d087-47cc-b56b-4129a82539f6"></td>
     </tr>
   </tbody>
 </table>

@@ -50,8 +50,8 @@ class AlamatViewModel : BaseViewModel() {
         }
     }
 
-    fun deleteAlamatById(id: String, onComplete: (Boolean) -> Unit) {
-        alamatRepository.deleteAlamatById(id) { isSuccess ->
+    fun deleteAlamatById( id: String, userUid: String, onComplete: (Boolean) -> Unit) {
+        alamatRepository.deleteAlamatById(id, userUid) { isSuccess ->
             onComplete(isSuccess)
         }
     }

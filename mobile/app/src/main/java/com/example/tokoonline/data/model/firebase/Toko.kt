@@ -13,7 +13,6 @@ data class Toko (
     val nama: String = "",
     val id_alamat: String = "",
     val id_users : String = "",
-    val isSeller: String? = "",
 ) : Parcelable, Serializable {
     fun toMap(): Map<String, Any?> {
         val gson = Gson()

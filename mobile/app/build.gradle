@@ -100,6 +100,8 @@ dependencies {
     implementation androidx.navKTX
     implementation androidx.navUI
     implementation androidx.annotation
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
 
     testImplementation unitTest.junit
     androidTestImplementation androidx.junitExt
@@ -153,6 +155,7 @@ dependencies {
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01")
 }
 
 // Allow references to generated code

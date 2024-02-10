@@ -1,5 +1,7 @@
 package com.example.tokoonline.view.viewmodel
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.tokoonline.core.base.BaseViewModel
 import com.example.tokoonline.data.model.firebase.Toko
@@ -30,6 +32,17 @@ class TokoViewModel : BaseViewModel() {
             }
         }
     }
+
+    fun updateToko( userUid: String, toko: Toko, onComplete: (Boolean) -> Unit) {
+        Log.d(TAG, "Updating Toko: $toko for user: $userUid")
+        viewModelScope.launch {
+            tokoRepository.updateToko(userUid, toko) { isSuccess ->
+                Log.d(TAG, "Update operation completed. Success: $isSuccess")
+                onComplete(isSuccess)
+            }
+        }
+    }
+
 
     fun checkUserHasToko(userId: String, callback: (Boolean) -> Unit) {
         // Assuming you have a repository method to check if the user has a toko

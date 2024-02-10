@@ -85,6 +85,8 @@ class DetailProductActivity : BaseActivity() {
             }
         }
 
+        
+
         callSeller.setOnClickListener {
             if (sellerPhone.text.isNullOrBlank()) {
                 showToast("Nomor WhatsApp tidak ditemukan")
@@ -96,14 +98,25 @@ class DetailProductActivity : BaseActivity() {
             )
         }
 
-        stok.text = "${produkData?.stok ?: 0} Pcs"
-        berat.text = "${produkData?.beratProduk ?: 0} Kg"
+        val stokProduk = produkData?.stok
 
+        if (stokProduk == null || stokProduk == 0) {
+            btnBeli.isEnabled = false
+            btnBeli.setOnClickListener {
+                showToast("Stok produk tidak tersedia. Silahkan hubungi seller")
+            }
+        } else {
+            stok.text = "${stokProduk} Pcs"
+            btnBeli.isEnabled = true
+        }
+
+
+
+        berat.text = "${produkData?.beratProduk ?: 0} Kg"
         btnKeranjang.setOnClickListener {
             if (produkData == null) {
                 return@setOnClickListener
             }
-
             showProgressDialog()
             userRepository.uid?.let { uuid ->
                 keranjangRepository.addKeranjang(
@@ -119,7 +132,6 @@ class DetailProductActivity : BaseActivity() {
                     })
             }
         }
-
         btnBeli.setOnClickListener {
             showUpdateStatusDialog()
         }
@@ -163,7 +175,7 @@ class DetailProductActivity : BaseActivity() {
 
             btnBeli.setOnClickListener {
                 startActivity(
-                    PengirimanActivity.createIntent(
+                    OrderConfirmationActivity.createIntent(
                         this@DetailProductActivity,
                         arrayOf(produkData!!.toProdukKeranjang(vm.quantity.value ?: 1))
                     )

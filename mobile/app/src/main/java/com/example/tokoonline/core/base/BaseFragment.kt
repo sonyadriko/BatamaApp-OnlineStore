@@ -91,6 +91,7 @@ abstract class BaseFragment : Fragment() {
         startActivity(intent)
     }
 
+
     fun goToTokoProfile(){
         val intent = Intent(requireContext(), TokoProfileActivity::class.java)
         startActivity(intent)

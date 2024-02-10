@@ -1,48 +1,67 @@
 package com.example.tokoonline.view.adapter
 
-import android.content.ClipData.Item
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.tokoonline.core.util.OnItemClick
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.firebase.Transaction
 import com.example.tokoonline.data.repository.firebase.ProdukRepository
+import com.example.tokoonline.data.repository.firebase.ProdukTransactionRepository
 import com.example.tokoonline.databinding.ItemRiwayatBinding
 
 
-class AdapterRiwayat(private val transactionList: List<Transaction>?) : RecyclerView.Adapter<AdapterRiwayat.ViewHolder>() {
-    class ViewHolder(private val binding: ItemRiwayatBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(transaction: Transaction) {
-            binding.tvTotalHarga.text = moneyFormatter(transaction.harga.toLong())
-            val produkRepository = ProdukRepository.getInstance()
-            produkRepository.getProdukById(transaction.produkId){produk ->
-                if (produk != null){
-                    binding.tvNama.text = produk.nama
-                    Glide.with(binding.imgProduk.context)
+class AdapterRiwayat(
+    private val onItemClick: OnItemClick
+) : RecyclerView.Adapter<AdapterRiwayat.ViewHolder>() {
+
+    private val transactionList: MutableList<Transaction> = mutableListOf()
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun submitList(newList: List<Transaction>) {
+        transactionList.clear()
+        transactionList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
+    inner class ViewHolder(private val binding: ItemRiwayatBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
+        fun bind(transaction: Transaction, position: Int) = with(binding) {
+            tvTotalHarga.text = moneyFormatter(transaction.harga.toLong() * transaction.jumlah)
+            labelStatus.setStatus(status = transaction.status)
+            tvItem.text = "${transaction.jumlah} item${if (transaction.jumlah > 1) "s" else ""}"
+            val produkRepository = ProdukTransactionRepository.getInstance()
+            produkRepository.getProdukById(transaction.produkId) { produk ->
+                if (produk != null) {
+                    tvNama.text = produk.nama
+                    Glide.with(imgProduk.context)
                         .load(produk.image)
-                        .into(binding.imgProduk)
+                        .into(imgProduk)
                 }
             }
 
-
+            root.setOnClickListener {
+                onItemClick.onClick(transaction, position)
+            }
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterRiwayat.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRiwayatBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return AdapterRiwayat.ViewHolder(binding)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: AdapterRiwayat.ViewHolder, position: Int) {
-        val transaction = transactionList?.get(position)
-
-        transaction?.let {
-            holder.bind(transaction)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val transaction = transactionList[position]
+        transaction.let {
+            holder.bind(transaction, position)
         }
     }
 
     override fun getItemCount(): Int {
-        return transactionList?.size ?: 0
+        return transactionList.size
     }
 
 }

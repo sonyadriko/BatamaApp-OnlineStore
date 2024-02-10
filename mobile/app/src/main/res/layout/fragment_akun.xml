@@ -249,11 +249,12 @@
                     android:paddingVertical="20dp">
 
                     <RelativeLayout
-                        android:id="@+id/btn_riwayat"
+                        android:id="@+id/btn_callAdmin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:gravity="center_vertical">
+
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -264,13 +265,13 @@
                             <ImageView
                                 android:layout_width="20dp"
                                 android:layout_height="20dp"
-                                app:srcCompat="@drawable/ic_receipt" />
+                                app:srcCompat="@drawable/baseline_call_24" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:text="Riwayat Transaksi"
+                                android:text="Kontak Admin"
                                 android:textColor="#434744" />
 
                         </LinearLayout>
@@ -283,13 +284,16 @@
 
                     </RelativeLayout>
 
+
+
                     <RelativeLayout
                         android:id="@+id/btn_keranjang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="20dp"
+                        android:layout_marginHorizontal="10dp"
                         android:gravity="center_vertical">
+
 
                         <LinearLayout
                             android:layout_width="match_parent"

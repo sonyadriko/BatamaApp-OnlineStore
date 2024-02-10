@@ -5,21 +5,22 @@ $is_production = getenv('IS_PROD');
 $server_key = $is_production ? getenv('ACCESS_KEY_PROD') : getenv('ACCESS_KEY_SANDBOX');
 // Set true for production, set false for sandbox
 
-$api_url = $is_production ? 
+$api_url = $is_production == 'true' ? 
   'https://app.midtrans.com/snap/v1/transactions' : 
   'https://app.sandbox.midtrans.com/snap/v1/transactions';
 
+
+if (strpos($_SERVER['REQUEST_URI'], '/conf')) {
+  http_response_code(200); 
+  echo "current configuration : " . $is_production;
+  echo "\ncurrent url : " . $api_url;
+  exit();
+}
 
 // Check if request doesn't contains `/charge` in the url/path, display 404
 if( !strpos($_SERVER['REQUEST_URI'], '/charge') ) {
   http_response_code(404); 
   echo "wrong path, make sure it's `/charge`"; exit();
-}
-
-// Check if request doesn't contains `/charge` in the url/path, display 404
-if( !strpos($_SERVER['REQUEST_URI'], '/conf') ) {
-  http_response_code(404); 
-  echo "current configuration : " . $is_production; exit();
 }
 
 // Check if method is not HTTP POST, display 404

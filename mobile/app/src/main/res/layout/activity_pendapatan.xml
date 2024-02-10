@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PendapatanActivity">
+    tools:context=".view.activity.PendapatanActivity">
 
     <ImageView
         android:id="@+id/background"

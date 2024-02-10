@@ -5,6 +5,7 @@ import android.text.Editable
 import android.view.View
 import androidx.activity.viewModels
 import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.data.model.firebase.Alamat
 import com.example.tokoonline.databinding.ActivityAlamatFormBinding
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
@@ -54,7 +55,20 @@ class AlamatFormActivity : BaseActivity() {
                 }
             }
         }else{
-//            binding.btnHapusAlamat.visibility = View.GONE
+            binding.btnHapusAlamat.gone()
+        }
+
+        binding.btnHapusAlamat.setOnClickListener {
+            if (selectedAlamatId != null) {
+                viewModel.deleteAlamatById(selectedAlamatId ,userId) { isSuccess ->
+                    if (isSuccess) {
+                        showToast("Alamat berhasil dihapus")
+                        finish()
+                    } else {
+                        showToast("Deletion failed")
+                    }
+                }
+            }
         }
         binding.btnSimpanAlamat.setOnClickListener{
             initListener(selectedAlamatId)

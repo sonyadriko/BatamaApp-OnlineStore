@@ -52,11 +52,12 @@ class AdapterKeranjang(
 
         if (count <= 0) {
             data.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position,data.size)
         } else {
             data[position] = newData
+            notifyItemChanged(position)
         }
-
-        notifyItemChanged(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -80,12 +81,14 @@ class AdapterKeranjang(
                 .into(imgProduk)
 
             btnTambah.setOnClickListener {
-                tvJumlah.text = "${count++}"
-                onItemClickListener.onClick(
-                    item.copy(produk = produk.copy(qty = count), isIncrement = true),
-                    position
-                )
-                btnTambah.setOnClickListener(null)
+                if (item.produk.stok >= count+1) {
+                    tvJumlah.text = "${count++}"
+                    onItemClickListener.onClick(
+                        item.copy(produk = produk.copy(qty = count), isIncrement = true),
+                        position
+                    )
+                    btnTambah.setOnClickListener(null)
+                }
             }
 
             btnKurang.setOnClickListener {

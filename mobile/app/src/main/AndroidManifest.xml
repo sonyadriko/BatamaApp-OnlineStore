@@ -14,22 +14,36 @@
         android:theme="@style/Theme.Tokoonline"
         tools:targetApi="31">
         <activity
-            android:name=".PendapatanActivity"
+            android:name=".view.activity.ProdukViewAllActivity"
             android:exported="false" />
         <activity
-            android:name=".TambahAlamatBaruActivity"
+            android:name=".view.activity.toko.pendapatan.PendapatanActivity"
             android:exported="false" />
         <activity
-            android:name=".SuccessOrderActivity"
+            android:name=".view.activity.toko.pesanan.StatusPesananActivity"
+            android:exported="false"
+            android:label="@string/title_activity_status_pesanan"
+            android:theme="@style/Theme.Tokoonline.NoActionBar" />
+        <activity
+            android:name=".view.activity.DetailPesananTokoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.PendapatanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.TambahAlamatBaruActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.activity.SuccessOrderActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.EditAkunActivity"
             android:exported="false" />
         <activity
-            android:name=".TambahTokoBaruActivity"
+            android:name=".view.activity.TambahTokoBaruActivity"
             android:exported="false" />
         <activity
-            android:name=".TambahTokoActivity"
+            android:name=".view.activity.TambahTokoActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.ProdukSayaActivity"
@@ -47,16 +61,13 @@
             android:name=".view.activity.TokoProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".view.activity.PengirimanActivity"
+            android:name=".view.activity.OrderConfirmationActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.PembayaranActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.AlamatFormActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.activity.CheckoutActivity"
             android:exported="false" />
         <activity
             android:name=".view.activity.SplashActivity"

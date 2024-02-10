@@ -9,13 +9,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tokoonline.view.activity.MainActivity
 import com.example.tokoonline.R
-import com.example.tokoonline.TambahTokoActivity
+import com.example.tokoonline.view.activity.TambahTokoActivity
 import com.example.tokoonline.data.model.firebase.ProdukKeranjang
 import com.example.tokoonline.data.repository.firebase.UserRepository
 import com.example.tokoonline.view.activity.AlamatFormActivity
 import com.example.tokoonline.view.activity.EditProfilFormActivity
 import com.example.tokoonline.view.activity.InitialActivity
-import com.example.tokoonline.view.activity.PengirimanActivity
+import com.example.tokoonline.view.activity.OrderConfirmationActivity
 import com.example.tokoonline.view.activity.ProdukSayaActivity
 import com.example.tokoonline.view.activity.SettingAlamatActivity
 import com.example.tokoonline.view.activity.TokoProfileActivity
@@ -118,17 +118,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
     fun goToAlamatSetting(){
         val intent = Intent(this, SettingAlamatActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun goToBayar(totalBelanja: Long, produkList: List<ProdukKeranjang>){
-        val intent = Intent(this, PengirimanActivity::class.java )
-        val bundle = Bundle()
-        if (produkList != null) {
-            bundle.putParcelableArrayList("produkList", ArrayList(produkList))
-            intent.putExtra("totalBelanja", totalBelanja)
-            intent.putExtras(bundle)
-        }
         startActivity(intent)
     }
 

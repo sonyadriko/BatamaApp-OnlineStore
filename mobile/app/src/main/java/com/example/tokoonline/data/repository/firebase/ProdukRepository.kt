@@ -44,9 +44,10 @@ class ProdukRepository {
             }
     }
 
-    fun updateProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
-        databaseReference.child(produk.keyword)
-            .updateChildren(produk.toMap())
+    fun updateProdukStok(produkId: String, newStok: Int, onComplete: (isSuccess: Boolean) -> Unit) {
+        databaseReference.child(produkId)
+            .child("stok")
+            .setValue(newStok)
             .addOnCompleteListener {
                 onComplete(it.isSuccessful)
             }
@@ -72,7 +73,7 @@ class ProdukRepository {
 
 
     fun getProdukByTokoId(tokoID: String, onComplete: (data: List<Produk?>) -> Unit) {
-        databaseReference.orderByChild("idSeller")
+        databaseReference.orderByChild("idToko")
             .equalTo(tokoID)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {

@@ -80,7 +80,12 @@ class SearchActivity : BaseActivity() {
         produkRepository.searchProduct(searchableKeyword.lowercase()) { isSuccess, data ->
             try {
                 if (isSuccess && data?.isNotEmpty() == true) {
-                    adapter.submitData(data.filterNotNull())
+                    // Filter out products with idSeller equal to userRepository.uid
+                    val filteredData = data.filterNotNull().filter { produk ->
+                        produk.idSeller != userRepository.uid
+                    }
+                    adapter.submitData(filteredData)
+
                     if (binding.containerSearchNotFound.isVisible) {
                         binding.containerSearchNotFound.gone()
                     }

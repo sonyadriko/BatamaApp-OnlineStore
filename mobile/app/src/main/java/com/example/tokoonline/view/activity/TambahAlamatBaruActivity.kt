@@ -1,11 +1,9 @@
-package com.example.tokoonline
+package com.example.tokoonline.view.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.data.model.firebase.Alamat
-import com.example.tokoonline.databinding.ActivityAlamatFormBinding
 import com.example.tokoonline.databinding.ActivityTambahAlamatBaruBinding
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 
@@ -30,9 +28,8 @@ class TambahAlamatBaruActivity : BaseActivity() {
     private fun initListener() = with(binding) {
 
         val newDataAlamat = Alamat(
-//            label = edtNama.text.toString(),
             alamat = edtAlamat.text.toString(),
-            catatan = edtType.text.toString(),
+            label = edtType.text.toString(),
             nama = edtNama.text.toString(),
             phone = edtPhone.text.toString(),
             default = false,

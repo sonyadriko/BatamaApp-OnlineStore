@@ -21,6 +21,7 @@ class UserRepository constructor(
         const val NAMA = "nama"
         const val EMAIL = "email"
         const val PHONE = "noTelepon"
+        const val ID_TOKO = "idToko"
 
         @Volatile
         private var INSTANCE: UserRepository? = null
@@ -120,8 +121,37 @@ class UserRepository constructor(
                     val snapshot = task.result
                     val idToko = snapshot.children.firstOrNull()?.getValue(Toko::class.java)?.id
                     onComplete(true, idToko)
+
+                    // Save idToko to SharedPreferences
+                    saveStringToSharedPref(ID_TOKO, idToko)
                 } else {
                     onComplete(false, null)
+                }
+            }
+    }
+    fun getIdToko(): String? {
+        return getStringFromSharedPref(ID_TOKO)
+    }
+
+    fun updateUser(userUid: String, newName: String, newEmail: String, newPhone: String, onComplete: (isSuccess: Boolean) -> Unit) {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: userUid
+
+        val userUpdateMap = mapOf(
+            NAMA to newName,
+            EMAIL to newEmail,
+            PHONE to newPhone
+        )
+
+        database.child(uid).updateChildren(userUpdateMap)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    onComplete(true)
+
+                    nama = newName
+                    email = newEmail
+                    phone = newPhone
+                } else {
+                    onComplete(false)
                 }
             }
     }

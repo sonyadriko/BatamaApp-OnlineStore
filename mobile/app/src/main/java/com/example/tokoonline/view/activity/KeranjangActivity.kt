@@ -3,7 +3,6 @@ package com.example.tokoonline.view.activity
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.core.base.BaseActivity
@@ -84,8 +83,12 @@ class KeranjangActivity : BaseActivity() {
 
         binding.btnBayar.setOnClickListener{
             val produkList = viewModel.produkToBePaid
-            val totalBelanja = viewModel.totalBelanja.value ?: 0
-            goToBayar(totalBelanja, produkList)
+            startActivity(
+                OrderConfirmationActivity.createIntent(
+                    this@KeranjangActivity,
+                    produkList.toTypedArray()
+                )
+            )
         }
 
         binding.toolbar.binding.leftIcon.setOnClickListener {
