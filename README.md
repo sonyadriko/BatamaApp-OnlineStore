@@ -67,7 +67,7 @@ https://www.figma.com/file/98na6prcdnz2Yy5v2MTR01/Low-Fidelity%2C-Medium-Fidelit
 - [x] halaman pembayaran
 - [x] halaman halaman list atm
 - [x] halaman riwayat transaksi
-- [ ] halaman detail riwayat transaksi (menunggu, batal transaksi, pesan diterima)
+- [x] halaman detail riwayat transaksi (menunggu, batal transaksi, pesan diterima)
 - [x] halaman akun
 - [x] halaman ubah profil
 - [x] halaman edit akun
@@ -76,8 +76,8 @@ https://www.figma.com/file/98na6prcdnz2Yy5v2MTR01/Low-Fidelity%2C-Medium-Fidelit
 - [ ] halaman daftar toko
 - [x] halaman produk
 - [x] halaman tambah produk
-- [ ] halaman keuangan
-- [ ] halaman status pesanan (perlu dikirim, pembatalan, selesai)
+- [x] halaman keuangan
+- [x] halaman status pesanan (perlu dikirim, pembatalan, selesai)
 - [ ] halaman pengaturan toko
 - [x] search
 - [x] halaman halaman hasil search
