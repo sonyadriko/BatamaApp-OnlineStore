@@ -5,16 +5,20 @@ import android.content.Intent
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.firebase.Produk
+import com.example.tokoonline.data.repository.firebase.ProdukRepository
 import com.example.tokoonline.databinding.ItemProdukSayaBinding
 import com.example.tokoonline.view.activity.DetailProductActivity
+import com.example.tokoonline.view.activity.ProdukSayaActivity
 import com.example.tokoonline.view.activity.TambahProdukActivity
 
 class AdapterItemProdukSaya(
     private val context: Context,
+    private val activity: ProdukSayaActivity,
     private val produkSayaList: List<Produk>
 ) : RecyclerView.Adapter<AdapterItemProdukSaya.ViewHolder>() {
 
@@ -43,8 +47,10 @@ class AdapterItemProdukSaya(
             }
 
             binding.btnHapusProduk.setOnClickListener {
-                //TODO add hapus produk by id produk
+                val produkId = produk.id
+                activity.deleteProduk(produkId, produk.idToko.toString())
             }
+
         }
     }
 
@@ -61,4 +67,5 @@ class AdapterItemProdukSaya(
     override fun getItemCount(): Int {
         return produkSayaList.size
     }
+
 }

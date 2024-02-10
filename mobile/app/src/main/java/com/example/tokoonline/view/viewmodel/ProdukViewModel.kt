@@ -73,5 +73,11 @@ class ProdukViewModel : BaseViewModel() {
         }
     }
 
+    fun deleteProdukById(produkId: String, onComplete: (isSuccess: Boolean) -> Unit) {
+        produkRepository.removeProdukById(produkId) { isSuccess ->
+            onComplete(isSuccess)
+        }
+    }
+
 
 }

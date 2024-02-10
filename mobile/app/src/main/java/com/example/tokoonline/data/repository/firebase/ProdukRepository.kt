@@ -137,8 +137,8 @@ class ProdukRepository {
     }
 
 
-    fun removeProduk(namaProduk: String, onComplete: (isSuccess: Boolean) -> Unit) {
-        databaseReference.child(namaProduk).removeValue { error, _ ->
+    fun removeProdukById(id: String, onComplete: (isSuccess: Boolean) -> Unit) {
+        databaseReference.child(id).removeValue { error, _ ->
             onComplete(error == null)
         }
     }

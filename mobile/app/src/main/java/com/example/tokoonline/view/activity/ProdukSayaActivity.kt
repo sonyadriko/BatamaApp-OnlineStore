@@ -34,10 +34,12 @@ class ProdukSayaActivity : BaseActivity() {
         viewModel.loadProdukbyIDToko(tokoID) { produkList ->
             dismissProgressDialog()
             val recyclerView: RecyclerView = binding.rvProduksaya
-            val adapter = AdapterItemProdukSaya(this, produkList)
+            val adapter = AdapterItemProdukSaya(this,this, produkList)
+
 
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.adapter = adapter
+
 
             // Check if the produkList is empty
             if (produkList.isEmpty()) {
@@ -64,5 +66,16 @@ class ProdukSayaActivity : BaseActivity() {
             }
         }
     }
+    fun deleteProduk(produkId: String, tokoID: String) {
+        viewModel.deleteProdukById(produkId) { isSuccess ->
+            if (isSuccess) {
+               showToast("Success to delete product")
+                loadProdukbyTokoID(tokoID)
+            } else {
+                showToast("Failed to delete product")
+            }
+        }
+    }
+
 
 }
