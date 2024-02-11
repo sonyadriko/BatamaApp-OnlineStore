@@ -40,6 +40,7 @@ class KeranjangActivity : BaseActivity() {
                             showToast("gagal update produk dalam keranjang")
                             finish()
                         } else {
+                            viewModel.updateProdukToBePaid(position, item.produk)
                             viewModel.removeTotalBelanja(produk.harga)
                             dismissProgressDialog()
                         }
@@ -53,6 +54,8 @@ class KeranjangActivity : BaseActivity() {
                             if (item.isChecked) {
                                 if (item.isIncrement) viewModel.addTotalBelanja(produk.harga)
                                 else viewModel.removeTotalBelanja(produk.harga)
+
+                                viewModel.updateProdukToBePaid(position, item.produk)
                                 dismissProgressDialog()
                             }
                         }
@@ -61,16 +64,18 @@ class KeranjangActivity : BaseActivity() {
             }
         }, object : OnItemCheckBoxListener {
             override fun onCheckBoxClick(isChecked: Boolean, data: Any, position: Int) {
-                val produk = data as ProdukKeranjang
-                if (isChecked) {
-                    viewModel.addProdukToBePaid(data)
-                    viewModel.addTotalBelanja(produk.harga * produk.qty)
-                } else {
-                    viewModel.removeProdukToBePaid(data)
-                    viewModel.removeTotalBelanja(produk.harga * produk.qty)
-                }
+                synchronized(this@KeranjangActivity) {
+                    val produk = data as ProdukKeranjang
+                    if (isChecked) {
+                        viewModel.addProdukToBePaid(data)
+                        viewModel.addTotalBelanja(produk.harga * produk.qty)
+                    } else {
+                        viewModel.removeProdukToBePaid(data)
+                        viewModel.removeTotalBelanja(produk.harga * produk.qty)
+                    }
 
-                adapter.updateData(produk.qty, position, false, isChecked)
+                    adapter.updateData(produk.qty, position, false, isChecked)
+                }
             }
         })
     }

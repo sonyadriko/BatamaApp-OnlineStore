@@ -31,5 +31,7 @@ class KeranjangViewModel : BaseViewModel() {
         _produkToBePaid.remove(data)
     }
 
-
+    fun updateProdukToBePaid(position: Int, newData: ProdukKeranjang) {
+        _produkToBePaid[position] = newData
+    }
 }
