@@ -35,6 +35,7 @@ class AdapterItemDetailPesanan : RecyclerView.Adapter<AdapterItemDetailPesanan.V
             tvNama.text = item.nama
             tvCount.text = "${item.qty} item${if (item.qty > 1) "s" else ""}"
             tvTotalHarga.text = moneyFormatter(item.harga * item.qty)
+            tvWeight.text = "${item.beratProduk} Kg"
             Glide.with(imgProduk.context)
                 .load(item.image)
                 .into(imgProduk)

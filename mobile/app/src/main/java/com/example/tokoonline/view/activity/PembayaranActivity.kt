@@ -92,8 +92,7 @@ class PembayaranActivity : BaseActivity() {
 
     private fun updateStatus(status: String) {
         showProgressDialog()
-
-        transactionRepository.updateTransaction(transaction!!.copy(status = status)) { result ->
+        transactionRepository.updateStatusPaidTransaction(transaction!!.snapToken) { result ->
             if (result) {
                 dismissProgressDialog()
                 startActivity(Intent(this@PembayaranActivity, MainActivity::class.java).apply {
