@@ -297,7 +297,7 @@ class OrderConfirmationActivity : BaseActivity() {
              Transaction(
                  alamatId = idAlamat,
                  orderId = initTransactionDetails().orderId,
-                 harga = product.value.sumOf { it.harga }.toDouble(),
+                 harga = product.value.sumOf { it.harga * it.qty }.toDouble(),
                  status = "pending",
                  userId = userRepository.uid!!,
                  catatan = binding.edtCatatan.text.toString(),
@@ -317,7 +317,7 @@ class OrderConfirmationActivity : BaseActivity() {
              Transaction(
                  alamatId = idAlamat,
                  orderId = initTransactionDetails().orderId,
-                 harga = product.value.sumOf { it.harga }.toDouble(),
+                 harga = product.value.sumOf { it.harga * it.qty }.toDouble(),
                  status = "pending",
                  userId = userRepository.uid!!,
                  catatan = binding.edtCatatan.text.toString(),
@@ -326,7 +326,9 @@ class OrderConfirmationActivity : BaseActivity() {
                  snapToken = result.data.token,
                  createdAt = getFormattedTimeMidtrans(System.currentTimeMillis()),
                  idSeller = product.value[0].idSeller!! // id seller is the same
-             )
+             ).also {
+                 it.setProdukKeranjang(product.value)
+             }
          }
     }
 }

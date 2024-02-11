@@ -35,15 +35,15 @@ class AdapterRiwayat(
             produkRepository.getProdukById(transaction.produkId) {
                 if (adapter == null) {
                     adapter = AdapterRiwayatProduk(
-                        context = binding.root.context,
+                        context = root.context,
                         it.filterNotNull()
                     )
                 }
 
-                binding.rv.adapter = adapter
+                rv.adapter = adapter
             }
 
-            binding.root.setOnClickListener {
+            clickableRoot.setOnClickListener {
                 onItemClick.onClick(transaction, position)
             }
         }

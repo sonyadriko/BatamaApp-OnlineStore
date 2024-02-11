@@ -14,6 +14,7 @@ import com.example.tokoonline.data.model.firebase.Transaction
 import com.example.tokoonline.data.repository.firebase.ProdukTransactionRepository
 import com.example.tokoonline.data.repository.firebase.TransactionRepository
 import com.example.tokoonline.databinding.ActivityDetailPesananTokoBinding
+import com.example.tokoonline.view.adapter.AdapterItemDetailPesanan
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import com.example.tokoonline.view.viewmodel.TokoViewModel
 
@@ -23,6 +24,7 @@ class DetailPesananTokoActivity : BaseActivity() {
     private lateinit var viewModelToko: TokoViewModel
 
     private val transactionRepository = TransactionRepository.getInstance()
+    private val produkTransactionRepository = ProdukTransactionRepository.getInstance()
 
     companion object {
         const val STATUS_PENDING = "pending"
@@ -62,13 +64,17 @@ class DetailPesananTokoActivity : BaseActivity() {
         }
     }
 
+    private val adapterDetailPesanan: AdapterItemDetailPesanan by lazy {
+        AdapterItemDetailPesanan()
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPesananTokoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModelAlamat = ViewModelProvider(this).get(AlamatViewModel::class.java)
-        viewModelToko = ViewModelProvider(this).get(TokoViewModel::class.java)
+        viewModelAlamat = ViewModelProvider(this)[AlamatViewModel::class.java]
+        viewModelToko = ViewModelProvider(this)[TokoViewModel::class.java]
 
         binding.toolbar.binding.leftIcon.setOnClickListener {
             finish()
@@ -142,9 +148,7 @@ class DetailPesananTokoActivity : BaseActivity() {
 
 
 
-        binding.tvMetodePembayaran.visibility = View.VISIBLE
-
-
+        binding.tvMetodePembayaran.visible()
         binding.tvMetodePembayaran.text = data.metodePembayaran
 
         binding.tvEstimasi.visible()
@@ -155,15 +159,11 @@ class DetailPesananTokoActivity : BaseActivity() {
         binding.tvTotal.text = "${data.harga}"
 
         binding.tvAlamatPenjual.visible()
-//        if (data != null){
-//            binding.tvAlamatPenjual.text = "${data.produkId}"
-//        }
 
-
-        val produkId = data?.produkId
-
-        if (produkId !== null){
-
+        val produkId = data.produkId
+        produkTransactionRepository.getProdukById(produkId) {
+            binding.rvBarangPesanan.adapter = adapterDetailPesanan
+            adapterDetailPesanan.submitList(it.filterNotNull())
         }
     }
 
