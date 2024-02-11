@@ -1,15 +1,14 @@
 package com.example.tokoonline.view.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.gone
-import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Transaction
 import com.example.tokoonline.data.repository.firebase.ProdukTransactionRepository
@@ -63,6 +62,7 @@ class DetailPesananTokoActivity : BaseActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPesananTokoBinding.inflate(layoutInflater)
@@ -126,25 +126,14 @@ class DetailPesananTokoActivity : BaseActivity() {
         }
 
         var idProduk = data.produkId
-        ProdukTransactionRepository.getInstance().getProdukById(idProduk){produk->
-            if (produk !== null){
-                binding.tvNama.text = produk.nama
-                binding.tvTotalHarga.text = moneyFormatter(produk.harga)
-                binding.tvWeight.text = produk.beratProduk.toString()
-                Glide.with(this)
-                    .load(produk.image)
-                    .placeholder(R.drawable.loading_animation) // Placeholder image while loading
-                    .into(binding.imgProduk)
-
-
-                viewModelToko.getTokoData(produk.idSeller.toString()){toko ->
-                    if (toko !== null){
-                        viewModelAlamat.getAlamatById(toko.id_alamat, toko.id_users){alamatToko ->
-                            if (alamatToko !== null){
-                                binding.tvAlamatPenjual.text = "${toko.nama} \n ${alamatToko.alamat}"
-                            }else{
-                                showToast("Gagal mengambil alamat Toko")
-                            }
+        ProdukTransactionRepository.getInstance().getProdukById(idProduk){ produk ->
+            viewModelToko.getTokoData(produk[0]!!.idSeller.toString()) { toko ->
+                if (toko !== null) {
+                    viewModelAlamat.getAlamatById(toko.id_alamat, toko.id_users) { alamatToko ->
+                        if (alamatToko !== null) {
+                            binding.tvAlamatPenjual.text = "${toko.nama} \n ${alamatToko.alamat}"
+                        } else {
+                            showToast("Gagal mengambil alamat Toko")
                         }
                     }
                 }
@@ -156,22 +145,14 @@ class DetailPesananTokoActivity : BaseActivity() {
         binding.tvMetodePembayaran.visibility = View.VISIBLE
 
 
-        if (data != null) {
-            binding.tvMetodePembayaran.text = "${data.metodePembayaran}"
-        }
+        binding.tvMetodePembayaran.text = data.metodePembayaran
 
         binding.tvEstimasi.visible()
-        if (data != null) {
-            binding.tvEstimasi.text = "${data.metodePengiriman}"
-        }
+        binding.tvEstimasi.text = data.metodePengiriman
         binding.tvTotalBelanja.visible()
-        if (data != null) {
-            binding.tvTotalBelanja.text = "${data.harga}"
-        }
+        binding.tvTotalBelanja.text = "${data.harga}"
         binding.tvTotal.visible()
-        if (data != null) {
-            binding.tvTotal.text = "${data.harga.toDouble()}"
-        }
+        binding.tvTotal.text = "${data.harga}"
 
         binding.tvAlamatPenjual.visible()
 //        if (data != null){

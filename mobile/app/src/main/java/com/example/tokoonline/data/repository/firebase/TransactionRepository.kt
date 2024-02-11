@@ -42,29 +42,42 @@ class TransactionRepository {
         onComplete: (isSuccess: Boolean) -> Unit
     ) {
         try {
-            for (index in produkKeranjang!!.indices) {
-                val produk = produkKeranjang[index]
-                produkTransactionRepository.addProdukTransaction(produk) { isSuccess, id ->
-                    if (isSuccess) {
-                        produkRepository.updateProdukStok(
-                            produk.produkId,
-                            produk.stok - produk.qty
-                        ) {
-                            val transactionRef = transactionReference.push()
-                            transactionRef.setValue(
-                                transaction.copy(
-                                    id = transactionRef.key!!,
-                                    produkId = id
-                                )
-                            ).addOnCompleteListener { task ->
-                                onComplete(task.isSuccessful)
-                            }
-                        }
-                    } else onComplete(false)
+            val produkRef = produkTransactionRepository.getRef()
+            addProdukTransaction(produkKeranjang!!, produkRef) { isSuccess ->
+                if (isSuccess) {
+                    val transactionRef = transactionReference.push()
+                    transactionRef.setValue(
+                        transaction.copy(
+                            id = transactionRef.key!!,
+                            produkId = produkRef.key!!
+                        )
+                    ).addOnCompleteListener { task ->
+                        onComplete(task.isSuccessful)
+                    }
                 }
             }
         } catch (e: Exception) {
             onComplete(false)
+        }
+    }
+
+    private fun addProdukTransaction(
+        produkKeranjang: Array<ProdukKeranjang>?,
+        produkRef: DatabaseReference,
+        onComplete: (isSuccess: Boolean) -> Unit
+    ) {
+        for (index in produkKeranjang!!.indices) {
+            val produk = produkKeranjang[index]
+            produkTransactionRepository.addProdukTransaction(produkRef.key, produk) { isSuccess ->
+                if (isSuccess) {
+                    produkRepository.updateProdukStok(
+                        produk.produkId,
+                        produk.stok - produk.qty
+                    ) {
+                        if (it) onComplete(index == produkKeranjang.size - 1)
+                    }
+                } else onComplete(false)
+            }
         }
     }
 
