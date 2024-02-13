@@ -4,21 +4,26 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.data.model.firebase.Transaction
 import com.example.tokoonline.databinding.ActivityTokoProfileBinding
 import com.example.tokoonline.view.activity.toko.pendapatan.PendapatanActivity
 import com.example.tokoonline.view.activity.toko.pesanan.StatusPesananActivity
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import com.example.tokoonline.view.viewmodel.TokoViewModel
+import com.example.tokoonline.view.viewmodel.TransactionViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class TokoProfileActivity : BaseActivity() {
     private lateinit var binding: ActivityTokoProfileBinding
     private lateinit var viewModelToko: TokoViewModel
-    private lateinit var viewModelAlamat : AlamatViewModel
+    private lateinit var viewModelAlamat: AlamatViewModel
+
+    private val viewModel: TransactionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +33,22 @@ class TokoProfileActivity : BaseActivity() {
         viewModelToko = ViewModelProvider(this)[TokoViewModel::class.java]
         viewModelAlamat = ViewModelProvider(this)[AlamatViewModel::class.java]
 
+        getStatusTransaction()
         initView()
         initClickListener()
+    }
+
+    private fun getStatusTransaction() {
+        viewModel.getTransaction(userUid = userRepository.uid ?: "") { transactionList ->
+            binding.tvDikirim.text = transactionList.getCountStatus("pending")
+            binding.tvPembatalan.text = transactionList.getCountStatus("cancel")
+            binding.tvSelesai.text = transactionList.getCountStatus("success")
+        }
+    }
+
+    private fun List<Transaction>.getCountStatus(status: String): String {
+        return filter { it.status.equals(status, ignoreCase = true) }
+            .toList().size.toString()
     }
 
     private fun initClickListener() {
