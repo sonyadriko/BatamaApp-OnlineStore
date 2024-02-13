@@ -152,7 +152,7 @@ class DetailPesananTokoActivity : BaseActivity() {
         binding.tvMetodePembayaran.text = data.metodePembayaran
 
         binding.tvEstimasi.visible()
-        binding.tvEstimasi.text = data.metodePengiriman
+        binding.tvEstimasi.text = data.metodePengiriman + "/n1 Hari Kerja"
         binding.tvTotalBelanja.visible()
         binding.tvTotalBelanja.text = "${data.harga}"
         binding.tvTotal.visible()
