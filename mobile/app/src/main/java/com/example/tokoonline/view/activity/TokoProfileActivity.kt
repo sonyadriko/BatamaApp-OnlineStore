@@ -108,6 +108,7 @@ class TokoProfileActivity : BaseActivity() {
         super.onResume()
         if (userHasToko) {
             getTokoData()
+            getStatusTransaction()
         }
     }
 
