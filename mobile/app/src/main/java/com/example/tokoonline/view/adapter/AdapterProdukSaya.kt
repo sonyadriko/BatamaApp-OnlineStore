@@ -1,26 +1,30 @@
 package com.example.tokoonline.view.adapter
 
-import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.data.model.firebase.Produk
-import com.example.tokoonline.data.repository.firebase.ProdukRepository
 import com.example.tokoonline.databinding.ItemProdukSayaBinding
 import com.example.tokoonline.view.activity.DetailProductActivity
 import com.example.tokoonline.view.activity.ProdukSayaActivity
 import com.example.tokoonline.view.activity.TambahProdukActivity
 
 class AdapterItemProdukSaya(
-    private val context: Context,
     private val activity: ProdukSayaActivity,
-    private val produkSayaList: List<Produk>
 ) : RecyclerView.Adapter<AdapterItemProdukSaya.ViewHolder>() {
+
+    private val produkSayaList = mutableListOf<Produk>()
+
+    @Suppress("notifyDataSetChanged")
+    fun submitList(newList: List<Produk>) {
+        produkSayaList.clear()
+        produkSayaList.addAll(newList)
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(private val binding: ItemProdukSayaBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -51,7 +55,6 @@ class AdapterItemProdukSaya(
                 val produkId = produk.id
                 activity.deleteProduk(produkId, produk.idToko.toString())
             }
-
         }
     }
 

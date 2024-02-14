@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
-import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.tokoonline.core.base.BaseActivity
@@ -37,6 +36,20 @@ class TokoProfileActivity : BaseActivity() {
 
         initView()
         initClickListener()
+        getStatusTransaction()
+    }
+
+    private fun getStatusTransaction() {
+        viewModel.getTransactionBySellerId(userRepository.uid ?: "") { transactionList ->
+            binding.tvDikirim.text = transactionList.getCountStatus("pending")
+            binding.tvPembatalan.text = transactionList.getCountStatus("cancel")
+            binding.tvSelesai.text = transactionList.getCountStatus("success")
+        }
+    }
+
+    private fun List<Transaction>.getCountStatus(status: String): String {
+        return filter { it.status.equals(status, ignoreCase = true) }
+            .toList().size.toString()
     }
 
     private fun initClickListener() {
