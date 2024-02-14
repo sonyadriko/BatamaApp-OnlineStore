@@ -37,20 +37,19 @@ class TokoSettingActivity : BaseActivity() {
                 val namaToko = toko?.nama ?: ""
                 binding.tvNamaToko.text = namaToko.toEditable()
                 viewModelAlamat.getAlamatDefault(userId){alamatDefault->
-                    val newToko = Toko(
-                        id = tokoId,
-                        id_users = userRepository.uid.toString(),
-                        id_alamat = alamatDefault?.id.toString(),
-                        nama = binding.tvNamaToko.text.toString(),
-                    )
-
                     binding.btnSimpanToko.setOnClickListener {
+                        val newToko = Toko(
+                            id = tokoId,
+                            id_users = userRepository.uid.toString(),
+                            id_alamat = alamatDefault?.id.toString(),
+                            nama = binding.tvNamaToko.text.toString(),
+                        )
                         showProgressDialog()
                         viewModelToko.updateToko(userId, newToko){isSuccess->
                             if (isSuccess){
                                 showToast("Toko Berhasil di Update")
                                 dismissProgressDialog()
-                                goToTokoProfile()
+                                finish()
                             }else{
                                 // handle failed to update toko
                             }
