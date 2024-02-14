@@ -127,6 +127,10 @@ class DetailPesananTokoActivity : BaseActivity() {
         viewModelAlamat.getAlamatById(idAlamat, idPembeli){alamatData ->
             if (alamatData !== null){
                 binding.alamatDefault.text = "${alamatData.nama} \u2022 ${alamatData.phone}\n ${alamatData.alamat}"
+            }else{
+                viewModelAlamat.getAlamatDefault(idPembeli){alamatDataDefault ->
+                    binding.alamatDefault.text = "${alamatDataDefault?.nama} \u2022 ${alamatDataDefault?.phone}\n ${alamatDataDefault?.alamat}"
+                }
             }
         }
 
@@ -140,7 +144,9 @@ class DetailPesananTokoActivity : BaseActivity() {
                         if (alamatToko !== null) {
                             binding.tvAlamatPenjual.text = "${toko.nama} \n ${alamatToko.alamat}"
                         } else {
-                            showToast("Gagal mengambil alamat Toko")
+                            viewModelAlamat.getAlamatDefault(toko.id_users){alamatTokoDefault ->
+                                binding.tvAlamatPenjual.text = "${toko.nama} \n ${alamatTokoDefault?.alamat}"
+                            }
                         }
                     }
                 }
