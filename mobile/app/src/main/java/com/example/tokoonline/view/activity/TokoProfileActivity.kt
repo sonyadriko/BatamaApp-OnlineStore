@@ -22,8 +22,9 @@ class TokoProfileActivity : BaseActivity() {
     private lateinit var binding: ActivityTokoProfileBinding
     private lateinit var viewModelToko: TokoViewModel
     private lateinit var viewModelAlamat: AlamatViewModel
+    private lateinit var viewModel: TransactionViewModel
 
-    private val viewModel: TransactionViewModel by viewModels()
+    private var userHasToko: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,23 +33,10 @@ class TokoProfileActivity : BaseActivity() {
         showProgressDialog()
         viewModelToko = ViewModelProvider(this)[TokoViewModel::class.java]
         viewModelAlamat = ViewModelProvider(this)[AlamatViewModel::class.java]
+        viewModel = ViewModelProvider(this)[TransactionViewModel::class.java]
 
-        getStatusTransaction()
         initView()
         initClickListener()
-    }
-
-    private fun getStatusTransaction() {
-        viewModel.getTransaction(userUid = userRepository.uid ?: "") { transactionList ->
-            binding.tvDikirim.text = transactionList.getCountStatus("pending")
-            binding.tvPembatalan.text = transactionList.getCountStatus("cancel")
-            binding.tvSelesai.text = transactionList.getCountStatus("success")
-        }
-    }
-
-    private fun List<Transaction>.getCountStatus(status: String): String {
-        return filter { it.status.equals(status, ignoreCase = true) }
-            .toList().size.toString()
     }
 
     private fun initClickListener() {
@@ -72,7 +60,8 @@ class TokoProfileActivity : BaseActivity() {
                 delay(200)
                 dismissProgressDialog()
             }
-            viewModelToko.checkUserHasToko(userId) { userHasToko ->
+            viewModelToko.checkUserHasToko(userId) { hasToko ->
+                userHasToko = hasToko
                 if (userHasToko) {
                     // User has a toko, show toko details
                     emptyView.visibility = View.GONE
@@ -82,9 +71,6 @@ class TokoProfileActivity : BaseActivity() {
                         finish()
                     }
                     getTokoData()
-
-                    // Use tokoData to populate your views
-                    // Example: binding.tvNamaToko.text = tokoData.nama
                 } else {
                     // User doesn't have a toko, show button to add a new toko
                     emptyView.visibility = View.VISIBLE
@@ -102,6 +88,13 @@ class TokoProfileActivity : BaseActivity() {
             }
         } else {
             finish()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (userHasToko) {
+            getTokoData()
         }
     }
 
@@ -128,11 +121,9 @@ class TokoProfileActivity : BaseActivity() {
                     intent.putExtra("tokoID", tokoID)
                     startActivity(intent)
                 }
-
             } else {
                 showToast("Gagal mengambil Nama Toko")
             }
         }
     }
-
 }
