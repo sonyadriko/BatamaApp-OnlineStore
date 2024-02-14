@@ -150,10 +150,20 @@ class DetailPesananTokoActivity : BaseActivity() {
 
 
         binding.tvMetodePembayaran.visible()
-        binding.tvMetodePembayaran.text = data.metodePembayaran
+        val metodePembayaran = data.metodePembayaran
+        if (metodePembayaran == "cod"){
+            binding.tvMetodePembayaran.text = "Cash On Delivery (COD)"
+        }else{
+            binding.tvMetodePembayaran.text = "Transfer via Gopay"
+        }
 
         binding.tvEstimasi.visible()
-        binding.tvEstimasi.text = data.metodePengiriman + "/n1 Hari Kerja"
+        val metodePengiriman = data.metodePengiriman
+        if (metodePengiriman == "ambil"){
+            binding.tvEstimasi.text = "Diambil oleh Pembeli\n1 Hari Kerja"
+        }else{
+            binding.tvEstimasi.text = "Dikirim oleh Penjual\n1 Hari Kerja"
+        }
         binding.tvTotalBelanja.visible()
         binding.tvTotalBelanja.text = "${data.harga}"
         binding.tvTotal.visible()
