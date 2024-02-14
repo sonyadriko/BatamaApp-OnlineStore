@@ -32,6 +32,7 @@ class AdapterItemProdukSaya(
             binding.tvNama.text = produk.nama
             binding.tvHarga.text = moneyFormatter(produk.harga)
             binding.tvStok.text = produk.stok.toString()
+            binding.tvTerjual.text = produk.terjual.toString()
 
             binding.btnDetailProduk.setOnClickListener {
                 val intent = Intent(binding.root.context, DetailProductActivity::class.java)

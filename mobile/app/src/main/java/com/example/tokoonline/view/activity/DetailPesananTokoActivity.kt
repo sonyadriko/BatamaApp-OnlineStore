@@ -103,7 +103,6 @@ class DetailPesananTokoActivity : BaseActivity() {
             }
         } else binding.sellerAction.gone()
 
-        val userId = userRepository.uid.toString()
         when (data.status?.toLowerCase()) {
             STATUS_PENDING -> {
                 binding.statusCancel.gone()
@@ -122,18 +121,20 @@ class DetailPesananTokoActivity : BaseActivity() {
         }
 
         val idAlamat = data.alamatId
-        binding.alamatDefault.text = idAlamat
+        val idPembeli = data.userId
+        var idProduk = data.produkId
 
-        viewModelAlamat.getAlamatById(idAlamat, userId){alamatData ->
+        viewModelAlamat.getAlamatById(idAlamat, idPembeli){alamatData ->
             if (alamatData !== null){
-                binding.alamatDefault.visible()
                 binding.alamatDefault.text = "${alamatData.nama} \u2022 ${alamatData.phone}\n ${alamatData.alamat}"
             }
         }
 
-        var idProduk = data.produkId
         ProdukTransactionRepository.getInstance().getProdukById(idProduk){ produk ->
             viewModelToko.getTokoData(produk[0]!!.idSeller.toString()) { toko ->
+                val idPembeli = toko?.id_users.toString()
+
+
                 if (toko !== null) {
                     viewModelAlamat.getAlamatById(toko.id_alamat, toko.id_users) { alamatToko ->
                         if (alamatToko !== null) {
