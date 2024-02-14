@@ -40,7 +40,7 @@ class KeranjangActivity : BaseActivity() {
                             showToast("gagal update produk dalam keranjang")
                             finish()
                         } else {
-                            viewModel.updateProdukToBePaid(position, item.produk)
+                            // viewModel.updateProdukToBePaid(position, item.produk)
                             viewModel.removeTotalBelanja(produk.harga)
                             dismissProgressDialog()
                         }

@@ -64,6 +64,15 @@ class ProdukRepository {
             }
     }
 
+    fun updateProdukTerjual(produkId: String, terjual: Int, onComplete: (isSuccess: Boolean) -> Unit) {
+        databaseReference.child(produkId)
+            .child("terjual")
+            .setValue(terjual)
+            .addOnCompleteListener {
+                onComplete(it.isSuccessful)
+            }
+    }
+
     fun searchProduct(query: String, onComplete: (isSuccess: Boolean, data: List<Produk?>?) -> Unit) {
         databaseReference.orderByChild("keyword")
             .startAt(query)

@@ -94,7 +94,6 @@ class RiwayatTransaksiFragment : BaseFragment() {
     }
     private fun init() {
         lifecycleScope.launch {
-            adapter.submitList(emptyList())
             userRepository.uid?.let {
                 uuid = it
                 getRiwayat(uuid)

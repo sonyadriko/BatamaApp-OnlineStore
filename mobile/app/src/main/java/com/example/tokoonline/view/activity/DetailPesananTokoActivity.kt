@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Transaction
+import com.example.tokoonline.data.repository.firebase.ProdukRepository
 import com.example.tokoonline.data.repository.firebase.ProdukTransactionRepository
 import com.example.tokoonline.data.repository.firebase.TransactionRepository
 import com.example.tokoonline.databinding.ActivityDetailPesananTokoBinding
@@ -25,6 +25,7 @@ class DetailPesananTokoActivity : BaseActivity() {
 
     private val transactionRepository = TransactionRepository.getInstance()
     private val produkTransactionRepository = ProdukTransactionRepository.getInstance()
+    private val produkRepository = ProdukRepository.getInstance()
 
     companion object {
         const val STATUS_PENDING = "pending"
@@ -86,20 +87,50 @@ class DetailPesananTokoActivity : BaseActivity() {
                 showProgressDialog()
                 transactionRepository
                     .updateTransaction(transaction = data.copy(status = STATUS_SUCCESS)) {
-                        dismissProgressDialog()
                         if (it) finish()
                         else showToast("Gagal update status transaksi")
                     }
+
+                produkTransactionRepository.getProdukById(data.produkId) { produkList ->
+                    val filteredList = produkList.filterNotNull()
+                    filteredList.forEachIndexed { index, produkKeranjang ->
+                        produkRepository.getProdukById(produkId = produkKeranjang.produkId) { produk ->
+                            produkRepository.updateProdukTerjual(
+                                produkId = produk!!.id,
+                                terjual = produk.terjual + produkKeranjang.qty
+                            ) { isSuccess ->
+                                if (isSuccess && index == filteredList.size - 1) {
+                                    dismissProgressDialog()
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             binding.btnBatal.setOnClickListener {
                 showProgressDialog()
                 transactionRepository
                     .updateTransaction(transaction = data.copy(status = STATUS_CANCELED)) {
-                        dismissProgressDialog()
                         if (it) finish()
                         else showToast("Gagal update status transaksi")
                     }
+
+                produkTransactionRepository.getProdukById(data.produkId) {
+                    val filteredList = it.filterNotNull()
+                    filteredList.forEachIndexed { index, produkKeranjang ->
+                        produkRepository.getProdukById(produkId = produkKeranjang.produkId) { produk ->
+                            produkRepository.updateProdukStok(
+                                produkId = produk!!.id,
+                                newStok = produk.stok + produkKeranjang.qty
+                            ) { isSuccess ->
+                                if (isSuccess && index == filteredList.size - 1) {
+                                    dismissProgressDialog()
+                                }
+                            }
+                        }
+                    }
+                }
             }
         } else binding.sellerAction.gone()
 

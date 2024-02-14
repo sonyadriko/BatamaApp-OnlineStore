@@ -12,9 +12,16 @@ import com.example.tokoonline.databinding.ItemRiwayatProdukBinding
 
 
 class AdapterRiwayatProduk(
-    private val context: Context,
-    private val listProduk: List<ProdukKeranjang>
+    private val context: Context
 ) : RecyclerView.Adapter<AdapterRiwayatProduk.ViewHolder>() {
+
+    private val listProduk = mutableListOf<ProdukKeranjang>()
+
+    fun submitList(newList: List<ProdukKeranjang>) {
+        listProduk.clear()
+        listProduk.addAll(newList)
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(private val binding: ItemRiwayatProdukBinding) :
         RecyclerView.ViewHolder(binding.root) {
