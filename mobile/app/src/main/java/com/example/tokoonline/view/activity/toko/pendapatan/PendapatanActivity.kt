@@ -21,6 +21,10 @@ class PendapatanActivity : BaseActivity() {
         binding = ActivityPendapatan2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.toolbar.binding.leftIcon.setOnClickListener {
+            finish()
+        }
+
         initView()
     }
 

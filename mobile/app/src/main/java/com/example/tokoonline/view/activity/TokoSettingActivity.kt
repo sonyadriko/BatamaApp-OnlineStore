@@ -7,6 +7,8 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.core.util.gone
+import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Toko
 import com.example.tokoonline.databinding.ActivityTokoSettingBinding
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
@@ -22,6 +24,7 @@ class TokoSettingActivity : BaseActivity() {
     }
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTokoSettingBinding.inflate(layoutInflater)
@@ -32,17 +35,21 @@ class TokoSettingActivity : BaseActivity() {
         viewModelAlamat = ViewModelProvider(this).get(AlamatViewModel::class.java)
         viewModelToko = ViewModelProvider(this).get(TokoViewModel::class.java)
 
+        binding.toolbar.binding.leftIcon.setOnClickListener {
+            finish()
+        }
+
         if (tokoId != null){
             viewModelToko.getTokoData(userId){toko ->
                 val namaToko = toko?.nama ?: ""
-                binding.tvNamaToko.text = namaToko.toEditable()
+                binding.edtNama.text = namaToko.toEditable()
                 viewModelAlamat.getAlamatDefault(userId){alamatDefault->
                     binding.btnSimpanToko.setOnClickListener {
                         val newToko = Toko(
                             id = tokoId,
                             id_users = userRepository.uid.toString(),
                             id_alamat = alamatDefault?.id.toString(),
-                            nama = binding.tvNamaToko.text.toString(),
+                            nama = binding.edtNama.text.toString(),
                         )
                         showProgressDialog()
                         viewModelToko.updateToko(userId, newToko){isSuccess->
@@ -70,21 +77,20 @@ class TokoSettingActivity : BaseActivity() {
         }
 
 
-
     }
 
+
+    private var idAlamat = ""
     fun showAlamatDefault(userUid: String) {
         viewModelAlamat.getAlamatDefault(userUid) { alamatDefault ->
             if (alamatDefault != null) {
-                binding.tvNamaPenerima.text = alamatDefault.nama
-                binding.tvAlamatPenerima.text = alamatDefault.alamat
-                binding.tvPhonePenerima.text = alamatDefault.phone
-                binding.tvCatatanAlamat.text = alamatDefault.catatan
-                binding.radioButton.isChecked = alamatDefault.default
+                binding.alamatDefault.visible()
+                binding.alamatDefault.text =
+                        "${alamatDefault.nama} \u2022 ${alamatDefault.phone}\n${alamatDefault.alamat}"
+                    idAlamat = alamatDefault.id.toString()
                 alamatDefault.id
-                binding.divTambahAlamat.visibility = View.GONE
             } else {
-                binding.divAlamat.visibility = View.GONE
+                binding.alamatDefault.visibility = View.GONE
             }
         }
     }
