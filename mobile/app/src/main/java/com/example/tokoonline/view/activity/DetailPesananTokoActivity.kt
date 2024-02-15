@@ -82,50 +82,52 @@ class DetailPesananTokoActivity : BaseActivity() {
         }
 
         if (isFromSeller) {
-            binding.sellerAction.visible()
-            binding.btnSelesai.setOnClickListener {
-                showProgressDialog()
-                transactionRepository
-                    .updateTransaction(transaction = data.copy(status = STATUS_SUCCESS)) {
-                        if (it) finish()
-                        else showToast("Gagal update status transaksi")
-                    }
+            if (data.status?.toLowerCase() == STATUS_PENDING) {
+                binding.sellerAction.visible()
+                binding.btnSelesai.setOnClickListener {
+                    showProgressDialog()
+                    transactionRepository
+                        .updateTransaction(transaction = data.copy(status = STATUS_SUCCESS)) {
+                            if (it) finish()
+                            else showToast("Gagal update status transaksi")
+                        }
 
-                produkTransactionRepository.getProdukById(data.produkId) { produkList ->
-                    val filteredList = produkList.filterNotNull()
-                    filteredList.forEachIndexed { index, produkKeranjang ->
-                        produkRepository.getProdukById(produkId = produkKeranjang.produkId) { produk ->
-                            produkRepository.updateProdukTerjual(
-                                produkId = produk!!.id,
-                                terjual = produk.terjual + produkKeranjang.qty
-                            ) { isSuccess ->
-                                if (isSuccess && index == filteredList.size - 1) {
-                                    dismissProgressDialog()
+                    produkTransactionRepository.getProdukById(data.produkId) { produkList ->
+                        val filteredList = produkList.filterNotNull()
+                        filteredList.forEachIndexed { index, produkKeranjang ->
+                            produkRepository.getProdukById(produkId = produkKeranjang.produkId) { produk ->
+                                produkRepository.updateProdukTerjual(
+                                    produkId = produk!!.id,
+                                    terjual = produk.terjual + produkKeranjang.qty
+                                ) { isSuccess ->
+                                    if (isSuccess && index == filteredList.size - 1) {
+                                        dismissProgressDialog()
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            binding.btnBatal.setOnClickListener {
-                showProgressDialog()
-                transactionRepository
-                    .updateTransaction(transaction = data.copy(status = STATUS_CANCELED)) {
-                        if (it) finish()
-                        else showToast("Gagal update status transaksi")
-                    }
+                binding.btnBatal.setOnClickListener {
+                    showProgressDialog()
+                    transactionRepository
+                        .updateTransaction(transaction = data.copy(status = STATUS_CANCELED)) {
+                            if (it) finish()
+                            else showToast("Gagal update status transaksi")
+                        }
 
-                produkTransactionRepository.getProdukById(data.produkId) {
-                    val filteredList = it.filterNotNull()
-                    filteredList.forEachIndexed { index, produkKeranjang ->
-                        produkRepository.getProdukById(produkId = produkKeranjang.produkId) { produk ->
-                            produkRepository.updateProdukStok(
-                                produkId = produk!!.id,
-                                newStok = produk.stok + produkKeranjang.qty
-                            ) { isSuccess ->
-                                if (isSuccess && index == filteredList.size - 1) {
-                                    dismissProgressDialog()
+                    produkTransactionRepository.getProdukById(data.produkId) {
+                        val filteredList = it.filterNotNull()
+                        filteredList.forEachIndexed { index, produkKeranjang ->
+                            produkRepository.getProdukById(produkId = produkKeranjang.produkId) { produk ->
+                                produkRepository.updateProdukStok(
+                                    produkId = produk!!.id,
+                                    newStok = produk.stok + produkKeranjang.qty
+                                ) { isSuccess ->
+                                    if (isSuccess && index == filteredList.size - 1) {
+                                        dismissProgressDialog()
+                                    }
                                 }
                             }
                         }
