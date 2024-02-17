@@ -60,24 +60,13 @@ class StatusPesananFragment : BaseFragment() {
     val adapter: AdapterRiwayat by lazy {
         AdapterRiwayat(object : OnItemClick {
             override fun onClick(data: Any, position: Int) {
-                if ((data as Transaction).status.equals("pending", ignoreCase = true)
-                    && data.metodePembayaran.equals("cod", ignoreCase = true).not()
-                ) {
-                    startActivity(
-                        PembayaranActivity.createIntent(
-                            requireActivity(),
-                            data
-                        )
+                startActivity(
+                    DetailPesananTokoActivity.createIntent(
+                        requireContext(),
+                        transaction = data as Transaction,
+                        isFromSeller = true
                     )
-                } else {
-                    startActivity(
-                        DetailPesananTokoActivity.createIntent(
-                            requireContext(),
-                            transaction = data,
-                            isFromSeller = true
-                        )
-                    )
-                }
+                )
             }
         })
     }

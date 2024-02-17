@@ -217,7 +217,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:visibility="gone"
                             tools:visibility="visible"
                             android:ellipsize="end"
                             android:text="-"
@@ -305,97 +304,14 @@
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_barang_pesanan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_marginVertical="@dimen/small_space_8"
-                            android:layout_marginStart="@dimen/medium_space"
-                            app:cardCornerRadius="4dp"
-                            app:cardElevation="1dp">
-
-                            <ImageView
-                                android:id="@+id/img_produk"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/loading_animation" />
-
-                        </androidx.cardview.widget.CardView>
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginVertical="@dimen/small_space_8"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:paddingStart="12dp">
-
-                            <TextView
-                                android:id="@+id/tv_nama"
-                                style="@style/body_1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:paddingBottom="10dp"
-                                android:text="Nama"
-                                android:textColor="#8E908E"
-                                android:textSize="14sp" />
-
-                            <TextView
-                                android:id="@+id/tv_totalHarga"
-                                style="@style/body_1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:text="-"
-                                android:textColor="#2C302D"
-                                android:textSize="14sp"
-                                tools:text="Rp.10.000" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginVertical="@dimen/small_space_8"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginEnd="@dimen/medium_space"
-                            android:gravity="end"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tv_weight"
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:ellipsize="end"
-                                android:gravity="end|bottom"
-                                tools:text="1 Kg" />
-
-                            <TextView
-                                android:id="@+id/tv_count"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:gravity="end|bottom"
-                                tools:text="1 items" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
+                    android:overScrollMode="never"
+                    tools:listitem="@layout/item_detail_pesanan"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3" />
 
                 <View
                     android:layout_width="match_parent"
@@ -447,6 +363,19 @@
                             android:textColor="#747674"
                             android:textSize="14sp"
                             android:maxLines="2" />
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_marginTop="8dp"-->
+<!--                            android:visibility="gone"-->
+<!--                            tools:visibility="visible"-->
+<!--                            android:ellipsize="end"-->
+<!--                            android:text="-"-->
+<!--                            android:fontFamily="@font/interregular"-->
+<!--                            tools:text="1 Hari Kerja"-->
+<!--                            android:textColor="#747674"-->
+<!--                            android:textSize="14sp"-->
+<!--                            android:maxLines="2" />-->
 
                     </LinearLayout>
 

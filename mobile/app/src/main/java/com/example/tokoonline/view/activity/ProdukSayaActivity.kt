@@ -17,6 +17,15 @@ import com.example.tokoonline.view.viewmodel.ProdukViewModel
 class ProdukSayaActivity : BaseActivity() {
     private lateinit var binding : ActivityProdukSayaBinding
     private lateinit var viewModel : ProdukViewModel
+
+    private val tokoID: String by lazy {
+        intent.getStringExtra("tokoID").toString()
+    }
+
+    private val adapter: AdapterItemProdukSaya by lazy {
+        AdapterItemProdukSaya(this@ProdukSayaActivity)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProdukSayaBinding.inflate(layoutInflater)
@@ -24,20 +33,22 @@ class ProdukSayaActivity : BaseActivity() {
         viewModel = ViewModelProvider(this).get(ProdukViewModel::class.java)
 
 
-        val tokoID = intent.getStringExtra("tokoID").toString()
-        showProgressDialog()
-        loadProdukbyTokoID(tokoID)
+        val recyclerView: RecyclerView = binding.rvProduksaya
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
 
+        getData()
     }
 
-    fun loadProdukbyTokoID(tokoID: String) {
+    private fun getData() {
+        showProgressDialog()
+        loadProdukbyTokoID(tokoID)
+    }
+
+    private fun loadProdukbyTokoID(tokoID: String) {
         viewModel.loadProdukbyIDToko(tokoID) { produkList ->
             dismissProgressDialog()
-            val recyclerView: RecyclerView = binding.rvProduksaya
-            val adapter = AdapterItemProdukSaya(produkList)
-
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = adapter
+            adapter.submitList(produkList)
 
             // Check if the produkList is empty
             if (produkList.isEmpty()) {
@@ -64,5 +75,19 @@ class ProdukSayaActivity : BaseActivity() {
             }
         }
     }
+    fun deleteProduk(produkId: String, tokoID: String) {
+        viewModel.deleteProdukById(produkId) { isSuccess ->
+            if (isSuccess) {
+               showToast("Success to delete product")
+                loadProdukbyTokoID(tokoID)
+            } else {
+                showToast("Failed to delete product")
+            }
+        }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        getData()
+    }
 }

@@ -36,6 +36,16 @@ class ProdukRepository {
     }
 
 
+    fun updateProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
+        val produkRef = databaseReference.child(produk.id)
+
+        produkRef.updateChildren(produk.toMap())
+            .addOnCompleteListener { task ->
+                onComplete(task.isSuccessful)
+            }
+    }
+
+
 
     fun addProduk(produk: Produk, onComplete: (isSuccess: Boolean) -> Unit) {
         val produkRef = databaseReference.push()
@@ -49,6 +59,15 @@ class ProdukRepository {
         databaseReference.child(produkId)
             .child("stok")
             .setValue(newStok)
+            .addOnCompleteListener {
+                onComplete(it.isSuccessful)
+            }
+    }
+
+    fun updateProdukTerjual(produkId: String, terjual: Int, onComplete: (isSuccess: Boolean) -> Unit) {
+        databaseReference.child(produkId)
+            .child("terjual")
+            .setValue(terjual)
             .addOnCompleteListener {
                 onComplete(it.isSuccessful)
             }
@@ -86,7 +105,7 @@ class ProdukRepository {
 
                 override fun onCancelled(error: DatabaseError) {
                     // Handle the error here if needed
-                    onComplete(emptyList()) // Return an empty list in case of an error
+                    onComplete(emptyList())
                 }
             })
     }
@@ -128,8 +147,8 @@ class ProdukRepository {
     }
 
 
-    fun removeProduk(namaProduk: String, onComplete: (isSuccess: Boolean) -> Unit) {
-        databaseReference.child(namaProduk).removeValue { error, _ ->
+    fun removeProdukById(id: String, onComplete: (isSuccess: Boolean) -> Unit) {
+        databaseReference.child(id).removeValue { error, _ ->
             onComplete(error == null)
         }
     }

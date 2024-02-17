@@ -32,6 +32,7 @@ class RiwayatTransaksiFragment : BaseFragment() {
             override fun onClick(data: Any, position: Int) {
                 if ((data as Transaction).status.equals("pending", ignoreCase = true)
                     && data.metodePembayaran.equals("cod", ignoreCase = true).not()
+                    && !data.terbayar
                 ) {
                     startActivity(
                         PembayaranActivity.createIntent(
@@ -93,7 +94,6 @@ class RiwayatTransaksiFragment : BaseFragment() {
     }
     private fun init() {
         lifecycleScope.launch {
-            adapter.submitList(emptyList())
             userRepository.uid?.let {
                 uuid = it
                 getRiwayat(uuid)

@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
+import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.moneyFormatter
 import com.example.tokoonline.core.util.parcelable
 import com.example.tokoonline.data.model.firebase.Produk
@@ -99,6 +100,7 @@ class DetailProductActivity : BaseActivity() {
         }
 
         val stokProduk = produkData?.stok
+
 
         if (stokProduk == null || stokProduk == 0) {
             btnBeli.isEnabled = false
@@ -204,6 +206,10 @@ class DetailProductActivity : BaseActivity() {
         tvHarga.text = moneyFormatter(produkData.harga)
         tvDeskripsi.text = produkData.deskripsi
         Glide.with(image).load(produkData.image.toUri()).into(image)
+        if (produkData.idSeller == userRepository.uid.toString()){
+            binding.btnBeli.gone()
+            binding.btnKeranjang.gone()
+        }
 
         // dismiss
         dismissProgressDialog()

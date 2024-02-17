@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.runBlocking
 
 class TransactionRepository {
     private val transactionReference: DatabaseReference =
@@ -87,6 +88,37 @@ class TransactionRepository {
             .addOnCompleteListener {
                 onComplete(it.isSuccessful)
             }
+    }
+
+    fun updateStatusPaidTransaction(snapToken: String, onComplete: (isSuccess: Boolean) -> Unit) {
+        val query = transactionReference.orderByChild("snapToken").equalTo(snapToken)
+        query.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var updatedCount = 0
+
+                for (data in snapshot.children) {
+                    data.ref.child("terbayar").setValue(true)
+                        .addOnCompleteListener { task ->
+                            updatedCount++
+
+                            if (task.isSuccessful) {
+                                // Callback when setValue(true) is completed
+                                if (updatedCount == snapshot.children.count()) {
+                                    // All updates are complete
+                                    onComplete(true)
+                                }
+                            } else {
+                                // Handle error if setValue(true) fails
+                                onComplete(false)
+                            }
+                        }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                onComplete(false)
+            }
+        })
     }
 
     fun removeTransaction(namaTransaction: String, onComplete: (isSuccess: Boolean) -> Unit) {

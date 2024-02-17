@@ -4,16 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.example.tokoonline.R
 import com.example.tokoonline.core.base.BaseActivity
 import com.example.tokoonline.core.util.gone
 import com.example.tokoonline.core.util.visible
 import com.example.tokoonline.data.model.firebase.Transaction
+import com.example.tokoonline.data.repository.firebase.ProdukRepository
 import com.example.tokoonline.data.repository.firebase.ProdukTransactionRepository
 import com.example.tokoonline.data.repository.firebase.TransactionRepository
 import com.example.tokoonline.databinding.ActivityDetailPesananTokoBinding
+import com.example.tokoonline.view.adapter.AdapterItemDetailPesanan
 import com.example.tokoonline.view.viewmodel.AlamatViewModel
 import com.example.tokoonline.view.viewmodel.TokoViewModel
 
@@ -23,6 +24,8 @@ class DetailPesananTokoActivity : BaseActivity() {
     private lateinit var viewModelToko: TokoViewModel
 
     private val transactionRepository = TransactionRepository.getInstance()
+    private val produkTransactionRepository = ProdukTransactionRepository.getInstance()
+    private val produkRepository = ProdukRepository.getInstance()
 
     companion object {
         const val STATUS_PENDING = "pending"
@@ -62,42 +65,77 @@ class DetailPesananTokoActivity : BaseActivity() {
         }
     }
 
+    private val adapterDetailPesanan: AdapterItemDetailPesanan by lazy {
+        AdapterItemDetailPesanan()
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailPesananTokoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModelAlamat = ViewModelProvider(this).get(AlamatViewModel::class.java)
-        viewModelToko = ViewModelProvider(this).get(TokoViewModel::class.java)
+        viewModelAlamat = ViewModelProvider(this)[AlamatViewModel::class.java]
+        viewModelToko = ViewModelProvider(this)[TokoViewModel::class.java]
 
         binding.toolbar.binding.leftIcon.setOnClickListener {
             finish()
         }
 
         if (isFromSeller) {
-            binding.sellerAction.visible()
-            binding.btnSelesai.setOnClickListener {
-                showProgressDialog()
-                transactionRepository
-                    .updateTransaction(transaction = data.copy(status = STATUS_SUCCESS)) {
-                        dismissProgressDialog()
-                        if (it) finish()
-                        else showToast("Gagal update status transaksi")
-                    }
-            }
+            if (data.status?.toLowerCase() == STATUS_PENDING) {
+                binding.sellerAction.visible()
+                binding.btnSelesai.setOnClickListener {
+                    showProgressDialog()
+                    transactionRepository
+                        .updateTransaction(transaction = data.copy(status = STATUS_SUCCESS)) {
+                            if (it) finish()
+                            else showToast("Gagal update status transaksi")
+                        }
 
-            binding.btnBatal.setOnClickListener {
-                showProgressDialog()
-                transactionRepository
-                    .updateTransaction(transaction = data.copy(status = STATUS_CANCELED)) {
-                        dismissProgressDialog()
-                        if (it) finish()
-                        else showToast("Gagal update status transaksi")
+                    produkTransactionRepository.getProdukById(data.produkId) { produkList ->
+                        val filteredList = produkList.filterNotNull()
+                        filteredList.forEachIndexed { index, produkKeranjang ->
+                            produkRepository.getProdukById(produkId = produkKeranjang.produkId) { produk ->
+                                produkRepository.updateProdukTerjual(
+                                    produkId = produk!!.id,
+                                    terjual = produk.terjual + produkKeranjang.qty
+                                ) { isSuccess ->
+                                    if (isSuccess && index == filteredList.size - 1) {
+                                        dismissProgressDialog()
+                                    }
+                                }
+                            }
+                        }
                     }
+                }
+
+                binding.btnBatal.setOnClickListener {
+                    showProgressDialog()
+                    transactionRepository
+                        .updateTransaction(transaction = data.copy(status = STATUS_CANCELED)) {
+                            if (it) finish()
+                            else showToast("Gagal update status transaksi")
+                        }
+
+                    produkTransactionRepository.getProdukById(data.produkId) {
+                        val filteredList = it.filterNotNull()
+                        filteredList.forEachIndexed { index, produkKeranjang ->
+                            produkRepository.getProdukById(produkId = produkKeranjang.produkId) { produk ->
+                                produkRepository.updateProdukStok(
+                                    produkId = produk!!.id,
+                                    newStok = produk.stok + produkKeranjang.qty
+                                ) { isSuccess ->
+                                    if (isSuccess && index == filteredList.size - 1) {
+                                        dismissProgressDialog()
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         } else binding.sellerAction.gone()
 
-        val userId = userRepository.uid.toString()
         when (data.status?.toLowerCase()) {
             STATUS_PENDING -> {
                 binding.statusCancel.gone()
@@ -116,24 +154,32 @@ class DetailPesananTokoActivity : BaseActivity() {
         }
 
         val idAlamat = data.alamatId
-        binding.alamatDefault.text = idAlamat
+        val idPembeli = data.userId
+        var idProduk = data.produkId
 
-        viewModelAlamat.getAlamatById(idAlamat, userId){alamatData ->
+        viewModelAlamat.getAlamatById(idAlamat, idPembeli){alamatData ->
             if (alamatData !== null){
-                binding.alamatDefault.visible()
                 binding.alamatDefault.text = "${alamatData.nama} \u2022 ${alamatData.phone}\n ${alamatData.alamat}"
+            }else{
+                viewModelAlamat.getAlamatDefault(idPembeli){alamatDataDefault ->
+                    binding.alamatDefault.text = "${alamatDataDefault?.nama} \u2022 ${alamatDataDefault?.phone}\n ${alamatDataDefault?.alamat}"
+                }
             }
         }
 
-        var idProduk = data.produkId
         ProdukTransactionRepository.getInstance().getProdukById(idProduk){ produk ->
             viewModelToko.getTokoData(produk[0]!!.idSeller.toString()) { toko ->
+                val idPembeli = toko?.id_users.toString()
+
+
                 if (toko !== null) {
                     viewModelAlamat.getAlamatById(toko.id_alamat, toko.id_users) { alamatToko ->
                         if (alamatToko !== null) {
                             binding.tvAlamatPenjual.text = "${toko.nama} \n ${alamatToko.alamat}"
                         } else {
-                            showToast("Gagal mengambil alamat Toko")
+                            viewModelAlamat.getAlamatDefault(toko.id_users){alamatTokoDefault ->
+                                binding.tvAlamatPenjual.text = "${toko.nama} \n ${alamatTokoDefault?.alamat}"
+                            }
                         }
                     }
                 }
@@ -142,28 +188,32 @@ class DetailPesananTokoActivity : BaseActivity() {
 
 
 
-        binding.tvMetodePembayaran.visibility = View.VISIBLE
-
-
-        binding.tvMetodePembayaran.text = data.metodePembayaran
+        binding.tvMetodePembayaran.visible()
+        val metodePembayaran = data.metodePembayaran
+        if (metodePembayaran == "cod"){
+            binding.tvMetodePembayaran.text = "Cash On Delivery (COD)"
+        }else{
+            binding.tvMetodePembayaran.text = "Transfer via Gopay"
+        }
 
         binding.tvEstimasi.visible()
-        binding.tvEstimasi.text = data.metodePengiriman
+        val metodePengiriman = data.metodePengiriman
+        if (metodePengiriman == "ambil"){
+            binding.tvEstimasi.text = "Diambil oleh Pembeli\n1 Hari Kerja"
+        }else{
+            binding.tvEstimasi.text = "Dikirim oleh Penjual\n1 Hari Kerja"
+        }
         binding.tvTotalBelanja.visible()
         binding.tvTotalBelanja.text = "${data.harga}"
         binding.tvTotal.visible()
         binding.tvTotal.text = "${data.harga}"
 
         binding.tvAlamatPenjual.visible()
-//        if (data != null){
-//            binding.tvAlamatPenjual.text = "${data.produkId}"
-//        }
 
-
-        val produkId = data?.produkId
-
-        if (produkId !== null){
-
+        val produkId = data.produkId
+        produkTransactionRepository.getProdukById(produkId) {
+            binding.rvBarangPesanan.adapter = adapterDetailPesanan
+            adapterDetailPesanan.submitList(it.filterNotNull())
         }
     }
 
